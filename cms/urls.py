@@ -70,6 +70,7 @@ urlpatterns += patterns(
     url(r'^$', 'howitworks', name='homepage'),
     url(r'^howitworks$', 'howitworks'),
     url(r'^signup$', 'signup', name='signup'),
+    url(r'^signup_institution', 'signup_institution', name='signup_institution'),
     url(r'^signin$', 'login_page', name='login'),
     url(r'^request_course_creator$', 'request_course_creator'),
     url(r'^sync/class/appointment$', 'sync_class_appointment'),

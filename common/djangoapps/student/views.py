@@ -1401,7 +1401,7 @@ def change_setting(request):
 
 def _push_info_to_bs(post_vars):
     """
-    Need data consistency with bs
+    Need data consistency with bs, no need for medical mooc
     """
     gender_dict = {'m': '男', 'f': '女', 'o': '其他'}
     level_of_education_dict = {
@@ -1510,6 +1510,63 @@ def _do_create_account(post_vars):
         log.exception("UserProfile creation failed for user {id}.".format(id=user.id))
     return (user, profile, registration)
 
+def _do_institution_create_account(post_vars):
+    """
+    Given cleaned post variables, create the User and UserProfile objects, as well as the
+    registration for this user.
+
+    Returns a tuple (User, UserProfile, Registration).
+
+    Note: this function is also used for creating test users.
+    """
+    user = User(username=post_vars['username'],
+                email=post_vars['email'],
+                is_active=False)
+    user.set_password(post_vars['password'])
+    registration = Registration()
+    # TODO: Rearrange so that if part of the process fails, the whole process fails.
+    # Right now, we can have e.g. no registration e-mail sent out and a zombie account
+    try:
+        user.save()
+    except IntegrityError:
+        js = {'success': False}
+        # Figure out the cause of the integrity error
+        if len(User.objects.filter(username=post_vars['username'])) > 0:
+            js['value'] = _("An account with the Public Username '{username}' already exists.").format(username=post_vars['username'])
+            js['field'] = 'username'
+            return JsonResponse(js, status=400)
+
+        if len(User.objects.filter(email=post_vars['email'])) > 0:
+            js['value'] = _("An account with the Email '{email}' already exists.").format(email=post_vars['email'])
+            js['field'] = 'email'
+            return JsonResponse(js, status=400)
+
+        raise
+
+    registration.register(user)
+
+    profile = UserProfile(user=user)
+    profile.name = post_vars['name']
+    profile.level_of_education = post_vars.get('level_of_education')
+    profile.gender = post_vars.get('gender')
+    profile.mailing_address = post_vars.get('mailing_address')
+    profile.city = post_vars.get('city')
+    profile.country = post_vars.get('country')
+    profile.goals = post_vars.get('goals')
+    profile.profile_role = 'in'
+
+    try:
+        profile.year_of_birth = int(post_vars['year_of_birth'])
+    except (ValueError, KeyError):
+        # If they give us garbage, just ignore it instead
+        # of asking them to put an integer.
+        profile.year_of_birth = None
+    try:
+        profile.save()
+    except Exception:
+        log.exception("UserProfile creation failed for user {id}.".format(id=user.id))
+    return (user, profile, registration)
+
 
 @ensure_csrf_cookie
 def mobi_create_account(request, post_override=None):
@@ -1565,11 +1622,11 @@ def mobi_create_account(request, post_override=None):
             js['field'] = 'password'
             return JsonResponse(js, status=400)
 
-    # sync student infomation to bs
-    presult = _push_info_to_bs(post_vars)
-    if not presult['success']:
-        js['value'] = presult['errmsg']
-        return JsonResponse(js, status=400)
+    # # sync student infomation to bs
+    # presult = _push_info_to_bs(post_vars)
+    # if not presult['success']:
+    #     js['value'] = presult['errmsg']
+    #     return JsonResponse(js, status=400)
 
     # Ok, looks like everything is legit.  Create the account.
     ret = _do_create_account(post_vars)
@@ -1738,13 +1795,16 @@ def create_account(request, post_override=None):
             return JsonResponse(js, status=400)
 
     # sync student infomation to bs
-    presult = _push_info_to_bs(post_vars)
-    if not presult['success']:
-        js['value'] = presult['errmsg']
-        return JsonResponse(js, status=400)
+    # presult = _push_info_to_bs(post_vars)
+    # if not presult['success']:
+    #     js['value'] = presult['errmsg']
+    #     return JsonResponse(js, status=400)
 
     # Ok, looks like everything is legit.  Create the account.
-    ret = _do_create_account(post_vars)
+    if request_type == 'ins':
+        ret = _do_institution_create_account(post_vars)
+    else:
+        ret = _do_create_account(post_vars)
     if isinstance(ret, HttpResponse):  # if there was an error then return that
         return ret
     (user, profile, registration) = ret

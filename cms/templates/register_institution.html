@@ -1,0 +1,138 @@
+<%! from django.utils.translation import ugettext as _ %>
+<%inherit file="base.html" />
+<%! from django.core.urlresolvers import reverse %>
+
+<%block name="title">${_("Sign Up")}</%block>
+<%block name="bodyclass">not-signedin view-signup</%block>
+
+<%block name="content">
+<section>
+<%include file="xiaodun_navigator.html" />
+</section>
+<div class="wrapper-content wrapper">
+  <section class="content">
+    <header>
+      <h1 class="title title-1">注册</h1>
+      <a href="${reverse('login')}" class="action action-signin">如果您已经有了工作平台帐号,请直接登录</a>
+    </header>
+
+    <p class="introduction">如果您已准备好创建在线课程，请在下面注册并创建您的第一个课程。</p>
+
+    <article class="content-primary" role="main">
+      <form id="register_form" method="post">
+        <div id="register_error" name="register_error" class="message message-status message-status error">
+        </div>
+
+        <fieldset>
+          <legend class="sr">${_("Required Information to Sign Up for edX Studio")}</legend>
+
+          <ol class="list-input">
+            <li class="field text required" id="field-email">
+              <label for="email">${_("Email Address")}</label>
+              <input id="email" type="email" name="email" placeholder="e.g. jane.doe@gmail.com" />
+            </li>
+
+            <li class="field text required" id="field-password">
+              <label for="password">${_("Password")}</label>
+              <input id="password" type="password" name="password" />
+            </li>
+
+            <li class="field text required" id="field-username">
+              <label for="username">${_("Public Username")}</label>
+              <input id="username" type="text" name="username" placeholder="e.g. janedoe" />
+              <span class="tip tip-stacked">${_("This will be used in public discussions with your courses and in our edX101 support forums")}</span>
+            </li>
+
+            <li class="field text required" id="field-name">
+              <label for="name">单位名称</label>
+              <input id="name" type="text" name="name" placeholder="e.g. Jane Doe" />
+            </li>
+
+            <li class="field-group">
+              <div class="field text" id="field-location">
+                <label for="location">${_("Your Location")}</label>
+                <input class="short" id="location" type="text" name="location" />
+              </div>
+
+              <div class="field text" id="field-language">
+                <label for="language">${_("Preferred Language")}</label>
+                <input class="short" id="language" type="text" name="language" />
+              </div>
+            </li>
+
+            <li class="field checkbox required" id="field-tos">
+              <input id="tos" name="terms_of_service" type="checkbox" value="true" />
+              <label for="tos">
+                ${_("I agree to the {a_start} Terms of Service {a_end}").format(a_start='<a data-rel="edx.org" href="{}">'.format(marketing_link('TOS')), a_end="</a>")}
+              </label>
+            </li>
+          </ol>
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="submit" id="submit" name="submit" class="action action-primary">${_("Create My Account &amp; Start Authoring Courses")}</button>
+        </div>
+
+        <!-- no honor code for CMS, but need it because we're using the lms student object -->
+        <input name="honor_code" type="checkbox" value="true" checked="true" hidden="true">
+      </form>
+    </article>
+
+    <aside class="content-supplementary" role="complimentary">
+      <h2 class="sr">${_("Common Studio Questions")}</h2>
+
+      <div class="bit">
+        <h3 class="title-3">校盾计划工作平台是做什么的？</h3>
+        <p>
+           校盾工作平台试面向任何希望使用全球化校盾平台创建在线课程的用户，这些用户通常是教员，助教，课程员工或教学技术小组。
+        </p>
+      </div>
+
+      <div class="bit">
+        <h3 class="title-3">在校盾计划工作平台创建课程需要掌握哪些技术？</h3>
+        <p>对几乎所有熟悉网上编辑环境(WordPress，Moodle之类)的人而言，校盾平台都是很容易使用的。它无需编程知识，不过拥有技术背景会对使用一些高级特性有所帮助。我们会一如既往地为您提供帮助，不要犹豫赶快加入吧。</p>
+      </div>
+
+      <div class="bit">
+        <h3 class="title-3">${_("I've never authored a course online before. Is there help?")}</h3>
+        <p>
+            当然。我们创建了一个在线课程xiaodun101，它记述了一些最好的实践方法：从拍摄影片，创建练习到开展在线课程的基础。另外，我们会一直在线提供帮助，需要时请只管给我们留言。
+        </p>
+      </div>
+    </aside>
+  </section>
+</div>
+</%block>
+
+<%block name="jsextra">
+  <script type="text/javascript">
+require(["jquery", "jquery.cookie"], function($) {
+  $("form :input").focus(function() {
+    $("label[for='" + this.id + "']").addClass("is-focused");
+  }).blur(function() {
+    $("label").removeClass("is-focused");
+  });
+
+  $('form#register_form').submit(function(e) {
+    e.preventDefault();
+    var submit_data = $('#register_form').serialize();
+
+    $.ajax({
+      url: '/create_account?created_role=ins',
+      type: 'POST',
+      dataType: 'json',
+      data: submit_data,
+      headers: {'X-CSRFToken': $.cookie('csrftoken')},
+      success: function(json) {
+        location.href = "/course";
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        json = $.parseJSON(jqXHR.responseText);
+        $('#register_error').html(json.value).stop().addClass('is-shown');
+      },
+      notifyOnError: false
+    });
+  });
+});
+  </script>
+</%block>

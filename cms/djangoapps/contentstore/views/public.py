@@ -20,7 +20,7 @@ from edxmako.shortcuts import render_to_response
 from external_auth.views import ssl_login_shortcut, ssl_get_cert_from_request
 from microsite_configuration import microsite
 
-__all__ = ['signup', 'login_page', 'howitworks']
+__all__ = ['signup', 'login_page', 'howitworks', 'signup_institution']
 
 
 class CaptchaLoginForm(forms.Form):
@@ -41,6 +41,21 @@ def signup(request):
         return redirect(reverse('login'))
 
     return render_to_response('register.html', {'csrf': csrf_token})
+
+@ensure_csrf_cookie
+def signup_institution(request):
+    """
+    Display the signup form.
+    """
+    csrf_token = csrf(request)['csrf_token']
+    if request.user.is_authenticated():
+        return redirect('/course')
+    if settings.FEATURES.get('AUTH_USE_CERTIFICATES_IMMEDIATE_SIGNUP'):
+        # Redirect to course to login to process their certificate if SSL is enabled
+        # and registration is disabled.
+        return redirect(reverse('login'))
+
+    return render_to_response('register_institution.html', {'csrf': csrf_token})
 
 
 @ssl_login_shortcut
