@@ -36,12 +36,12 @@
       @include background-image($dashboard-profile-header-image);
       background-color: $dashboard-profile-header-color;
       border: 1px solid $border-color-2;
-      border-radius: 4px;
+      #border-radius: 4px;
       @include box-sizing(border-box);
       width: flex-grid(12);
 
       h1.user-name {
-        color: $base-font-color;
+        color: #fff;
         font: 700 1.2em/1.2em $sans-serif;
         margin: 0px;
         overflow: hidden;
@@ -58,7 +58,7 @@
 
       > ul {
         background: $dashboard-profile-color;
-        border: 1px solid $border-color-2;
+        border: 1px solid #2883bc;
         border-top: none;
         //@include border-bottom-radius(4px);
         @include box-sizing(border-box);
@@ -106,11 +106,11 @@
               width: 19px;
 
               &.email-icon {
-                @include background-image(url('../images/portal-icons/email-icon.png'));
+                //@include background-image(url('../images/portal-icons/email-icon.png'));
               }
 
               &.name-icon {
-                @include background-image(url('../images/portal-icons/course-info-icon.png'));
+                //@include background-ima  ge(url('../images/portal-icons/course-info-icon.png'));
               }
 
               &.location-icon {
@@ -288,8 +288,13 @@
     width: flex-grid(9);
 
     > header {
-      border-bottom: 1px solid $border-color-2;
+      border-bottom: 4px solid #2883bc;
       margin-bottom: 30px;
+    }
+
+    h2{
+       color: #2883bc;
+       font-size: 22px;
     }
 
     .empty-dashboard-message {
@@ -333,14 +338,19 @@
       @extend %ui-no-list;
 
       .course-item {
-        margin-bottom: ($baseline*2.5);
+        /*margin-bottom: ($baseline*2.5);
         border-bottom: 4px solid $border-color-l4;
-        padding-bottom: ($baseline*2.5);
+        padding-bottom: ($baseline*2.5);*/
+        margin-bottom:30px;
+        background:#f6f6f6;
+        border-bottom:4px solid #f5f5f5;
+        padding:15px;
+        padding-bottom:65px;
 
         &:last-child {
-          margin-bottom: 0;
+          /*margin-bottom: 0;
           border-bottom: none;
-          padding-bottom: 0;
+          padding-bottom: 0;*/
         }
       }
     }
@@ -369,7 +379,10 @@
 
         img {
           width: 100%;
-          height: 100%;        }
+          height: 100%;
+          border: 5px solid #e1e1e1;
+          box-sizing: border-box;
+          }
       }
 
       .info {
@@ -392,7 +405,7 @@
 
           .date-block {
             position: absolute;
-            top: -20px;
+            top: 0;
             right: 0;
             font-family: $sans-serif;
             font-size: 13px;
@@ -447,7 +460,7 @@
         }
 
         .enter-course {
-          @include button(simple, $button-color);
+          /*@include button(simple, $button-color);
           @include box-sizing(border-box);
           border-radius: 3px;
           display: block;
@@ -456,20 +469,58 @@
           letter-spacing: 0;
           padding: 6px 32px 7px;
           text-align: center;
-          margin-top: 28px;
+          margin-top: 28px;*/
+          border:1px solid #2883bc;
+          color:#2883bc;
+          display:inline-block;
+          font-size:11px;font-weight:bold;
+          padding:7px 18px;
+          text-decoration:none;
+          background-clip:padding-box;
+          -webkit-box-sizing:border-box;
+          -moz-box-sizing:border-box;
+          box-sizing:border-box;
+          display:block;
+          float:left;
+          font:normal 15px/1.6rem "Microsoft YaHei","Open Sans",Verdana,Geneva,sans-serif,sans-serif;
+          letter-spacing:0;
+          padding:6px 32px 7px;text-align:center;
+          margin-top:28px;
 
           &.archived {
-            @include button(simple, $button-archive-color);
+            /*@include button(simple, $button-archive-color);
             font: normal 15px/1.6rem $sans-serif;
-            padding: 6px 32px 7px;
+            padding: 6px 32px 7px;*/
+            border:1px solid #2883bc;
+            color:#2883bc;
+            display:inline-block;
+            font-size:11px;
+            font-weight:bold;
+            background-color:#fff;
+            padding:7px 18px;
+            text-decoration:none;
+            background-clip:padding-box;
+            font:normal 15px/1.6rem "Microsoft YaHei","Open Sans",Verdana,Geneva,sans-serif,sans-serif;
+            padding:6px 32px 7px;
 
             &:hover, &:focus {
-              text-decoration: none;
+              /*text-decoration: none;*/
+              cursor:pointer;
+              background-color:#2883bc;
+              background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #4098d0),color-stop(100%, #2883bc));
+              background-image:-webkit-linear-gradient(#4098d0,#2883bc);
+              background-image:linear-gradient(#4098d0,#2883bc);
             }
           }
 
           &:hover, &:focus {
-            text-decoration: none;
+            /*text-decoration: none;*/
+            color:#fff;
+            cursor:pointer;
+            background-color:#2883bc;
+            background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #4098d0),color-stop(100%, #2883bc));
+            background-image:-webkit-linear-gradient(#4098d0,#2883bc);
+            background-image:linear-gradient(#4098d0,#2883bc)
           }
         }
       }
@@ -822,7 +873,7 @@
     a.unenroll {
       float: right;
       display: block;
-      color: #FD7022;
+      color: #2883bc;
       text-decoration: underline;
       font-size: .8em;
       margin-top: 54px;
@@ -834,7 +885,7 @@
 
     a.email-settings {
       @extend a.unenroll;
-      color: #FD7022;
+      color: #2883bc;
       margin-right: 10px;
       margin-top: 54px;
 
@@ -1029,10 +1080,10 @@
 .ratebar{width:100%; position:absolute; left:0px; margin-top:7px;}
 .ratebar-box{ float:left ;width:100%; position:relative;}
 .ratebar-box-text{float:left; position: absolute; left:0; top:-20px; color:#646464;}
-.ratebar-box-present{float:left; position:absolute; left:50%; top:10px; color:#ff7a31;}
+.ratebar-box-present{float:left; position:absolute; left:50%; top:10px; color:#2883bc;}
 .ratebar-box-100{float:left; position:absolute; right:0; top:-20px; color:#646464;}
 .ratebar-box-line{ width:100%; height:6px; position:absolute; background: url('../images/ratebar-bg_03.gif') left top repeat-x; left:0; top:0px;}
-.ratebar-box-orange{ width:50%; height:6px; position:absolute; background:#ff7a31; left:0; top:0;}
+.ratebar-box-orange{ width:50%; height:6px; position:absolute; background:#2883bc; left:0; top:0;}
 .ratebar-box-dot{ float:left; width:10px; height:10px; position:absolute; left:50%; top:-8px;}
 .ratebar-btn{width:162px; height:40px; background:#b5b5b5; position:absolute; left:230px; line-height:40px; text-align:center; cursor:pointer; display:none;}
 .ratebar-btn:hover{width:162px; height:40px; background:#cfcfcf; position:absolute; left:230px; line-height:40px; text-align:center; cursor:pointer; }

@@ -1,7 +1,7 @@
 header.global {
-  border-bottom: 3px solid $header-bottom-border-color;
+  /*border-bottom: 3px solid $header-bottom-border-color;*/
   box-shadow: 0 1px 5px 0 rgba(0,0,0, 0.1);
-  background: none repeat scroll 0 0 #FFFFFF;
+  background: none repeat scroll 0 0 #f9f9f9;
   height: 100px;
   position: relative;
   width: 100%;
@@ -27,14 +27,14 @@ header.global {
   }
 
   h1.logo img{
-    width:413px;
+    margin-top: 15px;
   }
 
   ol {
     &.left {
       float: left;
-      margin-left: -200px;
-      margin-top: 27px;
+      margin-left: 50px;
+      margin-top: 20px;
     }
 
     &.guest {
@@ -82,8 +82,8 @@ header.global {
       margin-right: 5px;
 
       > a {
-        @include background-image($button-bg-image);
-        background-color: $button-bg-color;
+        /*@include background-image($button-bg-image);*/
+        /*background-color: $button-bg-color;*/
         border: 1px solid $border-color-2;
         border-radius: 3px;
         @include box-sizing(border-box);
@@ -121,9 +121,11 @@ header.global {
 
         > a {
           margin: 0px;
-          @include border-right-radius(0px);
-          background:#ff7a31;
-          border-color: rgb(195, 79, 79);
+          border-top-right-radius: 0px;
+          color: #fff;
+          border-bottom-right-radius: 0px;
+          background: #2883bc;
+          border-color: #fff
         }
 
         &:last-child {
@@ -151,7 +153,7 @@ header.global {
         letter-spacing: 0;
 
         .avatar {
-          @include background-image(url('../images/small-header-home-icon.png'));
+          /*@include background-image(url('../images/small-header-home-icon.png'));*/
           background-repeat: no-repeat;
           height: 26px;
           @include inline-block;
@@ -263,6 +265,7 @@ header.global {
         padding: ($baseline/4);
         color: $lighter-base-font-color;
         font-weight: 600;
+        font-size: 18px;
 
         &:hover, &:focus, &:active {
           text-decoration: none;
