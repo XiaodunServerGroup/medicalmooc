@@ -1155,7 +1155,7 @@ def login_user(request, error=""):
     if user is not None:
         studio_name = settings.ROOT_URLCONF.split(".")[0]
         user_profile = UserProfile.objects.get(user=user)
-        if studio_name == "cms" and user_profile.profile_role != "th":
+        if studio_name == "cms" and user_profile.profile_role not in ["th",'in']:
             user = None;
 
     # check if the user has a linked shibboleth account, if so, redirect the user to shib-login
