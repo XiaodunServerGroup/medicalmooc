@@ -119,6 +119,7 @@
 
     header {
       position: relative;
+      
 
       // CASE: normal typographical headings
       h1 {
@@ -132,26 +133,27 @@
       .title {
         position: absolute;
         top: ($baseline*2.5);
-        left:($baseline*1.5);
+        left:290px;
 
-        .title-super, .title-sub {
+        .title-super, .title-sub{
           @extend %t-weight1;
           display: block;
           letter-spacing: 0;
         }
 
         .title-super {
-          @include font-size(26);
+          @include font-size(24);
           @include line-height(18);
           text-transform: uppercase;
-          color: $header-graphic-super-color;
+          color: #fff;
         }
 
         .title-sub {
-          @include font-size(20);
+          @include font-size(16);
           margin-left: ($baseline*2);
           text-transform: lowercase;
-          color: $header-graphic-sub-color;
+          color:#fff; 
+          margin-left:130px;
         }
       }
     }
@@ -594,9 +596,11 @@
     padding: 0;
 
     header {
-      height: 120px;
-      border-bottom: 1px solid $m-gray;
-      background: transparent $register-banner-image 0 0 no-repeat;
+      height: 176px;
+      margin-left: -400px;
+      margin-right: -400px;
+      background: transparent $register-banner-image center center no-repeat;
+      border-bottom:1px solid #fff;
     }
   }
 }

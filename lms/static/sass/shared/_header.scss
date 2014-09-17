@@ -1,11 +1,10 @@
-header.global {
+	header.global {
   /*border-bottom: 3px solid $header-bottom-border-color;*/
-  box-shadow: 0 1px 5px 0 rgba(0,0,0, 0.1);
-  background: none repeat scroll 0 0 #f9f9f9;
-  height: 100px;
-  position: relative;
-  width: 100%;
-  z-index: 10;
+  background:none repeat scroll 0 0 #f9f9f9;
+  height:100px;
+  position:relative;
+  width:100%;z-index:10;
+
 
   nav {
     @include clearfix;
@@ -312,7 +311,7 @@ header.global {
 .view-register, .view-login {
 
   header.global nav {
-    width: 960px;
+  //  width: 960px;
   }
 }
 

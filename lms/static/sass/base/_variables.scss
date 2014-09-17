@@ -89,16 +89,16 @@ $m-gray-t1: rgba($m-gray,0.25);
 $m-gray-t2: rgba($m-gray,0.50);
 $m-gray-t3: rgba($m-gray,0.75);
 
-$m-blue: #FF6600;
-$m-blue-l1: #FF6600;
-$m-blue-l2: #FF6600;
-$m-blue-l3: #FF6600;
+$m-blue: #2883bc;
+$m-blue-l1: #2883bc;
+$m-blue-l2: #2883bc;
+$m-blue-l3: #2883bc;
 $m-blue-l4: tint($m-blue,90%);
 $m-blue-l5: tint($m-blue,95%);
-$m-blue-d1: #FF6600;
-$m-blue-d2: #FF6600;
-$m-blue-d3: #FF6600;
-$m-blue-d4: #FF6600;
+$m-blue-d1: #2883bc;
+$m-blue-d2: #2883bc;
+$m-blue-d3: #2883bc;
+$m-blue-d4: #2883bc;
 $m-blue-t0: rgba($m-blue,0.125);
 $m-blue-t1: rgba($m-blue,0.25);
 $m-blue-t2: rgba($m-blue,0.50);
@@ -254,7 +254,7 @@ $dot-color: $light-gray;
 $content-wrapper-bg: $white;
 $course-bg-color: #F2F2F2;
 $course-bg-image: url(../images/bg-texture.png);
-$account-content-wrapper-bg: shade($body-bg, 2%);
+$account-content-wrapper-bg: $white;
 $course-profile-bg: rgb(245,245,245);
 $course-header-bg: rgba(255,255,255, 0.93);
 
@@ -306,7 +306,7 @@ $homepage__header--background: lighten($blue, 15%);
 $homepage-bg-image: url(../images/homepage-bg.jpg);
 
 $login-banner-image: url(../images/bg-banner-account.png);
-$register-banner-image: url(../images/bg-banner-account.png);
+$register-banner-image: url(../images/bg-banner-account.jpg);
 
 $video-thumb-url: '../images/courses/video-thumb.jpg';
 
