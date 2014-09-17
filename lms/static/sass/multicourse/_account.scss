@@ -106,8 +106,9 @@
     @include box-sizing(border-box);
     @include clearfix;
     margin: 0 auto;
-    width: 960px;
-    background: $container-bg;
+    min-width: 760px;
+    max-width: 1180px;
+    //background: $container-bg;
   }
 
   .container {
@@ -132,8 +133,8 @@
       // CASE: marketing/imageery-based headings
       .title {
         position: absolute;
-        top: ($baseline*2.5);
-        left:290px;
+        top: 30px;
+        left:0;
 
         .title-super, .title-sub{
           @extend %t-weight1;
@@ -149,13 +150,18 @@
         }
 
         .title-sub {
-          @include font-size(16);
-          margin-left: ($baseline*2);
+          //@include font-size(16);
+          //margin-left: ($baseline*2);
           text-transform: lowercase;
           color:#fff; 
-          margin-left:130px;
+          //margin-left:130px;
+          margin-top: 40px;
+          font-size: 22px;
         }
       }
+    }
+  .header_login {
+    border-bottom: 3px solid #fff!important;
     }
   }
 }
@@ -199,7 +205,7 @@
   }
 
   .content {
-    margin-right: ($baseline*2);
+    margin-left: ($baseline*5);
     width: 600px;
     float: left;
   }
@@ -207,6 +213,7 @@
   aside {
     width: 280px;
     float: left;
+    margin: 50px;
 
     p, ol, ul {
       font-size: 14px !important;
@@ -225,6 +232,9 @@
 
       &:last-child {
         margin-bottom: 0;
+        background: $account-content-aside-cat-last-child;
+        width: 280px;
+        height: 210px;
       }
 
       h3 {
@@ -316,7 +326,7 @@
       label {
         @include transition(color 0.15s ease-in-out 0s);
         margin: 0 0 ($baseline/4) 0;
-        color: tint($black, 20%);
+        color: #fff;
       }
 
       .tip {
@@ -475,6 +485,14 @@
           width: 100px;
       }
     }
+    .no_login {
+    padding-top: 10px;
+    float: right;
+    h3 {
+      color: #fff;
+    }
+    }
+    }
   }
 
   // forms - actions
@@ -583,8 +601,8 @@
 
     header {
       height: 120px;
-      border-bottom: 1px solid $m-gray;
-      background: transparent $login-banner-image 0 0 no-repeat;
+      //border-bottom: 1px solid $m-gray;
+      //background: transparent $login-banner-image 0 0 no-repeat;
     }
   }
 }
