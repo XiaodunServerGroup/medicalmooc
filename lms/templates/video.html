@@ -104,16 +104,16 @@
     <a class="nav-skip sr" id="after-transcript_${id}" href="#before-transcript_${id}">${_('Go back to start of transcript.')}</a>
 
     <div class="focus_grabber last"></div>
-  <ul class="wrapper-downloads">
-    % if sources.get('main'):
-        <li class="video-sources">
-            ${('<a href="%s">' + _('Download video') + '</a>') % sources.get('main')}
-        </li>
-    % endif
-    % if track:
-        <li class="video-tracks">
-            ${('<a href="%s">' + _('Download timed transcript') + '</a>') % track}
-        </li>
-    % endif
-  </ul>
+  <!--<ul class="wrapper-downloads">-->
+    <!--% if sources.get('main'):-->
+        <!--<li class="video-sources">-->
+            <!--${('<a href="%s">' + _('Download video') + '</a>') % sources.get('main')}-->
+        <!--</li>-->
+    <!--% endif-->
+    <!--% if track:-->
+        <!--<li class="video-tracks">-->
+            <!--${('<a href="%s">' + _('Download timed transcript') + '</a>') % track}-->
+        <!--</li>-->
+    <!--% endif-->
+  <!--</ul>-->
 </div>

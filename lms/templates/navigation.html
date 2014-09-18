@@ -79,7 +79,7 @@ site_status_msg = get_site_status_msg(course_id)
     </ol>
 
     % if course:
-      <h2>
+      <!--<h2>-->
         <!--
         <span class="provider">
           ${course.display_org_with_default | h}:
@@ -88,8 +88,8 @@ site_status_msg = get_site_status_msg(course_id)
         <!--
         ${course.display_number_with_default | h}
         -->
-        ${course.display_name_with_default}
-      </h2>
+        <!--${course.display_name_with_default}-->
+      <!--</h2>-->
     % endif
 
     % if user.is_authenticated():

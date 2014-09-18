@@ -2,7 +2,7 @@
   @extend .sidebar;
   @extend .tran;
   border-radius: 3px 0 0 3px;
-  border-right: 1px solid $border-color-2;
+  //border-right: 1px solid $border-color-2;
 
   #open_close_accordion {
     display: none;
@@ -79,7 +79,7 @@
       @include transition(background-color .1s linear 0s);
 
       &.is-open {
-        background: #fff;
+        background: #f4f4f4;
       }
 
       &:first-child {

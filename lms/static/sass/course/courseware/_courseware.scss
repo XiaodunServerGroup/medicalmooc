@@ -17,6 +17,13 @@ div.course-wrapper {
     @extend .content;
     padding: 40px;
     line-height: 1.6;
+    margin-left: 20px;
+    -moz-background-image:linear-gradient(to right, #ffffff 0%, #fefefe 1%, #f5f5f5 1%, #f4f4f4 100%);
+    -webkit-background-image:linear-gradient(to right, #ffffff 0%, #fefefe 1%, #f5f5f5 1%, #f4f4f4 100%);
+    -moz-background-image:linear-gradient(to right, #ffffff 0%, #fefefe 1%, #f5f5f5 1%, #f4f4f4 100%);
+    -ms-background-image:linear-gradient(to right, #ffffff 0%, #fefefe 1%, #f5f5f5 1%, #f4f4f4 100%);
+    -o-background-image:linear-gradient(to right, #ffffff 0%, #fefefe 1%, #f5f5f5 1%, #f4f4f4 100%);
+    @include linear-gradient(to right, #ffffff 0%, #fefefe 1%, #f5f5f5 1%, #f4f4f4 100%);
 
     h1 {
       margin: 0 0 lh();
