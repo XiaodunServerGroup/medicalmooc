@@ -31,7 +31,7 @@
 
   ## OG (Open Graph) title and description added below to give social media info to display
   ## (https://developers.facebook.com/docs/opengraph/howtos/maximizing-distribution-media-content#tags)
-  <meta property="og:title" content="${get_course_about_section(course, 'title')}" />
+<meta property="og:title" content="${get_course_about_section(course, 'title')}" xmlns="http://www.w3.org/1999/html"/>
   <meta property="og:description" content="${get_course_about_section(course, 'short_description')}" />
 </%block>
 
@@ -50,7 +50,7 @@
         event.preventDefault();
         return false;
       }
-      
+
       if (classAttrs.indexOf('auth') > 0 && classAttrs.indexOf('purchased') > 0) {
         $('div#purchase-prompt').children('span:first-child').html("您的账户已经在我们的运营系统上支付过此门课程，请直接点击下面按钮注册该课程");
         $('a#finish_purchase').html('加入课程&开始学习');
@@ -59,7 +59,7 @@
 
       if (classAttrs.indexOf('auth') > 0 && classAttrs.indexOf('purchased') == -1) {
         var purchaseLink = $('section.intro').data('purchase_link');
-        var showContent = "学习课程之前，请在我们的运营系统购买该课程(" + "<a href='" + purchaseLink + "' target='_blank'>购买链接</a>" 
+        var showContent = "学习课程之前，请在我们的运营系统购买该课程(" + "<a href='" + purchaseLink + "' target='_blank'>购买链接</a>"
           + ")，购买完成后，请点击下面按钮注册课程";
         window.open(purchaseLink, '_blank');
         $('div#purchase-prompt').children('span:first-child').html(showContent);
@@ -165,202 +165,141 @@
   </script>
 
   <script src="${static.url('js/course_info.js')}"></script>
+  <link href="${static.url('css/vendor/course_about.css')}" rel="stylesheet" type="text/css">
 </%block>
 
 <%block name="pagetitle">${_("About {course.display_number_with_default}").format(course=course) | h}</%block>
 
-<section class="course-info">
-  <header class="course-profile">
-    <div class="intro-inner-wrapper">
-      <div class="table">
-      <section class="intro">
-        <hgroup>
-          <h1>
-            ${get_course_about_section(course, "title")}
-            % if not self.theme_enabled():
-              <a href="#">${get_course_about_section(course, "university")}</a>
-            % endif         
-          </h1>
-          %if not registered:
-            <label style='margin-left: 20px; font-family: "微软雅黑"; font-style: normal'>
-              %if course.display_course_price_with_default == 0:
-                ${"(免费)"}
-              %else:
-                <span style='color: #53A93F; font-size: 26px;' id='course_price_span'>${str(course.display_course_price_with_default)}</span>
-                元
-              %endif
-            </label> 
-          %endif
-        </hgroup>
-
-        <div class="main-cta">
-          %if user.is_authenticated() and registered:
-            %if show_courseware_link:
-              <a href="${course_target}">
-            %endif
-
-            <span class="register disabled">${_("You are registered for this course")}</span>
-
-            %if show_courseware_link:
-              <strong>${_("View Courseware")}</strong>
-              </a>
-            %endif
-          %else:
-              %if course.display_course_price_with_default > 0:
-                <a href="#purchase-modal" class="register ${'auth' if user.is_authenticated else ''} ${'purchased' if purchased else ''}" rel='leanModal'>购买课程</a>
-              %else:
-                <a class="register free ${'auth' if user.is_authenticated else ''}">免费注册课程</a>
-              %endif
-            <div id="register_error" style='clear: both;'></div> 
-          %endif
-        </div>
-
-      </section>
-      % if get_course_about_section(course, "video"):
-        <a href="#video-modal" class="media" rel="leanModal">
-          <div class="hero">
-            <img src="${course_image_url(course)}" alt="" />
-            <div class="play-intro"></div>
-          </div>
-        </a>
-      %else:
-        <div class="media">
-          <div class="hero">
-            <img src="${course_image_url(course)}" alt="" />
-          </div>
-        </div>
-      % endif
-    </div>
-      </div>
-  </header>
-
-  <section class="container">
-    <section class="details">
-      <nav>
-        <a href="#" class="active">${_("Overview")}</a>
-      ##  <a href="#">${_("FAQ")}</a>
-      ##  <a href="#">${_("Requirements")}</a>
-      ##  <a href="#">${_("Text-book")}</a>
-      ##  <a href="#">${_("Syllabus")}</a>
-      ##  <a href="#">${_("Reviews")}</a>
-      </nav>
-
-      <div class="inner-wrapper">
-        ${get_course_about_section(course, "overview")}
-      </div>
-    </section>
-
-    <section class="course-sidebar">
-      <section class="course-summary">
-        <header>
-          % if microsite.get_value('course_about_show_social_links', True):
-          <div class="social-sharing">
-            <div class="sharing-message">${_("Share with friends and family!")}</div>
-            ## TODO: this should probably be an overrideable block,
-            ##       or something allowing themes to do whatever they
-            ##       want here (and on this whole page, really).
-            % if self.stanford_theme_enabled():
-              <a href="http://twitter.com/intent/tweet?text=I+just+registered+for+${course.number}+${get_course_about_section(course, 'title')}!+(http://class.stanford.edu)" class="share">
-                <img src="${static.url('images/social/twitter-sharing.png')}" alt="Tweet that you've registered for this course">
-              </a>
-              <a href="mailto:?subject=Take%20a%20course%20at%20Stanford%20online!&body=I%20just%20registered%20for%20${course.number}%20${get_course_about_section(course, 'title')}+(http://class.stanford.edu)" class="share">
-                <img src="${static.url('images/social/email-sharing.png')}" alt="Email someone to say you've registered for this course">
-              </a>
-            % else:
-              <%
-                site_domain = microsite.get_value('site_domain', 'www.edx.org')
-                platform_name = microsite.get_value('platform_name', 'edX')
-
-                tweet_action = "http://twitter.com/intent/tweet?text=I+just+registered+for+{number}+{title}+through+{account}:+{url}".format(
-                    number=course.number,
-                    title=get_course_about_section(course, 'title'),
-                    account=microsite.get_value('course_about_twitter_account', '@edxonline'),
-                    url="http://{domain}{path}".format(
-                        domain=site_domain,
-                        path=reverse('about_course', args=[course.id])
-                    )
-                )
-
-                facebook_link = microsite.get_value('course_about_facebook_link', 'http://www.facebook.com/EdxOnline')
-
-                email_subject = "mailto:?subject={subject}&body={body}".format(
-                    subject="Take a course with {platform} online".format(platform=platform_name),
-                    body="I just registered for {number} {title} through {platform} {url}".format(
-                        number=course.number,
-                        title=get_course_about_section(course, 'title'),
-                        platform=platform_name,
-                        url="http://{domain}{path}".format(
-                            domain=site_domain,
-                            path=reverse('about_course', args=[course.id]),
-                        )
-                    )
-                ).replace(" ", "%20")
-              %>
-              <!--a href="${tweet_action}" class="share">
-                <img src="${static.url('images/social/twitter-sharing.png')}" alt="Tweet that you've registered for this course">
-              </a>
-              <a href="${facebook_link}" class="share">
-                <img src="${static.url('images/social/facebook-sharing.png')}" alt="Post a Facebook message to say you've registered for this course">
-              </a-->
-              <a href="${email_subject}" class="share">
-                <img src="${static.url('images/social/email-sharing.png')}" alt="Email someone to say you've registered for this course">
-              </a>
-            % endif
-          </div>
-          % endif
-        </header>
-
-        <ol class="important-dates">
-          <li><div class="icon course-number"></div><p>${_("Course Number")}</p><span class="course-number">${course.display_number_with_default | h}</span></li>
-          % if not course.start_date_is_still_default:
-          <li><div class="icon start"></div><p>${_("Classes Start")}</p><span class="start-date">${course.start_date_text}</span></li>
-          % endif
-            ## We plan to ditch end_date (which is not stored in course metadata),
-            ## but for backwards compatibility, show about/end_date blob if it exists.
-            % if get_course_about_section(course, "end_date") or course.end:
-            <li>
-                <div class="icon end"></div>
-                <p>${_("Classes End")}</p><span class="final-date">
-                % if get_course_about_section(course, "end_date"):
-                    ${get_course_about_section(course, "end_date")}
-                % else:
-                    ${course.end_date_text}
-                % endif
-                </span>
-            </li>
-            % endif
-
-          % if get_course_about_section(course, "effort"):
-            <li><div class="icon effort"></div><p>${_("Estimated Effort")}</p><span class="start-date">${get_course_about_section(course, "effort")}</span></li>
-          % endif
-
-          ##<li><div class="icon length"></div><p>${_('Course Length')}</p><span class="course-length">${_('{number} weeks').format(number=15)}</span></li>
-
-          % if get_course_about_section(course, "prerequisites"):
-            <li class="prerequisites"><div class="icon prereq"></div><p>${_("Prerequisites")}</p><span class="start-date">${get_course_about_section(course, "prerequisites")}</span></li>
-          % endif
-        </ol>
-      </section>
 
 
-      ## For now, ocw links are the only thing that goes in additional resources
-      % if get_course_about_section(course, "ocw_links"):
-      <section class="additional-resources">
-        <header>
-          <h1>${_("Additional Resources")}</h1>
-        </header>
-
-        <section>
-          ## "MITOpenCourseware" should *not* be translated
-          <h2 class="opencourseware">MITOpenCourseware</h2>
-             ${get_course_about_section(course, "ocw_links")}
+<div class="content">
+    <div class="wrapper">
+        <section class="container container_bg">
+        	<div class="container_pad">
+                <div class="course_left">
+                    <h2><img src="${course_image_url(course)}" width="228" height="80"  alt=""/></h2>
+                    <h3 class="title">${get_course_about_section(course, "title")}</h3>
+                    <p>《有机化学》是研究有机化合物的结构、性质和反应的学科，是化学专业学生的必修基础课，是生物化学、分子生物学、医学、药学等课程的先修课。西安交通大学教学名师唐玉海教授，将在MOOC课堂中通过多元化教学模式，融合理论学习和实例分析，并结合课外实验，帮助学生系统深入地掌握有机化学基本知识。</p>
+                </div>
+                <div class="course_right">
+                 % if get_course_about_section(course, "video"):
+                   <a href="#video-modal" class="media" rel="leanModal">
+                      <div class="hero">
+                            <img src="${course_image_url(course)}" width="425" height="241" alt="" />
+                      <div class="play-intro"></div>
+                      </div>
+                   </a>
+                 %else:
+                    <div class="media">
+                        <div class="hero">
+                            <img src="${course_image_url(course)}" width="425" height="241" alt="" />
+                        </div>
+                    </div>
+                </div>
+                 % endif
+            </div>
         </section>
-      </section>
-      %endif
-    </section>
+        <section class="container">
+            <section class="section_left container_bg">
+            	<div class="container_pad2">
+                    <h2 class="line">课程概述</h2>
+                        <div class="inner-wrapper">
+                        ${get_course_about_section(course, "overview")}
+                        </div>
+                </div>
+            </section>
+            <section class="section_right container_bg">
+            	<div class="container_pad2">
+                    <h2>课程学期</h2>
+                    <div class="termSelect_c">
+                        <select id="j-termSelect" class="termSelect">
+                            <option value="18001">${course.start_date_text}-${course.end_date_text}</option>
+                        </select>
+                    </div>
+                    <div class="m-btnList">
+                        <div class="main-cta">
+                        %if user.is_authenticated() and registered:
+                            %if show_courseware_link:
+                                <a href="${course_target}">
+                            %endif
 
-  </section>
-</section>
+                                <!--<span class="register disabled">${_("You are registered for this course")}</span>-->
+
+                            %if show_courseware_link:
+                                <strong><span id="j-startLearn" class="u-btn-orange">${_("View Courseware")}</span></strong>
+                                </a>
+                            %endif
+                        %else:
+                            %if course.display_course_price_with_default > 0:
+                                <a href="#purchase-modal" class="register ${'auth' if user.is_authenticated else ''} ${'purchased' if purchased else ''}" rel='leanModal'>购买课程</a>
+                            %else:
+                                <a class="register free ${'auth' if user.is_authenticated else ''}">免费注册课程</a>
+                            %endif
+                                <div id="register_error" style='clear: both;'></div>
+                        %endif
+                        </div>
+                    </div>
+                    <div class="m-btnList">
+                        <h2>课程信息</h2>
+                        <p><span>课程时长：</span><span class="cor_red">12周</span></p>
+                        <p><span>开课时间：</span><span class="cor_red">${course.start}</span></p>
+                        <p><span>课程负载：</span><span class="cor_red">4小时每周</span></p>
+                        <p><span>内容类型：</span><span>视频 文档 随堂测验 富文本 讨论</span></p>
+                        <p><span>课程分类：</span><a href="#">哲学历史</a></p>
+                    </div>
+                  </div>
+                    <div class="m-btnList">
+                        <h4>授课老师</h4>
+                        <a class="m-btn" href="#">
+                            <img src="${static.url('images/liuz.jpg')}" width="80" height="80"  alt=""/>
+							<div class="cnt f-fl">
+                				<h3>唐玉海</h3>
+                				<p>教授</p>
+              				</div>
+                        </a>
+                        <a class="m-btn" href="#">
+                            <img src="${static.url('images/liuz.jpg')}" width="80" height="80"  alt=""/>
+							<div class="cnt f-fl">
+                				<h3>唐玉海</h3>
+                				<p>教授</p>
+              				</div>
+                        </a>
+                        <a class="m-btn" href="#">
+                            <img src="${static.url('images/liuz.jpg')}" width="80" height="80"  alt=""/>
+							<div class="cnt f-fl">
+                				<h3>唐玉海</h3>
+                				<p>教授</p>
+              				</div>
+                        </a>
+                        <a class="m-btn" href="#">
+                            <img src="${static.url('images/liuz.jpg')}" width="80" height="80"  alt=""/>
+							<div class="cnt f-fl">
+                				<h3>唐玉海</h3>
+                				<p>教授</p>
+              				</div>
+                        </a>
+                    </div>
+                    <div class="m-btnList">
+                        <h4>分享</h4>
+                            <!-- JiaThis Button BEGIN -->
+                            <div class="jiathis_style_32x32">
+	                            <a class="jiathis_button_qzone"></a>
+	                            <a class="jiathis_button_tsina"></a>
+	                            <a class="jiathis_button_tqq"></a>
+	                            <a class="jiathis_button_weixin"></a>
+	                            <a class="jiathis_button_renren"></a>
+	                            <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	                            <a class="jiathis_counter_style"></a>
+                            <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1394016511800771" charset="utf-8"></script>
+                            <!-- JiaThis Button END -->
+                        </div>
+                    </div>
+            </section>
+        </section>
+    </div>
+</div>
+<!--content end-->
+
 
 %if not registered:
   <div style="display: none;">
@@ -376,74 +315,5 @@
   </div>
 %endif
 
+
 <%include file="../video_modal.html" />
-
-
-<style>
-  section#purchase-modal header { padding: 0px; margin: 25px 0px 10px; border-bottom: 1px solid #d2d2d2}
-
-  section#purchase-modal div#purchase-oper { margin: 15px 0px 0px;}
-  section#purchase-modal div#purchase-oper a:first-child {margin-right: 30px; }
-  section#purchase-modal div#purchase-oper a.trade_class {
-      width: 100%;
-      border: 1px solid #8a0b00;
-      border-bottom: 1px solid #810000;
-      box-shadow: inset 0 1px 0 0 #ff973d;
-      color: white;
-      display: inline-block;
-      font-size: 14px;
-      background-color: #ff7a31;
-      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ff7a31),color-stop(50%, #c74810),color-stop(50%, #a92f01),color-stop(100%, #b03403));
-      background-image: -webkit-linear-gradient(top, #ff7a31 0%,#c74810 50%,#a92f01 50%,#b03403 100%);
-      background-image: linear-gradient(to bottom,#ff7a31 0%,#c74810 50%,#a92f01 50%,#b03403 100%);
-      padding: 8px 20px;
-      text-align: center;
-      text-decoration: none;
-      text-shadow: 0 -1px 1px #730000;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      border-radius: 3px;
-      display: inline-block;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      text-align: center;
-  }
-
-  section#purchase-modal div#purchase-oper a.trade_class:hover {
-    cursor:pointer;
-    background-color: #f26b1f;
-    background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #f26b1f),color-stop(50%, #bd3c00),color-stop(50%, #a22500),color-stop(100%, #a92a00));
-    background-image:-webkit-linear-gradient(top, #f26b1f 0%,#bd3c00 50%,#a22500 50%,#a92a00 100%);
-    background-image: linear-gradient(to bottom,#f26b1f 0%,#bd3c00 50%,#a22500 50%,#a92a00 100%)
-  }
-</style>
-<section id='purchase-modal' class="modal">
-  <div class="inner-wrapper" role='dialog' aria-labelledby="purchase-modal-title" style="border-bottom: 1px solid #d2d2d2">
-    <button class="close-modal">&#10005;
-      <span class="sr">
-        ## Translators: this is a control to allow users to exit out of this modal interface (a menu or piece of UI that takes the full focus of the screen)
-        ${_('Close Modal')}
-      </span>
-    </button>
-
-    <header style="padding: 0;">
-      <h2 id="portfolio-modal-title">
-        <span class="sr">,
-          ## Translators: this text gives status on if the modal interface (a menu or piece of UI that takes the full focus of the screen) is open or not
-          ${_("modal open")}
-        </span>
-      </h2>
-    </header>
-
-    <section class="purchase-content" style="width: auto; padding: 0 40px 20px">
-      <div id='purchase-prompt'>
-        <span>支付进行中。。。如果支付完成，请点击下面按钮来注册加入课程</span>
-      </div>
-
-      <div id='purchase-oper'>
-        <a class="trade_class" id="finish_purchase" style="display: inline-block; padding: 8px 20px">确定已支付&注册课程</a>
-      </div>
-    </section>
-  </div>
-</section>

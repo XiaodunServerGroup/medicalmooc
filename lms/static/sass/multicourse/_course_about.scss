@@ -1,33 +1,36 @@
 .course-info {
+  background: #eeeeee;
   .container {
     padding-bottom: 120px;
   }
 
   header.course-profile {
-    background: $course-profile-bg;
-    background-image: $homepage-bg-image;
+    //background: $course-profile-bg;
+    //background-image: $homepage-bg-image;
     background-size: cover;
     box-shadow: 0 1px 80px 0 rgba(0,0,0, 0.5);
     /*border-bottom: 1px solid $border-color-3;*/
     box-shadow: inset 0 1px 5px 0 rgba(0,0,0, 0.1);
     height: 280px;
-    margin-top: $header_image_margin;
-    padding-top: 150px;
+    //margin-top: $header_image_margin;
+    padding-top: 20px;
     overflow: hidden;
     position: relative;
     width: 100%;
 
     .intro-inner-wrapper {
-      background: $course-header-bg;
-      border: 1px solid $border-color-3;
-      box-shadow: 0 4px 25px 0 rgba(0,0,0, 0.5);
+      //background: $course-header-bg;
+      background: #fff;
+      //border: 1px solid $border-color-3;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
       @include box-sizing(border-box);
       @include clearfix;
       margin: 0 auto;
-      max-width: 1200px;
-      min-width: 760px;
+      max-width: 960px;
+      min-width: 960px;
       position: relative;
       z-index: 2;
+      padding-bottom: 69px;
 
       > div.table {
         display: table;
@@ -235,6 +238,9 @@
 
   .container {
     @include clearfix;
+    max-width: 960px;
+    min-width: 960px;
+    margin-top: 20px;
 
     nav {
       border-bottom: 1px solid $border-color-2;
@@ -275,7 +281,8 @@
   .details {
     float: left;
     margin-right: flex-gutter();
-    width: flex-grid(8);
+    width: flex-grid(7.6);
+    background: #fff;
 
     > nav {
       > a {
@@ -356,11 +363,13 @@
   .course-sidebar {
     @include box-sizing(border-box);
     float: left;
-    width: flex-grid(4);
+    width: flex-grid(4.3);
+    background: #fff;
+    margin-left: 7px;
 
     > section {
-      box-shadow: inset 0 0 3px 0 rgba(0,0,0, 0.15);
-      border: 1px solid $border-color-2;
+      //box-shadow: inset 0 0 3px 0 rgba(0,0,0, 0.15);
+      //border: 1px solid $border-color-2;
 
       &.course-summary {
         padding: 16px 20px 30px;

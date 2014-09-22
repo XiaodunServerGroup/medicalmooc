@@ -54,6 +54,11 @@
       a {
         letter-spacing: 1px;
         vertical-align: middle;
+        display: block;
+        padding: 5px;
+        color: #646464;
+        //font-size: 18px;
+        font-weight: 400;
       }
     }
 
@@ -292,9 +297,15 @@
     float: right;
     margin-top: ($baseline/4);
     list-style: none;
+    border: 1px solid #2883bc;
 
     li {
       display: inline-block;
+
+      .click {
+        background: #2883bc;
+        color: #fff;
+      }
 
       .cta {
         @extend %m-btn-primary;

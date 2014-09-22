@@ -15,6 +15,7 @@
   show_partners = microsite.get_value('show_partners', True)
 
 %>
+<script type="text/javascript" src="${static.url('js/index.js')}"></script>
 <script language="text/javascript">
 function chkform(){
     var addform= document.queryform;
@@ -25,55 +26,76 @@ function chkform(){
 }
 </script>
 <section class="home">
-  <header>
-    <div class="outer-wrapper">
-      <div class="title">
-        <hgroup>
-          % if homepage_overlay_html:
-            ${homepage_overlay_html}
-          % else:
-            % if self.stanford_theme_enabled():
-              <h1>${_("Free courses from <strong>{university_name}</strong>").format(university_name="Stanford")}</h1>
-            % else:
-              <h1>${_("For anyone, anywhere, anytime")}</h1>
-            % endif
+  <!--<header>-->
+    <!--<div class="outer-wrapper">-->
+      <!--<div class="title">-->
+        <!--<hgroup>-->
+          <!--% if homepage_overlay_html:-->
+            <!--${homepage_overlay_html}-->
+          <!--% else:-->
+            <!--% if self.stanford_theme_enabled():-->
+              <!--<h1>${_("Free courses from <strong>{university_name}</strong>").format(university_name="Stanford")}</h1>-->
+            <!--% else:-->
+              <!--<h1>${_("For anyone, anywhere, anytime")}</h1>-->
+            <!--% endif-->
 
-          % endif
-            <form name="queryform" class="search-container search" action="/courses" method="get" id="search-form" onsubmit="return chkform();">
-              <!--<input id="search-query" name="query" onfocus="if (value =='请输入关键字...'){value =''}" onblur="if (value ==''){value='请输入关键字...'}" value=""  type="text" width="340px">-->
-              <input id="search-query" name="query" onfocus="placeholder =''" value=""  onblur="placeholder='请输入关键字...'"  placeholder="请输入关键字..." type="text" width="340px">
-                 <ul class="search-menu" style="display: none;">
-                 </ul>
-              <input value="搜索" type="submit">
-            </form>
-        </hgroup>
+          <!--% endif-->
+            <!--<form name="queryform" class="search-container search" action="/courses" method="get" id="search-form" onsubmit="return chkform();">-->
+              <!--&lt;!&ndash;<input id="search-query" name="query" onfocus="if (value =='请输入关键字...'){value =''}" onblur="if (value ==''){value='请输入关键字...'}" value=""  type="text" width="340px">&ndash;&gt;-->
+              <!--<input id="search-query" name="query" onfocus="placeholder =''" value=""  onblur="placeholder='请输入关键字...'"  placeholder="请输入关键字..." type="text" width="340px">-->
+                 <!--<ul class="search-menu" style="display: none;">-->
+                 <!--</ul>-->
+              <!--<input value="搜索" type="submit">-->
+            <!--</form>-->
+        <!--</hgroup>-->
 
-        ## Disable social buttons for non-edX sites
-        % if not self.theme_enabled():
-          <section class="actions">
-            <div class="main-cta">
-              <a href="#signup-modal" id="signup_action" class="find-courses" rel="leanModal">${_("Sign Up")}</a>
-            </div>
+        <!--## Disable social buttons for non-edX sites-->
+        <!--% if not self.theme_enabled():-->
+          <!--<section class="actions">-->
+            <!--<div class="main-cta">-->
+              <!--<a href="#signup-modal" id="signup_action" class="find-courses" rel="leanModal">${_("Sign Up")}</a>-->
+            <!--</div>-->
 
-            <div class="secondary-actions">
-              <div class="social-sharing">
-                <div class="sharing-message">${_("Stay up to date with all {platform_name} has to offer!").format(platform_name=settings.PLATFORM_NAME)}</div>
-                <a href="https://twitter.com/edXOnline" class="share">
-                  <img src="${static.url('images/social/twitter-sharing.png')}">
-                </a>
-                <a href="http://www.facebook.com/EdxOnline" class="share">
-                  <img src="${static.url('images/social/facebook-sharing.png')}">
-                </a>
-                <a href="https://plus.google.com/108235383044095082735/posts" class="share">
-                  <img src="${static.url('images/social/google-plus-sharing.png')}">
-                </a>
-              </div>
-            </div>
-          </section>
-          % endif
-      </div>
+            <!--<div class="secondary-actions">-->
+              <!--<div class="social-sharing">-->
+                <!--<div class="sharing-message">${_("Stay up to date with all {platform_name} has to offer!").format(platform_name=settings.PLATFORM_NAME)}</div>-->
+                <!--<a href="https://twitter.com/edXOnline" class="share">-->
+                  <!--<img src="${static.url('images/social/twitter-sharing.png')}">-->
+                <!--</a>-->
+                <!--<a href="http://www.facebook.com/EdxOnline" class="share">-->
+                  <!--<img src="${static.url('images/social/facebook-sharing.png')}">-->
+                <!--</a>-->
+                <!--<a href="https://plus.google.com/108235383044095082735/posts" class="share">-->
+                  <!--<img src="${static.url('images/social/google-plus-sharing.png')}">-->
+                <!--</a>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</section>-->
+          <!--% endif-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</header>-->
+
+  <!--banner begin-->
+    <div class="default_banner">
+        <div class="big-img" id="big-img">
+        	<img class="big_b1" src="static/images/banner1_02.jpg" style="opacity:1;z-index:1; filter:alpha(opacity:100)"></img>
+			<img class="big_b2" src="static/images/lobby_02.jpg" style="opacity:0;z-index:0; filter:alpha(opacity:100)"></img>
+			<img class="big_b3"  src="static/images/lobby_04.jpg" style="opacity:0;z-index:0; filter:alpha(opacity:100)"></img>
+        </div>
+      	<div class="small">
+                <ul class="small_m">
+                      <div class="s_pre" id="prevBtn"></div>
+                      <div class="scroll_pic" id="tab-btn">
+                   		<li><img class="cls" src="static/images/index3_07.png" /></li>
+                        <li><img src="static/images/index3_07.png"  alt=""/></li>
+                        <li><img src="static/images/index3_07.png"  alt=""/></li>
+                      </div>
+                      <div class="s_next" id="nextBtn"></div>
+                </ul>
+        </div>
     </div>
-  </header>
+	<!--banner end-->
 
   <section class="container">
     <section class="highlighted-courses">
@@ -122,3 +144,21 @@ function chkform(){
   $(window).load(function() {$('#signup_action').trigger("click");});
 </script>
 % endif
+
+<style type="text/css">
+    .default_banner {width:100%; margin:0; padding:0; background:#FFFFFF; position:relative; height:524px;}
+	.default_banner .big_b1 {position:absolute; top:0; left:0; width:100%; background: url(01.jpg) center top no-repeat; height:524px;}
+	.default_banner .big_b2 {position:absolute; top:0; left:0; width:100%; background: url(02.jpg) center top no-repeat; height:524px;}
+	.default_banner .big_b3 {position:absolute; top:0; left:0; width:100%; background: url(03.jpg) center top no-repeat; height:524px;}
+	.default_banner .small { width:100%; height:89px; position:absolute; z-index:999; top:200px; left:0;}
+	.default_banner .small .small_m {margin:auto; width:1003px; position:relative;list-style-type:none;}
+	.default_banner .small .small_m .s_pre { position:absolute; left:0; top:1px; background: url(static/images/prev_03.png) center center no-repeat; width:65px; height:65px; cursor:pointer;}
+	.default_banner .small .small_m .s_pre:hover {background: url(static/images/prev_03_1.png) repeat scroll 0 0 rgba(0, 0, 0, 0);}
+	.default_banner .small .small_m .s_next { position:absolute; right:0; top:1px; background: url(static/images/next_03.png) center center no-repeat; width:65px; height:65px; cursor:pointer;}
+	.default_banner .small .small_m .s_next:hover {background: url(static/images/next_03_1.png) repeat scroll 0 0 rgba(0, 0, 0, 0);}
+	.default_banner .small .small_m .scroll_pic {position:absolute; left:420px; top:250px;}
+	.default_banner .small .small_m .scroll_pic li {background:none; cursor: pointer; float: left; height:17px; width: 17px; margin:5px 0 0 30px;}
+	.default_banner .small .small_m .scroll_pic li img {opacity: 0.7;}
+	.default_banner .small .small_m .scroll_pic li:hover img, .scroll_pic li:hover {opacity: 1;}
+	.default_banner .small .small_m .scroll_pic li img.cls {background:#72add3; border-radius:50%; opacity:1;}
+</style>

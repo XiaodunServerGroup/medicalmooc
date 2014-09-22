@@ -157,17 +157,20 @@
     }
   </script>
 </%block>
-
-<section class="introduction">
+<section class="introduction_bg">
+<div class="introduction">
   <header>
     <h1 class="title">
-      <span class="title-super">欢迎访问我们的网站，请注册并创建属于您的账户</span>
-      <span class="title-sub">请将这些字段补充完整以注册账户</span>
-      <span class="title-sub">必须的字段已经<strong>粗体和星号(*)</strong>所标记</span>
+      <span class="title-super">欢迎访问我们的网站，请注册并创建属于您的账户.</span>
     </h1>
   </header>
+  <p style="padding-top:20px;"><span style="color:#fff; margin-left:120px;">
+        请将这些字段补充完整以注册账户。</span><br>
+        <span style="color:#fff; margin-left:120px;">必须的字段已经<strong>粗体和星号(*)</strong>所标记</span>
+  </p>
+</div>
 </section>
-
+<section class="login_background">
 <section class="register container">
   <section role="main" class="content">
     <form role="form" id="register-form" method="post" data-remote="true" action="/create_account" novalidate>
@@ -425,4 +428,5 @@
     <%include file="${sidebar_file}" />
 
   </aside-->
+</section>
 </section>

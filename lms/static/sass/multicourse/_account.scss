@@ -102,6 +102,10 @@
     padding-bottom: 0;
   }
 
+  .login_background {
+    background: $account-content-wrapper-login-background;
+  }
+
   .container, .introduction {
     @include box-sizing(border-box);
     @include clearfix;
@@ -144,8 +148,8 @@
 
         .title-super {
           @include font-size(24);
-          @include line-height(18);
-          text-transform: uppercase;
+          //@include line-height(18);
+          text-transform: lowercase;
           color: #fff;
         }
 
@@ -326,7 +330,7 @@
       label {
         @include transition(color 0.15s ease-in-out 0s);
         margin: 0 0 ($baseline/4) 0;
-        color: #fff;
+        //color: #fff;
       }
 
       .tip {
@@ -609,14 +613,17 @@
 // register
 .view-register {
 
+  .introduction_bg {
+    height: 176px;
+    background: transparent $register-banner-image center center no-repeat;
+  }
+
   .introduction {
     padding: 0;
 
     header {
-      height: 176px;
-      margin-left: -400px;
-      margin-right: -400px;
-      background: transparent $register-banner-image center center no-repeat;
+      height: 80px;
+      //background: transparent $register-banner-image center center no-repeat;
       border-bottom:1px solid #fff;
     }
   }
