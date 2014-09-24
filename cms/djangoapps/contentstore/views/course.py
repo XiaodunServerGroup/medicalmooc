@@ -67,7 +67,7 @@ from .component import (
 from django_comment_common.models import assign_default_role
 from django_comment_common.utils import seed_permissions_roles
 
-from student.models import CourseEnrollment
+from student.models import CourseEnrollment,UserProfile
 
 from xmodule.html_module import AboutDescriptor
 from xmodule.modulestore.locator import BlockUsageLocator, CourseLocator
@@ -404,6 +404,7 @@ def course_listing(request):
         print "=====error===== " * 5
 
     course_org = _get_course_org_from_bs(request.user)
+    profile = UserProfile.objects.get(name=request.user)
     return render_to_response('index.html', {
         'courses': [format_course_for_view(c) for c in courses if not isinstance(c, ErrorDescriptor)],
         'user': request.user,
@@ -411,7 +412,8 @@ def course_listing(request):
         'course_creator_status': _get_course_creator_status(request.user),
         'course_org': course_org,
         'wenjuan_link': wenjuan_loginapi,
-        'qlist': qlist
+        'qlist': qlist,
+        'profile': profile
     })
 
 

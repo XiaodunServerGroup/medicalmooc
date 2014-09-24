@@ -396,6 +396,23 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
         </ol>
       </div>
 
+      % if profile.profile_role=='in':
+      <div class="bit">
+        <h3 class="title title-3">单位管理</h3>
+        <p>由帐户为单位帐户,在以下可进行本单位相关管理.</p>
+
+        <ol class="list-actions">
+          <li class="action-item">
+            <a href="" title="批量导入教师" target="_blank">批量导入教师</a>
+            <br/>
+            <a href="" title="添加审核教师" target="_blank">添加审核教师</a>
+            <br/>
+            <a href="" title="管理本单位教师" target="_blank">管理本单位教师</a>
+          </li>
+        </ol>
+      </div>
+        % endif
+
       % if course_creator_status=='disallowed_for_this_site' and settings.FEATURES.get('STUDIO_REQUEST_EMAIL',''):
       <div class="bit">
         <h3 class="title title-3">${_('Can I create courses in Studio?')}</h3>
