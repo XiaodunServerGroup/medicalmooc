@@ -2,6 +2,8 @@
 #coding=utf-8
 import Queue
 import sys,os
+from django.shortcuts import render
+import xlrd
 
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -1250,3 +1252,5 @@ def course_audit_api(request, course_id, operation):
         return JsonResponse(re_json)
     except:
         return JsonResponse(re_json)
+
+

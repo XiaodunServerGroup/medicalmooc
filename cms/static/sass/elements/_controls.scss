@@ -26,13 +26,13 @@
 // blue primary button
 %btn-primary-blue {
   @extend %ui-btn-primary;
-  background: $blue;
-  border-color: $blue-s1;
+  background: #0e74b4;
+  border-color: #0e74b4;
   color: $white;
 
   &:hover, &:active {
-    background: $blue-s2;
-    border-color: $blue-s2;
+    background: #0e74b4;
+    border-color: #0e74b4;
   }
 
   &.current, &.active {
@@ -49,13 +49,13 @@
 // green primary button
 %btn-primary-green {
   @extend %ui-btn-primary;
-  background: $green;
-  border-color: $green;
+  background: #0e74b4;
+  border-color: #0e74b4;
   color: $white;
 
   &:hover, &:active {
-    background: $green-s1;
-    border-color: $green-s1;
+    background: #0e74b4;
+    border-color: #0e74b4;
   }
 
   &.current, &.active {

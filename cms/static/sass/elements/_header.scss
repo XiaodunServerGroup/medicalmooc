@@ -9,7 +9,7 @@
   box-shadow: 0 1px 2px 0 $shadow-l1;
   margin: 0;
   padding: 0 $baseline;
-  background: $white;
+  background: #f9f9f9;
   border-bottom: 3px solid $theme-color;  
 
   header.primary {
@@ -120,10 +120,10 @@
       display: block;
 
       img {
-        height: 70px;
-        width: 413px;
+        //height: 70px;
+        //width: 413px;
         display: block;
-        margin-left:-10px;
+        //margin-left:-10px;
       }
     }
   }

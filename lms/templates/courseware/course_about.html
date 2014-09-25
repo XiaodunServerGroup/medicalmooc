@@ -173,7 +173,7 @@
 
 
 <div class="content">
-    <div class="wrapper">
+    <div class="wrapper_about">
         <section class="container container_bg">
         	<div class="container_pad">
                 <div class="course_left">
@@ -230,11 +230,11 @@
                                 </a>
                             %endif
                         %else:
-                            %if course.display_course_price_with_default > 0:
-                                <a href="#purchase-modal" class="register ${'auth' if user.is_authenticated else ''} ${'purchased' if purchased else ''}" rel='leanModal'>购买课程</a>
-                            %else:
-                                <a class="register free ${'auth' if user.is_authenticated else ''}">免费注册课程</a>
-                            %endif
+                            <!--%if course.display_course_price_with_default > 0:-->
+                                <!--<a href="#purchase-modal" class="register ${'auth' if user.is_authenticated else ''} ${'purchased' if purchased else ''}" rel='leanModal'>购买课程</a>-->
+                            <!--%else:-->
+                                <a class="register free ${'auth' if user.is_authenticated else ''}"><span id="j-startLearn" class="u-btn-orange">免费注册课程</span></a>
+                            <!--%endif-->
                                 <div id="register_error" style='clear: both;'></div>
                         %endif
                         </div>

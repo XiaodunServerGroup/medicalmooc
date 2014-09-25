@@ -864,3 +864,4 @@ def log_successful_logout(sender, request, user, **kwargs):
         AUDIT_LOG.info(u"Logout - user.id: {0}".format(request.user.id))
     else:
         AUDIT_LOG.info(u"Logout - {0}".format(request.user))
+
