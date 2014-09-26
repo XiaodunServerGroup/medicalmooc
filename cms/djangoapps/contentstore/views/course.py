@@ -3,7 +3,6 @@
 import Queue
 import sys,os
 from django.shortcuts import render
-import xlrd
 
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -674,7 +673,7 @@ def notice_course_update_to_student(json,course_location,package_id):
     # 发送邮件给所有的注册学生
     queue = Queue.Queue()
     course_module = modulestore().get_item(course_location, depth=0)
-    sub = "校盾课程  [" + course_module.display_name_with_default.encode("utf-8") + ']  更新提醒'
+    sub = "课程  [" + course_module.display_name_with_default.encode("utf-8") + ']  更新提醒'
     try:
         update_content = json['content']
         student_email_list = analytics.basic.enrolled_students_features(package_id.replace(".", "/"), ['email'])

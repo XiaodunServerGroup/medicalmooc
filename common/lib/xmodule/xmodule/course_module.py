@@ -396,15 +396,15 @@ class CourseFields(object):
                                       "action_external": 1
                                     },
                                     {
-                                      "short_description": "注册加入校盾平台",
-                                      "long_description": "注册校盾、阅读创建校盾课程的入门教程",
+                                      "short_description": "注册加入中国医学教育慕课联盟平台",
+                                      "long_description": "注册中国医学教育慕课联盟、阅读创建校盾课程的入门教程",
                                       "is_checked": 0,
                                       "action_url": "https://edge.edx.org/courses/edX/edX101/How_to_Create_an_edX_Course/about",
-                                      "action_text": "注册校盾平台",
+                                      "action_text": "注册中国医学教育慕课联盟平台",
                                       "action_external": 1
                                     },
                                     {
-                                      "short_description": "下载校盾工作平台的相关文档",
+                                      "short_description": "下载中国医学教育慕课联盟工作平台的相关文档",
                                       "long_description": "以PDF格式搜索下载工作平台的参考文档。",
                                       "is_checked": 0,
                                       "action_url": "http://files.edx.org/Getting_Started_with_Studio.pdf",
@@ -418,7 +418,7 @@ class CourseFields(object):
                                   "items": [
                                     {
                                       "short_description": "起草课程描述",
-                                      "long_description": "在校盾中的课程都有相关的页面，包含了该课程的视频、描述和其他信息。学生在您的课程报名前该仔细阅读该介绍。",
+                                      "long_description": "在中国医学教育慕课联盟中的课程都有相关的页面，包含了该课程的视频、描述和其他信息。学生在您的课程报名前该仔细阅读该介绍。",
                                       "is_checked": 0,
                                       "action_url": "SettingsDetails",
                                       "action_text": "编辑课程详细及日程页",

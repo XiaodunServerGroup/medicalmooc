@@ -14,7 +14,7 @@
 <%! from datetime import date %>
 <%! import calendar %>
 
-<%block name="pagetitle">校盾注册</%block>
+<%block name="pagetitle">中国医学教育慕课联盟注册</%block>
 
 <%block name="bodyclass">view-register</%block>
 
@@ -96,7 +96,7 @@
         $submitButton.
           removeClass('is-disabled').
           removeProp('disabled').
-          html("创建我的校盾账户");
+          html("创建我的账户");
       }
       else {
         $submitButton.
@@ -366,7 +366,7 @@
 
           % if settings.REGISTRATION_EXTRA_FIELDS['goals'] != 'hidden':
           <li class="field ${settings.REGISTRATION_EXTRA_FIELDS['goals']} text" id="field-goals">
-            <label for="goals">请分享您注册校盾的原因</label>
+            <label for="goals">请分享您注册中国医学教育慕课联盟的原因</label>
             <textarea id="goals" name="goals" value="" ${'required aria-required="true"' if settings.REGISTRATION_EXTRA_FIELDS['goals'] == 'required' else ''}></textarea>
           </li>
           % endif

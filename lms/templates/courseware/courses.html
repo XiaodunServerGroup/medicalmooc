@@ -96,28 +96,21 @@ function chkform(obj){
   </section>
   <!--hfy6 end-->
   </header>
-    <section class="container search_position">
-        <div class="search_box">
-  		    <i class="search_icon"></i>
-                <input id="search" class="search" type="text" aria-described-by="email-tip" aria-required="true" required placeholder="请输入您要查询的课程" value="" name="">
-                <input type="submit" class="search_button" value="搜索">
-        </div>
-    </section>
   <section class="container">
-    <!--<section class="filter" style="z-index:150;">-->
-       <!--<nav>-->
-        <!--<form name="queryform" class="search-container search" id="search-form" action="/courses" method="get" onsubmit="return chkform(this)">-->
-          <!--&lt;!&ndash;<input type="text" id="search-query" name="query"  onfocus="if (value =='请输入关键字...'){value =''}" onblur="if (value ==''){value='请输入关键字...'}" value="">&ndash;&gt;-->
-          <!--<table>-->
-              <!--<tr>-->
-                  <!--<td><div id="remind"></div></td>-->
-                  <!--<td><input type="text" id="search-query" name="query"  placeholder="请输入关键字..." onfocus="placeholder =''" onblur="placeholder='请输入关键字...'" value=""></td>-->
-                  <!--<td><input type="submit" value="搜索"></td>-->
-              <!--</tr>-->
-          <!--</table>-->
-        <!--</form>-->
-       <!--</nav>-->
-    <!--</section>-->
+    <section class="search_box" style="z-index:150;">
+       <nav>
+        <form name="queryform" class="search-container search" id="search-form" action="/courses" method="get" onsubmit="return chkform(this)">
+          <!--<input type="text" id="search-query" name="query"  onfocus="if (value =='请输入关键字...'){value =''}" onblur="if (value ==''){value='请输入关键字...'}" value="">-->
+          <table>
+              <tr>
+                  <td><div id="remind"></div></td>
+                  <td><input type="text" id="search-query" name="query"  class="search" placeholder="请输入关键字..." onfocus="placeholder =''" onblur="placeholder='请输入关键字...'" value=""></td>
+                  <td><input type="submit" class="search_button" value="搜索"></td>
+              </tr>
+          </table>
+        </form>
+       </nav>
+    </section>
 
     <section class="courses">
 

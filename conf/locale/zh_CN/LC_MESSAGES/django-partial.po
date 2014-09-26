@@ -1312,7 +1312,7 @@ msgstr "课程网页已经自动创建"
 
 #: lms/djangoapps/course_wiki/views.py:124
 msgid "Welcome to the edX Wiki"
-msgstr "欢迎访问校盾资料站"
+msgstr "欢迎访问中国医学教育慕课联盟资料站"
 
 #: lms/djangoapps/course_wiki/views.py:126
 msgid "Visit a course wiki to add an article."

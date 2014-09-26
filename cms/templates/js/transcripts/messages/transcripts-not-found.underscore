@@ -1,6 +1,6 @@
 <div class="transcripts-message-status status-error"><i class="icon-remove"></i><%= gettext("无时间记录") %></div>
 <p class="transcripts-message">
-<%= gettext("在校盾中没有发现该视频的在线记录，但我们发现此视频在YouTube上有在线记录。你打算将其导入到校盾吗？") %>
+<%= gettext("在中国医学教育慕课联盟中没有发现该视频的在线记录，但我们发现此视频在YouTube上有在线记录。你打算将其导入到中国医学教育慕课联盟吗？") %>
 </p>
 <div class="transcripts-file-uploader"></div>
 <p class="transcripts-error-message is-invisible">

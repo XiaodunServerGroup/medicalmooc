@@ -1098,7 +1098,7 @@ msgstr ""
 
 #: lms/templates/login.html:102
 msgid "Please log in to access your account and courses"
-msgstr "请登录校盾账户"
+msgstr "请登录账户"
 
 #: lms/templates/login.html:113
 msgid "We're Sorry, {platform_name} accounts are unavailable currently"
