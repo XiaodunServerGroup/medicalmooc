@@ -349,7 +349,7 @@ def get_course_tabs(user, course, active_page, request):
     # load, but not from inside xmodule, since that doesn't (and probably
     # shouldn't) know about the details of what tabs are supported, etc.
     validate_tabs(course)
-    course.tabs.append( {u'type': u'calendar', u'name': u'日历'});
+    #course.tabs.append( {u'type': u'calendar', u'name': u'日历'});
     tabs = []
 
     if waffle.flag_is_active(request, 'merge_course_tabs'):

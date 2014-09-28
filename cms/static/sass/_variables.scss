@@ -48,7 +48,7 @@ $gray-d2: shade($gray,40%);
 $gray-d3: shade($gray,60%);
 $gray-d4: shade($gray,80%);
 
-$blue: rgb(255,102,0);
+$blue: #0e74b4;
 $blue-l1: tint($blue,20%);
 $blue-l2: tint($blue,40%);
 $blue-l3: tint($blue,60%);
@@ -192,17 +192,17 @@ $ui-update-color: $blue-l4;
 $baseFontColor: $gray-d2;
 $lighter-base-font-color: rgb(100,100,100);
 $offBlack: #3c3c3c;
-$green: #ff7a31;    //
+$green: #0e74b4;    //
 $lightGrey: #edf1f5;
-$mediumGrey: #ff6600; //
+$mediumGrey: #0e74b4; //
 $darkGrey: #8891a1;
 $extraDarkGrey: #3d4043;
 $paleYellow: #fffcf1;
 $yellow: rgb(255, 254, 223);
-$green: rgb(255,102,0);  //
-$brightGreen: rgb(255,122,49); //
+$green: #0e74b4;  //
+$brightGreen: #0e74b4; //
 $disabledGreen: rgb(124, 206, 153);
-$darkGreen: rgb(255,102,0); //
+$darkGreen: #0e74b4; //
 $lightBluishGrey: rgb(197, 207, 223);
 $lightBluishGrey2: rgb(213, 220, 228);
 $error-red: rgb(253, 87, 87);

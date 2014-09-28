@@ -3,8 +3,8 @@
   height: 35px;
   padding: 0 15px;
   border-radius: 3px;
-  border: 1px solid #ff7a31;
-  @include linear-gradient(top, #ff7a31, #ff7a31);
+  border: 1px solid #0e74b4;
+  @include linear-gradient(top, #0e74b4, #0e74b4);
   font-size: 13px;
   font-weight: 700;
   line-height: 32px;
@@ -404,7 +404,7 @@ body.discussion {
       margin-top: $baseline/2;
       padding-bottom: 2px;
       height: 37px;
-      border-color: #ff7a31;
+      border-color: #0e74b4;
 
       &:hover, &:focus {
         border-color: #222;
@@ -1083,9 +1083,9 @@ body.discussion {
       }
 
       &.active {
-        @include linear-gradient(top, #ff9933, #ff6600);
+        @include linear-gradient(top, #2883bc, #2883bc);
         border-color: #4697c1;
-        box-shadow: 0 1px 0 #ff6633, 0 -1px 0 #ff6633;
+        box-shadow: 0 1px 0 #2883bc, 0 -1px 0 #2883bc;
 
         .title {
           color: #333;
@@ -1101,7 +1101,7 @@ body.discussion {
 
         .votes-count,
         .comments-count {
-          @include linear-gradient(top, #ff6600, #ff6600);
+          @include linear-gradient(top, #2883bc, #2883bc);
           color: $white;
 
           &:after {
@@ -2131,7 +2131,7 @@ body.discussion {
         z-index: 1;
         padding: $baseline/2;
         @include box-sizing(border-box);
-        border: 1px solid #ff7a31;
+        border: 1px solid #0e74b4;
         border-radius: 3px 3px 0 0;
         background: $white;
         font-family: 'Microsoft YaHei', 'Monaco', monospace;
@@ -2158,7 +2158,7 @@ body.discussion {
         padding: 0 $baseline/2;
         @include box-sizing(border-box);
         border-radius: 3px;
-        border: 1px solid #ff7a31;
+        border: 1px solid #0e74b4;
         font-size: 16px;
         font-weight: 700;
         font-family: 'Microsoft YaHei', 'Open Sans', sans-serif;
