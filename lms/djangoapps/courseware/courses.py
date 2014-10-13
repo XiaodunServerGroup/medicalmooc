@@ -332,7 +332,7 @@ def filter_audited_items(courses):
 
     courses_list = []
     for course in courses:
-        if course.course_audit == 0:
+        if course.course_audit == 1:
             courses_list.append(course)
 
     return courses_list
