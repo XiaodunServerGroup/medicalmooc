@@ -94,6 +94,9 @@ def courses(request):
     """
     Render "find courses" page.  The course selection work is done in courseware.courses.
     """
+    user = request.user or AnonymousUser()
+    crude_courses = audit_courses(request, user)
+
     q = request.GET.get('query', '')
 
     courses_aa = get_courses_by_search(request.META.get('HTTP_HOST'))
@@ -108,7 +111,105 @@ def courses(request):
        courses_list = courses_aa
 
     courses = sort_by_announcement(courses_list)
+
+
+    # format string
+    def format_course(course):
+        format_course_json = {
+            "id": course.id,
+            "is_new": course.is_newish,
+            "course_about_url": reverse('about_course', args=[course.id]),
+            "course_number": course.display_number_with_default or "",
+            "title": get_course_about_section(course, 'title'),
+            "short_description": get_course_about_section(course, "short_description"),
+            "img_src": course_image_url(course),
+            "university": get_course_about_section(course, 'university'),
+            "is_start_date_default": course.start_date_is_still_default,
+            }
+
+        if not format_course_json["is_start_date_default"]:
+            format_course_json.update({"start_date_text": course.start_date_text})
+
+        return format_course_json
+
+    sel_items = {
+        "subject": [
+            ["LCHYX", "临床医学"],
+            ["JCHYX", "基础医学"],
+            ["ZHYZHY", "中医中药"],
+            ["KQYX", "口腔医学"],
+            ["YX", "药学"],
+            ["HL", "护理"],
+            ["GGWSHYFYX", "公共卫生与预防医学"],
+            ["YXYJ", "医学检验"],
+        ]
+
+    }
+
+    con_col = {}
+    con_courses = []
+
+    subject_con = request.GET.get("subject", "")
+    con_col.update({"subCon": subject_con.split(',')})
+
+    for course in crude_courses:
+        # acquire subject condition
+        subject_flag = False
+        if subject_con:
+            if "all" in con_col['subCon'] or ("all" not in con_col['subCon'] and course.course_category in con_col['subCon']):
+                if course in con_courses:
+                    continue
+                con_courses.append(course)
+        else:
+            subject_flag = True
+
+        if subject_flag :
+            con_courses = crude_courses
+            break
+
+
+#    # acquire course_id condition
+#    def course_dep(crucourses, course_id):
+#        course_index = 0
+#        try:
+#            for idx, c in enumerate(crucourses):
+#                if c.id == course_id:
+#                    course_index = (idx + 1)
+#                    break
+#        except:
+#            course_index = 0
+#
+#        courses_list = crucourses[course_index: course_index +3]
+#
+#        return courses_list
+
+    id_con = request.GET.get('course_id', '').strip().encode("utf-8")
+
+    con_col.update({'course_id': id_con})
+#    con_courses = course_dep(con_courses, id_con)
+
+
+    context = {"courses": con_courses}
+    context.update(sel_items)
+    context.update(con_col)
+
+    if request.is_ajax():
+        context["courses"] = map(format_course, context["courses"])
+        return JsonResponse(context)
+
     return render_to_response("courseware/courses.html", {'courses': filter_audited_items(courses)})
+
+
+def audit_courses(request, user=AnonymousUser()):
+    # The course selection work is done in courseware.courses.
+    domain = settings.FEATURES.get('FORCE_UNIVERSITY_DOMAIN')  # normally False
+    # do explicit check, because domain=None is valid
+    if domain is False:
+        domain = request.META.get('HTTP_HOST')
+
+    courses = get_courses(user, domain=domain)
+
+    return filter_audited_items(sort_by_announcement(courses))
 
 
 def return_fixed_courses(request, courses, action=None):
