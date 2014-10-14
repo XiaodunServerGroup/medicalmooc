@@ -403,11 +403,11 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
 
         <ol class="list-actions">
           <li class="action-item">
-            <a href="/institution_upload_teacher" title="批量导入教师" target="_blank">批量导入教师</a>
+            <a href="#add-teachers-modal" rel="leanModal" title="批量导入教师">批量导入教师</a>
             <br/>
-            <a href="" title="添加审核教师" target="_blank">添加审核教师</a>
+            <a href="#add-teachers-modal"  rel="leanModal"  id="show-add-teachers-modal" title="添加审核教师">添加审核教师</a>
             <br/>
-            <a href="" title="管理本单位教师" target="_blank">管理本单位教师</a>
+            <a href="" title="管理本单位教师">管理本单位教师</a>
           </li>
         </ol>
       </div>
@@ -666,6 +666,26 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
           <span>目前你还没有制作过问卷，<a href="${wenjuan_link}" target="_blank">点击此处</a>来制作</span>            
         </div>
       % endif
+    <div>
+  </div>
+</section>
+
+
+<section id="add-teachers-modal" class="modal teachers-data" aria-hidden="true">
+  <div class="inner-wrapper" role='alertdialog' aria-labelledy="wenjuan-modal-title">
+    <header>
+      <h2>
+        <span id="wenjuan-modal-title">当前问卷列表</span>
+        <span class="sr">,
+          ## Translators: this text gives status on if the modal interface (a menu or piece of UI that takes the full focus of the screen) is open or not
+          ${_("modal open")}
+        </span>
+        <hr />
+      </h2>
+    </header>
+
+    <div id="wenjuan-list" style="">
+      <textarea rows="6" cols="70" name="multiple_students"></textarea>
     <div>
   </div>
 </section>
