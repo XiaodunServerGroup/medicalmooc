@@ -501,12 +501,12 @@ ROOT_URLCONF = 'lms.urls'
 IGNORABLE_404_ENDS = ('favicon.ico')
 # NOTE: Please set ALLOWED_HOSTS to some sane value, as we do not allow the default '*'
 
-DEFAULT_FROM_EMAIL = 'xiaodun@guoshi.com'
-DEFAULT_FEEDBACK_EMAIL = 'xiaodun@guoshi.com'
-SERVER_EMAIL = 'xiaodun@guoshi.com'
-TECH_SUPPORT_EMAIL = 'xiaodun@guoshi.com'
-CONTACT_EMAIL = 'xiaodun@guoshi.com'
-BUGS_EMAIL = 'xiaodun@guoshi.com'
+DEFAULT_FROM_EMAIL = 'xiaodunxin@126.com'
+DEFAULT_FEEDBACK_EMAIL = 'xiaodunxin@126.com'
+SERVER_EMAIL = 'xiaodunxin@126.com'
+TECH_SUPPORT_EMAIL = 'xiaodunxin@126.com'
+CONTACT_EMAIL = 'xiaodunxin@126.com'
+BUGS_EMAIL = 'xiaodunxin@126.com'
 ADMINS = ()
 MANAGERS = ADMINS
 
