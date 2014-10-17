@@ -23,6 +23,13 @@ from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
 from django.utils import timezone
 
+
+from django.core.validators import validate_email, validate_slug, ValidationError
+from student.models import UserProfile,Registration
+from django.db import IntegrityError
+from django.utils.translation import ugettext as _
+
+
 from xmodule_modifiers import wrap_xblock
 import xmodule.graders as xmgraders
 from xmodule.modulestore import XML_MODULESTORE_TYPE, Location
@@ -694,6 +701,7 @@ def instructor_dashboard(request, course_id):
         is_shib_course = uses_shib(course)
         students = request.POST.get('multiple_students', '')
         auto_enroll = bool(request.POST.get('auto_enroll'))
+        students_filter(students)
         email_students = bool(request.POST.get('email_students'))
         ret = _do_enroll_students(course, course_id, students, auto_enroll=auto_enroll, email_students=email_students, is_shib_course=is_shib_course)
         datatable = ret['datatable']
@@ -920,6 +928,96 @@ def instructor_dashboard(request, course_id):
         context['beta_dashboard_url'] = reverse('instructor_dashboard_2', kwargs={'course_id': course_id})
 
     return render_to_response('courseware/instructor_dashboard.html', context)
+
+
+
+def _do_create_student(post_vars):
+    """
+    Given cleaned post variables, create the User and UserProfile objects, as well as the
+    registration for this user.
+
+    Returns a tuple (User, UserProfile, Registration).
+
+    Note: this function is also used for creating test users.
+    """
+    user = User(username=post_vars['username'],
+        email=post_vars['email'],
+        is_active=False)
+    user.set_password(post_vars['password'])
+    registration = Registration()
+    # TODO: Rearrange so that if part of the process fails, the whole process fails.
+    # Right now, we can have e.g. no registration e-mail sent out and a zombie account
+    try:
+        user.save()
+    except IntegrityError:
+        js = {'success': False}
+        # Figure out the cause of the integrity error
+        if len(User.objects.filter(username=post_vars['username'])) > 0:
+            js['value'] = _("An account with the Public Username '{username}' already exists.").format(username=post_vars['username'])
+            js['field'] = 'username'
+
+        if len(User.objects.filter(email=post_vars['email'])) > 0:
+            js['value'] = _("An account with the Email '{email}' already exists.").format(email=post_vars['email'])
+            js['field'] = 'email'
+
+        raise
+
+    registration.register(user)
+    profile = UserProfile(user=user)
+    profile.name = post_vars['name']
+    profile.level_of_education = post_vars.get('level_of_education')
+    profile.gender = post_vars.get('gender')
+    profile.mailing_address = post_vars.get('mailing_address')
+    profile.city = post_vars.get('city')
+    profile.country = post_vars.get('country')
+    profile.goals = post_vars.get('goals')
+
+    try:
+        profile.year_of_birth = int(post_vars['year_of_birth'])
+    except (ValueError, KeyError):
+        # If they give us garbage, just ignore it instead
+        # of asking them to put an integer.
+        profile.year_of_birth = None
+    try:
+        profile.save()
+    except Exception:
+        log.exception("UserProfile creation failed for user {id}.".format(id=user.id))
+
+
+def students_filter(students):
+
+    new_students, new_students_lc = get_and_clean_student_list(students)
+    for student in new_students:
+        post_vars = {}
+        flag = User.objects.filter(email=student).exists()
+        if not flag:
+            post_vars['email']= student
+            post_vars['username']= str(re.split(r'[@]', student)[0])
+            post_vars['name']= str(re.split(r'[@]', student)[0])
+            post_vars['password']='mooc'+str(re.split(r'[@]', student)[0])
+            post_vars['gender']= ''
+            post_vars['terms_of_service']= 'true'
+            post_vars['year_of_birth']= ''
+            post_vars['level_of_education']= ''
+            post_vars['goals']= ''
+            post_vars['honor_code']= 'true'
+            post_vars['mailing_address']= ''
+
+            try:
+                validate_email(post_vars['email'])
+            except ValidationError:
+                js = {'success':False}
+                js['no_register_email'] =_(" '{email}' email  format error").format(email=post_vars['email'])
+                continue
+            try:
+                validate_slug(post_vars['username'])
+            except ValidationError:
+                js = {'success':False}
+                js['no_register_email'] =_(" '{username}' format error.").format(username=post_vars['username'])
+                continue
+            _do_create_student(post_vars)
+
+
 
 
 def _do_remote_gradebook(user, course, action, args=None, files=None):
