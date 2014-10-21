@@ -2,6 +2,7 @@
 """
 Instructor Views
 """
+import Queue
 import csv
 import json
 import logging
@@ -71,6 +72,7 @@ from xblock.fields import ScopeIds
 from django.utils.translation import ugettext as _u
 
 from microsite_configuration import microsite
+from contentstore.utils import send_mail_update
 
 log = logging.getLogger(__name__)
 
@@ -735,7 +737,8 @@ def instructor_dashboard(request, course_id):
     #----------------------------------------
     # email
 
-    elif action == 'Send email':
+    # elif action == 'Send email':
+    elif action == '发送邮件':
         email_to_option = request.POST.get("to_option")
         email_subject = request.POST.get("subject")
         html_message = request.POST.get("message")
@@ -775,6 +778,37 @@ def instructor_dashboard(request, course_id):
     elif "Show Background Email Task History" in action:
         message, datatable = get_background_task_table(course_id, task_type='bulk_course_email')
         msg += message
+
+
+    #----------------------------------------
+    # 发送添加邮箱邮件
+
+    elif action == '发送添加邮箱邮件':
+        email_to_option_select = request.POST.get("student")
+        email_subject = request.POST.get("subject")
+        html_message = request.POST.get("message")
+        email_to_option_select = str(email_to_option_select)
+        email_to_option_select_list = []
+
+        for i in range(1, email_to_option_select.count(';')+2):
+            email_to_option_select_list.append(email_to_option_select.split(';')[-i])
+
+
+        queue = Queue.Queue()
+        try:
+            # update_content = json['content']
+            # student_data_email_list = []
+            for i in range(0, len(email_to_option_select_list)):
+                queue.put(email_to_option_select_list[i])
+
+            for k in range(2):
+                threadname = 'Thread' + str(k)
+                send_mail_update(threadname, queue, html_message, email_subject)
+                print 'success'
+            # queue.join()
+        except:
+            raise
+            print 'failure'
 
     #----------------------------------------
     # psychometrics
@@ -872,6 +906,16 @@ def instructor_dashboard(request, course_id):
         fragment = wrap_xblock('LmsRuntime', html_module, 'studio_view', fragment, None, extra_data={"course-id": course_id})
         email_editor = fragment.content
 
+    if idash_mode == 'Email_free' and is_studio_course:
+        html_module = HtmlDescriptor(
+            course.system,
+            DictFieldData({'data': html_message}),
+            ScopeIds(None, None, None, 'i4x://dummy_org/dummy_course/html/dummy_name')
+        )
+        fragment = html_module.render('studio_view')
+        fragment = wrap_xblock('LmsRuntime', html_module, 'studio_view', fragment, None, extra_data={"course-id": course_id})
+        email_editor = fragment.content
+
     # Enable instructor email only if the following conditions are met:
     # 1. Feature flag is on
     # 2. We have explicitly enabled email for the given course via django-admin
@@ -879,6 +923,10 @@ def instructor_dashboard(request, course_id):
     if settings.FEATURES['ENABLE_INSTRUCTOR_EMAIL'] and \
        CourseAuthorization.instructor_email_enabled(course_id) and is_studio_course:
         show_email_tab = True
+
+    if settings.FEATURES['ENABLE_INSTRUCTOR_EMAIL'] and \
+       CourseAuthorization.instructor_email_enabled(course_id) and is_studio_course:
+        show_email_tab_free = True
 
     # display course stats only if there is no other table to display:
     course_stats = None
@@ -911,6 +959,7 @@ def instructor_dashboard(request, course_id):
         'editor': email_editor,            # email
         'email_msg': email_msg,            # email
         'show_email_tab': show_email_tab,  # email
+        'show_email_tab_free': show_email_tab_free,  # free-email
 
         'problems': problems,		# psychometrics
         'plots': plots,			# psychometrics

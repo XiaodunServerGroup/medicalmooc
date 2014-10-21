@@ -6,7 +6,7 @@
 <%block name="bodyclass">is-signedin index view-dashboard</%block>
 
 <%block name="jsextra">
-<script type="text/javascript">
+<script type="text/javascript" xmlns="http://www.w3.org/1999/html">
 require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
     // showing/hiding creation rights UI
     $('.show-creationrights').click(function(e){
@@ -72,16 +72,15 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
 
           if (nextTr.css('display') == 'none') {
             self.html("隐藏URL");
-            nextTr.fadeIn(); 
+            nextTr.fadeIn();
           }
         }
     });
 
     $('.remove-button').click(function(){
         if(confirm('确定要删除吗?')){
-            $('#remove-id').val();
             $.ajax({
-                url: "/remove_institute_teacher?id=" + $('#remove-id').val(),
+                url: "/remove_institute_teacher?id=" + $(this).attr("value"),
                 type: "GET",
                 dataType: "jsonp",
                 jsonp: false,
@@ -117,6 +116,7 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
     accessible_modal(".edit-name", "#apply_name_change_file .close-modal", "#apply_name_change_file", "#index-main");
 });
 </script>
+
 </%block>
 
 <%block name="content">
@@ -652,6 +652,26 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
   .table-hover tbody tr:hover td {
     background-color: #EEE;
   }
+
+  /*institute css*/
+
+/*layer1*/
+.change_name_body{margin-left: 40px;}
+.change-name-title{  padding-bottom:22px; border-bottom:1px solid #0e74b4;  text-align:center; position:relative;}
+.change-name-title strong{ font-weight:normal;  font-size:24px; line-height:24px;}
+.table1{ line-height:24px; font-size:14px;}
+.table1 th{ font-weight:normal;}
+.table1 td{ text-align:center; width: 300px;}
+.table1 td a{ color:#85acce;}
+/*layer2*/
+.up_text{ width:250px; margin:0 auto; margin-top:40px; height:420px;}
+.up_text p{ color:#0e74b4; font-size:14px; line-height:28px;}
+.upload_text{ line-height:28px; margin-top:6px; font-size:14px;}
+.upload_text b , .upload_text strong{ float:left; font-weight:normal; }
+.btn01{ width:250px; margin:0 auto; margin-top:67px;  line-height:30px;}
+.submit1{ float:left; display:inline-block; background-color:#0e74b4;  line-height:28px; color:#fff; cursor:pointer; margin-left:24px; border:1px solid #0e74b4; width:75px;}
+.reset1{ float:left; width:75px;  display:inline-block; background-color:#fff;  line-height:28px; color:#626262; cursor:pointer; border:1px solid #0e74b4;margin-left:44px;}
+
 </style>
 <section id="wenjuan-list-modal" class="modal wenjuan-data" aria-hidden="true">
   <div class="inner-wrapper" role='alertdialog' aria-labelledy="wenjuan-modal-title">
@@ -710,25 +730,6 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
   </div>
 </section>
 
-<section id="add-teachers-modal" class="modal teachers-data" aria-hidden="true">
-  <div class="inner-wrapper" role='alertdialog' aria-labelledy="wenjuan-modal-title">
-    <header>
-      <h2>
-        <span id="wenjuan-modal-title">当前问卷列表</span>
-        <span class="sr">,
-          ## Translators: this text gives status on if the modal interface (a menu or piece of UI that takes the full focus of the screen) is open or not
-          ${_("modal open")}
-        </span>
-        <hr />
-      </h2>
-    </header>
-
-    <div id="wenjuan-list" style="">
-      <textarea rows="6" cols="70" name="multiple_students"></textarea>
-    <div>
-  </div>
-</section>
-
 <section id="apply_name_change" class="modal" aria-hidden="true">
   <div class="inner-wrapper" role="dialog" aria-labelledby="change-name-title">
     <button class="close-modal">&#10005;
@@ -739,22 +740,16 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
     </button>
 
     <header>
-      <h2 id="change-name-title">
-        <!--${_("Change your name")}-->
+      <div class="change-name-title">
+        <strong>
         本单位教师管理
-412 <a href="#apply_name_change" rel="leanModal" title="导入" class="edit-name">管理本单位教师</a>
-        <span class="sr">,
-          ## Translators: this text gives status on if the modal interface (a menu or piece of UI that takes the full focus of the screen) is open or not
-          ${_("modal open")}
-        </span>
-      </h2>
-      <hr/>
+        </strong>
+      </div>
     </header>
-    <div id="change_name_body">
+    <div class="change_name_body">
         % if user_institute_teacher_list:
-        <div class="student-email" id="student-email" style="color: black">
-            <fieldset style="height:400px; overflow:auto;">
-            <table class="table-hover">
+            <fieldset style="height:460px; overflow:auto;">
+            <table width="800" class="table1">
                 <tr>
                     <td>用户名</td>
                     <td>姓名</td>
@@ -766,17 +761,16 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
                     <td>${s.username}</td>
                     <td>${s.first_name}</td>
                     <td>${s.email}</td>
-                    <input type="hidden" id="remove-id" name="remove-id" value="${ s.id }">
                     <!--<td><a href="/remove_institute_teacher?id=${ s.id }" >移除</a></td>-->
-                    <td><a href="" class="remove-button">移除</a></td>
+                    <td><a href="" class="remove-button" value="${ s.id }">移除</a></td>
                 </tr>
             %endfor
             </table>
             </fieldset>
-        </div>
         %endif
     </div>
   </div>
+    </div>
 </section>
 
 <section id="apply_name_change_file" class="modal" aria-hidden="true">
@@ -789,24 +783,22 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
     </button>
 
     <header>
-      <h2 id="change-name-title">
+      <div class="change-name-title">
+        <strong>
         批量导入教师
-        <span class="sr">,
-          ## Translators: this text gives status on if the modal interface (a menu or piece of UI that takes the full focus of the screen) is open or not
-          ${_("modal open")}
-        </span>
-      </h2>
-      <hr/>
+        </strong>
+      </div>
     </header>
-    <div id="change_name_body">
-       <td id="content"></td>
-    <a>配置文件上传</a>
+    <div class="up_text">
+    <p>配置文件上传</p>
     <form action="/institution_upload_teacher?id=${ profile.user_id }" method="post" enctype="multipart/form-data" accept-charset="utf-8">
         <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='{% csrf_token %}' /></div>
 
-        <p><label for="id_file">请上传文件:</label> <input type="file" name="file" id="id_file" /></p>
-        <button id="submit_button">提交</button>
-        <button id="return_course" name="return_course">返回</button>
+        <div class="upload_text"><p><label for="id_file">请上传文件:</label> <input type="file" name="file" id="id_file" /></p></div>
+        <div class="btn01">
+        <button id="submit_button" class="submit1">提交</button>
+        <button id="return_course" name="return_course" class="reset1">返回</button>
+        </div>
     </form>
     </div>
   </div>
