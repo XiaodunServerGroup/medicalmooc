@@ -199,6 +199,7 @@ class UserProfile(models.Model):
     profile_role = models.CharField(
         blank=True, max_length=6, db_index=True, choices=ROLE_CHOICES, default='st'
     )
+    institute = models.CharField(max_length=225)
 
     # [03/21/2013] removed these, but leaving comment since there'll still be
     # p_se and p_oth in the existing data in db.
@@ -865,3 +866,5 @@ def log_successful_logout(sender, request, user, **kwargs):
     else:
         AUDIT_LOG.info(u"Logout - {0}".format(request.user))
 
+class UploadFileForm(forms.Form):
+    file = forms.FileField()

@@ -76,6 +76,45 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
           }
         }
     });
+
+    $('.remove-button').click(function(){
+        if(confirm('确定要删除吗?')){
+            $('#remove-id').val();
+            $.ajax({
+                url: "/remove_institute_teacher?id=" + $('#remove-id').val(),
+                type: "GET",
+                dataType: "jsonp",
+                jsonp: false,
+                'cache': true,
+                success: function(){
+
+                }
+            })
+            alert('移除成功!')
+        }else{
+            return false;
+        }
+    });
+
+    $('.close-modal').click(function(){
+        $('#lean_overlay').css('display','none');
+    })
+
+    $('#submit_button').click(function(){
+        var file=$("input[name='file']").val();
+        var filename=file.replace(/.*(\/|\\)/, "");
+        var fileExt=(/[.]/.exec(filename)) ? /[^.]+$/.exec(filename.toLowerCase()) : '';
+        if(fileExt != 'xls'){
+            alert('上传失败!上传文件为excel格式');
+            //$('#content').innerHTML="上传失败!上传文件为excel格式";
+            return false;
+        }else{
+            alert('上传成功!')
+        }
+    })
+
+    accessible_modal(".edit-name", "#apply_name_change .close-modal", "#apply_name_change", "#index-main");
+    accessible_modal(".edit-name", "#apply_name_change_file .close-modal", "#apply_name_change_file", "#index-main");
 });
 </script>
 </%block>
@@ -103,7 +142,7 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
   </header>
 </div>
 
-<div class="wrapper-content wrapper">
+<div class="wrapper-content wrapper" id="index-main">
   % if user.is_active:
   <section class="content">
     <article class="content-primary" role="main">
@@ -403,11 +442,12 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
 
         <ol class="list-actions">
           <li class="action-item">
-            <a href="#add-teachers-modal" rel="leanModal" title="批量导入教师">批量导入教师</a>
+            <!--<a href="/institution_upload_teacher?id=${ profile.user_id }" title="批量导入教师" target="_blank">批量导入教师</a>-->
+            <a href="#apply_name_change_file" rel="leanModal" title="批量导入教师" class="edit-name">批量导入教师</a>
             <br/>
             <a href="#add-teachers-modal"  rel="leanModal"  id="show-add-teachers-modal" title="添加审核教师">添加审核教师</a>
             <br/>
-            <a href="" title="管理本单位教师">管理本单位教师</a>
+            <a href="#apply_name_change" rel="leanModal" title="导入" class="edit-name">管理本单位教师</a>
           </li>
         </ol>
       </div>
@@ -670,7 +710,6 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
   </div>
 </section>
 
-
 <section id="add-teachers-modal" class="modal teachers-data" aria-hidden="true">
   <div class="inner-wrapper" role='alertdialog' aria-labelledy="wenjuan-modal-title">
     <header>
@@ -687,6 +726,89 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
     <div id="wenjuan-list" style="">
       <textarea rows="6" cols="70" name="multiple_students"></textarea>
     <div>
+  </div>
+</section>
+
+<section id="apply_name_change" class="modal" aria-hidden="true">
+  <div class="inner-wrapper" role="dialog" aria-labelledby="change-name-title">
+    <button class="close-modal">&#10005;
+      <span class="sr">
+        ## Translators: this is a control to allow users to exit out of this modal interface (a menu or piece of UI that takes the full focus of the screen)
+        ${_('Close Modal')}
+      </span>
+    </button>
+
+    <header>
+      <h2 id="change-name-title">
+        <!--${_("Change your name")}-->
+        本单位教师管理
+412 <a href="#apply_name_change" rel="leanModal" title="导入" class="edit-name">管理本单位教师</a>
+        <span class="sr">,
+          ## Translators: this text gives status on if the modal interface (a menu or piece of UI that takes the full focus of the screen) is open or not
+          ${_("modal open")}
+        </span>
+      </h2>
+      <hr/>
+    </header>
+    <div id="change_name_body">
+        % if user_institute_teacher_list:
+        <div class="student-email" id="student-email" style="color: black">
+            <fieldset style="height:400px; overflow:auto;">
+            <table class="table-hover">
+                <tr>
+                    <td>用户名</td>
+                    <td>姓名</td>
+                    <td>邮箱</td>
+                    <td>操作</td>
+                </tr>
+            %for s in user_institute_teacher_list:
+                <tr>
+                    <td>${s.username}</td>
+                    <td>${s.first_name}</td>
+                    <td>${s.email}</td>
+                    <input type="hidden" id="remove-id" name="remove-id" value="${ s.id }">
+                    <!--<td><a href="/remove_institute_teacher?id=${ s.id }" >移除</a></td>-->
+                    <td><a href="" class="remove-button">移除</a></td>
+                </tr>
+            %endfor
+            </table>
+            </fieldset>
+        </div>
+        %endif
+    </div>
+  </div>
+</section>
+
+<section id="apply_name_change_file" class="modal" aria-hidden="true">
+  <div class="inner-wrapper" role="dialog" aria-labelledby="change-name-title">
+    <button class="close-modal">&#10005;
+      <span class="sr">
+        ## Translators: this is a control to allow users to exit out of this modal interface (a menu or piece of UI that takes the full focus of the screen)
+        ${_('Close Modal')}
+      </span>
+    </button>
+
+    <header>
+      <h2 id="change-name-title">
+        批量导入教师
+        <span class="sr">,
+          ## Translators: this text gives status on if the modal interface (a menu or piece of UI that takes the full focus of the screen) is open or not
+          ${_("modal open")}
+        </span>
+      </h2>
+      <hr/>
+    </header>
+    <div id="change_name_body">
+       <td id="content"></td>
+    <a>配置文件上传</a>
+    <form action="/institution_upload_teacher?id=${ profile.user_id }" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+        <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='{% csrf_token %}' /></div>
+
+        <p><label for="id_file">请上传文件:</label> <input type="file" name="file" id="id_file" /></p>
+        <button id="submit_button">提交</button>
+        <button id="return_course" name="return_course">返回</button>
+    </form>
+    </div>
   </div>
 </section>
 </%block>

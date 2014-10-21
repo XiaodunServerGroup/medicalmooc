@@ -266,7 +266,7 @@ def remove_extra_panel_tab(tab_type, course):
 
 
 
-class send_mail(threading.Thread):
+class send_mail_update(threading.Thread):
     def __init__(self, threadname, queue, content, sub):
         threading.Thread.__init__(self)
         self.threadname = threadname
