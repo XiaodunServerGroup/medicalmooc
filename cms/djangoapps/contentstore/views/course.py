@@ -1284,20 +1284,15 @@ def institution_upload_teacher(request):
     messg=''
     if request.method == 'POST':
         use_id = request.GET['id']
-        print use_id
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             filename = form.cleaned_data['file']
-            print filename
             filename_suffix = filename.name.split('.')[-1]
-            print filename_suffix
             if filename_suffix == 'xls':
-                print 'entry'
                 f = handle_uploaded_file(filename)
                 xls_insert_into_db(request, f, use_id)
                 messg = '教师导入成功'
             else:
-                print 'out'
                 messg = '上传文件要为excel格式'
     else:
         form = UploadFileForm()
@@ -1313,7 +1308,6 @@ def handle_uploaded_file(f):
     f_path = PROJECT_ROOT + '/static/upload/'+f.name.encode('utf8')
 
     with open(f_path.encode('utf8'), 'wb+') as info:
-        print f
         for chunk in f.chunks():
             info.write(chunk)
     return f_path.encode('utf8')
@@ -1321,10 +1315,6 @@ def handle_uploaded_file(f):
 def xls_insert_into_db(request, xlsfile, instutition_id):
     wb = xlrd.open_workbook(xlsfile)
     sh = wb.sheet_by_index(0)
-    for row in range(sh.nrows):
-        for col in range(sh.ncols):
-            print "(", row, col, sh.cell(row, col).value.encode('utf8'), ')',
-        print ''
     rows = sh.nrows
 
     for i in range(1, rows):
@@ -1344,7 +1334,6 @@ def xls_insert_into_db(request, xlsfile, instutition_id):
 
 def remove_institute_teacher(request):
     institute_id = request.GET['id']
-    print institute_id
     profile_user = UserProfile.objects.get(user_id=institute_id)
     profile_user.institute = None
     profile_user.save()
