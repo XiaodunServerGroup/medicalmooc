@@ -425,12 +425,18 @@ def course_listing(request):
     profile = UserProfile.objects.get(user_id=curr_user.id)
 
     # get institute teacher user
-    user_list = UserProfile.objects.all()
-    user_institute_teacher_list= []
-    for ul in user_list:
+    userprofile_list = UserProfile.objects.all()
+    user_institute_teacher_list = []
+    for ul in userprofile_list:
         if ul.institute == profile.user_id:
             u = User.objects.get(id=ul.user_id)
-            user_institute_teacher_list.append(u)
+            content = {
+                'id': int(u.id),
+                'username': u.username.encode('utf8'),
+                'email': u.email.encode('utf8'),
+                'name': ul.name.encode('utf8')
+            }
+            user_institute_teacher_list.append(content)
 
     return render_to_response('index.html', {
         'courses': [format_course_for_view(c) for c in courses if not isinstance(c, ErrorDescriptor)],
@@ -1329,7 +1335,6 @@ def xls_insert_into_db(request, xlsfile, instutition_id):
             'name': name
         }
         do_institution_import_teacher_create_account(post_vars, instutition_id)
-        print 'success'
     return HttpResponseRedirect('/course')
 
 def remove_institute_teacher(request):
