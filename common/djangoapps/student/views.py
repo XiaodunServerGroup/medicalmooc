@@ -1510,7 +1510,59 @@ def _do_create_account(post_vars):
         log.exception("UserProfile creation failed for user {id}.".format(id=user.id))
     return (user, profile, registration)
 
+
+def _do_teacher_create_account(post_vars):
+    user = User(username=post_vars['username'],
+                email=post_vars['email'],
+                is_active=False)
+    user.set_password(post_vars['password'])
+    registration = Registration()
+    # TODO: Rearrange so that if part of the process fails, the whole process fails.
+    # Right now, we can have e.g. no registration e-mail sent out and a zombie account
+    try:
+        user.save()
+    except IntegrityError:
+        js = {'success': False}
+        # Figure out the cause of the integrity error
+        if len(User.objects.filter(username=post_vars['username'])) > 0:
+            js['value'] = _("An account with the Public Username '{username}' already exists.").format(username=post_vars['username'])
+            js['field'] = 'username'
+            return JsonResponse(js, status=400)
+
+        if len(User.objects.filter(email=post_vars['email'])) > 0:
+            js['value'] = _("An account with the Email '{email}' already exists.").format(email=post_vars['email'])
+            js['field'] = 'email'
+            return JsonResponse(js, status=400)
+
+        raise
+
+    registration.register(user)
+
+    profile = UserProfile(user=user)
+    profile.name = post_vars['name']
+    profile.level_of_education = post_vars.get('level_of_education')
+    profile.gender = post_vars.get('gender')
+    profile.mailing_address = post_vars.get('mailing_address')
+    profile.city = post_vars.get('city')
+    profile.country = post_vars.get('country')
+    profile.goals = post_vars.get('goals')
+    profile.profile_role = 'th'
+
+    try:
+        profile.year_of_birth = int(post_vars['year_of_birth'])
+    except (ValueError, KeyError):
+        # If they give us garbage, just ignore it instead
+        # of asking them to put an integer.
+        profile.year_of_birth = None
+    try:
+        profile.save()
+    except Exception:
+        log.exception("UserProfile creation failed for user {id}.".format(id=user.id))
+    return (user, profile, registration)
+
+
 def _do_institution_create_account(post_vars):
+
     """
     Given cleaned post variables, create the User and UserProfile objects, as well as the
     registration for this user.
@@ -1803,6 +1855,8 @@ def create_account(request, post_override=None):
     # Ok, looks like everything is legit.  Create the account.
     if request_type == 'ins':
         ret = _do_institution_create_account(post_vars)
+    elif request_type == 'th':
+        ret = _do_teacher_create_account(post_vars)
     else:
         ret = _do_create_account(post_vars)
     if isinstance(ret, HttpResponse):  # if there was an error then return that
@@ -2790,6 +2844,7 @@ def do_institution_import_teacher_create_account(post_vars, institute_id):
     registration = Registration()
     # TODO: Rearrange so that if part of the process fails, the whole process fails.
     # Right now, we can have e.g. no registration e-mail sent out and a zombie account
+    u = User.objects.get(email=user.email)
     try:
         user.save()
     except IntegrityError:
@@ -2798,11 +2853,17 @@ def do_institution_import_teacher_create_account(post_vars, institute_id):
         if len(User.objects.filter(username=post_vars['username'])) > 0:
             js['value'] = _("An account with the Public Username '{username}' already exists.").format(username=post_vars['username'])
             js['field'] = 'username'
+            profile = UserProfile.objects.get(user_id=User.objects.get(username=post_vars['username']).id)
+            profile.institute = institute_id
+            profile.save()
             return JsonResponse(js, status=400)
 
         if len(User.objects.filter(email=post_vars['email'])) > 0:
             js['value'] = _("An account with the Email '{email}' already exists.").format(email=post_vars['email'])
             js['field'] = 'email'
+            profile = UserProfile.objects.get(user_id=User.objects.get(email=post_vars['email']).id)
+            profile.institute = institute_id
+            profile.save()
             return JsonResponse(js, status=400)
 
         raise

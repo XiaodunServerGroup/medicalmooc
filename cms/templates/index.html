@@ -214,28 +214,30 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
                     -->
                     <script src="${settings.XIAODUN_BACK_HOST}/dictionaryRs.jsp?divid=field-course-level&code=course_level&selectname=new-course-level"></script>
                 </li>
+                  <!--
                 <li class="field text required" id="field-course-price">
                   <label for="new-course-price">课程价格</label>                  
                   <input class="new-course-price" id="new-course-price" type="text" name="new-course-price" aria-required="false" placeholder="课程价格" />
                   <span class='tip'>请填写课程价格，不填默认为0</span>
                 </li>
+                -->
                 <li class="field text required" id="field-organization">
                   <label for="new-course-org">${_("Organization")}</label>
-                  <input class="new-course-org" id="new-course-org" type="text" name="new-course-org" aria-required="true" value="${course_org}" disabled='disabled' placeholder="${_('e.g. UniversityX or OrganizationX')}" />
-                  <span class="tip">${_("The name of the organization sponsoring the course.")}  <strong>${_("Note: This is part of your course URL, so no spaces or special characters are allowed.")}</strong> ${_("This cannot be changed, but you can set a different display name in Advanced Settings later.")}</span>
+                  <input class="new-course-org" id="new-course-org" type="text" name="new-course-org" aria-required="true" value="${course_org}" placeholder="${_('e.g. UniversityX or OrganizationX')}" />
+                  <span class="tip">${_("The name of the organization sponsoring the course.")}  <strong>${_("Note: This is part of your course URL, so no spaces or special characters are allowed.")}</strong> ${_("This cannot be changed, but you can set a different display name in Advanced Settings later.")},请勿使用.点号和中文.</span>
                   <span class="tip tip-error is-hiding"></span>
                 </li>
                 <li class="field text required" id="field-course-number">
                   <label for="new-course-number">${_("Course Number")}</label>
                   <input class="new-course-number" id="new-course-number" type="text" name="new-course-number" aria-required="true" placeholder="${_('e.g. CS101')}" />
-                  <span class="tip">${_("The unique number that identifies your course within your organization.")} <strong>${_("Note: This is part of your course URL, so no spaces or special characters are allowed and it cannot be changed.")}</strong></span>
+                  <span class="tip">${_("The unique number that identifies your course within your organization.")} <strong>${_("Note: This is part of your course URL, so no spaces or special characters are allowed and it cannot be changed.")},请勿使用.点号和中文.</strong></span>
                   <span class="tip tip-error is-hiding"></span>
                 </li>
 
                 <li class="field text required" id="field-course-run">
                   <label for="new-course-run">${_("Course Run")}</label>
                   <input class="new-course-run" id="new-course-run" type="text" name="new-course-run" aria-required="true"placeholder="${_('e.g. 2014_T1')}" />
-                  <span class="tip">${_("The term in which your course will run.")} <strong>${_("Note: This is part of your course URL, so no spaces or special characters are allowed and it cannot be changed.")}</strong></span>
+                  <span class="tip">${_("The term in which your course will run.")} <strong>${_("Note: This is part of your course URL, so no spaces or special characters are allowed and it cannot be changed.")},请勿使用.点号和中文.</strong></span>
                   <span class="tip tip-error is-hiding"></span>
                 </li>
               </ol>

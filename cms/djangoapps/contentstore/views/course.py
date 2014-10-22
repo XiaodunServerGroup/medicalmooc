@@ -116,6 +116,18 @@ def _get_locator_and_course(package_id, branch, version_guid, block_id, user, de
     course_module = modulestore().get_item(course_location, depth=depth)
     return locator, course_module
 
+def _get_institute(curr_user):
+    course_org = ""
+    u = UserProfile.objects.get(user_id=curr_user.id)
+    if u.profile_role == 'in':
+        course_org = u.name
+    elif u.profile_role == 'th' and  u.institute:
+        course_org = UserProfile.objects.get(user_id=u.institute).name
+
+    print course_org.encode('utf-8')
+
+    return course_org
+
 def _get_course_org_from_bs(user):
     course_org = ""
     try:
@@ -407,8 +419,10 @@ def course_listing(request):
     except:
         print "=====error===== " * 5
 
-    course_org = _get_course_org_from_bs(request.user)
-    profile = UserProfile.objects.get(name=request.user)
+    # course_org = _get_course_org_from_bs(request.user)
+    curr_user = User.objects.get(username=request.user)
+    course_org = _get_institute(curr_user)
+    profile = UserProfile.objects.get(user_id=curr_user.id)
 
     # get institute teacher user
     user_list = UserProfile.objects.all()

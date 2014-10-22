@@ -160,61 +160,17 @@
             }
         };
 
-        var ajaxSetOptions = function (org_name) {
-            request_bs_host = $('#business_system_host').attr('data-host');
-            request_url = request_bs_host + "/course/course!edxclasstree.do?branname=" + org_name
-            $.ajax({
-                url: request_url,
-                dataType: "jsonp",
-                type: 'GET',
-                jsonp: 'callback',
-                jsonpCallback: 'success_jsonp',
-                success: function(json, textStatus){
-                    if (json['success']) {
-//                        $('select.new-course-category').html(json['option'])
-                        $('select.new-course-category').html("" +
-                            "<option value='LCHYX'>临床医学</option>" +
-                            "<option value='JCHYX'>基础医学</option>" +
-                            "<option value='ZHYZHY'>中医中药</option>" +
-                            "<option value='KQYX'>口腔医学</option>" +
-                            "<option value='YX'>药学</option>" +
-                            "<option value='HL'>护理</option>" +
-                            "<option value='GGWSHYFYX'>公共卫生与预防医学</option>" +
-                            "<option value='YXYJ'>医学检验</option>"
-                        )
-                    } else {
-                        var errors = _.reduce(
-                            ['.new-course-category'],
-                            function (acc, ele) {
-                                var $ele = $(ele);
-                                var error = "服务器获取分类信息失败，请将无法创建课程，请稍后再试"
-                                setNewCourseFieldInErr($ele.parent('li'), error);
-                                return error ? true : acc;
-                            },
-                            false
-                        );                        
-                    }
-                }
-            });
-        }
-
         domReady(function () {
             $('.new-course-button').bind('click', addNewCourse);
-            
-            org_name = $('input.new-course-org').val();
-            if (org_name != ""){
-                ajaxSetOptions(org_name);
-            } else {
-                var errors = _.reduce(
-                    ['.new-course-org'],
-                    function (acc, ele) {
-                        var $ele = $(ele);
-                        var error = "服务器获取组织失败，将无法创建课程，请稍后再试"
-                        setNewCourseFieldInErr($ele.parent('li'), error);
-                        return error ? true : acc;
-                    },
-                    false
-                );
-            }                     
+            $('select.new-course-category').html("" +
+                "<option value='LCHYX'>临床医学</option>" +
+                "<option value='JCHYX'>基础医学</option>" +
+                "<option value='ZHYZHY'>中医中药</option>" +
+                "<option value='KQYX'>口腔医学</option>" +
+                "<option value='YX'>药学</option>" +
+                "<option value='HL'>护理</option>" +
+                "<option value='GGWSHYFYX'>公共卫生与预防医学</option>" +
+                "<option value='YXYJ'>医学检验</option>"
+            )
         });
     });
