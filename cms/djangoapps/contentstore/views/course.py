@@ -2,7 +2,10 @@
 #coding=utf-8
 import Queue
 import sys,os
-from django.shortcuts import render
+from envs.common import PROJECT_ROOT
+import xlrd
+from student.views import do_institution_import_teacher_create_account
+
 
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -35,7 +38,7 @@ from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseBadRequest, HttpResponseNotFound
+from django.http import HttpResponseBadRequest, HttpResponseNotFound, HttpResponseRedirect, HttpResponse
 from util.json_request import JsonResponse
 from edxmako.shortcuts import render_to_response
 
@@ -52,7 +55,7 @@ from contentstore.course_info_model import get_course_updates, update_course_upd
 from contentstore.utils import (
     get_lms_link_for_item, add_extra_panel_tab, remove_extra_panel_tab,
     get_modulestore)
-from contentstore.utils import send_mail
+from contentstore.utils import send_mail_update
 from models.settings.course_details import CourseDetails, CourseSettingsEncoder
 
 from models.settings.course_grading import CourseGradingModel
@@ -68,7 +71,7 @@ from .component import (
 from django_comment_common.models import assign_default_role
 from django_comment_common.utils import seed_permissions_roles
 
-from student.models import CourseEnrollment,UserProfile
+from student.models import CourseEnrollment,UserProfile,UploadFileForm
 
 from xmodule.html_module import AboutDescriptor
 from xmodule.modulestore.locator import BlockUsageLocator, CourseLocator
@@ -90,7 +93,7 @@ __all__ = ['course_info_handler', 'course_handler', 'course_info_update_handler'
            'calendar_common_updateevent',
            'calendar_settings_getevents',
            'textbooks_list_handler',
-           'textbooks_detail_handler', 'course_audit_api', 'sync_class_appointment']
+           'textbooks_detail_handler', 'course_audit_api', 'sync_class_appointment', 'institution_upload_teacher', 'remove_institute_teacher']
 
 WENJUAN_STATUS = {
     "0": "未发布",
@@ -406,6 +409,15 @@ def course_listing(request):
 
     course_org = _get_course_org_from_bs(request.user)
     profile = UserProfile.objects.get(name=request.user)
+
+    # get institute teacher user
+    user_list = UserProfile.objects.all()
+    user_institute_teacher_list= []
+    for ul in user_list:
+        if ul.institute == profile.user_id:
+            u = User.objects.get(id=ul.user_id)
+            user_institute_teacher_list.append(u)
+
     return render_to_response('index.html', {
         'courses': [format_course_for_view(c) for c in courses if not isinstance(c, ErrorDescriptor)],
         'user': request.user,
@@ -414,7 +426,8 @@ def course_listing(request):
         'course_org': course_org,
         'wenjuan_link': wenjuan_loginapi,
         'qlist': qlist,
-        'profile': profile
+        'profile': profile,
+        'user_institute_teacher_list': user_institute_teacher_list
     })
 
 
@@ -684,7 +697,7 @@ def notice_course_update_to_student(json,course_location,package_id):
 
         for k in range(2):
             threadname = 'Thread' + str(k)
-            send_mail(threadname, queue, update_content, sub)
+            send_mail_update(threadname, queue, update_content, sub)
             print 'success'
         # queue.join()
     except:
@@ -1252,4 +1265,73 @@ def course_audit_api(request, course_id, operation):
     except:
         return JsonResponse(re_json)
 
+@csrf_exempt
+def institution_upload_teacher(request):
+    messg=''
+    if request.method == 'POST':
+        use_id = request.GET['id']
+        print use_id
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            filename = form.cleaned_data['file']
+            print filename
+            filename_suffix = filename.name.split('.')[-1]
+            print filename_suffix
+            if filename_suffix == 'xls':
+                print 'entry'
+                f = handle_uploaded_file(filename)
+                xls_insert_into_db(request, f, use_id)
+                messg = '教师导入成功'
+            else:
+                print 'out'
+                messg = '上传文件要为excel格式'
+    else:
+        form = UploadFileForm()
+    content = {
+        'form': form,
+        'id': use_id,
+        'messg': messg
+    }
+    return HttpResponseRedirect('/course')
 
+
+def handle_uploaded_file(f):
+    f_path = PROJECT_ROOT + '/static/upload/'+f.name.encode('utf8')
+
+    with open(f_path.encode('utf8'), 'wb+') as info:
+        print f
+        for chunk in f.chunks():
+            info.write(chunk)
+    return f_path.encode('utf8')
+
+def xls_insert_into_db(request, xlsfile, instutition_id):
+    wb = xlrd.open_workbook(xlsfile)
+    sh = wb.sheet_by_index(0)
+    for row in range(sh.nrows):
+        for col in range(sh.ncols):
+            print "(", row, col, sh.cell(row, col).value.encode('utf8'), ')',
+        print ''
+    rows = sh.nrows
+
+    for i in range(1, rows):
+        username = sh.cell(i, 2).value
+        email = sh.cell(i, 0).value
+        password = sh.cell(i, 1).value
+        name = sh.cell(i, 3).value
+        post_vars = {
+            'username': username,
+            'email': email,
+            'password': password,
+            'name': name
+        }
+        do_institution_import_teacher_create_account(post_vars, instutition_id)
+        print 'success'
+    return HttpResponseRedirect('/course')
+
+def remove_institute_teacher(request):
+    institute_id = request.GET['id']
+    print institute_id
+    profile_user = UserProfile.objects.get(user_id=institute_id)
+    profile_user.institute = None
+    profile_user.save()
+    return JsonResponse('/course')

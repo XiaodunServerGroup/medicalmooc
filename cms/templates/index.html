@@ -6,7 +6,7 @@
 <%block name="bodyclass">is-signedin index view-dashboard</%block>
 
 <%block name="jsextra">
-<script type="text/javascript">
+<script type="text/javascript" xmlns="http://www.w3.org/1999/html">
 require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
     // showing/hiding creation rights UI
     $('.show-creationrights').click(function(e){
@@ -72,12 +72,51 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
 
           if (nextTr.css('display') == 'none') {
             self.html("隐藏URL");
-            nextTr.fadeIn(); 
+            nextTr.fadeIn();
           }
         }
     });
+
+    $('.remove-button').click(function(){
+        if(confirm('确定要删除吗?')){
+            $.ajax({
+                url: "/remove_institute_teacher?id=" + $(this).attr("value"),
+                type: "GET",
+                dataType: "jsonp",
+                jsonp: false,
+                'cache': true,
+                success: function(){
+
+                }
+            })
+            alert('移除成功!')
+        }else{
+            return false;
+        }
+    });
+
+    $('.close-modal').click(function(){
+        $('#lean_overlay').css('display','none');
+    })
+
+    $('#submit_button').click(function(){
+        var file=$("input[name='file']").val();
+        var filename=file.replace(/.*(\/|\\)/, "");
+        var fileExt=(/[.]/.exec(filename)) ? /[^.]+$/.exec(filename.toLowerCase()) : '';
+        if(fileExt != 'xls'){
+            alert('上传失败!上传文件为excel格式');
+            //$('#content').innerHTML="上传失败!上传文件为excel格式";
+            return false;
+        }else{
+            alert('上传成功!')
+        }
+    })
+
+    accessible_modal(".edit-name", "#apply_name_change .close-modal", "#apply_name_change", "#index-main");
+    accessible_modal(".edit-name", "#apply_name_change_file .close-modal", "#apply_name_change_file", "#index-main");
 });
 </script>
+
 </%block>
 
 <%block name="content">
@@ -103,7 +142,7 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
   </header>
 </div>
 
-<div class="wrapper-content wrapper">
+<div class="wrapper-content wrapper" id="index-main">
   % if user.is_active:
   <section class="content">
     <article class="content-primary" role="main">
@@ -403,11 +442,12 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
 
         <ol class="list-actions">
           <li class="action-item">
-            <a href="#add-teachers-modal" rel="leanModal" title="批量导入教师">批量导入教师</a>
+            <!--<a href="/institution_upload_teacher?id=${ profile.user_id }" title="批量导入教师" target="_blank">批量导入教师</a>-->
+            <a href="#apply_name_change_file" rel="leanModal" title="批量导入教师" class="edit-name">批量导入教师</a>
             <br/>
             <a href="#add-teachers-modal"  rel="leanModal"  id="show-add-teachers-modal" title="添加审核教师">添加审核教师</a>
             <br/>
-            <a href="" title="管理本单位教师">管理本单位教师</a>
+            <a href="#apply_name_change" rel="leanModal" title="导入" class="edit-name">管理本单位教师</a>
           </li>
         </ol>
       </div>
@@ -612,6 +652,26 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
   .table-hover tbody tr:hover td {
     background-color: #EEE;
   }
+
+  /*institute css*/
+
+/*layer1*/
+.change_name_body{margin-left: 40px;}
+.change-name-title{  padding-bottom:22px; border-bottom:1px solid #0e74b4;  text-align:center; position:relative;}
+.change-name-title strong{ font-weight:normal;  font-size:24px; line-height:24px;}
+.table1{ line-height:24px; font-size:14px;}
+.table1 th{ font-weight:normal;}
+.table1 td{ text-align:center; width: 300px;}
+.table1 td a{ color:#85acce;}
+/*layer2*/
+.up_text{ width:250px; margin:0 auto; margin-top:40px; height:420px;}
+.up_text p{ color:#0e74b4; font-size:14px; line-height:28px;}
+.upload_text{ line-height:28px; margin-top:6px; font-size:14px;}
+.upload_text b , .upload_text strong{ float:left; font-weight:normal; }
+.btn01{ width:250px; margin:0 auto; margin-top:67px;  line-height:30px;}
+.submit1{ float:left; display:inline-block; background-color:#0e74b4;  line-height:28px; color:#fff; cursor:pointer; margin-left:24px; border:1px solid #0e74b4; width:75px;}
+.reset1{ float:left; width:75px;  display:inline-block; background-color:#fff;  line-height:28px; color:#626262; cursor:pointer; border:1px solid #0e74b4;margin-left:44px;}
+
 </style>
 <section id="wenjuan-list-modal" class="modal wenjuan-data" aria-hidden="true">
   <div class="inner-wrapper" role='alertdialog' aria-labelledy="wenjuan-modal-title">
@@ -670,23 +730,79 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
   </div>
 </section>
 
+<section id="apply_name_change" class="modal" aria-hidden="true">
+  <div class="inner-wrapper" role="dialog" aria-labelledby="change-name-title">
+    <button class="close-modal">&#10005;
+      <span class="sr">
+        ## Translators: this is a control to allow users to exit out of this modal interface (a menu or piece of UI that takes the full focus of the screen)
+        ${_('Close Modal')}
+      </span>
+    </button>
 
-<section id="add-teachers-modal" class="modal teachers-data" aria-hidden="true">
-  <div class="inner-wrapper" role='alertdialog' aria-labelledy="wenjuan-modal-title">
     <header>
-      <h2>
-        <span id="wenjuan-modal-title">当前问卷列表</span>
-        <span class="sr">,
-          ## Translators: this text gives status on if the modal interface (a menu or piece of UI that takes the full focus of the screen) is open or not
-          ${_("modal open")}
-        </span>
-        <hr />
-      </h2>
+      <div class="change-name-title">
+        <strong>
+        本单位教师管理
+        </strong>
+      </div>
     </header>
+    <div class="change_name_body">
+            <fieldset style="height:460px; overflow:auto;">
+            <table width="800" class="table1">
+        % if user_institute_teacher_list:
+                <tr>
+                    <td>用户名</td>
+                    <td>姓名</td>
+                    <td>邮箱</td>
+                    <td>操作</td>
+                </tr>
+            %for s in user_institute_teacher_list:
+                <tr>
+                    <td>${s.username}</td>
+                    <td>${s.first_name}</td>
+                    <td>${s.email}</td>
+                    <!--<td><a href="/remove_institute_teacher?id=${ s.id }" >移除</a></td>-->
+                    <td><a href="" class="remove-button" value="${ s.id }">移除</a></td>
+                </tr>
+            %endfor
+        % else:
+            本单位暂无教师
+        %endif
+        </table>
+        </fieldset>
+    </div>
+  </div>
+    </div>
+</section>
 
-    <div id="wenjuan-list" style="">
-      <textarea rows="6" cols="70" name="multiple_students"></textarea>
-    <div>
+<section id="apply_name_change_file" class="modal" aria-hidden="true">
+  <div class="inner-wrapper" role="dialog" aria-labelledby="change-name-title">
+    <button class="close-modal">&#10005;
+      <span class="sr">
+        ## Translators: this is a control to allow users to exit out of this modal interface (a menu or piece of UI that takes the full focus of the screen)
+        ${_('Close Modal')}
+      </span>
+    </button>
+
+    <header>
+      <div class="change-name-title">
+        <strong>
+        批量导入教师
+        </strong>
+      </div>
+    </header>
+    <div class="up_text">
+    <p>配置文件上传</p>
+    <form action="/institution_upload_teacher?id=${ profile.user_id }" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+        <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='{% csrf_token %}' /></div>
+
+        <div class="upload_text"><p><label for="id_file">请上传文件:</label> <input type="file" name="file" id="id_file" /></p></div>
+        <div class="btn01">
+        <button id="submit_button" class="submit1">提交</button>
+        <button id="return_course" name="return_course" class="reset1">返回</button>
+        </div>
+    </form>
+    </div>
   </div>
 </section>
 </%block>

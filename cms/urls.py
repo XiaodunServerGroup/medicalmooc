@@ -74,6 +74,8 @@ urlpatterns += patterns(
     url(r'^signin$', 'login_page', name='login'),
     url(r'^request_course_creator$', 'request_course_creator'),
     url(r'^sync/class/appointment$', 'sync_class_appointment'),
+    url(r'^institution_upload_teacher$', 'institution_upload_teacher'),
+    url(r'^remove_institute_teacher$', 'remove_institute_teacher'),
     # (?ix) == ignore case and verbose (multiline regex)
     url(r'(?ix)^course_team/{}(/)?(?P<email>.+)?$'.format(parsers.URL_RE_SOURCE), 'course_team_handler'),
     url(r'(?ix)^course_info/{}$'.format(parsers.URL_RE_SOURCE), 'course_info_handler'),

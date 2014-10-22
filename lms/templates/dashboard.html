@@ -352,7 +352,7 @@
 
     <header>
       <h2 id="purchase-modal-title">
-        学习档案袋
+        学分证书
         <span class="sr">,
           ## Translators: this text gives status on if the modal interface (a menu or piece of UI that takes the full focus of the screen) is open or not
           ${_("modal open")}
@@ -410,6 +410,17 @@
               <div id='courseprogress'>
                 <label>课程进度：</label>
                 <span>${'{:.0%}'.format((grades.grade(user, request, course)['percent']))}</span>
+              </div>
+
+              <div id='coursecertificate'>
+              	<label>证书:</label>
+              	<span>
+                 % if grades.grade(user, request, course)['percent'] == 1:
+                   <p>已颁发</p>
+                 % else:
+                   <p>未颁发</p>
+                 % endif
+              	</span>
               </div>
             </li>
         % endfor

@@ -11,7 +11,7 @@
 <%static:css group='style-course-vendor'/>
 <%static:css group='style-course'/>
 
-  <script type="text/javascript" src="${static.url('js/vendor/flot/jquery.flot.js')}"></script>
+  <script type="text/javascript" src="${static.url('js/vendor/flot/jquery.flot.js')}" xmlns="http://www.w3.org/1999/html"></script>
   <script type="text/javascript" src="${static.url('js/vendor/flot/jquery.flot.axislabels.js')}"></script>
   <script type="text/javascript" src="${static.url('js/vendor/jquery-jvectormap-1.1.1/jquery-jvectormap-1.1.1.min.js')}"></script>
   <script type="text/javascript" src="${static.url('js/vendor/jquery-jvectormap-1.1.1/jquery-jvectormap-world-mill-en.js')}"></script>
@@ -140,6 +140,9 @@ function goto( mode)
           <a href="#" onclick="goto('Manage Groups');" class="${modeflag.get('Manage Groups')}">${_("Manage Groups")}</a>
           %if show_email_tab:
              | <a href="#" onclick="goto('Email')" class="${modeflag.get('Email')}">${_("Email")}</a>
+          %endif
+          %if show_email_tab_free:
+             | <a href="#" onclick="goto('Email_free')" class="${modeflag.get('Email_free')}">自由发送电子邮件</a>
           %endif
           %if settings.FEATURES.get('ENABLE_INSTRUCTOR_ANALYTICS'):
              | <a href="#" onclick="goto('Analytics');" class="${modeflag.get('Analytics')}">${_("Analytics")}</a>
@@ -579,6 +582,54 @@ function goto( mode)
     <p>
       <input type="submit" onclick="this.value='Show Background Email Task History'" name="action" value="显示后台邮件状态信息">
     </p>
+%endif
+
+##-----------------------------------------------------------------------------
+
+%if modeflag.get('Email_free'):
+    %if email_msg:
+        <p></p><p>${email_msg}</p>
+    %endif
+
+    <ul class="list-fields">
+      <li class="field">
+        <label for="id_to">${_("Send to:")}</label>
+        <input type="text" name="student" id="send_email_student" value="" />
+        <span class="tip">(多个邮箱用;隔开, 例如:renwei@example.com;renweishe@example.com)</span>
+      </li>
+
+      <li class="field">
+        <label for="id_subject">${_("Subject: ")}</label>
+        %if subject:
+          <input type="text" id="id_subject" name="subject" maxlength="128" size="75" value="${subject}">
+        %else:
+          <input type="text" id="id_subject" name="subject" maxlength="128" size="75">
+        %endif
+        <span class="tip">${_("(Max 128 characters)")}</span>
+      </li>
+
+      <li class="field">
+        <label>Message:</label>
+        <div class="email-editor">
+          ${editor}
+        </div>
+        <input type="hidden" name="message" value="">
+      </li>
+    </ul>
+
+    <div class="submit-email-action">
+      <br />
+      <input type="submit" name="action" value="发送添加邮箱邮件">
+    </div>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var emailEditor = XBlock.initializeBlock($('.xblock-studio_view'));
+        document.idashform.onsubmit = function() {
+          this.message.value = emailEditor.save()['data'];
+          return true;
+        }
+      });
+    </script>
 %endif
 
     </form>
