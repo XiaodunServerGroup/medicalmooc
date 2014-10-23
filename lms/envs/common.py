@@ -501,12 +501,12 @@ ROOT_URLCONF = 'lms.urls'
 IGNORABLE_404_ENDS = ('favicon.ico')
 # NOTE: Please set ALLOWED_HOSTS to some sane value, as we do not allow the default '*'
 
-DEFAULT_FROM_EMAIL = 'xiaodunxin@126.com'
-DEFAULT_FEEDBACK_EMAIL = 'xiaodunxin@126.com'
-SERVER_EMAIL = 'xiaodunxin@126.com'
-TECH_SUPPORT_EMAIL = 'xiaodunxin@126.com'
-CONTACT_EMAIL = 'xiaodunxin@126.com'
-BUGS_EMAIL = 'xiaodunxin@126.com'
+DEFAULT_FROM_EMAIL = 'servicemooc@pmph.com'
+DEFAULT_FEEDBACK_EMAIL = 'servicemooc@pmph.com'
+SERVER_EMAIL = 'servicemooc@pmph.com'
+TECH_SUPPORT_EMAIL = 'servicemooc@pmph.com'
+CONTACT_EMAIL = 'servicemooc@pmph.com'
+BUGS_EMAIL = 'servicemooc@pmph.com'
 ADMINS = ()
 MANAGERS = ADMINS
 

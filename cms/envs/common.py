@@ -250,15 +250,15 @@ IGNORABLE_404_ENDS = ('favicon.ico')
 
 # Email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.126.com'
+EMAIL_HOST = 'mail.pmph.com'
 EMAIL_PORT = 25
 EMAIL_USE_TLS = False
-EMAIL_HOST_USER = 'xiaodunxin'
-EMAIL_HOST_PASSWORD = '123456qr'
+EMAIL_HOST_USER = 'servicemooc'
+EMAIL_HOST_PASSWORD = 'pmph59787000'
 
-DEFAULT_FROM_EMAIL = 'xiaodunxin@126.com'
-DEFAULT_FEEDBACK_EMAIL = 'xiaodunxin@126.com'
-SERVER_EMAIL = 'xiaodunxin@126.com'
+DEFAULT_FROM_EMAIL = 'servicemooc@pmph.com'
+DEFAULT_FEEDBACK_EMAIL = 'servicemooc@pmph.com'
+SERVER_EMAIL = 'servicemooc@pmph.com'
 ADMINS = ()
 MANAGERS = ADMINS
 
