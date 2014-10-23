@@ -2844,7 +2844,6 @@ def do_institution_import_teacher_create_account(post_vars, institute_id):
     registration = Registration()
     # TODO: Rearrange so that if part of the process fails, the whole process fails.
     # Right now, we can have e.g. no registration e-mail sent out and a zombie account
-    u = User.objects.get(email=user.email)
     try:
         user.save()
     except IntegrityError:
@@ -2871,7 +2870,7 @@ def do_institution_import_teacher_create_account(post_vars, institute_id):
     registration.register(user)
 
     profile = UserProfile(user=user)
-    profile.name = post_vars['username']
+    profile.name = post_vars['name']
     profile.level_of_education = post_vars.get('level_of_education')
     profile.gender = post_vars.get('gender')
     profile.mailing_address = post_vars.get('mailing_address')
@@ -2889,7 +2888,6 @@ def do_institution_import_teacher_create_account(post_vars, institute_id):
         profile.year_of_birth = None
     try:
         profile.save()
-        print 'profile'
     except Exception:
         log.exception("UserProfile creation failed for user {id}.".format(id=user.id))
     return (user, profile, registration)

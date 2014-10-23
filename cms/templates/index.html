@@ -751,20 +751,19 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
     <div class="change_name_body">
             <fieldset style="height:460px; overflow:auto;">
             <table width="800" class="table1">
-        % if user_institute_teacher_list:
+        % if len(user_institute_teacher_list):
                 <tr>
                     <td>用户名</td>
                     <td>姓名</td>
                     <td>邮箱</td>
                     <td>操作</td>
                 </tr>
-            %for s in user_institute_teacher_list:
+            %for s in range(0, len(user_institute_teacher_list)):
                 <tr>
-                    <td>${s.username}</td>
-                    <td>${s.first_name}</td>
-                    <td>${s.email}</td>
-                    <!--<td><a href="/remove_institute_teacher?id=${ s.id }" >移除</a></td>-->
-                    <td><a href="" class="remove-button" value="${ s.id }">移除</a></td>
+                    <td>${user_institute_teacher_list[s]['username']}</td>
+                    <td>${user_institute_teacher_list[s]['name']}</td>
+                    <td>${user_institute_teacher_list[s]['email']}</td>
+                    <td><a href="" class="remove-button" value="${ user_institute_teacher_list[s]['id'] }">移除</a></td>
                 </tr>
             %endfor
         % else:
