@@ -9,7 +9,7 @@ USE_I18N = True
 TEMPLATE_DEBUG = DEBUG
 TIME_ZONE = 'Asia/Shanghai'
 LANGUAGE_CODE = 'zh_CN'
-SITE_NAME = 'course.xiaodun.cn:81'
+SITE_NAME = '119.254.225.106:18010'
 
 ################################ LOGGERS ######################################
 
@@ -26,7 +26,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 ################################# LMS INTEGRATION #############################
 
-LMS_BASE = "mooc.xiaodun.cn"
+LMS_BASE = "119.254.225.106"
 FEATURES['PREVIEW_LMS_BASE'] = LMS_BASE
 
 ################################# CELERY ######################################
