@@ -112,7 +112,7 @@ class CapaFields(object):
         help=("定义显示问题答案的时间，"
               "默认值可以在高级设置中设置。"),
         scope=Scope.settings,
-        default="finished",
+        default="attempted",
         values=[
             {"display_name": "一直", "value": "always"},
             {"display_name": "询问", "value": "answered"},
