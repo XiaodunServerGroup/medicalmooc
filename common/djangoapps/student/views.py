@@ -206,7 +206,7 @@ def lead_courses(request):
     sel_items = {
         "subject": [
                        ["XSecure", "信息安全基础理论"],
-                       ["CTec", "通用那全技术"],
+                       ["CTec", "通用安全技术"],
                        ["CManage", "安全管理"],
                        ["SPTec", "专项安全技术"],
                 ],
@@ -1868,12 +1868,17 @@ def create_account(request, post_override=None):
         'key': registration.activation_key,
     }
 
+    print '111111111111111111'
+    print  context
+    print  '1111111111111111'
     # composes activation email
     subject = render_to_string('emails/activation_email_subject.txt', context)
     # Email subject *must not* contain newlines
     subject = ''.join(subject.splitlines())
-    message = render_to_string('emails/activation_email.txt', context)
 
+
+    message = render_to_string('emails/activation_email.txt', context)
+    print  message.encode('utf-8')
     # don't send email if we are doing load testing or random user generation for some reason
     if not (settings.FEATURES.get('AUTOMATIC_AUTH_FOR_TESTING')):
         from_address = microsite.get_value(
