@@ -50,11 +50,6 @@
           </div>
         </div>
         % if subsection.start and not almost_same_datetime(subsection.start, parent_item.start):
-            % if parent_item.start is None:
-            <p class="notice">${_("The date above differs from the release date of {name}, which is unset.").format(name=parent_item.display_name_with_default)}
-            % else:
-      <p class="notice">${_("The date above differs from the release date of {name} - {start_time}").format(name=parent_item.display_name_with_default, start_time=get_default_time_display(parent_item.start))}.
-            % endif
       <a href="#" class="sync-date no-spinner">${_("Sync to {name}.").format(name=parent_item.display_name_with_default)}</a></p>
         % endif
       </div>
