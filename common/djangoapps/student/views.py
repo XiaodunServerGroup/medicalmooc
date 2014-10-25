@@ -2896,3 +2896,7 @@ def do_institution_import_teacher_create_account(post_vars, institute_id):
     except Exception:
         log.exception("UserProfile creation failed for user {id}.".format(id=user.id))
     return (user, profile, registration)
+
+def test(request):
+
+    return render_to_response('test.html')

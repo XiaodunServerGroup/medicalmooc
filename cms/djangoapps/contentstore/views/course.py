@@ -602,8 +602,7 @@ def create_new_course(request):
     course_module = get_modulestore(course_location).get_item(course_location) 
      
     data_json = {
-      "showanswer": "attempted",
-      "course_audit": "1"
+      "showanswer": "always"
     }
     CourseMetadata.update_from_json(course_module, data_json, True, request.user)
     # end 

@@ -270,7 +270,7 @@ def courses_list_handler(request, action):
 
     if action not in ["homefalls", "all", "hot", "latest", "my", "search", "rolling", "sync"]:
         return JsonResponse({"success": False, "errmsg": "not support other actions except homefalls all hot latest rolling and my"})
-    
+
     def get_courses_depend_action(courses):
         """
         Return courses depend on action
@@ -990,11 +990,6 @@ def course_about(request, course_id):
         raise Http404
 
     course = get_course_with_access(request.user, course_id, 'see_exists')
-    print '-==================='
-    print course_id.encode('utf-8')
-    print '-==================='
-    print str(course.course_uuid)[-12:]
-    print '-==================='
     course.course_uid = str(course.course_uuid)[-12:]
     registered = registered_for_course(course, request.user)
 
@@ -1024,7 +1019,7 @@ def course_about(request, course_id):
     # see if we have already filled up all allowed enrollments
     is_course_full = CourseEnrollment.is_course_full(course)
 
-    # load wsdl client 
+    # load wsdl client
     # TODO setting operation system url to common setting which load when sys boot
     oper_sys_domain = settings.OPER_SYS_DOMAIN
     url = "{}/services/OssWebService?wsdl".format(oper_sys_domain)
@@ -1063,6 +1058,9 @@ def course_about(request, course_id):
             raise
     print course_purchased
 
+    # 课程时长
+    course_duration = course.end-course.start
+
     return render_to_response('courseware/course_about.html',
                               {'course': course,
                                'registered': registered,
@@ -1074,7 +1072,8 @@ def course_about(request, course_id):
                                'is_course_full': is_course_full,
                                'purchase_link': '{}/account/buy.action?uuid={}'.format(oper_sys_domain, str(course.course_uid)),
                                'push_update': push_update,
-                               'purchased': course_purchased})
+                               'purchased': course_purchased,
+                               'course_duration': course_duration})
 
 
 @ensure_csrf_cookie
