@@ -179,7 +179,7 @@
                 <div class="course_left">
                     <h2><img src="${course_image_url(course)}" width="228" height="80"  alt=""/></h2>
                     <h3 class="title">${get_course_about_section(course, "title")}</h3>
-                    <p>《有机化学》是研究有机化合物的结构、性质和反应的学科，是化学专业学生的必修基础课，是生物化学、分子生物学、医学、药学等课程的先修课。西安交通大学教学名师唐玉海教授，将在MOOC课堂中通过多元化教学模式，融合理论学习和实例分析，并结合课外实验，帮助学生系统深入地掌握有机化学基本知识。</p>
+                    <p>${get_course_about_section(course, "short_description")}</p>
                 </div>
                 <div class="course_right">
                  % if get_course_about_section(course, "video"):
@@ -243,41 +243,41 @@
                         <h2>课程信息</h2>
                         <p><span>课程时长：</span><span class="cor_red">12周</span></p>
                         <p><span>开课时间：</span><span class="cor_red">${course.start}</span></p>
-                        <p><span>课程负载：</span><span class="cor_red">4小时每周</span></p>
-                        <p><span>内容类型：</span><span>视频 文档 随堂测验 富文本 讨论</span></p>
-                        <p><span>课程分类：</span><a href="#">哲学历史</a></p>
+                        <p><span>课程负载：</span><span class="cor_red">${get_course_about_section(course, "effort")}小时每周</span></p>
+                        <!--<p><span>内容类型：</span><span>视频 文档 随堂测验 富文本 讨论</span></p>-->
+                        <!--<p><span>课程分类：</span><a href="#">哲学历史</a></p>-->
                     </div>
                   </div>
                     <div class="m-btnList">
                         <h4>授课老师</h4>
-                        <a class="m-btn" href="#">
-                            <img src="${static.url('images/liuz.jpg')}" width="80" height="80"  alt=""/>
-							<div class="cnt f-fl">
-                				<h3>唐玉海</h3>
-                				<p>教授</p>
-              				</div>
-                        </a>
-                        <a class="m-btn" href="#">
-                            <img src="${static.url('images/liuz.jpg')}" width="80" height="80"  alt=""/>
-							<div class="cnt f-fl">
-                				<h3>唐玉海</h3>
-                				<p>教授</p>
-              				</div>
-                        </a>
-                        <a class="m-btn" href="#">
-                            <img src="${static.url('images/liuz.jpg')}" width="80" height="80"  alt=""/>
-							<div class="cnt f-fl">
-                				<h3>唐玉海</h3>
-                				<p>教授</p>
-              				</div>
-                        </a>
-                        <a class="m-btn" href="#">
-                            <img src="${static.url('images/liuz.jpg')}" width="80" height="80"  alt=""/>
-							<div class="cnt f-fl">
-                				<h3>唐玉海</h3>
-                				<p>教授</p>
-              				</div>
-                        </a>
+                        <!--<a class="m-btn" href="#">-->
+                            <!--<img src="${static.url('images/liuz.jpg')}" width="80" height="80"  alt=""/>-->
+							<!--<div class="cnt f-fl">-->
+                				<!--<h3>唐玉海</h3>-->
+                				<!--<p>教授</p>-->
+              				<!--</div>-->
+                        <!--</a>-->
+                        <!--<a class="m-btn" href="#">-->
+                            <!--<img src="${static.url('images/liuz.jpg')}" width="80" height="80"  alt=""/>-->
+							<!--<div class="cnt f-fl">-->
+                				<!--<h3>唐玉海</h3>-->
+                				<!--<p>教授</p>-->
+              				<!--</div>-->
+                        <!--</a>-->
+                        <!--<a class="m-btn" href="#">-->
+                            <!--<img src="${static.url('images/liuz.jpg')}" width="80" height="80"  alt=""/>-->
+							<!--<div class="cnt f-fl">-->
+                				<!--<h3>唐玉海</h3>-->
+                				<!--<p>教授</p>-->
+              				<!--</div>-->
+                        <!--</a>-->
+                        <!--<a class="m-btn" href="#">-->
+                            <!--<img src="${static.url('images/liuz.jpg')}" width="80" height="80"  alt=""/>-->
+							<!--<div class="cnt f-fl">-->
+                				<!--<h3>唐玉海</h3>-->
+                				<!--<p>教授</p>-->
+              				<!--</div>-->
+                        <!--</a>-->
                     </div>
                     <div class="m-btnList">
                         <h4>分享</h4>

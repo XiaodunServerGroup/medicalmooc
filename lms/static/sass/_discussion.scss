@@ -10,11 +10,11 @@
   line-height: 32px;
   color: $white;
   text-shadow: 0 1px 0 rgba(0, 0, 0, .3);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 1px 1px rgba(0, 0, 0, .15);
+  box-shadow: 0 1px 0 #0e74b4 inset, 0 1px 1px #0e74b4;
 
   &:hover, &:focus {
-    border-color: #ff6600;
-    @include linear-gradient(top, #ff6600, #ff6600);
+    border-color: #0e74b4;
+    @include linear-gradient(top, #0e74b4, #0e74b4);
   }
 }
 

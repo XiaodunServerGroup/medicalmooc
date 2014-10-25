@@ -86,7 +86,7 @@ $pink-u1: desaturate($pink,15%);
 $pink-u2: desaturate($pink,30%);
 $pink-u3: desaturate($pink,45%);
 
-$red: rgb(178, 6, 16);
+$red: #0e74b4;
 $red-l1: tint($red,20%);
 $red-l2: tint($red,40%);
 $red-l3: tint($red,60%);
@@ -137,7 +137,7 @@ $yellow-u1: desaturate($yellow,15%);
 $yellow-u2: desaturate($yellow,30%);
 $yellow-u3: desaturate($yellow,45%);
 
-$orange: rgb(237, 189, 60);
+$orange: #0e74b4;
 $orange-l1: tint($orange,20%);
 $orange-l2: tint($orange,40%);
 $orange-l3: tint($orange,60%);
@@ -154,7 +154,7 @@ $orange-u1: desaturate($orange,15%);
 $orange-u2: desaturate($orange,30%);
 $orange-u3: desaturate($orange,45%);
 
-$shadow: rgba($black, 0.2);
+$shadow: #0e74b4;
 $shadow-l1: rgba($black, 0.1);
 $shadow-l2: rgba($black, 0.05);
 $shadow-d1: rgba($black, 0.4);
