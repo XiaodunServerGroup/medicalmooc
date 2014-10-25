@@ -107,6 +107,7 @@ def instructor_dashboard(request, course_id):
     email_subject = None
     html_message = ''
     show_email_tab = False
+    show_email_tab_free = False
     problems = []
     plots = []
     datatable = {}
