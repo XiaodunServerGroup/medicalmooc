@@ -3,10 +3,9 @@
 import sys,os
 reload(sys)
 sys.setdefaultencoding('utf8')
+
+
 from datetime import timedelta
-
-
-
 import logging
 import urllib
 import hashlib
@@ -1021,14 +1020,15 @@ def course_about(request, course_id):
     is_course_full = CourseEnrollment.is_course_full(course)
 
     # 课程时长
+    course_end_time = ''
     if course.end!= None:
        course_duration = course.end-course.start
        bb = str(course_duration).split(" ")
        course_duration = bb[0] + "天"+" " + bb[2]
+       course_end = course.end + timedelta(days=+1)
+       course_end_time = course_end.strftime('%Y年%m月%d日')
     else:  
        course_duration = "课程结束时间未定"
-    course_end = course.end + timedelta(days=+1)
-    course_end_time = course_end.strftime('%Y年%m月%d日')
 
     # course team
     course_team = [];
