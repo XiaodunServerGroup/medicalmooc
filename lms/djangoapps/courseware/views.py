@@ -1061,7 +1061,7 @@ def course_about(request, course_id):
     # 课程时长
     if course.end!= None:
        course_duration = course.end-course.start
-       bb = "".join(str(course_duration)).split(" ")
+       bb = str(course_duration).split(" ")
        course_duration = bb[0] + "天"+" " + bb[2]
     else:  
        course_duration = "课程结束时间未定"
