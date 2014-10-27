@@ -1045,7 +1045,7 @@ def course_about(request, course_id):
                                'reg_then_add_to_cart_link': reg_then_add_to_cart_link,
                                'show_courseware_link': show_courseware_link,
                                'is_course_full': is_course_full,
-                               'course_duration': course_duration})
+                               'course_duration': course_duration,
                                'course_end_time': course_end_time})
 
 
