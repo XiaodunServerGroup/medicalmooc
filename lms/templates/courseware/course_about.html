@@ -177,7 +177,7 @@
         <section class="container container_bg">
         	<div class="container_pad">
                 <div class="course_left">
-                    <h2><img src="${course_image_url(course)}" width="228" height="80"  alt=""/></h2>
+                    <!--<h2><img src="${course_image_url(course)}" width="228" height="80"  alt=""/></h2>-->
                     <h3 class="title">${get_course_about_section(course, "title")}</h3>
                     <p>${get_course_about_section(course, "short_description")}</p>
                 </div>
@@ -213,7 +213,7 @@
                     <h2>课程学期</h2>
                     <div class="termSelect_c">
                         <select id="j-termSelect" class="termSelect">
-                            <option value="18001">${course.start_date_text}-${course.end_date_text}</option>
+                            <option value="18001">${course.start_date_text}-${course_end_time}</option>
                         </select>
                     </div>
                     <div class="m-btnList">

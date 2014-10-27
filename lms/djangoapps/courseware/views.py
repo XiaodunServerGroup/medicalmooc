@@ -3,6 +3,7 @@
 import sys,os
 reload(sys)
 sys.setdefaultencoding('utf8')
+from datetime import timedelta
 
 
 
@@ -1065,6 +1066,8 @@ def course_about(request, course_id):
        course_duration = bb[0] + "天"+" " + bb[2]
     else:  
        course_duration = "课程结束时间未定"
+    course_end = course.end + timedelta(days=+1)
+    course_end_time = course_end.strftime('%Y年%m月%d日')
 
     return render_to_response('courseware/course_about.html',
                               {'course': course,
@@ -1078,7 +1081,8 @@ def course_about(request, course_id):
                                'purchase_link': '{}/account/buy.action?uuid={}'.format(oper_sys_domain, str(course.course_uid)),
                                'push_update': push_update,
                                'purchased': course_purchased,
-                               'course_duration': course_duration})
+                               'course_duration': course_duration,
+                               'course_end_time': course_end_time})
 
 
 @ensure_csrf_cookie
