@@ -3,6 +3,7 @@
 import sys,os
 reload(sys)
 sys.setdefaultencoding('utf8')
+from datetime import timedelta
 
 
 
@@ -1026,6 +1027,8 @@ def course_about(request, course_id):
        course_duration = bb[0] + "天"+" " + bb[2]
     else:  
        course_duration = "课程结束时间未定"
+    course_end = course.end + timedelta(days=+1)
+    course_end_time = course_end.strftime('%Y年%m月%d日')
 
     # course team
     course_team = [];
@@ -1043,6 +1046,7 @@ def course_about(request, course_id):
                                'show_courseware_link': show_courseware_link,
                                'is_course_full': is_course_full,
                                'course_duration': course_duration})
+                               'course_end_time': course_end_time})
 
 
 @ensure_csrf_cookie
