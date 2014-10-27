@@ -1059,7 +1059,12 @@ def course_about(request, course_id):
     print course_purchased
 
     # 课程时长
-    course_duration = course.end-course.start
+    if course.end!= None:
+       course_duration = course.end-course.start
+       bb = "".join(str(course_duration)).split(" ")
+       course_duration = bb[0] + "天"+" " + bb[2]
+    else:  
+       course_duration = "课程结束时间未定"
 
     return render_to_response('courseware/course_about.html',
                               {'course': course,
