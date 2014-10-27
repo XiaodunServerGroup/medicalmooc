@@ -1058,8 +1058,6 @@ def course_about(request, course_id):
             raise
     print course_purchased
 
-    # 课程时长
-    course_duration = course.end-course.start
 
     return render_to_response('courseware/course_about.html',
                               {'course': course,
@@ -1072,8 +1070,7 @@ def course_about(request, course_id):
                                'is_course_full': is_course_full,
                                'purchase_link': '{}/account/buy.action?uuid={}'.format(oper_sys_domain, str(course.course_uid)),
                                'push_update': push_update,
-                               'purchased': course_purchased,
-                               'course_duration': course_duration})
+                               'purchased': course_purchased})
 
 
 @ensure_csrf_cookie
