@@ -32,14 +32,13 @@
   ## OG (Open Graph) title and description added below to give social media info to display
   ## (https://developers.facebook.com/docs/opengraph/howtos/maximizing-distribution-media-content#tags)
 <meta property="og:title" content="${get_course_about_section(course, 'title')}" xmlns="http://www.w3.org/1999/html"/>
-  <meta property="og:description" content="${get_course_about_section(course, 'short_description')}" />
+  <!--<meta property="og:description" content="${get_course_about_section(course, 'short_description')}" />-->
 </%block>
 
 <%block name="js_extra">
 
   <script type="text/javascript">
   (function() {
-    $('section.intro').data('purchase_link', '${purchase_link}');
 
     $(".register").click(function(event) {
       var eventRecipient = $(this);
@@ -51,45 +50,7 @@
         return false;
       }
 
-      if (classAttrs.indexOf('auth') > 0 && classAttrs.indexOf('purchased') > 0) {
-        $('div#purchase-prompt').children('span:first-child').html("您的账户已经在我们的运营系统上支付过此门课程，请直接点击下面按钮注册该课程");
-        $('a#finish_purchase').html('加入课程&开始学习');
-        return false;
-      }
-
-      if (classAttrs.indexOf('auth') > 0 && classAttrs.indexOf('purchased') == -1) {
-        var purchaseLink = $('section.intro').data('purchase_link');
-        var showContent = "学习课程之前，请在我们的运营系统购买该课程(" + "<a href='" + purchaseLink + "' target='_blank'>购买链接</a>"
-          + ")，购买完成后，请点击下面按钮注册课程";
-        window.open(purchaseLink, '_blank');
-        $('div#purchase-prompt').children('span:first-child').html(showContent);
-
-        return false
-      }
     });
-
-    $("a#finish_purchase").click(function(){
-        ajaxJudgeAuth();
-    });
-
-    function ajaxJudgeAuth(){
-      // ajax request get course purchase infomation
-      var loc_hf = location.href.split('/');
-      var course_id = loc_hf[4] + '/' + loc_hf[5] + '/' + loc_hf[6]
-      $.ajax({
-        url: '/courses/' + course_id + '/purchase/auth',
-        type: 'GET',
-        dataType: 'json',
-        success: function(json){
-          if (json.authenticated) {
-            $('#class_enroll_form').submit();
-          } else{
-            $('.close-modal').click();
-            $("#register_error").html("${_('An error occurred. Please try again later.')}").css('display', 'block');
-          }
-        }
-      });
-    }
 
     % if settings.FEATURES.get('ENABLE_SHOPPING_CART') and settings.FEATURES.get('ENABLE_PAID_COURSE_REGISTRATION'):
       add_course_complete_handler = function(jqXHR, textStatus) {
@@ -177,7 +138,7 @@
         <section class="container container_bg">
         	<div class="container_pad">
                 <div class="course_left">
-                    <h2><img src="${course_image_url(course)}" width="228" height="80"  alt=""/></h2>
+                    <!--<h2><img src="${course_image_url(course)}" width="228" height="80"  alt=""/></h2>-->
                     <h3 class="title">${get_course_about_section(course, "title")}</h3>
                     <p>${get_course_about_section(course, "short_description")}</p>
                 </div>
@@ -230,11 +191,7 @@
                                 </a>
                             %endif
                         %else:
-                            <!--%if course.display_course_price_with_default > 0:-->
-                                <!--<a href="#purchase-modal" class="register ${'auth' if user.is_authenticated else ''} ${'purchased' if purchased else ''}" rel='leanModal'>购买课程</a>-->
-                            <!--%else:-->
-                                <a class="register free ${'auth' if user.is_authenticated else ''}"><span id="j-startLearn" class="u-btn-orange">免费注册课程</span></a>
-                            <!--%endif-->
+                                <a class="register free ${'auth' if user.is_authenticated else ''}"><span id="j-startLearn" class="u-btn-orange">注册课程</span></a>
                                 <div id="register_error" style='clear: both;'></div>
                         %endif
                         </div>
@@ -250,6 +207,17 @@
                   </div>
                     <div class="m-btnList">
                         <h4>授课老师</h4>
+
+
+                        % for name in course_team:
+                        <a class="m-btn" href="#">
+							<div class="cnt f-fl" style="margin-left:40px">
+                        <li>
+                				<h2>${name}</h2>
+                        </li>
+              				</div>
+                        </a>
+                        % endfor
                         <!--<a class="m-btn" href="#">-->
                             <!--<img src="${static.url('images/liuz.jpg')}" width="80" height="80"  alt=""/>-->
 							<!--<div class="cnt f-fl">-->

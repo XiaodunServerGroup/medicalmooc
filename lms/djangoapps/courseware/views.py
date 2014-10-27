@@ -45,7 +45,8 @@ from .module_render import toc_for_course, get_module_for_descriptor, get_module
 from courseware.models import StudentModule, StudentModuleHistory
 from course_modes.models import CourseMode
 
-from student.models import UserTestGroup, CourseEnrollment
+from student.models import UserTestGroup, CourseEnrollment, UserProfile
+from student.roles import CourseInstructorRole, CourseStaffRole
 from student.views import course_from_id, single_course_reverification_info
 from util.cache import cache, cache_if_anonymous
 from util.json_request import JsonResponse
@@ -982,7 +983,6 @@ def purchase_authenticate(request, course_id):
 @cache_if_anonymous
 def course_about(request, course_id):
 
-    print '--------------------------------'
     if microsite.get_value(
         'ENABLE_MKTG_SITE',
         settings.FEATURES.get('ENABLE_MKTG_SITE', False)
@@ -1019,45 +1019,6 @@ def course_about(request, course_id):
     # see if we have already filled up all allowed enrollments
     is_course_full = CourseEnrollment.is_course_full(course)
 
-    # load wsdl client
-    # TODO setting operation system url to common setting which load when sys boot
-    oper_sys_domain = settings.OPER_SYS_DOMAIN
-    url = "{}/services/OssWebService?wsdl".format(oper_sys_domain)
-    # url = "http://192.168.1.6:8090/cetvossFront/services/OssWebService?wsdl"
-    client = Client(url)
-    # push course info to operating system and get purchase info
-    push_update, course_purchased = True, False
-    if not isinstance(request.user, AnonymousUser) and not registered:
-        xml_course_info = render_to_string('xmls/pcourse_xml.xml', {'course': course, 'user': request.user})
-        print xml_course_info
-        try:
-            p_xml = client.service.addorUpdateCommodities(xml_course_info, demd5_webservicestr(xml_course_info + "VTEC_#^)&*("))
-            print p_xml.encode('utf-8')
-
-            # parse xml to dict
-            docdict = xmltodict.parse(p_xml.encode('utf-8'))
-            # TODO: course table add a column mark is-push-data or not; when modify price column reset the column as false
-            if int(docdict['UPDATECOMMODITIESRESPONSE']['RESULT']) != 0:
-                push_update = False
-        except:
-            print "Fail to push course information to "
-            raise
-            push_update = False
-
-        xml_purchase = render_to_string('xmls/auth_purchase.xml', {'username': request.user.username, 'course_uuid': course.course_uid})
-        print xml_purchase
-        try:
-            aresult = client.service.confirmBillEvent(xml_purchase, demd5_webservicestr(xml_purchase + "VTEC_#^)&*("))
-            print aresult.encode('utf-8')
-            redict = xmltodict.parse(aresult.encode('utf-8'))
-            if redict['EVENTRETURN']['RESULT'].strip() in ['0', '1']:
-            # if redict['EVENTRETURN']['RESULT'].strip() in ['1']:
-                course_purchased = True
-        except:
-            print "Fail to get trade info about the course"
-            raise
-    print course_purchased
-
     # 课程时长
     if course.end!= None:
        course_duration = course.end-course.start
@@ -1066,18 +1027,21 @@ def course_about(request, course_id):
     else:  
        course_duration = "课程结束时间未定"
 
+    # course team
+    course_team = [];
+    for user in CourseStaffRole(course.location).users_with_role():
+        course_team.append(UserProfile.objects.get(user_id=User.objects.get(username=user).id).name)
+
     return render_to_response('courseware/course_about.html',
                               {'course': course,
                                'registered': registered,
                                'course_target': course_target,
                                'registration_price': registration_price,
                                'in_cart': in_cart,
+                               'course_team': course_team,
                                'reg_then_add_to_cart_link': reg_then_add_to_cart_link,
                                'show_courseware_link': show_courseware_link,
                                'is_course_full': is_course_full,
-                               'purchase_link': '{}/account/buy.action?uuid={}'.format(oper_sys_domain, str(course.course_uid)),
-                               'push_update': push_update,
-                               'purchased': course_purchased,
                                'course_duration': course_duration})
 
 
