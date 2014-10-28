@@ -397,7 +397,7 @@ class CourseFields(object):
                                     },
                                     {
                                       "short_description": "注册加入中国医学教育慕课联盟平台",
-                                      "long_description": "注册中国医学教育慕课联盟、阅读创建校盾课程的入门教程",
+                                      "long_description": "注册中国医学教育慕课联盟、阅读创建课程的入门教程",
                                       "is_checked": 0,
                                       "action_url": "https://edge.edx.org/courses/edX/edX101/How_to_Create_an_edX_Course/about",
                                       "action_text": "注册中国医学教育慕课联盟平台",
