@@ -1020,13 +1020,12 @@ def course_about(request, course_id):
     is_course_full = CourseEnrollment.is_course_full(course)
 
     # 课程时长
-    course_end_time = ''
+    course_end = ''
+    course_dur = ''
     if course.end!= None:
        course_duration = course.end-course.start
-       bb = str(course_duration).split(" ")
-       course_duration = bb[0] + "天"+" " + bb[2]
+       course_dur = str(course_duration).split(" ")
        course_end = course.end + timedelta(days=+1)
-       course_end_time = course_end.strftime('%Y年%m月%d日')
     else:  
        course_duration = "课程结束时间未定"
 
@@ -1046,7 +1045,8 @@ def course_about(request, course_id):
                                'show_courseware_link': show_courseware_link,
                                'is_course_full': is_course_full,
                                'course_duration': course_duration,
-                               'course_end_time': course_end_time})
+                               'course_end': course_end,
+                               'course_dur': course_dur})
 
 
 @ensure_csrf_cookie
