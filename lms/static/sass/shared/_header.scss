@@ -33,8 +33,8 @@
   ol {
     &.left {
       float: left;
-      margin-left: 50px;
-      margin-top: 20px;
+      margin-left: 49px;
+      margin-top: 19px;
     }
 
     &.guest {
@@ -55,9 +55,9 @@
         letter-spacing: 1px;
         vertical-align: middle;
         display: block;
-        padding: 5px;
+        padding: 5.5px;
         color: #646464;
-        //font-size: 18px;
+        font-size: 18px;
         font-weight: 400;
       }
     }
@@ -295,7 +295,7 @@
 
   .nav-courseware {
     float: right;
-    margin-top: ($baseline/4);
+    margin-top: 15px;
     list-style: none;
     border: 1px solid #2883bc;
 
