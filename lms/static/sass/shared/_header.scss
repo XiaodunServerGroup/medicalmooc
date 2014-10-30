@@ -18,7 +18,7 @@
 
   h1.logo {
     float: left;
-    margin: -7px 39px 0px 0px;
+    margin: -7px 16px 0px 0px;
     position: relative;
 
     a {
@@ -27,7 +27,7 @@
   }
 
   h1.logo img{
-    margin-top: 15px;
+    margin-top: 14px;
   }
 
   ol {
@@ -43,7 +43,7 @@
 
     > li {
       @include inline-block;
-      margin-right: 20px;
+      margin-right: 25px;
       position: relative;
       vertical-align: middle;
 
@@ -52,12 +52,12 @@
       }
 
       a {
-        letter-spacing: 1px;
+        //letter-spacing: 1px;
         vertical-align: middle;
         display: block;
-        padding: 5.5px;
+        padding: 5px;
         color: #646464;
-        font-size: 18px;
+        //font-size: 18px;
         font-weight: 400;
       }
     }

@@ -77,6 +77,9 @@ lms/static/sass/course.scss
 cms/static/css/
 cms/static/sass/*.css
 
+#####
+lms/envs/aws.py
+lms/envs/common.py
 ### Logging artifacts
 log/
 logs
