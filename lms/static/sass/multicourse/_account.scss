@@ -504,6 +504,7 @@
 
     button[type="submit"] {
       @extend %m-btn-primary;
+      color:#fff;
 
       &:disabled, &.is-disabled {
         opacity: 0.3;

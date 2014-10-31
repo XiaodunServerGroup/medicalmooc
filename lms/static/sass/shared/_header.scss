@@ -18,7 +18,7 @@
 
   h1.logo {
     float: left;
-    margin: -7px 16px 0px 0px;
+    margin: -7px 23px 0px 0px;
     position: relative;
 
     a {
@@ -43,7 +43,7 @@
 
     > li {
       @include inline-block;
-      margin-right: 25px;
+      margin-right: 35px;
       position: relative;
       vertical-align: middle;
 
@@ -57,7 +57,7 @@
         display: block;
         padding: 5px;
         color: #646464;
-        //font-size: 18px;
+        font-size: 18px;
         font-weight: 400;
       }
     }
@@ -137,7 +137,7 @@
           > a {
             border-radius: 0 4px 4px 0;
             border-left: none;
-            padding: 5.5px 8px 5px 8px;
+            padding: 6px 8px 5px 8px;
             
             &.shopping-cart {
               border-radius: 4px;

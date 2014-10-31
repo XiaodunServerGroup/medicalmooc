@@ -138,13 +138,13 @@ site_status_msg = get_site_status_msg(course_id)
       </%block>
     </ol>
 
-    <ol class="right nav-courseware">
+    <ol class="right nav-courseware" style="margin-right:110px;">
      <li class="nav-courseware-01">
       % if not settings.FEATURES['DISABLE_LOGIN_BUTTON']:
           % if course and settings.FEATURES.get('RESTRICT_ENROLL_BY_REG_METHOD') and course.enrollment_domain:
-          <a class="cta cta-login" href="${reverse('course-specific-login', args=[course.id])}${login_query()}">${_("Log in")}</a>
+          <a class="cta cta-login" style="font-size: 15px;" href="${reverse('course-specific-login', args=[course.id])}${login_query()}">${_("Log in")}</a>
           % else:
-          <a class="cta cta-login" href="/login${login_query()}">${_("Log in")}</a>
+          <a class="cta cta-login" style="font-size: 15px;" href="/login${login_query()}">${_("Log in")}</a>
           % endif
       % endif
      </li>
@@ -154,11 +154,11 @@ site_status_msg = get_site_status_msg(course_id)
       % if not settings.FEATURES['DISABLE_LOGIN_BUTTON']:
           % if course and settings.FEATURES.get('RESTRICT_ENROLL_BY_REG_METHOD') and course.enrollment_domain:
           <li>
-            <a class="cta cta-register click" href="${reverse('course-specific-register', args=[course.id])}">注册</a>
+            <a class="cta cta-register click" style="border-radius: 0px;font-size: 15px;" href="${reverse('course-specific-register', args=[course.id])}">注册</a>
           </li>
           % else:
           <li>
-            <a class="cta cta-register click" href="/register">注册</a>
+            <a class="cta cta-register click" style="border-radius: 0px;font-size: 15px;" href="/register">注册</a>
           </li>
           % endif
       % endif
