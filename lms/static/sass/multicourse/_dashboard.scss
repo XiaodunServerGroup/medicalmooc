@@ -310,10 +310,10 @@
 
       a {
         background: rgb(240,240,240);
-        @include background-image($button-bg-image);
+        //@include background-image($button-bg-image);
         background-color: $button-bg-color;
         border: 1px solid $border-color-2;
-        border-radius: 4px;
+        //border-radius: 4px;
         box-shadow: 0 1px 8px 0 rgba(0,0,0, 0.1);
         @include box-sizing(border-box);
         color: $base-font-color;
@@ -325,7 +325,8 @@
         text-shadow: 0 1px rgba(255,255,255, 0.6);
 
         &:hover, &:focus {
-          color: $link-color;
+          //color: $link-color;
+          color: #fff;
           text-decoration: none;
         }
       }

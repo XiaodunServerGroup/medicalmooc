@@ -1117,7 +1117,7 @@
             var okButton = doc.createElement("input");
             okButton.type = "button";
             okButton.onclick = function () { return close(false); };
-            okButton.value = "OK";
+            okButton.value = "确定";
             style = okButton.style;
             style.margin = "10px";
             style.display = "inline";
@@ -1128,7 +1128,7 @@
             var cancelButton = doc.createElement("input");
             cancelButton.type = "button";
             cancelButton.onclick = function () { return close(true); };
-            cancelButton.value = "Cancel";
+            cancelButton.value = "取消";
             style = cancelButton.style;
             style.margin = "10px";
             style.display = "inline";
