@@ -142,9 +142,9 @@ site_status_msg = get_site_status_msg(course_id)
      <li class="nav-courseware-01">
       % if not settings.FEATURES['DISABLE_LOGIN_BUTTON']:
           % if course and settings.FEATURES.get('RESTRICT_ENROLL_BY_REG_METHOD') and course.enrollment_domain:
-          <a class="cta cta-login" style="font-size: 15px;" href="${reverse('course-specific-login', args=[course.id])}${login_query()}">${_("Log in")}</a>
+          <a class="cta cta-login" style="font-size: 15px;border-radius: 0px;" href="${reverse('course-specific-login', args=[course.id])}${login_query()}">${_("Log in")}</a>
           % else:
-          <a class="cta cta-login" style="font-size: 15px;" href="/login${login_query()}">${_("Log in")}</a>
+          <a class="cta cta-login" style="font-size: 15px;border-radius: 0px;" href="/login${login_query()}">${_("Log in")}</a>
           % endif
       % endif
      </li>
