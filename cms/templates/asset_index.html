@@ -75,7 +75,7 @@ require(["domReady", "jquery", "js/models/asset", "js/collections/asset",
             var startUpload = function (e) {
                 var file = e.target.value;
 
-                $('.upload-modal h1').text("${_(u'Uploading…')}");
+                $('.upload-modal h1').text("文件正在上传中，请耐心等待，稍候再来查看，请勿关闭或刷新页面。");
                 $('.upload-modal .file-name').html(file.substring(file.lastIndexOf("\\") + 1));
                 $('.upload-modal .choose-file-button').hide();
                 $('.upload-modal .progress-bar').removeClass('loaded').show();
