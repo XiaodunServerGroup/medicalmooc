@@ -2102,6 +2102,21 @@ def password_reset(request):
         AUDIT_LOG.info("Bad password_reset user passed in.")
         limiter.tick_bad_request_counter(request)
 
+    if not  request.POST.get('email') :
+        print '11111111111111111111'
+        return JsonResponse({
+            'Failure': False,
+            'value': render_to_string('registration/password_reset_done.html', {}),
+            })
+
+    try:
+        validate_email(request.POST.get('email'))
+    except :
+        return JsonResponse({
+            'Failure': False,
+            'value': render_to_string('registration/password_reset_done.html', {}),
+            })
+
     return JsonResponse({
         'success': True,
         'value': render_to_string('registration/password_reset_done.html', {}),
