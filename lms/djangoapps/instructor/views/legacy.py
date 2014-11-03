@@ -706,8 +706,11 @@ def instructor_dashboard(request, course_id):
         auto_enroll = bool(request.POST.get('auto_enroll'))
         students_filter(students)
         email_students = bool(request.POST.get('email_students'))
+        print email_students
+        print request.POST
         ret = _do_enroll_students(course, course_id, students, auto_enroll=auto_enroll, email_students=email_students, is_shib_course=is_shib_course)
         datatable = ret['datatable']
+        print '-----------------------finish-------------------------------------------------'
 
     elif action == 'Unenroll multiple students':
 
@@ -1033,6 +1036,7 @@ def _do_create_student(post_vars):
     except Exception:
         log.exception("UserProfile creation failed for user {id}.".format(id=user.id))
 
+    return (user, profile, registration)
 
 def students_filter(students):
 
@@ -1065,7 +1069,48 @@ def students_filter(students):
                 js = {'success':False}
                 js['no_register_email'] =_(" '{username}' format error.").format(username=post_vars['username'])
                 continue
-            _do_create_student(post_vars)
+            ret=_do_create_student(post_vars)
+
+            (user, profile, registration) = ret
+
+            context = {
+                'name': post_vars['name'],
+                'key': registration.activation_key,
+                }
+
+            print '----------------------debug-------------------------'
+            print  context
+            print  '----------------------finish--------------------------'
+            # composes activation email
+            subject = render_to_string('emails/activation_email_subject.txt', context)
+            # Email subject *must not* contain newlines
+            subject = ''.join(subject.splitlines())
+
+
+            message = render_to_string('emails/activation_email.txt', context)
+
+            # don't send email if we are doing load testing or random user generation for some reason
+            if not (settings.FEATURES.get('AUTOMATIC_AUTH_FOR_TESTING')):
+                from_address = microsite.get_value(
+                    'email_from_address',
+                    settings.DEFAULT_FROM_EMAIL
+                )
+                try:
+                    if settings.FEATURES.get('REROUTE_ACTIVATION_EMAIL'):
+                        dest_addr = settings.FEATURES['REROUTE_ACTIVATION_EMAIL']
+                        message = ("Activation for %s (%s): %s\n" % (user, user.email, profile.name) +
+                                   '-' * 80 + '\n\n' + message)
+                        send_mail(subject, message, from_address, [dest_addr], fail_silently=False)
+                    else:
+                        user.email_user(subject, message, from_address)
+                except Exception:  # pylint: disable=broad-except
+                    log.warning('Unable to send activation email to user', exc_info=True)
+                    js['value'] = _('Could not send activation e-mail.')
+                    # What is the correct status code to use here? I think it's 500, because
+                    # the problem is on the server's end -- but also, the account was created.
+                    # Seems like the core part of the request was successful.
+                    return JsonResponse(js, status=500)
+
 
 
 
@@ -1487,7 +1532,7 @@ def _do_enroll_students(course, course_id, students, overload=False, auto_enroll
 
             if email_students:
                 #User is allowed to enroll but has not signed up yet
-                d['email_address'] = student
+                d['email_addre  ss'] = student
                 d['message'] = 'allowed_enroll'
                 send_mail_ret = send_mail_to_student(student, d)
                 status[student] += (', email sent' if send_mail_ret else '')
