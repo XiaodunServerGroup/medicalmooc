@@ -22,7 +22,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .clear{clear:both;}
 html{zoom:expression(function(ele){ele.style.zoom="1";document.execCommand("BackgroundImageCache",false,true);}(this));}
 body{background:#eeeeee; color:#666; word-break:break-all;}
-.wrapper_about{margin:0 auto; width: 960px}
+.wrapper_about{margin:0 auto; width: 1180px}
 /*header*/
 .global{background:#f9f9f9; height:100px; width:100%; float:left; border-bottom:4px solid #2883bc;}
 .global .wrapper_bg{height:100px; border-bottom:4px solid #004f9c;}
@@ -62,13 +62,13 @@ footer p{color:#fff; text-align:center;}
 .content{width:100%; background:#eeeeee; float:left;}
 	.content .container{float:left;width:100%; margin-top:20px;padding: 0px;}
 	.content .container_bg{background:#fff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);}
-	.content .container .container_pad{padding:20px; float:left; width:920px;}
-	.content .container .container_pad .title{font-size:20px;padding:10px 0; font-weight:normal; color:#000;}
-	.content .container .container_pad .course_left{width:430px; float:left;}
+	.content .container .container_pad{padding:20px; float:left; width:1140px;}
+	.content .container .container_pad .title{font-size:16px;padding:10px 0; font-weight:normal; color:#000;}
+	.content .container .container_pad .course_left{width:700px; float:left;}
 	.content .container .container_pad .course_right{width:425px; float:right; height: 241px;}
 
 .content .container .container_pad2{padding:20px; float:left;}
-	.content .container .section_left {width:600px; float:left;}
+	.content .container .section_left {width:820px; float:left;}
 	.content .container .section_left .line{border-bottom:1px solid #eee; font-size:16px; font-weight:normal; color:#000; padding:10px 0; margin-bottom:20px;}
 	.content .container .section_right {width:340px; float:right;}
 	.content .container .section_right h2{font-size:16px; font-weight:normal; padding:10px 0; color:#000;}
@@ -77,7 +77,7 @@ footer p{color:#fff; text-align:center;}
 	.content .container .section_right p .cor_red{color:#d80000;}
 	.content .container .section_right .termSelect_c{padding:10px 0;}
 	.content .container .section_right .termSelect_c .termSelect{width:100%; height:30px;}
-	.content .container .section_right .m-btnList{padding:10px 0; float:left; widt:100%; width:100%;}
+	.content .container .section_right .m-btnList{padding:10px; float:left; width:100%;}
 	.content .container .section_right .m-btnList h4{padding-left:20px; margin:20px 0; font-size:16px; color:#000; font-weight:normal;}
 	.content .container .section_right .m-btnList .fx{padding-left:20px; padding-bottom:10px;}
 	.content .container .section_right .m-btnList .fx span{width:33px; height:33px; margin-right:15px; display:inline-block; ;}
@@ -91,7 +91,8 @@ footer p{color:#fff; text-align:center;}
 	.content .container .section_right .m-btnList .m-btn:hover{float:left; background:#f6f6f6; color:#61a500;}
 	.content .container .section_right .m-btnList .m-btn img{float:left;margin-left:20px; margin-right:20px; border-radius:50%;}
 	.content .container .section_right .m-btnList .m-btn h3{padding-top:15px;}
-	.content .container .section_right .u-btn-orange{height:40px; text-align:center; box-shadow: 0 1px 0 #0e74b4 inset, 0 1px 2px #0e74b4; border-radius:0px; font-size:20px; cursor:pointer; line-height:40px; display:block; border:1px solid #0e74b4; background-image: linear-gradient(#0e74b4, #0e74b4);  background-repeat: repeat-x; border-bottom: 1px solid #0e74b4; border-color: #0e74b4 #0e74b4 #0e74b4; color: #fff;}
+	.content .container .section_right .u-btn-orange{height:40px; text-align:center; box-shadow: 0 1px 0 #0e74b4 inset, 0 1px 2px #0e74b4; border-radius:0px; font-size:20px; cursor:pointer; line-height:40px; display:block; border:1px solid #0e74b4; background-image: linear-gradient(#0e74b4, #0e74b4);  background-repeat: repeat-x; border-bottom: 1px solid #0e74b4; border-color: #0e74b4 #0e74b4 #0e74b4; color: #fff; background-image: linear-gradient(#0e74b4, #0e74b4);background-color: #2883bc;
+}
 	.content .container .section_right .u-btn-orange:hover{background:#0e74b4;}
 /*about*/
 .content2{width:100%; background:#fff; float:left;}
