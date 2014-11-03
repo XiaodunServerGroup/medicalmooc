@@ -19,6 +19,8 @@ urlpatterns = ('',  # nopep8
     url(r'^login_failure_count$', 'student.views.login_failure_count', name='login_failure_count'),
     url(r'^register$', 'student.views.register_user', name="register_user"),
 
+    url(r'^common/header$', 'student.views.common_header', name='common_header'),
+
     url(r'^admin_dashboard$', 'dashboard.views.dashboard'),
 
     url(r'^lead/courses$', 'student.views.lead_courses', name='lead_courses'),
