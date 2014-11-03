@@ -22,7 +22,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .clear{clear:both;}
 html{zoom:expression(function(ele){ele.style.zoom="1";document.execCommand("BackgroundImageCache",false,true);}(this));}
 body{background:#eeeeee; color:#666; word-break:break-all;}
-.wrapper_about{margin:0 auto; width: 1180px}
+.wrapper_about{margin:0 auto;width: 1180px;}
 /*header*/
 .global{background:#f9f9f9; height:100px; width:100%; float:left; border-bottom:4px solid #2883bc;}
 .global .wrapper_bg{height:100px; border-bottom:4px solid #004f9c;}
