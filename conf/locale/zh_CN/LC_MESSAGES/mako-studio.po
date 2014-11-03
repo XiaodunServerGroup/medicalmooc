@@ -122,7 +122,7 @@ msgstr "如果您还有问题，请联系edX技术支持。同时，您也可以
 
 #: cms/templates/activation_invalid.html:27
 msgid "Contact edX Support"
-msgstr "联系edX技术支持"
+msgstr "联系技术支持"
 
 #: cms/templates/asset_index.html:6 cms/templates/asset_index.html:135
 #: cms/templates/widgets/header.html:59
@@ -131,7 +131,7 @@ msgstr "文件上传及管理"
 
 #: cms/templates/asset_index.html:78
 msgid "Uploading…"
-msgstr "上传中……"
+msgstr "文件正在上传中，请耐心等待，稍候再来查看，请勿关闭或刷新页面"
 
 #: cms/templates/asset_index.html:94 cms/templates/asset_index.html:191
 msgid "Choose File"

@@ -629,6 +629,9 @@ class VideoDescriptor(VideoFields, TabsEditingDescriptor, EmptyDataRawDescriptor
         if youtube_id_1_0_value:
             video_url['value'].insert(0, youtube_id_1_0_value)
 
+        if video_url['value'] == ['http://youtu.be/OEoXaMPEzfM']:
+           video_url['value'] = ['http://mooc.diandiyun.com/c4x/staff/cs005/asset/FZ1.mp4']
+
         metadata = {
             'display_name': display_name,
             'video_url': video_url
