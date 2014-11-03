@@ -36,7 +36,7 @@ def correct_video_settings(_step):
     expected_entries = [
         # basic
         ['Display Name', 'Video', False],
-        ['Video URL', 'http://youtu.be/OEoXaMPEzfM, , ', False],
+        ['Video URL', 'http://mooc.diandiyun.com/c4x/staff/cs005/asset/FZ1.mp4, , ', False],
 
         # advanced
         ['Display Name', 'Video', False],
