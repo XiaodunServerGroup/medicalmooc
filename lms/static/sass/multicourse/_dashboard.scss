@@ -34,11 +34,12 @@
 
     header.profile {
       @include background-image($dashboard-profile-header-image);
-      background-color: $dashboard-profile-header-color;
+      //background-color: $dashboard-profile-header-color;
       border: 1px solid $border-color-2;
       #border-radius: 4px;
       @include box-sizing(border-box);
       width: flex-grid(12);
+      background-color: #2883bc;
 
       h1.user-name {
         color: #fff;
@@ -311,12 +312,12 @@
       a {
         background: rgb(240,240,240);
         //@include background-image($button-bg-image);
-        background-color: $button-bg-color;
+        background-color: #2883bc;
         border: 1px solid $border-color-2;
         //border-radius: 4px;
         box-shadow: 0 1px 8px 0 rgba(0,0,0, 0.1);
         @include box-sizing(border-box);
-        color: $base-font-color;
+        color: #fff;
         font-family: $sans-serif;
         @include inline-block;
         letter-spacing: 1px;
