@@ -1,0 +1,83 @@
+<%! from django.utils.translation import ugettext as _ %>
+
+<%! from django.core.urlresolvers import reverse %>
+<!DOCTYPE html>
+<!--[if IE 7]><html class="ie ie7 lte9 lte8 lte7" lang="${LANGUAGE_CODE}"><![endif]-->
+<!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="${LANGUAGE_CODE}"><![endif]-->
+<!--[if IE 9]><html class="ie ie9 lte9" lang="${LANGUAGE_CODE}"><![endif]-->
+<!--[if gt IE 9]><!--><html lang="${LANGUAGE_CODE}"><!--<![endif]-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<%! from django.utils.translation import ugettext as _ %>
+<%! from microsite_configuration import microsite %>
+<%! from microsite_configuration import page_title_breadcrumbs %>
+
+<%namespace name='static' file='static_content.html'/>
+<%! from django.utils import html %>
+
+<%def name="theme_enabled()">
+  <% return settings.FEATURES.get("USE_CUSTOM_THEME", False) %>
+</%def>
+
+
+<%def name="pagetitle()" />
+  <%block name="title">
+      <title>
+       ${page_title_breadcrumbs(self.pagetitle())}
+       中国医学教育慕课联盟学习平台
+      </title>
+  </%block>
+
+
+  <script type="text/javascript" src="/jsi18n/"></script>
+
+  <link rel="gettext" type="application/x-po" href="${static.url('js/vendor/ova/locale/zh_CN/annotator.po')}">
+
+  <link rel="icon" type="image/x-icon" href="${static.url(microsite.get_value('favicon_path', settings.FAVICON_PATH))}" />
+
+  <%static:css group='style-vendor'/>
+  <%static:css group='style-app'/>
+  <%static:css group='style-app-extend1'/>
+  <%static:css group='style-app-extend2'/>
+
+  <%static:js group='main_vendor'/>
+
+  <%block name="headextra"/>
+
+<%
+  if theme_enabled():
+    header_extra_file = 'theme-head-extra.html'
+    header_file = 'theme-header.html'
+    google_analytics_file = 'theme-google-analytics.html'
+    footer_file = 'theme-footer.html'
+
+    style_overrides_file = None
+
+  else:
+    header_extra_file = None
+    header_file = microsite.get_template_path('navigation.html')
+    google_analytics_file = microsite.get_template_path('google_analytics.html')
+    footer_file = microsite.get_template_path('footer.html')
+
+    style_overrides_file = microsite.get_value('css_overrides_file')
+%>
+
+
+  <!--[if lt IE 9]>
+    <script src="${static.url('js/html5shiv.js')}"></script>
+  <![endif]-->
+
+
+
+
+</head>
+
+<body class="<%block name='bodyclass'/> lang_${LANGUAGE_CODE}">
+
+  % if not suppress_toplevel_navigation:
+    <%include file="${header_file}" />
+  %endif
+</body>
+</html>
+

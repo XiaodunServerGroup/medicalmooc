@@ -540,6 +540,9 @@ def signin_user(request):
     }
     return render_to_response('login.html', context)
 
+def common_header(request):
+    return render_to_response('common_header.html')
+
 
 @ensure_csrf_cookie
 def register_user(request, extra_context=None):
