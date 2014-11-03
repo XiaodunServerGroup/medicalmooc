@@ -228,15 +228,20 @@
           <%include file='dashboard/_dashboard_info_language.html' />
         %endif
 
-        % if external_auth_map is None or 'shib' not in external_auth_map.external_domain:
-        <li class="controls--account">
-          <span class="title"><div class="icon"></div><a href="#password_reset_complete" rel="leanModal" id="pwd_reset_button">${_("Reset Password")}</a></span>
-          <form id="password_reset_form" method="post" data-remote="true" action="${reverse('password_reset')}">
-            <input id="id_email" type="hidden" name="email" maxlength="75" value="${user.email}" />
-            <!-- <input type="submit" id="pwd_reset_button" value="${_('Reset Password')}" /> -->
-          </form>
-        </li>
-        % endif
+
+
+
+          %if user.is_active ==1:
+                % if external_auth_map is None or 'shib' not in external_auth_map.external_domain:
+                <li class="controls--account">
+                  <span class="title"><div class="icon"></div><a href="#password_reset_complete" rel="leanModal" id="pwd_reset_button">${_("Reset Password")}</a></span>
+                  <form id="password_reset_form" method="post" data-remote="true" action="${reverse('password_reset')}">
+                    <input id="id_email" type="hidden" name="email" maxlength="75" value="${user.email}" />
+                    <!-- <input type="submit" id="pwd_reset_button" value="${_('Reset Password')}" /> -->
+                  </form>
+                </li>
+                % endif
+          %endif
 <!--
         <li class="control--appointment">
           <span class="title">
@@ -280,13 +285,20 @@
         % endfor
 
       </ul>
+
     % else:
       <section class="empty-dashboard-message">
         % if settings.FEATURES.get('COURSES_ARE_BROWSABLE'):
           <p>${_("Looks like you haven't registered for any courses yet.")}</p>
-          <a href="${marketing_link('COURSES')}">
-            ${_("Find courses now!")}
-          </a>
+             %if user.is_active ==1:
+                <a href="${marketing_link('COURSES')}">
+                 ${_("Find courses now!")}
+                </a>
+            %else:
+             <a href="#">
+               ${_("Find courses now!")}
+              </a>
+            %endif
         % else:
           <p>${_("Looks like you haven't been enrolled in any courses yet.")}</p>
         %endif
