@@ -1,8 +1,15 @@
-<% if (model.get('type') == 'Homework') { data = '家庭作业'}%>
-<% if (model.get('type') == 'Lab') { data = '实验'}%>
-<% if (model.get('type') == 'Midterm Exam') { data = '期中测验'}%>
-<% if (model.get('type') == 'Final Exam') { data = '期末测验'}%>
-<% if (model.get('type') !== 'Homework'&&model.get('type') !== 'Lab'&&model.get('type') !== 'Midterm Exam'&&model.get('type') !== 'Final Exam') { data =  model.get('type')}%>
+<% if(model.get('type') == 'Homework'){ %>
+<% data = '家庭作业' %>
+<%  }else if (model.get('type') == 'Lab'){ %>
+<%  data = '实验' %>
+<%  console.log('LLLLL') %>
+<%  }else if(model.get('type') == 'Midterm Exam'){ %>
+<%  data = '期中测验' %>
+<%  }else if(model.get('type') == 'Final Exam'){ %>
+<%  data = '期末测验' %>
+<%  }else{ %>
+<%  data = model.get('type') %>
+<% } %>
 
 <li class="field-group course-grading-assignment-list-item">
   <div class="field text" id="field-course-grading-assignment-name">
