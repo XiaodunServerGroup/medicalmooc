@@ -2316,6 +2316,116 @@ def confirm_email_change(request, key):
         raise
 
 
+
+
+@ensure_csrf_cookie
+def change_shortbio_request(request):
+    """ Log a request for a new name. """
+    if not request.user.is_authenticated:
+        raise Http404
+
+    try:
+        pnc = PendingNameChange.objects.get(user=request.user)
+    except PendingNameChange.DoesNotExist:
+        pnc = PendingNameChange()
+    pnc.user = request.user
+    pnc.rationale = request.POST['new_shortbio']
+    print pnc.rationale.encode('utf-8')
+    if len(pnc.rationale) < 1:
+        return JsonResponse({
+            "success": False,
+            "error": "请输入您的个人简介",
+        })  # TODO: this should be status code 400  # pylint: disable=fixme
+    pnc.save()
+
+    # The following automatically accepts name change requests. Remove this to
+    # go back to the old system where it gets queued up for admin approval.
+    accept_shortbio_change_by_id(pnc.id)
+
+    return JsonResponse({"success": True})
+
+
+def accept_shortbio_change_by_id(id):
+    try:
+        pnc = PendingNameChange.objects.get(id=id)
+    except PendingNameChange.DoesNotExist:
+        return JsonResponse({
+            "success": False,
+            "error": _('Invalid ID'),
+        })  # TODO: this should be status code 400  # pylint: disable=fixme
+
+    u = pnc.user
+    up = UserProfile.objects.get(user=u)
+
+    # Save old name
+    meta = up.get_meta()
+    if 'old_shortbios' not in meta:
+        meta['old_shortbios'] = []
+    meta['old_shortbios'].append([up.shortbio, pnc.rationale, datetime.datetime.now(UTC).isoformat()])
+    up.set_meta(meta)
+
+    up.shortbio = pnc.rationale
+    up.save()
+    pnc.delete()
+
+    return JsonResponse({"success": True})
+
+
+
+
+@ensure_csrf_cookie
+def change_picurl_request(request):
+    """ Log a request for a new name. """
+    if not request.user.is_authenticated:
+        raise Http404
+
+    try:
+        pnc = PendingNameChange.objects.get(user=request.user)
+    except PendingNameChange.DoesNotExist:
+        pnc = PendingNameChange()
+    pnc.user = request.user
+    pnc.new_name = request.POST['new_picurl']
+    if len(pnc.new_name) < 15:
+        return JsonResponse({
+            "success": False,
+            "error": _('Name required'),
+        })  # TODO: this should be status code 400  # pylint: disable=fixme
+    pnc.save()
+
+    # The following automatically accepts name change requests. Remove this to
+    # go back to the old system where it gets queued up for admin approval.
+    accept_picurl_change_by_id(pnc.id)
+
+    return JsonResponse({"success": True})
+
+
+def accept_picurl_change_by_id(id):
+    try:
+        pnc = PendingNameChange.objects.get(id=id)
+    except PendingNameChange.DoesNotExist:
+        return JsonResponse({
+            "success": False,
+            "error": _('Invalid ID'),
+        })  # TODO: this should be status code 400  # pylint: disable=fixme
+
+    u = pnc.user
+    up = UserProfile.objects.get(user=u)
+
+    # Save old name
+    # meta = up.get_meta()
+    # if 'old_picurls' not in meta:
+    #     meta['old_names'] = []
+    # meta['old_names'].append([up.picurl, pnc.rationale, datetime.datetime.now(UTC).isoformat()])
+    # up.set_meta(meta)
+
+    up.picurl = pnc.new_name
+    up.save()
+    pnc.delete()
+
+    return JsonResponse({"success": True})
+
+
+
 @ensure_csrf_cookie
 def change_name_request(request):
     """ Log a request for a new name. """
