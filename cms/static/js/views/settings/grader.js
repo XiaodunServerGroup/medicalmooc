@@ -50,8 +50,8 @@ var GraderView = ValidatingView.extend({
                 // overload the error display logic
                 this._cacheValidationErrors.push(event.currentTarget);
                 $(event.currentTarget).parent().append(
-                        this.errorTemplate({message : 'For grading to work, you must change all "' + this.oldName +
-                            '" subsections to "' + this.model.get('type') + '".'}));
+                        this.errorTemplate({message : '为了使评价功能正常, 你需要将所有 "' + this.oldName +
+                            '" 小节修改为 "' + this.model.get('type') + '".'}));
             }
             break;
         default:

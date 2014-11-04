@@ -18,7 +18,7 @@
 
   h1.logo {
     float: left;
-    margin: -7px 23px 0px 0px;
+    margin: -7px 23px 0px 2px;
     position: relative;
 
     a {
@@ -33,8 +33,8 @@
   ol {
     &.left {
       float: left;
-      margin-left: 49px;
-      margin-top: 19px;
+      margin-left: 47px;
+      margin-top: 17px;
     }
 
     &.guest {
@@ -43,7 +43,7 @@
 
     > li {
       @include inline-block;
-      margin-right: 35px;
+      margin-right: 34px;
       position: relative;
       vertical-align: middle;
 
@@ -295,7 +295,7 @@
 
   .nav-courseware {
     float: right;
-    margin-top: 15px;
+    margin-top: 18px;
     list-style: none;
     border: 1px solid #2883bc;
 

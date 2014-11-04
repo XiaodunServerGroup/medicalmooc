@@ -135,7 +135,8 @@
 
   // make overlay flat black since IE cant handle rgba
   #lean_overlay {
-    background: #000;
+    //background: #000;
+    background: transparent;
   }
 
   // active navigation
