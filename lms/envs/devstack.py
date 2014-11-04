@@ -13,6 +13,7 @@ CELERY_ALWAYS_EAGER = True
 TIME_ZONE = 'Asia/Shanghai'
 LANGUAGE_CODE = 'zh-cn'
 PLATFORM_NAME = ""
+SESSION_COOKIE_DOMAIN = ""
 ################################ LOGGERS ######################################
 
 import logging

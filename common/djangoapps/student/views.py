@@ -540,10 +540,6 @@ def signin_user(request):
     }
     return render_to_response('login.html', context)
 
-def common_header(request):
-    return render_to_response('common_header.html')
-
-
 @ensure_csrf_cookie
 def register_user(request, extra_context=None):
     """
@@ -1273,6 +1269,11 @@ def login_user(request, error=""):
             path='/', secure=None, httponly=None,
         )
 
+        response.set_cookie(
+            "logged_username", user.username, max_age=max_age,
+            expires=expires, domain=settings.SESSION_COOKIE_DOMAIN,
+            path='/', secure=None, httponly=None,
+        )
         return response
 
     if settings.FEATURES['SQUELCH_PII_IN_LOGS']:
@@ -1305,6 +1306,10 @@ def logout_user(request):
     response = redirect(target)
     response.delete_cookie(
         settings.EDXMKTG_COOKIE_NAME,
+        path='/', domain=settings.SESSION_COOKIE_DOMAIN,
+    )
+    response.delete_cookie(
+        'logged_username',
         path='/', domain=settings.SESSION_COOKIE_DOMAIN,
     )
     return response
@@ -2330,7 +2335,6 @@ def change_shortbio_request(request):
         pnc = PendingNameChange()
     pnc.user = request.user
     pnc.rationale = request.POST['new_shortbio']
-    print pnc.rationale.encode('utf-8')
     if len(pnc.rationale) < 1:
         return JsonResponse({
             "success": False,
