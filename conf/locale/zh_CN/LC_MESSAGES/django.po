@@ -900,7 +900,7 @@ msgid "Approved:"
 msgstr "通过"
 
 msgid "Are you staff on an existing Studio course?"
-msgstr "你的职员在上现有的 Studio 课程么？"
+msgstr "您在当前Studio上拥有课程吗？"
 
 msgid "Are you sure that you want to flag this submission?"
 msgstr "您确定要标记此次提交吗？"
