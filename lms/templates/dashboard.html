@@ -244,7 +244,7 @@
           <span class="title"><div class="icon picurl-icon"></div>头像 (<a href="#apply_picurl_change" rel="leanModal" class="edit-picurl">${_("edit")}</a>)</span>
             <span class="data">
                 %if user.profile.picurl:
-                <img src="${ user.profile.picurl | h }" width="70" height="70"/>
+                <img src="${ user.profile.picurl | h }" width="70" height="70" style="border-radius:50%;"/>
                 %else:
                 <img src="${static.url('images/noprofilepic.jpg')}" width="70" height="70"/>
                 %endif

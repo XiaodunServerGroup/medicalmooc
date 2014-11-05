@@ -1,95 +1,28 @@
-<%! from django.utils.translation import ugettext as _ %>
 
-<%! from django.core.urlresolvers import reverse %>
-<%inherit file="main.html" />
-<%namespace name='static' file='static_content.html'/>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="http://exam2013.ipmph.com/js/index.js"></script>
 
-<%! from microsite_configuration import microsite %>
+</head>
+<body>
+<script language="javascript" src="http://lms.pmphmooc.com/common/header.js">
+</script><link href="http://www.pmphmooc.com/css.css" rel="stylesheet" type="text/css">
 
-<%
-  homepage_overlay_html = microsite.get_value('homepage_overlay_html')
-
-  show_homepage_promo_video = microsite.get_value('show_homepage_promo_video', True)
-  homepage_promo_video_youtube_id = microsite.get_value('homepage_promo_video_youtube_id', "XNaiOGxWeto")
-
-  show_partners = microsite.get_value('show_partners', True)
-
-%>
-<script type="text/javascript" src="${static.url('js/index_lms.js')}"></script>
-<script language="text/javascript">
-function chkform(){
-    var addform= document.queryform;
-    if (addform.query.placeholder=="请输入关键字..."){
-        addform.query.value=""
-        return true;
-    }
-}
-</script>
-<section class="home">
-  <!--<header>-->
-    <!--<div class="outer-wrapper">-->
-      <!--<div class="title">-->
-        <!--<hgroup>-->
-          <!--% if homepage_overlay_html:-->
-            <!--${homepage_overlay_html}-->
-          <!--% else:-->
-            <!--% if self.stanford_theme_enabled():-->
-              <!--<h1>${_("Free courses from <strong>{university_name}</strong>").format(university_name="Stanford")}</h1>-->
-            <!--% else:-->
-              <!--<h1>${_("For anyone, anywhere, anytime")}</h1>-->
-            <!--% endif-->
-
-          <!--% endif-->
-            <!--<form name="queryform" class="search-container search" action="/courses" method="get" id="search-form" onsubmit="return chkform();">-->
-              <!--&lt;!&ndash;<input id="search-query" name="query" onfocus="if (value =='请输入关键字...'){value =''}" onblur="if (value ==''){value='请输入关键字...'}" value=""  type="text" width="340px">&ndash;&gt;-->
-              <!--<input id="search-query" name="query" onfocus="placeholder =''" value=""  onblur="placeholder='请输入关键字...'"  placeholder="请输入关键字..." type="text" width="340px">-->
-                 <!--<ul class="search-menu" style="display: none;">-->
-                 <!--</ul>-->
-              <!--<input value="搜索" type="submit">-->
-            <!--</form>-->
-        <!--</hgroup>-->
-
-        <!--## Disable social buttons for non-edX sites-->
-        <!--% if not self.theme_enabled():-->
-          <!--<section class="actions">-->
-            <!--<div class="main-cta">-->
-              <!--<a href="#signup-modal" id="signup_action" class="find-courses" rel="leanModal">${_("Sign Up")}</a>-->
-            <!--</div>-->
-
-            <!--<div class="secondary-actions">-->
-              <!--<div class="social-sharing">-->
-                <!--<div class="sharing-message">${_("Stay up to date with all {platform_name} has to offer!").format(platform_name=settings.PLATFORM_NAME)}</div>-->
-                <!--<a href="https://twitter.com/edXOnline" class="share">-->
-                  <!--<img src="${static.url('images/social/twitter-sharing.png')}">-->
-                <!--</a>-->
-                <!--<a href="http://www.facebook.com/EdxOnline" class="share">-->
-                  <!--<img src="${static.url('images/social/facebook-sharing.png')}">-->
-                <!--</a>-->
-                <!--<a href="https://plus.google.com/108235383044095082735/posts" class="share">-->
-                  <!--<img src="${static.url('images/social/google-plus-sharing.png')}">-->
-                <!--</a>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</section>-->
-          <!--% endif-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</header>-->
-
-  <!--banner begin-->
-    <div class="default_banner">
+<div class="default_banner">
         <div class="big-img" id="big-img">
-        	<img class="big_b1" src="static/images/banner1_02.jpg" style="opacity:1;z-index:1; filter:alpha(opacity:100)"></img>
-			<img class="big_b2" src="static/images/lobby_02.jpg" style="opacity:0;z-index:0; filter:alpha(opacity:100)"></img>
-			<img class="big_b3"  src="static/images/lobby_04.jpg" style="opacity:0;z-index:0; filter:alpha(opacity:100)"></img>
+        	<a href="#"><img class="big_b1" src="http://www.pmphmooc.com/statics/css/../medmooc_renweishe/banner1_02.jpg" style="opacity:1;z-index:1; filter:alpha(opacity:100)"></img></a>
+			<a href="#"><img class="big_b2" src="http://www.pmphmooc.com/statics/css/../medmooc_renweishe/lobby_02.jpg" style="opacity:0;z-index:0; filter:alpha(opacity:100)"></img></a>
+			<a href="#"><img class="big_b3"  src="http://www.pmphmooc.com/statics/css/../medmooc_renweishe/lobby_04.jpg" style="opacity:0;z-index:0; filter:alpha(opacity:100)"></img></a>
         </div>
       	<div class="small">
                 <ul class="small_m">
                       <div class="s_pre" id="prevBtn"></div>
                       <div class="scroll_pic" id="tab-btn">
-                   		<li><img class="cls" src="static/images/index3_07.png" /></li>
-                        <li><img src="static/images/index3_07.png"  alt=""/></li>
-                        <li><img src="static/images/index3_07.png"  alt=""/></li>
+                   		<li><img class="cls" src="http://www.pmphmooc.com/statics/css/../medmooc_renweishe/index3_07.png" /></li>
+                        <li><img src="http://www.pmphmooc.com/statics/css/../medmooc_renweishe/index3_07.png"  alt=""/></li>
+                        <li><img src="http://www.pmphmooc.com/statics/css/../medmooc_renweishe/index3_07.png"  alt=""/></li>
                       </div>
                       <div class="s_next" id="nextBtn"></div>
                 </ul>
@@ -97,57 +30,582 @@ function chkform(){
     </div>
 	<!--banner end-->
 
-  <section class="container">
-    <section class="highlighted-courses">
-
-      % if settings.FEATURES.get('COURSES_ARE_BROWSABLE'):
-        <section class="courses">
-            <ul class="courses-listing">
-            %for course in courses:
-              <li class="courses-listing-item">
-                <%include file="course.html" args="course=course" />
-              </li>
-            %endfor
+<!--content begin-->
+<div class="content5" style="background: #fff;">
+    <div class="wrapper">
+    	<section>
+    	<div class="title_mooc">
+            <h2>慕课</h2>
+            <ul class="nav" id="tabss">
+                <li><a id="current" name="#tab1" href="#">热门课程</a></li>/
+                <li><a name="#tab2" href="#">最近开课</a></li>/
+                <li><a name="#tab3" href="#">最新预告</a></li>
             </ul>
-        </section>
-      % endif
+        </div>
+		<!--tab menu end-->
 
-    </section>
-  </section>
-</section>
+         <!--board begin-->
+		<div id="content">
+			<!--content1 begin-->
+			<div id="tab1" class="content3">
+            	<ul class="ul_list">
 
-<!--alliance_members begin-->
-<section class="alliance_members">
-  <div class="wrapper_list">
-   	  <h2>
-        	<span>联盟成员</span>
-            <a href="#"><img src="static/images/index_03.png" width="24" height="6"  alt=""/></a>
-      </h2>
-      <ul>
-   	    <li class="one"><a href="#"><img src="static/images/index_07.jpg" width="223" height="223"  alt=""/></a></li>
-          <li><a href="#"><img src="static/images/index_09.jpg"   alt=""/></a></li>
-          <li><a href="#"><img src="static/images/index_11.jpg"   alt=""/></a></li>
-          <li><a href="#"><img src="static/images/index_13.jpg"   alt=""/></a></li>
-          <li><a href="#"><img src="static/images/index_15.jpg"  alt=""/></a></li>
-          <li><a href="#"><img src="static/images/index_20.jpg"   alt=""/></a></li>
-          <li><a href="#"><img src="static/images/index_21.jpg"   alt=""/></a></li>
-          <li><a href="#"><img src="static/images/index_23.jpg"   alt=""/></a></li>
-          <li><a href="#"><img src="static/images/index_24.jpg"   alt=""/></a></li>
-      </ul>
-    </div>
-</section>
-<!--alliance_members end-->
+                	
+<li>
+                    	<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="机械原理">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025063443424.jpg" width="275" height="152"  alt="机械原理"/>
+                                <h4>机械原理</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>黄霞老师</h2>
+                                     </div><p><p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">MIT 环境学院 教授</span></font></font></p>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei" size="2">老师的介绍</font>　　</p>
+</p> </div>
+                               
+                           
+                    	</a>
+                    </li>
 
-<!--section id="video-modal" class="modal home-page-video-modal video-modal">
-  <div class="inner-wrapper">
-    <%
-      youtube_video_id = homepage_promo_video_youtube_id
-      if self.stanford_theme_enabled():
-        youtube_video_id = "2gmreZObCY4"
-    %>
-    <iframe width="640" height="360" src="//www.youtube.com/embed/${youtube_video_id}?showinfo=0" frameborder="0" allowfullscreen></iframe>
+
+
+
+<li>
+                    	<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="水利工程">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025060803414.jpg" width="275" height="152"  alt="水利工程"/>
+                                <h4>水利工程</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>李丽</h2>
+                                     </div><p><span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">北京大学 环境学院 讲师</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</span></font></font></p>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">水处理工程</span></font></font></p>
+</p> </div>
+                               
+                           
+                    	</a>
+                    </li>
+
+
+
+
+<li>
+                    	<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="高等数学">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025060908485.jpg" width="275" height="152"  alt="高等数学"/>
+                                <h4>高等数学</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>王华</h2>
+                                     </div><p><p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">人民大学 数学学院 讲师<br />
+<br />
+数学是讲究数量结构变化空间以及信息等概念的一门学科,从某种角度看属于形式科学的一种.</span></font></font><br />
+&nbsp;</p>
+　</p> </div>
+                               
+                           
+                    	</a>
+                    </li>
+
+
+
+
+<li>
+                    	<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="国际金融">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025061000805.jpg" width="275" height="152"  alt="国际金融"/>
+                                <h4>国际金融</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>张永</h2>
+                                     </div><p><span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">北京交通大学 外语学院 教授</span>
+<p style="margin-bottom: 0in">主修外语,第二语言日语</p>
+<p style="margin-bottom: 0in">&nbsp;</p>
+</p> </div>
+                               
+                           
+                    	</a>
+                    </li>
+
+
+
+
+<li>
+                    	<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="数据结构">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025061049520.jpg" width="275" height="152"  alt="数据结构"/>
+                                <h4>数据结构</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>刘路</h2>
+                                     </div><p>　<span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">清华大学 计算机学院 教授</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">计算机导论、数据结构等课程,讲述编程算法.</span></font></font></p>
+<p style="margin-bottom: 0in">&nbsp;</p>
+</p> </div>
+                               
+                           
+                    	</a>
+                    </li>
+
+
+
+
+<li>
+                    	<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="文献管理与信息分析">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025061109434.jpg" width="275" height="152"  alt="文献管理与信息分析"/>
+                                <h4>文献管理与信息分析</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>刘洋</h2>
+                                     </div><p>　山西<span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">大学 环境学院 教授</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</span></font></font></p>
+<p style="margin-bottom: 0in">&nbsp;</p>
+</p> </div>
+                               
+                           
+                    	</a>
+                    </li>
+
+
+
+
+<li>
+                    	<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="人文学">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025061948393.jpg" width="275" height="152"  alt="人文学"/>
+                                <h4>人文学</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>赵杰</h2>
+                                     </div><p>　北京<span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">大学 人文学院 教授</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei" size="2">人文就是人类文化中的先进部分和核心部分,及先进的价值观及其规范</font></p>
+</p> </div>
+                               
+                           
+                    	</a>
+                    </li>
+
+
+
+
+<li>
+                    	<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="云计算">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025061450323.jpg" width="275" height="152"  alt="云计算"/>
+                                <h4>云计算</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>孙梦</h2>
+                                     </div><p>　北京<span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">大学 环境学院 教授</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</span></font></font></p>
+<p style="margin-bottom: 0in">&nbsp;</p>
+</p> </div>
+                               
+                           
+                    	</a>
+                    </li>
+
+
+
+                </ul>
+            </div>
+            <div id="tab2" class="content3">
+            	<ul class="ul_list">
+               <li>
+<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="云计算">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025063155717.jpg" width="275" height="152"  alt="云计算"/>
+                                <h4>云计算</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>纪录片 之旅</h2>
+                                     </div><p>　<span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">清华大学 环境学院 教授</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</span></font></font></p>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">水处理工程</span></font></font></p>
+</p> </div>
+                               
+                           
+                    	</a>
+</li>
+<li>
+<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="国际金融">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025063218298.jpg" width="275" height="152"  alt="国际金融"/>
+                                <h4>国际金融</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>刘洋</h2>
+                                     </div><p>　<span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">清华大学 环境学院 教授</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</span></font></font></p>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">水处理工程</span></font></font></p>
+</p> </div>
+                               
+                           
+                    	</a>
+</li>
+<li>
+<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="纪录片之旅">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/thumb_398_234_20141025062301115.jpg" width="275" height="152"  alt="纪录片之旅"/>
+                                <h4>纪录片之旅</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>纪录片 之旅</h2>
+                                     </div><p>　<span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">清华大学 环境学院 教授</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</span></font></font></p>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">水处理工程</span></font></font></p>
+</p> </div>
+                               
+                           
+                    	</a>
+</li>
+<li>
+<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="纪录片之旅">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025063038788.jpg" width="275" height="152"  alt="纪录片之旅"/>
+                                <h4>纪录片之旅</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>纪录片 之旅</h2>
+                                     </div><p>　<span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">清华大学 环境学院 教授</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</span></font></font></p>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">水处理工程</span></font></font></p>
+</p> </div>
+                               
+                           
+                    	</a>
+</li>
+<li>
+<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="纪录片之旅">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025062152258.jpg" width="275" height="152"  alt="纪录片之旅"/>
+                                <h4>纪录片之旅</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>纪录片 之旅</h2>
+                                     </div><p>　<span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">清华大学 环境学院 教授</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</span></font></font></p>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">水处理工程</span></font></font></p>
+</p> </div>
+                               
+                           
+                    	</a>
+</li>
+<li>
+<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="纪录片之旅">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025061948393.jpg" width="275" height="152"  alt="纪录片之旅"/>
+                                <h4>纪录片之旅</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>纪录片 之旅</h2>
+                                     </div><p>　<span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">清华大学 环境学院 教授</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</span></font></font></p>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">水处理工程</span></font></font></p>
+</p> </div>
+                               
+                           
+                    	</a>
+</li>
+<li>
+<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="纪录片之旅">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025062051558.jpg" width="275" height="152"  alt="纪录片之旅"/>
+                                <h4>纪录片之旅</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>纪录片 之旅</h2>
+                                     </div><p>　<span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">清华大学 环境学院 教授</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</span></font></font></p>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">水处理工程</span></font></font></p>
+</p> </div>
+                               
+                           
+                    	</a>
+</li>
+<li>
+<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="纪录片之旅">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025063443424.jpg" width="275" height="152"  alt="纪录片之旅"/>
+                                <h4>纪录片之旅</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>纪录片 之旅</h2>
+                                     </div><p>　<span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">清华大学 环境学院 教授</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</span></font></font></p>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">水处理工程</span></font></font></p>
+</p> </div>
+                               
+                           
+                    	</a>
+</li>
+                  
+                </ul>
+            </div>
+            <div id="tab3" class="content3">
+            	<ul class="ul_list">
+                	<li>
+<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="云计算">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025063155717.jpg" width="275" height="152"  alt="云计算"/>
+                                <h4>云计算</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>纪录片 之旅</h2>
+                                     </div><p>　<span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">清华大学 环境学院 教授</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</span></font></font></p>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">水处理工程</span></font></font></p>
+</p> </div>
+                               
+                           
+                    	</a>
+</li>
+<li>
+<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="国际金融">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025062858763.jpg" width="275" height="152"  alt="国际金融"/>
+                                <h4>国际金融</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>纪录片 之旅</h2>
+                                     </div><p>　<span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">清华大学 环境学院 教授</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</span></font></font></p>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">水处理工程</span></font></font></p>
+</p> </div>
+                               
+                           
+                    	</a>
+</li>
+<li>
+<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="人文学">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025062301115.jpg" width="275" height="152"  alt="人文学"/>
+                                <h4>人文学</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>纪录片 之旅</h2>
+                                     </div><p>　<span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">清华大学 环境学院 教授</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</span></font></font></p>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">水处理工程</span></font></font></p>
+</p> </div>
+                               
+                           
+                    	</a>
+</li>
+<li>
+<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="人文学">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025061948393.jpg" width="275" height="152"  alt="人文学"/>
+                                <h4>人文学</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>纪录片 之旅</h2>
+                                     </div><p>　<span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">清华大学 环境学院 教授</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</span></font></font></p>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">水处理工程</span></font></font></p>
+</p> </div>
+                               
+                           
+                    	</a>
+</li>
+<li>
+<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="纪录片之旅">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025063038788.jpg" width="275" height="152"  alt="纪录片之旅"/>
+                                <h4>纪录片之旅</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>纪录片 之旅</h2>
+                                     </div><p>　<span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">清华大学 环境学院 教授</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</span></font></font></p>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">水处理工程</span></font></font></p>
+</p> </div>
+                               
+                           
+                    	</a>
+</li>
+<li>
+<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="云计算2">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025061450323.jpg" width="275" height="152"  alt="云计算2"/>
+                                <h4>云计算2</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>纪录片 之旅</h2>
+                                     </div><p>　<span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">清华大学 环境学院 教授</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</span></font></font></p>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">水处理工程</span></font></font></p>
+</p> </div>
+                               
+                           
+                    	</a>
+</li>
+<li>
+<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="纪录片之旅">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025062152258.jpg" width="275" height="152"  alt="纪录片之旅"/>
+                                <h4>纪录片之旅</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>纪录片 之旅</h2>
+                                     </div><p>　<span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">清华大学 环境学院 教授</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</span></font></font></p>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">水处理工程</span></font></font></p>
+</p> </div>
+                               
+                           
+                    	</a>
+</li>
+<li>
+<a href="http://lms.pmphmooc.com/courses/%E6%9C%BA%E6%9E%84/cs1023/2014-10/about" title="国际金融">
+                            <div class="img">
+                                <img src="http://www.pmphmooc.com/uploadfile/2014/1025/20141025062051558.jpg" width="275" height="152"  alt="国际金融"/>
+                                <h4>国际金融</h4>
+                                
+                            </div>
+                            <div class="text_con3">
+                            	<div class="text_con3_title">
+                                	
+									<h2>纪录片 之旅</h2>
+                                     </div><p>　<span style="font-size: 10pt; font-family: 'WenQuanYi Zen Hei';">清华大学 环境学院 教授</span>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</span></font></font></p>
+<p style="margin-bottom: 0in"><font face="WenQuanYi Zen Hei"><font style="font-size: 10pt"><span lang="zh-CN">水处理工程</span></font></font></p>
+</p> </div>
+                               
+                           
+                    	</a>
+</li>
+                </ul>
+            </div>
+        </div>
+	</section>
   </div>
-</section>-->
+</div>
+<div class="content2">
+
+    <iframe src="http://exam2013.ipmph.com/" frameborder="0" height="888" scrolling="no" id="tabs" style="margin:0 auto;width: 100%;"></iframe>
+
+</div>
+<!--content end-->
+
+<script>
+    function resetTabs(){
+        $("#content > div").hide(); //Hide all content
+        $("#tabss a").attr("id",""); //Reset id's      
+    }
+
+    var myUrl = window.location.href; //get URL
+    var myUrlTab = myUrl.substring(myUrl.indexOf("#")); // For localhost/tabs.html#tab2, myUrlTab = #tab2     
+    var myUrlTabName = myUrlTab.substring(0,4); // For the above example, myUrlTabName = #tab
+
+    (function(){
+        $("#content > div").hide(); // Initially hide all content
+        $("#tabss li:first a").attr("id","current"); // Activate first tab
+        $("#content > div:first").fadeIn(); // Show first tab content
+        
+        $("#tabss a").on("click",function(e) {
+            e.preventDefault();
+            if ($(this).attr("id") == "current"){ //detection for current tab
+             return       
+            }
+            else{             
+            resetTabs();
+            $(this).attr("id","current"); // Activate this
+            $($(this).attr('name')).fadeIn(); // Show content for current tab
+            }
+        });
+
+        for (i = 1; i <= $("#tabss li").length; i++) {
+          if (myUrlTab == myUrlTabName + i) {
+              resetTabs();
+              $("a[name='"+myUrlTab+"']").attr("id","current"); // Activate url tab
+              $(myUrlTab).fadeIn(); // Show url tab content        
+          }
+        }
+    })()
+  </script>
+
+
+<!--footer begin-->
+<footer>
+    <div class="wrapper">
+      <p> 版权所有 人民卫生出版社有限公司</p>
+    </div>
+</footer>
+<!--footer end-->
+</body>
+</html>
 
 <%block name="js_extra">
    <script type="text/javascript">
@@ -158,64 +616,3 @@ function chkform(){
       })
    </script>
 </%block>
-
-% if show_signup_immediately is not UNDEFINED:
-  ## NOTE: This won't work in production, because anonymous views are cached, so it will
-  ## show either with or without this extra js for 3 minutes at a time.
-<script type="text/javascript">
-  $(window).load(function() {$('#signup_action').trigger("click");});
-</script>
-% endif
-
-<style type="text/css">
-    .default_banner {width:100%; margin:0; padding:0; background:#FFFFFF; position:relative; height:524px;}
-	.default_banner .big_b1 {position:absolute; top:0; left:0; width:100%; background: url(01.jpg) center top no-repeat; height:524px;}
-	.default_banner .big_b2 {position:absolute; top:0; left:0; width:100%; background: url(02.jpg) center top no-repeat; height:524px;}
-	.default_banner .big_b3 {position:absolute; top:0; left:0; width:100%; background: url(03.jpg) center top no-repeat; height:524px;}
-	.default_banner .small { width:100%; height:89px; position:absolute; z-index:999; top:200px; left:0;}
-	.default_banner .small .small_m {margin:auto; width:1003px; position:relative;list-style-type:none;}
-	.default_banner .small .small_m .s_pre { position:absolute; left:0; top:1px; background: url(static/images/prev_03.png) center center no-repeat; width:65px; height:65px; cursor:pointer;}
-	.default_banner .small .small_m .s_pre:hover {background: url(static/images/prev_03_1.png) repeat scroll 0 0 rgba(0, 0, 0, 0);}
-	.default_banner .small .small_m .s_next { position:absolute; right:0; top:1px; background: url(static/images/next_03.png) center center no-repeat; width:65px; height:65px; cursor:pointer;}
-	.default_banner .small .small_m .s_next:hover {background: url(static/images/next_03_1.png) repeat scroll 0 0 rgba(0, 0, 0, 0);}
-	.default_banner .small .small_m .scroll_pic {position:absolute; left:420px; top:250px;}
-	.default_banner .small .small_m .scroll_pic li {background:none; cursor: pointer; float: left; height:17px; width: 17px; margin:5px 0 0 30px;}
-	.default_banner .small .small_m .scroll_pic li img {opacity: 0.7;}
-	.default_banner .small .small_m .scroll_pic li:hover img, .scroll_pic li:hover {opacity: 1;}
-	.default_banner .small .small_m .scroll_pic li img.cls {background:#72add3; border-radius:50%; opacity:1;}
-
-
-    .content5{float:left; width:100%; background:#fbfbfb;}
-.title_mooc{width:100%;font-size:24px; padding:20px 0;}
-.title_mooc h2{width:30%; display:inline-block; font-weight:normal;}
-.title_mooc .nav{width:69%; display:inline-block; text-align:right; color:#c0c0c0; cursor:pointer;}
-.title_mooc .nav li{padding:5px; margin-left:5px; display:inline-block; font-weight:400;}
-.title_mooc .nav li a{color:#c0c0c0}
-.title_mooc .nav li #current{color:#333;}
-.title_mooc .nav li a.click{color:#333;}
-.ul_list{padding:0; margin:0; width:985px;}
-.ul_list li{width:221px; height:200px; display:inline-block; margin-right:25px; margin-bottom:25px; float:left;}
-.ul_list li h4{padding:10px 0; color:#161616; font-size:15px; font-weight:bold;}
-.ul_list li a{ cursor:pointer; position:relative; width:100%; display:block;}
-
-.ul_list li a:hover{ }
-.ul_list li a .img{width:221px; height:200px; backface-visibility: hidden; left: 0; opacity: 1; position: absolute; top: 0; transform:rotateY(0deg); transition:transform 0.8s ease 0s, opacity 0.8s ease 0s;}
-.ul_list li a:hover .img{opacity:0; transform:rotateY(180deg)}
-.ul_list li a .text_con3{ backface-visibility: hidden; background: none repeat scroll 0 0 #f4f4f4; color:#555; left: 0; opacity: 0; position: absolute; top: 0; transform: rotateY(-180deg); transition: transform 0.8s ease 0s, opacity 0.8s ease 0s; height:180px; width:201px; padding:10px;}
-.ul_list li a:hover .text_con3{opacity:1; transform:rotateY(0deg);}
-.text_con3_title{padding-bottom:20px;}
-.text_con3_title img{float:left; border-radius:50%; width:50px; height:50px; margin-right:10px;}
-.ul_list li a .text_con3 h3{padding-top:10px; font-size:15px;}
-
-.ul_list li p span{color:#868686!important; font-size:13px;}
-.ul_list li p span.left{margin-right:20px;}
-.ul_list li p span.right{float:right;}
-
-.alliance_members{background:#eef8ff; width:100%; height:350px; margin-bottom:50px; float:left;}
-.alliance_members h2{color:#333; font-size:24px; padding:20px 0; font-weight:normal;}
-.alliance_members h2 a{float:right;}
-.alliance_members ul{width:973px; padding:0!important; float:left;}
-.alliance_members li{float:left;width:171px; margin-right:13px; margin-bottom:13px; display:inline-block;}
-.alliance_members li.one{width:223px!important;}
-    .wrapper_list{margin:0 auto; width:960px;}
-</style>
