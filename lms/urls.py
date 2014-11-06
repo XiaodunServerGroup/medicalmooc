@@ -19,8 +19,6 @@ urlpatterns = ('',  # nopep8
     url(r'^login_failure_count$', 'student.views.login_failure_count', name='login_failure_count'),
     url(r'^register$', 'student.views.register_user', name="register_user"),
 
-    url(r'^common/header$', 'student.views.common_header', name='common_header'),
-
     url(r'^admin_dashboard$', 'dashboard.views.dashboard'),
 
     url(r'^lead/courses$', 'student.views.lead_courses', name='lead_courses'),
@@ -47,19 +45,6 @@ urlpatterns = ('',  # nopep8
     url(r'^logout$', 'student.views.logout_user', name='logout'),
     url(r'^create_account$', 'student.views.create_account', name='create_account'),
     url(r'^activate/(?P<key>[^/]*)$', 'student.views.activate_account', name="activate"),
-
-    # sync account from BS
-    url(r'^bs/sync/accounts$', 'student.views.bs_sync_accounts', name='bs_sync_accounts'),
-    url(r'^bs/user/(?P<user_id>\d+)/role/(?P<profile_role>(st|th))/changed$', 'student.views.bs_change_profle_role', name='bs_change_profle_role'),
-    url(r'^bs/sync/ban/account/(?P<user_id>[^/]*)$', 'student.views.bs_ban_account', name='bs_sync_accounts'),
-    url(r'^bs/recv/student/(?P<student_id>\d+)/courses/gradebook/(?P<ptype>(all|pass|fail))', 'student.views.bs_recv_grade', name='bs_recv_grade'),
-
-    # login user with sso, user from guoshi
-    url(r'^sso/user/guoshi/desencrypt/auth_login', 'student.views.des_auth_login', name='des_auth_login'),
-    url(r'^sso/user/guoshi/desencrypt/ajax_login_user$', 'student.views.login_user_with_guoshi_account', name='login_user_with_guoshi_account'),
-
-    # class appointment
-    url(r'^sync/class/appointment$', 'student.views.sync_class_appointment', name='sync_class_appointment'),
 
     url(r'^password_reset/$', 'student.views.password_reset', name='password_reset'),
     ## Obsolete Django views for password resets
@@ -128,7 +113,12 @@ urlpatterns += (
     url(r'^404$', 'static_template_view.views.render',
         {'template': '404.html'}, name="404"),
 )
-
+urlpatterns += (
+    url(r'^common/header.html$', 'static_template_view.views.render',
+        {'template': 'common_header.html'}, name="common_header"),
+    url(r'^common/header.js$', 'static_template_view.views.render',
+        {'template': 'common_header_barjs.html'}, name="common_header_barjs"),
+)
 # Semi-static views only used by edX, not by themes
 if not settings.FEATURES["USE_CUSTOM_THEME"]:
     urlpatterns += (

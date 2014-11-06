@@ -34,7 +34,7 @@
     &.left {
       float: left;
       margin-left: 47px;
-      margin-top: 17px;
+      margin-top: 18px;
     }
 
     &.guest {
@@ -43,7 +43,7 @@
 
     > li {
       @include inline-block;
-      margin-right: 34px;
+      margin-right: 35px;
       position: relative;
       vertical-align: middle;
 

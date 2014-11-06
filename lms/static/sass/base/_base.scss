@@ -68,7 +68,7 @@ p {
 
     &:hover, &:focus {
       color: $link-color;
-      text-decoration: underline;
+      text-decoration: none;
     }
   }
 }
@@ -80,7 +80,7 @@ a:link, a:visited {
   @include transition(all 0.1s linear 0s);
 
   &:hover, &:focus {
-    text-decoration: underline;
+    text-decoration: none;
   }
 
   &:disabled, &.is-disabled, &.disabled {

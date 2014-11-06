@@ -544,7 +544,7 @@ function goto( mode)
       </li>
 
       <li class="field">
-        <label>Message:</label>
+        <label>内容:</label>
         <div class="email-editor">
           ${editor}
         </div>
@@ -571,17 +571,17 @@ function goto( mode)
         var emailEditor = XBlock.initializeBlock($('.xblock-studio_view'));
         document.idashform.onsubmit = function() {
           this.message.value = emailEditor.save()['data'];
+          if (this.subject.value == ''){
+            alert("邮件主题不能为空")
+            return false;
+          }else if (this.message.value == ''){
+            alert("邮件内容不能为空")
+            return false;
+          }
           return true;
         }
       });
     </script>
-
-    <br />
-    <p>这些邮件发送状态信息在后台运行，已经发送的邮件不能取消，下表列表是邮件发送状态，查看邮件发送信息状态，点击下面按钮:
-    </p>
-    <p>
-      <input type="submit" onclick="this.value='Show Background Email Task History'" name="action" value="显示后台邮件状态信息">
-    </p>
 %endif
 
 ##-----------------------------------------------------------------------------
