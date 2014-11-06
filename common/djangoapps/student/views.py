@@ -1931,6 +1931,8 @@ def create_account(request, post_override=None):
 
     dog_stats_api.increment("common.student.account_created")
 
+    logout(request)
+
     response = JsonResponse({
         'success': True,
         'redirect_url': try_change_enrollment(request),
