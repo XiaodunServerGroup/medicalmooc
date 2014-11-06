@@ -219,14 +219,14 @@
 
 
                         % for n in range(0, len(course_team)):
-                        <a class="m-btn" href="#">
+                        <div class="m-btn" href="#">
                             %if course_team[n]['pic']:
                                 <img src="${course_team[n]['pic']}" width="80" height="80"  alt=""/>
                             %else:
                                 <img src="${static.url('images/noprofilepic.jpg')}" width="80" height="80"/>
                             %endif
 							<div class="cnt f-fl">
-                        <li>
+                        <li style="list-style-type:none">
                 				<h3>${course_team[n]['name']}</h3>
                             %if course_team[n]['shortbio']:
                                 <span id="shou">展开&nbsp;∨</span>
@@ -237,7 +237,7 @@
 
                         </li>
               				</div>
-                        </a>
+                        </div>
                         % endfor
 
                     </div>
