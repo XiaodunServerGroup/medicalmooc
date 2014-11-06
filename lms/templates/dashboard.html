@@ -246,7 +246,7 @@
                 %if user.profile.picurl:
                 <img src="${ user.profile.picurl | h }" width="70" height="70" style="border-radius:50%;"/>
                 %else:
-                <img src="${static.url('images/noprofilepic.jpg')}" width="70" height="70"/>
+                <img src="${static.url('images/noprofilepic.jpg')}" width="70" height="70" style="border-radius:50%;"/>
                 %endif
 
             </span>
