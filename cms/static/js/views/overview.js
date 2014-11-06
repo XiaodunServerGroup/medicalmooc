@@ -110,6 +110,7 @@ define(["domReady", "jquery", "jquery.ui", "underscore", "gettext", "js/views/fe
                     saving.hide();
                     closeModalNew();
                 });
+        alert("您已修改发布时间");
         location.reload();
         };
 
