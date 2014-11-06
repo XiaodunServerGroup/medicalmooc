@@ -218,11 +218,19 @@
                         <h4>授课老师</h4>
 
 
-                        % for name in course_team:
+                        % for n in range(0, len(course_team)):
                         <a class="m-btn" href="#">
+                            %if course_team[n]['pic']:
+                                <img src="${course_team[n]['pic']}" width="80" height="80"  alt=""/>
+                            %else:
+                                <img src="${static.url('images/noprofilepic.jpg')}" width="80" height="80"/>
+                            %endif
 							<div class="cnt f-fl" style="margin-left:40px">
                         <li>
-                				<h2>${name}</h2>
+                				<h2>${course_team[n]['name']}</h2>
+                            <span id="shou">展开&nbsp;∨</span>
+                				<div class="p1" style="display:none;">${course_team[n]['shortbio']}</div>
+
                         </li>
               				</div>
                         </a>
@@ -309,9 +317,7 @@
         top: 50%;
         width: 80px;
     }
-    div {
-        display: block;
-    }
+
         .play-intro::after{
             color: rgba(255,255,255,0.8);
             content: "\25B6";
@@ -323,13 +329,29 @@
             position: relative;
             text-shadow: 0 -1px rgba(0,0,0,0.8);
             top: 50%;
-            text-decoration: none;
+
        }
 
-    a:hover, a:active {
-        /* color: #2883bc; */
-        color: #666;
-        text-decoration: none;
-    }
+    .content .container .section_right .m-btnList{ float:left; width:100%;}
+	.content .container .section_right .m-btnList .m-btn:hover{float:left; background:#f6f6f6; color:#505050;}
+	.f-fl{ width:180px; float:left; }
+    .f-fl span{ cursor:pointer; color:#58bfff; color:#ff7f00; font-size:12px; margin-top:10px; display:block;}
+    .p1{ line-height:20px; font-size:12px;}
+
 
 </style>
+<script>
+	$(function (){
+			$("#shou").toggle(
+				function(){
+						$(this).siblings(".p1").attr("style","display:block");
+						$(this).addClass("");
+						document.getElementById("shou").innerHTML="收缩&nbsp;∧";
+					},
+				function (){
+						$(this).siblings(".p1").attr("style","display:none")
+						document.getElementById("shou").innerHTML="展开&nbsp;∨";
+					}
+			)
+	})
+</script>

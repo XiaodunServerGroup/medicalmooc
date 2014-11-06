@@ -1067,7 +1067,7 @@
             dialog.className = "wmd-prompt-dialog";
             dialog.style.padding = "10px;";
             dialog.style.position = "fixed";
-            dialog.style.width = "400px";
+            dialog.style.width = "360px";
             dialog.style.zIndex = "1001";
 
             // The dialog text.

@@ -1032,7 +1032,11 @@ def course_about(request, course_id):
     # course team
     course_team = [];
     for user in CourseStaffRole(course.location).users_with_role():
-        course_team.append(UserProfile.objects.get(user_id=User.objects.get(username=user).id).name)
+        course_team.append({
+            'name': UserProfile.objects.get(user_id=User.objects.get(username=user).id).name,
+            'pic': UserProfile.objects.get(user_id=User.objects.get(username=user).id).picurl,
+            'shortbio': UserProfile.objects.get(user_id=User.objects.get(username=user).id).shortbio
+        })
 
     return render_to_response('courseware/course_about.html',
                               {'course': course,
