@@ -1069,6 +1069,7 @@
             dialog.style.position = "fixed";
             dialog.style.width = "360px";
             dialog.style.zIndex = "1001";
+            dialog.style.border = "1px solid #333";
 
             // The dialog text.
             var question = doc.createElement("div");
