@@ -742,7 +742,8 @@ def instructor_dashboard(request, course_id):
     # email
 
     # elif action == 'Send email':
-    elif action == '发送邮件':
+    elif action == 'Send email':
+        print '----------------debug------------------------------'
         email_to_option = request.POST.get("to_option")
         email_subject = request.POST.get("subject")
         html_message = request.POST.get("message")
