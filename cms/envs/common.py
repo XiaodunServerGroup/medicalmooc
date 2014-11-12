@@ -575,10 +575,6 @@ else:
     INSTALLED_APPS += ('edx_jsdraw',)
 
 
-############## SSO KEY ################
-SSO_KEY = "SSOFOUNDER"
-
-
 ############## user auth ##############
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.UnsaltedMD5PasswordHasher',
@@ -590,15 +586,6 @@ PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.UnsaltedSHA1PasswordHasher',  
     'django.contrib.auth.hashers.CryptPasswordHasher'
 )
-
-############## SSO KEY ################
-SSO_KEY = "SSOFOUNDER"
-
-############## BUSINESS SYSTEM #################
-XIAODUN_BACK_HOST = 'http://busi.xiaodun.cn/app'
-
-############## video mettings ##################
-VEDIO_MEETING_DOMAIN = "http://passport.guoshi.com/mp"
 
 ############## wenjuan domain ##################
 WENJUAN_DOMAIN = "http://apitest.wenjuan.com:8000"

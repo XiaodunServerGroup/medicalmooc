@@ -93,7 +93,7 @@ __all__ = ['course_info_handler', 'course_handler', 'course_info_update_handler'
            'calendar_common_updateevent',
            'calendar_settings_getevents',
            'textbooks_list_handler',
-           'textbooks_detail_handler', 'course_audit_api', 'sync_class_appointment', 'institution_upload_teacher', 'remove_institute_teacher']
+           'textbooks_detail_handler', 'course_audit_api', 'institution_upload_teacher', 'remove_institute_teacher']
 
 WENJUAN_STATUS = {
     "0": "未发布",
@@ -127,58 +127,6 @@ def _get_institute(curr_user):
     print course_org.encode('utf-8')
 
     return course_org
-
-def _get_course_org_from_bs(user):
-    course_org = ""
-    try:
-        request_host = settings.XIAODUN_BACK_HOST
-        # request_url = request_host + "/teacher/teacher!branch.do?teacherid=" + str(user.id)
-        request_url = "{}/teacher/teacher!branch.do?teacherid={}".format(request_host, str(user.id))
-
-        timeout = 5
-        socket.setdefaulttimeout(timeout)
-        req = urllib2.Request(request_url)
-        request_json = json.load(urllib2.urlopen(req))
-
-        if request_json['success']:
-            course_org = request_json['name']
-    except:
-        print "some errors occur!"
-
-    return course_org
-
-
-@login_required
-def sync_class_appointment(request):
-    """
-    Synchronous classroom Appointment
-    """
-    user = request.user
-
-    # load settings viedio meeting domain
-    video_meeting_domain = settings.VEDIO_MEETING_DOMAIN  # "http://192.168.1.6:8091"
-
-    # des encrypt user info for login into video meetting sys
-    '''
-    pad = lambda s: s + (8 - len(s) % 8) * chr(8 - len(s) % 8)
-    def des_encrypt(input_str):
-        obj = DES.new(secure_key(KEY), DES.MODE_ECB)
-
-        return base64.b64encode(obj.encrypt(pad(input_str)))
-
-    des_user_info = des_encrypt(user.username + "#" + user.password)
-    '''
-
-    des_user_info = 'gwRz4rZHXMtbbPORcrVTgjnoi4oaEnkd/wIMDjUGklRqQfIlN7gypcbbstLUWdxg'
-
-    tabs = [
-        ["我的小屋", "{}/sns/meeting/edx_list_class_room.jsp?userInfo={}".format(video_meeting_domain, des_user_info), True],
-        ["查找小屋", "{}/sns/meeting/edx_find_class_room.jsp?userInfo={}".format(video_meeting_domain, des_user_info), False],
-        ["添加小屋", "{}/sns/meeting/edx_add_class_room.jsp?userInfo={}".format(video_meeting_domain, des_user_info), False],
-        ["信息通知", "{}/sns/pm/edx_pm.jsp?userInfo={}".format(video_meeting_domain, des_user_info), False],
-    ]
-
-    return render_to_response("sync_class_appointment.html", {"user": user, 'ftabs': tabs})
 
 
 # pylint: disable=unused-argument
@@ -419,7 +367,6 @@ def course_listing(request):
     except:
         print "=====error===== " * 5
 
-    # course_org = _get_course_org_from_bs(request.user)
     curr_user = User.objects.get(username=request.user)
     course_org = _get_institute(curr_user)
     profile = UserProfile.objects.get(user_id=curr_user.id)

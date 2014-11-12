@@ -930,55 +930,6 @@ def demd5_webservicestr(srstr):
     return md5obj.hexdigest()
 
 
-def purchase_authenticate(request, course_id):
-    user = request.user
-    course = get_course_with_access(request.user, course_id, 'see_exists')
-    print '-==================='
-    print course_id.encode('utf-8')
-    print '-==================='
-    print str(course.course_uuid)[-12:]
-    print '-==================='
-    course.course_uid= str(course.course_uuid)[-12:]
-    re_jsondict = {'authenticated': False}
-    if not (user is None or isinstance(user, AnonymousUser)):
-        xml_params = render_to_string('xmls/auth_purchase.xml', {'username': user.username, 'course_uuid': course.course_uid})
-        try:
-            url = "{}/services/OssWebService?wsdl".format(settings.OPER_SYS_DOMAIN)
-            client = Client(url)
-            aresult = client.service.confirmBillEvent(xml_params, demd5_webservicestr(xml_params + "VTEC_#^)&*("))
-            print aresult.encode('utf-8')
-            redict = xmltodict.parse(aresult.encode('utf-8'))
-
-            if int(redict['EVENTRETURN']['RESULT']) in [0, 1]:
-            # if int(redict['EVENTRETURN']['RESULT']) in [1]:
-                re_jsondict['authenticated'] = True
-
-                # # push course trade data to business system
-                # xml_data_str = render_to_string('xmls/pushed_course_data.xml', {'course': course, 'user': user})
-                # print xml_data_str
-                #
-                # # DES encode data
-                # pad = lambda s: s + (8 - len(s) % 8) * chr(8 - len(s) % 8)
-                # print pad
-                # des_enxml_str = base64.b64encode(DES.new(setting.SSO_KEY[0:8], DES.MODE_ECB).encrypt(pad(xml_data_str.encode('utf-8'))))
-                #
-                # bs_host = settings.XIAODUN_BACK_HOST        # test dev "http://192.168.1.78:8081/xiaodun"
-                # push_url = "{}/service/course/add?data={}".format(bs_host, des_enxml_str)
-                #
-                # socket.setdefaulttimeout(2)
-                # req = urllib2.Request(push_url)
-                # # TODO: setting a column mark result, if failure, package it and send with scheduler in backend
-                # urllib2.urlopen(req)
-            else:
-                errmsg = redict['EVENTRETURN']['DESCRIPTION']['DESC'].strip()
-                re_jsondict['errmsg'] = errmsg if errmsg else ""
-        except:
-            re_jsondict['errmsg'] = '服务器错误，稍后再试！'
-
-
-    return JsonResponse(re_jsondict)
-
-
 @ensure_csrf_cookie
 @cache_if_anonymous
 def course_about(request, course_id):

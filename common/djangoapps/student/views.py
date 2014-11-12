@@ -855,29 +855,6 @@ def change_enrollment(request):
         if not has_access(user, course, 'enroll'):
             return HttpResponseBadRequest(_("Enrollment is closed"))
 
-        if course.display_course_price_with_default > 0:
-            def demd5_webservicestr(srstr):
-                if not isinstance(srstr, str):
-                    return ""
-                md5obj = hashlib.md5()
-                md5obj.update(srstr)
-
-                return md5obj.hexdigest()
-
-            try:
-                url = '{}/services/OssWebService?wsdl'.format(settings.OPER_SYS_DOMAIN)
-                client = Client(url)
-                course.course_uid = str(course.course_uuid)[-12:]
-                # xml_params = render_to_string('xmls/auth_purchase.xml', {'username': user.username, 'course_uuid': course.course_uuid})
-                xml_params = render_to_string('xmls/auth_purchase.xml', {'username': user.username, 'course_uuid': course.course_uid})
-                xresult = client.service.confirmBillEvent(xml_params, demd5_webservicestr(xml_params + "VTEC_#^)&*("))
-                rdict = xmltodict.parse(xresult)
-                if int(rdict['EVENTRETURN']['RESULT']) not in [0, 1]:
-                    return HttpResponseBadRequest("课程内容收费，请先购买，再注册此课程！")
-            except:
-                return HttpResponseBadRequest("系统出错，请稍后再试！")
-
-
         # see if we have already filled up all allowed enrollments
         is_course_full = CourseEnrollment.is_course_full(course)
 
@@ -992,134 +969,6 @@ def des_auth_login(request):
     }
 
     return render_to_response('des_auth_login.html', context)
-
-
-def login_user_with_guoshi_account(request):
-    import xml.etree.ElementTree as ET
-    from django.utils.crypto import constant_time_compare
-    
-    key_sso = settings.SSO_KEY
-    def secure_key(key_str):
-        return key_str[0:8]
-    
-    def des_decrypt(en_str):
-        unpad = lambda x: x[0:-ord(x[-1])]
-
-        obj = DES.new(secure_key(key_sso), DES.MODE_ECB)
-
-        return unpad(obj.decrypt(base64.b64decode(en_str)))
-
-    response_json = {'success': False}
-
-    # parse params
-    passport = request.GET.get('passport', "")
-
-    if not passport:
-        raise Http404('no passport given')
-
-    # DES MODE_ECB decrypt string and acquire params
-    try:
-        de_passport_arr = des_decrypt(passport).split("#")
-        username, certificate = de_passport_arr[0], de_passport_arr[3]
-    except:
-        raise Http404("passport string out of range")
-
-    # request passport url and get details of user des encrypt string
-    try: 
-        request_url = "{}/proxyValidateuser?input={}".format(settings.SSO_DOMAIN, certificate)  # "".join(["{}/proxyValidateuser?input=", certificate])
-        req = urllib2.Request(request_url)
-
-        re_q = re.compile('\s+')
-        req_result = re.sub(re_q, '', urllib2.urlopen(req).read())
-    except:
-        raise Http404('failure on getting user details')
-
-    parser = ET.XMLParser(encoding="utf-8")
-    parse_xml_obj = ET.fromstring(unicode(des_decrypt(req_result), errors='replace').replace('GBK', 'utf-8'), parser=parser)
-    # parse_xml_obj = ET.fromstring(des_decrypt(req_result).decode('gbk').encode('utf-8').replace('GBK', 'utf-8'), parser=parser)
-
-    def parse_xml_obj_dict(xml_obj):
-        xml_dict = {}
-
-        for xml_i in xml_obj._children:
-            try:
-                xml_dict.update({xml_i.tag: xml_i.text})
-            except:
-                continue
-        
-        return xml_dict
-
-    xml_user_detail_dict = parse_xml_obj_dict(parse_xml_obj)
-
-    if not xml_user_detail_dict.get('email', ''):
-        raise Http404('can not find user email')
-
-    # decrypt_string = des_decrypt(str)
-    # parse decrypt string get email paddword username and so on
-    try:
-        # username = "xiaodun_dev_test_2"
-        # email = "xiaodun_dev_test_2@163.com"
-        # password = "Xiaodun"
-        user = User.objects.get(email=xml_user_detail_dict.get('email'))
-
-        # verify user get login user
-
-    except User.DoesNotExist:
-        user = User(
-                    username=xml_user_detail_dict.get('loginName', ''),
-                    email=xml_user_detail_dict.get('email'),
-                    is_active=True
-                )
-        user.password = xml_user_detail_dict.get('password')
-        user.save()
-
-        profile = UserProfile(user=user)
-        profile.name = xml_user_detail_dict.get('fullName')
-        profile.save()
-
-    if not constant_time_compare(user.password, xml_user_detail_dict.get('password')):
-        raise Http404('authenticate failure!')
-
-    # there every things looks well, then we login user
-    backend = load_backend(settings.AUTHENTICATION_BACKENDS[0])
-    user.backend = "%s.%s" % (backend.__module__, backend.__class__.__name__)
-    login(request, user)
-    suc_response = render_to_response('des_auth_login.html')
-    suc_response["P3P"] = 'CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"'
-
-    return suc_response
-
-
-@login_required
-def sync_class_appointment(request):
-    """
-    Synchronous classroom Appointment
-    """
-    user = request.user
-
-    # load settings viedio meeting domain
-    video_meeting_domain = settings.VEDIO_MEETING_DOMAIN   # "http://192.168.1.6:8091" 
-
-    # des encrypt user info for login into video meetting sys
-    pad = lambda s: s + (8 - len(s) % 8) * chr(8 - len(s) % 8)
-    def des_encrypt(input_str):
-        obj = DES.new(settings.SSO_KEY[0:8], DES.MODE_ECB)
-
-        return base64.b64encode(obj.encrypt(pad(input_str)))
-
-    des_user_info = des_encrypt(user.username + "#" + user.password)
-
-    # Test
-    # des_user_info = 'HdZGyS7Rp0n0k3w8/xAabLZCTejAT27KApJr2YGyQAgVE7LWpU5JoA=='
-    des_user_info = 'gwRz4rZHXMtbbPORcrVTgjnoi4oaEnkd/wIMDjUGklRqQfIlN7gypcbbstLUWdxg'
-
-    tabs = [
-        ["我的小屋", "{}/sns/meeting/edx_list_class_room.jsp?userInfo={}".format(video_meeting_domain, des_user_info), True],
-        ["查找小屋", "{}/sns/meeting/edx_find_class_room.jsp?userInfo={}".format(video_meeting_domain, des_user_info), False],
-        ["信息通知", "{}/sns/pm/edx_pm.jsp?userInfo={}".format(video_meeting_domain, des_user_info), False],
-    ]
-
-    return render_to_response("sync_class_appointment.html", {"user": user, 'ftabs': tabs})
 
 
 def login_failure_count(request):
@@ -1406,62 +1255,6 @@ def change_setting(request):
         "location": up.location,
     })
 
-
-def _push_info_to_bs(post_vars):
-    """
-    Need data consistency with bs, no need for medical mooc
-    """
-    gender_dict = {'m': '男', 'f': '女', 'o': '其他'}
-    level_of_education_dict = {
-        'p': '博士',
-        'm': '硕士',
-        'b': '学士',
-        'a': '大专',
-        'hs': '中专/高中',
-        'jhs': '初中',
-        'el': '小学',
-        'none': '没有',
-        'other': '其他',
-    }
-    context = {}
-    writedict = lambda x, y, attr, val: x.update({attr: y.get(val, "")}) if y else x.update({attr: val})
-    for attr in SYNCUSERATTR:
-        val = post_vars.get(attr, "").strip()
-        yobj = None
-        if attr == "gender":
-            yobj = gender_dict
-        elif attr == "level_of_education":
-            yobj = level_of_education_dict
-
-        writedict(context, yobj, attr, val)
-
-    xml_format = render_to_string('xmls/account_dict.xml', context)
-
-    # des encode data with base64
-    pad = lambda s: s + (8 - len(s) % 8) * chr(8 - len(s) % 8)
-    secure_key = settings.SSO_KEY[0:8]
-    des_enxml_str = base64.b64encode(DES.new(secure_key, DES.MODE_ECB).encrypt(pad(xml_format.encode('utf-8')))).replace('+', '$')
-    
-    # goon request
-    rejson = {'success': False}
-    try:
-        request_host = settings.XIAODUN_BACK_HOST            # Test DEV "http://192.168.1.78:8081/xiaodun"
-        request_url = '{}/student/student!regist.do?input={}'.format(request_host, des_enxml_str)
-
-        socket.setdefaulttimeout(10)
-        req = urllib2.Request(request_url)
-        request_json = json.load(urllib2.urlopen(req))
-
-        if not request_json.get('success', ''):
-            rejson["errmsg"] = request_json["errmessage"]
-        else:
-            rejson["success"] = True
-    except:
-        rejson['errmsg'] = "服务器错误，请稍后再试!"
-
-    return rejson
-
-
 def _do_create_account(post_vars):
     """
     Given cleaned post variables, create the User and UserProfile objects, as well as the
@@ -1682,12 +1475,6 @@ def mobi_create_account(request, post_override=None):
             js['field'] = 'password'
             return JsonResponse(js, status=400)
 
-    # # sync student infomation to bs
-    # presult = _push_info_to_bs(post_vars)
-    # if not presult['success']:
-    #     js['value'] = presult['errmsg']
-    #     return JsonResponse(js, status=400)
-
     # Ok, looks like everything is legit.  Create the account.
     ret = _do_create_account(post_vars)
     if isinstance(ret, HttpResponse):  # if there was an error then return that
@@ -1854,12 +1641,6 @@ def create_account(request, post_override=None):
             js['field'] = 'password'
             return JsonResponse(js, status=400)
 
-    # sync student infomation to bs
-    # presult = _push_info_to_bs(post_vars)
-    # if not presult['success']:
-    #     js['value'] = presult['errmsg']
-    #     return JsonResponse(js, status=400)
-
     # Ok, looks like everything is legit.  Create the account.
     if request_type == 'ins':
         ret = _do_institution_create_account(post_vars)
@@ -1876,9 +1657,6 @@ def create_account(request, post_override=None):
         'key': registration.activation_key,
     }
 
-    print '111111111111111111'
-    print  context
-    print  '1111111111111111'
     # composes activation email
     subject = render_to_string('emails/activation_email_subject.txt', context)
     # Email subject *must not* contain newlines
