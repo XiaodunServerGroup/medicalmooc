@@ -51,7 +51,7 @@ body{background:#eeeeee; color:#666; word-break:break-all;}
 		.default_banner .small .small_m .scroll_pic li {background:none; cursor: pointer; float: left; height:17px; width: 17px; margin:5px 0 0 30px;}
 		.default_banner .small .small_m .scroll_pic li img {opacity: 0.7;}
 		.default_banner .small .small_m .scroll_pic li:hover img, .scroll_pic li:hover {opacity: 1;}
-		.default_banner .small .small_m .scroll_pic li img.cls {width:17px; height:17px; }
+		.default_banner .small .small_m .scroll_pic li img.cls {width:17px; height:17px; background: url(../../images/click.png) left center no-repeat;}
 
 /*footer*/
 footer{float:left; background:#333; width:100%; padding:30px 0;}

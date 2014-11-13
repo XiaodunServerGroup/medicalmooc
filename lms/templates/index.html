@@ -9,20 +9,142 @@
 <script language="javascript" src="/common/header.js"></script>
 <script language="javascript" src="/common/header2.js"></script>
 <link href="static/css/vendor/moocheader.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+window.onload = function()
+{
+	var tabBtnBox = document.getElementById('tab-btn');
+	var tabBtn = tabBtnBox.getElementsByTagName('img');
+	var iNow = 0;
+
+	//******************Tab**************************
+	var prevBtn = document.getElementById('prevBtn');
+	var nextBtn = document.getElementById('nextBtn');
+	var bigImg = document.getElementById('big-img').getElementsByTagName('img');
+
+	for(var i=0; i<tabBtn.length; i++)
+	{
+		tabBtn[i].index = i;
+
+		tabBtn[i].onmouseover = function()
+		{
+			clearInterval(timer);
+			tabBtn[iNow].className = '';
+			goOpa(bigImg[iNow],{target:0,speed:5,endFn:function(){
+			bigImg[iNow].style.zIndex=0;
+			}});
+			this.className = 'cls';
+			iNow=this.index;
+			goOpa(bigImg[iNow],{target:100,speed:5,endFn:function(){
+			bigImg[iNow].style.zIndex = 10;
+			}});
+		};
+
+		tabBtn[i].onmouseout = function()
+		{
+			timer = setInterval(auto,3000);
+		};
+
+		tabBtn[i].onclick =  function()
+		{
+			tabBtn[iNow].className = '';
+			goOpa(bigImg[iNow],{target:0,speed:5,endFn:function(){
+			bigImg[iNow].style.zIndex=0;
+			}});
+			this.className = 'cls';
+			iNow=this.index;
+			goOpa(bigImg[iNow],{target:100,speed:5,endFn:function(){
+			bigImg[iNow].style.zIndex = 10;
+			}});
+		};
+	};
+
+
+	prevBtn.onclick = function(){
+		clearInterval(timer);
+		var _iNow = iNow;
+		tabBtn[iNow].className = '';
+		goOpa(bigImg[_iNow],{target:0,speed:5,endFn:function(){
+		bigImg[_iNow].style.zIndex = 0;
+		}});
+
+		iNow--;if(iNow < 0)iNow = bigImg.length-1;
+
+		tabBtn[iNow].className = 'cls';
+		goOpa(bigImg[iNow],{target:100,speed:5,endFn:function(){
+		bigImg[iNow].style.zIndex = 10;
+		}});
+		timer = setInterval(auto,3000);
+	};
+
+	nextBtn.onclick = function(){
+		clearInterval(timer);
+		var _iNow = iNow;
+		tabBtn[iNow].className = '';
+		goOpa(bigImg[_iNow],{target:0,speed:5,endFn:function(){//alert(iNow);
+		bigImg[_iNow].style.zIndex = 0;
+		//alert(iNow);
+		}});
+
+		//alert(iNow);
+		iNow++;if(iNow == bigImg.length)iNow = 0;
+		//alert(iNow);
+
+		tabBtn[iNow].className = 'cls';
+		goOpa(bigImg[iNow],{target:100,speed:5,endFn:function(){bigImg[iNow].style.zIndex=1;}});
+		timer = setInterval(auto,3000);
+	};
+
+
+
+	function auto(){
+		var _iNow = iNow;
+		tabBtn[_iNow].className = '';
+		goOpa(bigImg[_iNow],{target:0,speed:5,endFn:function(){bigImg[_iNow].style.zIndex=0;}});
+
+		iNow++;if(iNow == bigImg.length)iNow = 0;
+
+		tabBtn[iNow].className = 'cls';
+		goOpa(bigImg[iNow],{target:100,speed:5,endFn:function(){bigImg[iNow].style.zIndex=1;}});
+	};
+
+	var timer = setInterval(auto,3000);
+	/*
+	tabBtnBox.onmouseover = function()
+	{
+		clearInterval(timer);
+		alert(this.index);
+	};
+
+	tabBtnBox.onmouseout = function()
+	{
+		timer = setInterval(auto,3000);
+	};
+	*/
+};
+function goOpa(obj,json)
+{
+	clearInterval(obj.timer);var opa = getStyle(obj,'opacity')*100;var iSpeed = json.target > opa ? json.speed : -json.speed;
+	obj.timer = setInterval(function(){
+		if( Math.abs(json.target-opa) <= Math.abs(iSpeed) ) {obj.style.opacity = json.target/100;obj.style.filter = 'alpha(opacity:'+json.target+')';clearInterval(obj.timer);json.endFn  &&  json.endFn();}
+		else{opa = opa + iSpeed;obj.style.opacity = opa/100;obj.style.filter = 'alpha(opacity:'+opa+')';};
+	},30);
+};
+function getStyle(obj,attr){return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj,false)[attr];};
+</script>
 
 <div class="default_banner">
         <div class="big-img" id="big-img">
-        	<a href="#"><img class="big_b1" src="http://www.pmphmooc.com/statics/css/../medmooc_renweishe/banner1_02.jpg" style="opacity:1;z-index:1; filter:alpha(opacity:100)"></img></a>
-			<a href="#"><img class="big_b2" src="http://www.pmphmooc.com/statics/css/../medmooc_renweishe/lobby_02.jpg" style="opacity:0;z-index:0; filter:alpha(opacity:100)"></img></a>
-			<a href="#"><img class="big_b3"  src="http://www.pmphmooc.com/statics/css/../medmooc_renweishe/lobby_04.jpg" style="opacity:0;z-index:0; filter:alpha(opacity:100)"></img></a>
+        	<a href="#"><img class="big_b1" src="static/images/banner1_02.jpg" style="opacity:1;z-index:1; filter:alpha(opacity:100)"></img></a>
+			<a href="#"><img class="big_b2" src="static/images/lobby_02.jpg" style="opacity:0;z-index:0; filter:alpha(opacity:100)"></img></a>
+			<a href="#"><img class="big_b3"  src="static/images/lobby_04.jpg" style="opacity:0;z-index:0; filter:alpha(opacity:100)"></img></a>
         </div>
       	<div class="small">
                 <ul class="small_m">
                       <div class="s_pre" id="prevBtn"></div>
                       <div class="scroll_pic" id="tab-btn">
-                   		<li><img class="cls" src="http://www.pmphmooc.com/statics/css/../medmooc_renweishe/index3_07.png" /></li>
-                        <li><img src="http://www.pmphmooc.com/statics/css/../medmooc_renweishe/index3_07.png"  alt=""/></li>
-                        <li><img src="http://www.pmphmooc.com/statics/css/../medmooc_renweishe/index3_07.png"  alt=""/></li>
+                   		<li><img class="cls" src="static/images/index3_07.png" /></li>
+                        <li><img src="static/images/index3_07.png"  alt=""/></li>
+                        <li><img src="static/images/index3_07.png"  alt=""/></li>
                       </div>
                       <div class="s_next" id="nextBtn"></div>
                 </ul>
