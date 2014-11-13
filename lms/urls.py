@@ -118,6 +118,8 @@ urlpatterns += (
         {'template': 'common_header.html'}, name="common_header"),
     url(r'^common/header.js$', 'static_template_view.views.render',
         {'template': 'common_header_barjs.html'}, name="common_header_barjs"),
+    url(r'^common/header2.js$', 'static_template_view.views.render',
+        {'template': 'common_header_barjs2.html'}, name="common_header_barjs2"),
 )
 # Semi-static views only used by edX, not by themes
 if not settings.FEATURES["USE_CUSTOM_THEME"]:

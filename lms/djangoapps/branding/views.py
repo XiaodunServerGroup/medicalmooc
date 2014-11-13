@@ -20,8 +20,8 @@ def index(request):
     Redirects to main page -- info page if user authenticated, or marketing if not
     '''
 
-    if settings.COURSEWARE_ENABLED and request.user.is_authenticated():
-        return redirect(reverse('dashboard'))
+    # if settings.COURSEWARE_ENABLED and request.user.is_authenticated():
+    #     return redirect(reverse('dashboard'))
 
     if settings.FEATURES.get('AUTH_USE_CERTIFICATES'):
         from external_auth.views import ssl_login
