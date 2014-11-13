@@ -1247,13 +1247,14 @@ def course_list_team(request, cos_len, cos):
         if len(user) >= 1:
             name = UserProfile.objects.get(user_id=User.objects.get(username=user[0]).id).name
             picurl = UserProfile.objects.get(user_id=User.objects.get(username=user[0]).id).picurl
-            shortbio = str(UserProfile.objects.get(user_id=User.objects.get(username=user[0]).id).shortbio).encode('utf8')[0:48]
+            shortbio = str(UserProfile.objects.get(user_id=User.objects.get(username=user[0]).id).shortbio)[0:48]
             cos_id = cos[i].id
             (enrollment_number, course_update_date, count) = get_forum_info(request, cos_id, cos[i], 'updates')
+            short_description = get_course_about_section(cos[i], "short_description")[0:105]
             course_list_team.append({
                 'id': cos_id,
                 'title': get_course_about_section(cos[i], 'title').encode('utf8'),
-                'short_description': get_course_about_section(cos[i], "short_description").encode('utf8'),
+                'short_description': short_description,
                 'image_url': course_image_url(cos[i]).encode('utf8'),
                 'name': name,
                 'picurl': picurl,

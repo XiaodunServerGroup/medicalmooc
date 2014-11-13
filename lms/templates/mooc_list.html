@@ -67,7 +67,11 @@
                                     <p>${courses[co]['shortbio']}</p>
                                 %endif
                                 </div>
-                              <p>${courses[co]['short_description']}</p>
+                               %if courses[co]['short_description']:
+                                    <p>${courses[co]['short_description']}</p>
+                               %else:
+                                    <p>课程暂无简介</p>
+                               %endif
                             </div>
                     	</a>
                     </li>
