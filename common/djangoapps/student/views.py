@@ -33,6 +33,7 @@ from django.contrib.auth.views import password_reset_confirm
 from django.core.cache import cache
 from django.core.context_processors import csrf
 from django.core.mail import send_mail
+from django.core.mail.message import EmailMultiAlternatives
 from django.core.urlresolvers import reverse
 from django.core.validators import validate_email, validate_slug, ValidationError
 from django.db import IntegrityError, transaction
@@ -1655,6 +1656,7 @@ def create_account(request, post_override=None):
     context = {
         'name': post_vars['name'],
         'key': registration.activation_key,
+        'username': user.username,
     }
 
     # composes activation email
@@ -1676,9 +1678,10 @@ def create_account(request, post_override=None):
                 dest_addr = settings.FEATURES['REROUTE_ACTIVATION_EMAIL']
                 message = ("Activation for %s (%s): %s\n" % (user, user.email, profile.name) +
                            '-' * 80 + '\n\n' + message)
-                send_mail(subject, message, from_address, [dest_addr], fail_silently=False)
+                send_mails(subject, "", from_address, [user.email], fail_silently=False, html=message)
             else:
-                user.email_user(subject, message, from_address)
+                #user.email_user(subject, message, from_address)
+                send_mails(subject, "", from_address, [user.email], fail_silently=False, html=message)
         except Exception:  # pylint: disable=broad-except
             log.warning('Unable to send activation email to user', exc_info=True)
             js['value'] = _('Could not send activation e-mail.')
@@ -1741,6 +1744,11 @@ def create_account(request, post_override=None):
                         httponly=None)
     return response
 
+def send_mails(subject, body, from_email, recipient_list, fail_silently=False, html=None, *args, **kwargs):
+    msg = EmailMultiAlternatives(subject, body, from_email, recipient_list)
+    if html:
+        msg.attach_alternative(html, "text/html")
+    msg.send(fail_silently)
 
 def auto_auth(request):
     """
