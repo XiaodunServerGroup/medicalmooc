@@ -50,7 +50,6 @@
   <script type="text/javascript" src="/jsi18n/"></script>
 
   <link rel="gettext" type="application/x-po" href="${static.url('js/vendor/ova/locale/zh_CN/annotator.po')}"/>
-  <link rel="stylesheet" type="text/css" href="${static.url('css/vendor/moocheader.css')}" />
 
   <link rel="icon" type="image/x-icon" href="${static.url(microsite.get_value('favicon_path', settings.FAVICON_PATH))}" />
 
@@ -102,6 +101,7 @@
 % if style_overrides_file:
   <link rel="stylesheet" type="text/css" href="${static.url(style_overrides_file)}" />
 % endif
+  <link rel="stylesheet" type="text/css" href="${static.url('css/vendor/moocheader.css')}" />
 
 </head>
 
