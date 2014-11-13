@@ -155,18 +155,26 @@
 
         return score;
     }
+
+    $(function() {
+        $('input, textarea').placeholder();
+    }
+
+</script>
+
   </script>
+  <script type="text/javascript" src="static/js/placeholders.js"></script>
 </%block>
 <section class="introduction_bg">
 <div class="introduction">
   <header>
     <h1 class="title">
-      <span class="title-super">欢迎访问我们的网站，请注册并创建属于您的账户.</span>
+      <span class="title-super">欢迎访问人卫慕课，请创建属于您的账户.</span>
     </h1>
   </header>
   <p style="padding-top:20px;"><span style="color:#fff; margin-left:120px;">
-        请将这些字段补充完整以注册账户。</span><br>
-        <span style="color:#fff; margin-left:120px;">必须的字段已经<strong>粗体和星号(*)</strong>所标记</span>
+        请填写以下相关内容完成注册。</span><br>
+        <span style="color:#fff; margin-left:120px;">标记<strong>粗体和星号(*)</strong>的为必填项</span>
   </p>
 </div>
 </section>
@@ -195,6 +203,7 @@
           <li class="field required text" id="field-email">
             <label for="email">${_('E-mail')}</label>
             <input class="" id="email" type="email" name="email" value="" placeholder="${_('example: username@domain.com')}" required aria-required="true" />
+            <span id="" class="tip tip-input">电子邮件地址需验证后方可完成注册，请务必填写正确的电子邮件。</span>
           </li>
           <li class="field required password" id="field-password">
             <label for="password">${_('Password')}</label>
@@ -210,7 +219,8 @@
             <span id="username-tip" class="tip tip-input">6-16个字符，请使用字母加数字或符号的组合，例如：renweimooc_2014</span>
           </li>
           <li class="field required text" id="field-username">
-            <label for="username">${_('Public Username')}</label>
+            <!--<label for="username">${_('Public Username')}</label>-->
+            <label for="username">昵称</label>
             <input id="username" type="text" name="username" value="" placeholder="${_('example: JaneDoe')}" required aria-required="true" aria-describedby="username-tip"/>
             <span class="tip tip-input" id="username-tip">${_('Will be shown in any discussions or forums you participate in')} <strong>(${_('cannot be changed later')})</strong></span>
           </li>

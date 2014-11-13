@@ -4,7 +4,8 @@ import sys,os
 reload(sys)
 sys.setdefaultencoding('utf8')
 
-
+import lms.lib.comment_client as cc
+import django_comment_client.utils as utils
 from datetime import timedelta
 import logging
 import urllib
@@ -1238,3 +1239,112 @@ def submission_history(request, course_id, student_username, location):
     }
 
     return render_to_response('courseware/submission_history.html', context)
+
+def course_list_team(request, cos_len, cos):
+    course_list_team = []
+    for i in range(0, cos_len):
+        user = CourseStaffRole(cos[i].location).users_with_role()
+        if len(user) >= 1:
+            name = UserProfile.objects.get(user_id=User.objects.get(username=user[0]).id).name
+            picurl = UserProfile.objects.get(user_id=User.objects.get(username=user[0]).id).picurl
+            shortbio = str(UserProfile.objects.get(user_id=User.objects.get(username=user[0]).id).shortbio).encode('utf8')[0:48]
+            cos_id = cos[i].id
+            (enrollment_number, course_update_date, count) = get_forum_info(request, cos_id, cos[i], 'updates')
+            course_list_team.append({
+                'id': cos_id,
+                'title': get_course_about_section(cos[i], 'title').encode('utf8'),
+                'short_description': get_course_about_section(cos[i], "short_description").encode('utf8'),
+                'image_url': course_image_url(cos[i]).encode('utf8'),
+                'name': name,
+                'picurl': picurl,
+                'shortbio': shortbio,
+                'enrollment_number': enrollment_number,
+                'course_update_date': course_update_date,
+                'count': count
+            })
+    return course_list_team
+
+
+def mooc_list(request):
+
+    q = request.GET.get('query', '')
+    courses_aa = get_courses_by_search(request.META.get('HTTP_HOST'))
+    courses_list = []
+    if q != "":
+        for course in courses_aa:
+            if  q in course.org or q in course.id or q in course.display_name_with_default:
+                courses_list.append(course)
+            else:
+                continue
+    else:
+       courses_list = courses_aa
+
+    courses = sort_by_announcement(courses_list)
+    cos = filter_audited_items(courses)
+    if len(cos) < 8:
+        cos_len = len(cos)
+        (cos_list_team) = course_list_team(request, cos_len, cos)
+    else:
+        cos_len = 8
+        (cos_list_team) = course_list_team(request, cos_len, cos)
+
+    return render_to_response('mooc_list.html', {'courses': cos_list_team})
+
+def  get_forum_info(request, course_id, course, section_key='updates'):
+    #注册学生数:
+    enrollment_number = CourseEnrollment.num_enrolled_in(course_id)
+    #课程更新的日期:
+    try:
+        loc = Location(course.location.tag, course.location.org, course.location.course, 'course_info', section_key)
+        location = Location(loc)
+        descriptor = modulestore().get_instance(course.id, location, depth=0)
+
+        course_update_date_list=descriptor.runtime.module_data[location]['definition']['data']['items']
+        course_update_date = course_update_date_list[len(course_update_date_list)-1]['date']
+    except:
+        course_update_date = None
+    #讨论总数:
+    try:
+        unsafethreads, query_params = get_threads_new(request, course_id)   # This might process a search query
+        threads = [utils.safe_content(thread) for thread in unsafethreads]
+    except cc.utils.CommentClientMaintenanceError:
+        log.warning("Forum is in maintenance mode")
+        return render_to_response('discussion/maintenance.html', {})
+
+    count =0
+    for i in threads:
+        count = count+i['comments_count']
+
+    return (enrollment_number,course_update_date,count)
+
+# @newrelic.agent.function_trace()
+def get_threads_new(request, course_id, discussion_id=None, per_page=20):
+    """
+    This may raise an appropriate subclass of cc.utils.CommentClientError
+    if something goes wrong.
+    """
+    query_params = {
+        'page': 1,
+        'per_page': per_page,
+        'sort_key': 'date',
+        'sort_order': 'desc',
+        'text': '',
+        'commentable_id': discussion_id,
+        'course_id': course_id
+
+    }
+
+    threads, page, num_pages = cc.Thread.search(query_params)
+
+    #now add the group name if the thread has a group id
+    for thread in threads:
+        thread['group_name'] = ""
+        thread['group_string'] = "This post visible to everyone."
+        #patch for backward compatibility to comments service
+        if not 'pinned' in thread:
+            thread['pinned'] = False
+
+    query_params['page'] = page
+    query_params['num_pages'] = num_pages
+
+    return threads, query_params
