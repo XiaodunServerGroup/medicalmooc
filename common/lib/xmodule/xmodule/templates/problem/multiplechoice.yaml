@@ -2,23 +2,18 @@
 metadata:
     display_name: 单选择题
     markdown: |
-       A multiple choice problem presents radio buttons for student input. Students can only select a single 
-       option presented. Multiple Choice questions have been the subject of many areas of research due to the early 
-       invention and adoption of bubble sheets.
-       
-       One of the main elements that goes into a good multiple choice question is the existence of good distractors. 
-       That is, each of the alternate responses presented to the student should be the result of a plausible mistake 
-       that a student might make.
+      多个问题可供学生选择.学生只能选择提出了一个选项。由于早期发明和采用，单项选择题一直是许多领域的研究对象。
+      
+      其中，一个好的选择题的主要内容是很好的干扰项的存在。也就是说，每个呈现给学生的干扰选项应该是一个合理的，容易让学生出错的存在
     
-       >>What Apple device competed with the portable CD player?<<
+       >>什么苹果设备与便携式CD播放机竞争?<<
             ( ) The iPad
             ( ) Napster
             (x) The iPod
             ( ) The vegetable peeler
             
        [explanation]
-       The release of the iPod allowed consumers to carry their entire music library with them in a 
-       format that did not rely on fragile and energy-intensive spinning disks.
+       iPod的发布让消费者携带他们的整个音乐库，不需要依赖于脆弱和能源密集型旋转的磁盘.
        [explanation]
 data: |
    <problem>

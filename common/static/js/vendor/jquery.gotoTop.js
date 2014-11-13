@@ -50,7 +50,7 @@
 		targetObg:"body"//目标位置
 	};
 })(jQuery);
-
-$(function(){
-	$('<a href="javascript:;" class="backToTop" title="返回顶部">回顶部</a>').appendTo("body");
-});
+//
+//$(function(){
+//	$('<a href="javascript:;" class="backToTop" title="返回顶部">回顶部</a>').appendTo("body");
+//});
