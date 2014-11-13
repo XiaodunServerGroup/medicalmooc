@@ -456,7 +456,7 @@ function refreshConditionPage(){
     if (conStrArr.length > 0 && INITSTR != curStr) {
         var requestCon = conStrArr.join("&");
         window.conUrl = baseHref + "?" + requestCon;console.log(window.conUrl);
-        $('ul.courses-listing').eq(0).empty();
+        $('ul.courses').eq(0).empty();
         ajaxGetConCourse(window.conUrl);
     }
 
@@ -540,7 +540,7 @@ function ajaxGetConCourse(conUrl, courseId){
                 });
 
                 // clear course list replace with insertCourseHtml
-                $('ul.courses-listing').eq(0).append(insertCourseHtml);
+                $('ul.courses').eq(0).append(insertCourseHtml);
             }
 
         }
@@ -648,7 +648,7 @@ function chkform(obj){
         %endfor
       </ul>
     % else:
-        <ul class="courses-listing">
+        <ul class="courses">
         无匹配课程
     % endif
     </section>
