@@ -433,7 +433,7 @@ span.one{ float:left;}
 .banner_btn .con a.click img{border:2px solid #04924b;}
 .banner_btn .con ul{width:2000px;}
 .banner_btn .con li{float:left; width:140px; margin:0 5px;}
-.banner_btn .con li{position:relative;}
+.banner_btn .con li{position:relative;} 
 .banner_btn .con li a:hover{color:#04924b;}
 .banner_btn .con li a span{position:absolute; top:62px; right:-2px; z-index:5; height:20px; padding:0 10px; line-height:20px; background:#04924b; color:#fff;}
 /*alliance_members_teacher*/
