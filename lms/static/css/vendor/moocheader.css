@@ -21,7 +21,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .clear{clear:both;}
 html{zoom:expression(function(ele){ele.style.zoom="1";document.execCommand("BackgroundImageCache",false,true);}(this));}
 body{ color:#666; word-break:break-all;}
-.wrapper{margin:0 auto; width:1180px;}
+.wrapper{margin:0 auto; width:100%;}
 /*header*/
 .global{background:#f9f9f9; height:100px; width:100%; border-bottom:4px solid #2883bc;}
 .global .wrapper_bg{height:100px; border-bottom:4px solid #004f9c;}
@@ -54,7 +54,7 @@ body{ color:#666; word-break:break-all;}
 		.default_banner .small .small_m .scroll_pic li img.cls {width:17px; height:17px; background: url(../../images/click.png) left center no-repeat;}
 
 /*footer*/
-footer{float:left; background:#333; width:100%; padding:30px 0;}
+footer{float:left; background:#333; width:100%; padding:0 0 30px;}
 footer p{color:#fff; text-align:center;}
 
 /*scholl content*/
@@ -433,7 +433,7 @@ span.one{ float:left;}
 .banner_btn .con a.click img{border:2px solid #04924b;}
 .banner_btn .con ul{width:2000px;}
 .banner_btn .con li{float:left; width:140px; margin:0 5px;}
-.banner_btn .con li{position:relative;} 
+.banner_btn .con li{position:relative;}
 .banner_btn .con li a:hover{color:#04924b;}
 .banner_btn .con li a span{position:absolute; top:62px; right:-2px; z-index:5; height:20px; padding:0 10px; line-height:20px; background:#04924b; color:#fff;}
 /*alliance_members_teacher*/
@@ -465,7 +465,7 @@ span.one{ float:left;}
 .view_course_left_title_top .tips{ font-size: 14px; position: absolute; bottom: 20px; left: 30%; width: 90px; height: 50px; text-align: center; line-height: 50px; color:#0066cc; display: none;  box-shadow: 2px 2px 10px  #000; background: #fff;}
 .view_course_left_title_top ul{ overflow:hidden; height:130px;}
 .clear{ clear:both; height:0; line-height:0;}
-.footer{ padding:20px 0; background-color:#333; color:#fff; text-align:center; line-height:40px;}
+.footer{ padding:10px 0; background-color:#333; color:#fff; text-align:center; line-height:40px;}
 /*alliance_members_school*/
 .prd_div h1{ padding:20px 0 0 0; font-size:18px; width:100%; text-align:left;}
 .prd_div h1 a{ float:right; font-size:13px;}
