@@ -5410,6 +5410,24 @@ msgstr "教材"
 msgid "Thank You!"
 msgstr "谢谢！"
 
+msgid "hello user!"
+msgstr "尊敬的用户"
+
+msgid "Hello!"
+msgstr "您好！"
+
+msgid "you can activate it now and enjoy the MOOC services!"
+msgstr "您现在就可以激活并享受人卫慕课各项服务."
+
+msgid "If these words click do not work,copy and paste this address into your web browser's address bar!"
+msgstr "如果上述文字点击无效，请把下面网页地址复制到浏览器地址栏中打开."
+
+msgid "this satellite was admires the automatically generated class, the system does not receive an answer, please do not reply!"
+msgstr "此信是由人卫慕课系统自动发出，系统不接收回信，请勿回复!"
+
+msgid "Click the Activate message"
+msgstr "点击激活邮件"
+
 msgid ""
 "Thank you for activating your account. You may now sign in and start using "
 "edX Studio to author courses."

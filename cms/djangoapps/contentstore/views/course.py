@@ -668,6 +668,7 @@ def notice_course_update_to_student(json,course_location,package_id):
     sub = "课程  [" + course_module.display_name_with_default.encode("utf-8") + ']  更新提醒'
     try:
         update_content = json['content']
+        update_content = "感谢您参加人卫慕课"+course_module.display_name_with_default.encode("utf-8")+"课程，目前该门课程有新内容更新，具体如下："+"\n\n"+update_content+"\n\n"+"为了保证您的学习进度，请尽快开始学习，"+course_module.display_name_with_default.encode("utf-8")+"课程团队竭诚为您服务。"+"\n"+"祝您学习愉快!"+"\n"+course_module.display_name_with_default.encode("utf-8")+"课程团队"
         student_email_list = analytics.basic.enrolled_students_features(package_id.replace(".", "/"), ['email'])
         print student_email_list
         student_data_email_list = []
