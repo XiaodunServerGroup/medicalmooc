@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 #coding=utf-8
 import sys,os
+
 reload(sys)
 sys.setdefaultencoding('utf8')
 
@@ -37,7 +38,7 @@ import django.utils
 from courseware import grades
 from courseware.access import has_access
 from courseware.courses import (get_courses, get_course_with_access, sort_by_announcement, sort_and_audited_items, get_course_info_section, filter_audited_items,
-                                get_course_by_id, get_course, course_image_url, get_course_about_section, get_courses_by_search)
+                                get_course_by_id, get_course, course_image_url, get_course_about_section, get_courses_by_search, filter_audited_items_by_later_time, filter_audited_items_by_advance_time)
 
 import courseware.tabs as tabs
 from courseware.masquerade import setup_masquerade
@@ -1247,7 +1248,7 @@ def course_list_team(request, cos_len, cos):
         if len(user) >= 1:
             name = UserProfile.objects.get(user_id=User.objects.get(username=user[0]).id).name
             picurl = UserProfile.objects.get(user_id=User.objects.get(username=user[0]).id).picurl
-            shortbio = UserProfile.objects.get(user_id=User.objects.get(username=user[0]).id).shortbio
+            shortbio = str(UserProfile.objects.get(user_id=User.objects.get(username=user[0]).id).shortbio)
             cos_id = cos[i].id
             (enrollment_number, course_update_date, count) = get_forum_info(request, cos_id, cos[i], 'updates')
             short_description = get_course_about_section(cos[i], "short_description")
@@ -1281,6 +1282,8 @@ def mooc_list(request):
        courses_list = courses_aa
 
     courses = sort_by_announcement(courses_list)
+    courses_later = filter_audited_items_by_later_time(courses)
+    courses_advance = filter_audited_items_by_advance_time(courses)
     cos = filter_audited_items(courses)
     if len(cos) < 8:
         cos_len = len(cos)
@@ -1289,7 +1292,21 @@ def mooc_list(request):
         cos_len = 8
         (cos_list_team) = course_list_team(request, cos_len, cos)
 
-    return render_to_response('mooc_list.html', {'courses': cos_list_team})
+    if len(courses_later) < 8:
+        cos_len = len(courses_later)
+        (cos_later_list_team) = course_list_team(request, cos_len, courses_later)
+    else:
+        cos_len = 8
+        (cos_later_list_team) = course_list_team(request, cos_len, courses_later)
+
+    if len(courses_advance) < 8:
+        cos_len = len(courses_advance)
+        (cos_advance_list_team) = course_list_team(request, cos_len, courses_advance)
+    else:
+        cos_len = 8
+        (cos_advance_list_team) = course_list_team(request, cos_len, courses_advance)
+
+    return render_to_response('mooc_list.html', {'courses': cos_list_team, 'course_later': cos_later_list_team, 'course_advance': cos_advance_list_team})
 
 def  get_forum_info(request, course_id, course, section_key='updates'):
     #注册学生数:

@@ -6,6 +6,7 @@ import inspect
 from path import path
 from django.http import Http404
 from django.conf import settings
+import time
 from .module_render import get_module
 from xmodule.course_module import CourseDescriptor
 from xmodule.modulestore import Location, XML_MODULESTORE_TYPE
@@ -333,6 +334,30 @@ def filter_audited_items(courses):
     courses_list = []
     for course in courses:
         if course.course_audit == 1:
+            courses_list.append(course)
+
+    return courses_list
+
+def filter_audited_items_by_later_time(courses):
+    """
+    get courses audited
+    """
+    current_time = time.strftime('%Y-%m-%d', time.localtime(time.time()))
+    courses_list = []
+    for course in courses:
+        if str(course.start) < current_time:
+            courses_list.append(course)
+
+    return courses_list
+
+def filter_audited_items_by_advance_time(courses):
+    """
+    get courses audited
+    """
+    current_time = time.strftime('%Y-%m-%d', time.localtime(time.time()))
+    courses_list = []
+    for course in courses:
+        if str(course.start) > current_time:
             courses_list.append(course)
 
     return courses_list

@@ -79,59 +79,105 @@
                 %endfor
             </div>
             % endif
+
+            % if settings.FEATURES.get('COURSES_ARE_BROWSABLE'):
             <div id="tab2" class="content3">
+                %for col in range(0,len(course_later)):
             	<ul class="ul_list">
 
                      <li>
-                    	<a href="scholl.html">
+                    	<a href="${reverse('about_course', args=[course_later[col]['id']])}" target="_blank">
                             <div class="img">
-                                <img src="img/course_17.jpg" width="275" height="152"  alt=""/>
-                                <h4>纪录片之旅</h4>
+                                <img src="${course_later[col]['image_url']}" width="275" height="152"  alt=""/>
+                                <h4>${course_later[col]['title']}</h4>
                                 <p>
-                                  <span class="left">12小时前更新</span>
-                                  <span>2095听讲</span>
-                                  <span class="right">356评论</span>
+                                  %if course_later[col]['course_update_date']:
+                                    <span class="left">${course_later[col]['course_update_date']}更新</span>
+                                  %else:
+                                    <span class="left">暂时无更新</span>
+                                  %endif
+                                  <span>${course_later[col]['enrollment_number']}听讲</span>
+                                  <span class="right">${course_later[col]['count']}评论</span>
                                 </p>
                             </div>
                             <div class="text_con3">
                             	<div class="text_con3_title">
-                                	<img src="img/liuz.jpg" alt=""/>
-									<h2>黄霞</h2>
-                                    <p>清华大学 环境学院 教授</p>
+                                	%if courses[co]['picurl']:
+                                	    <img src="${course_later[col]['picurl']}" alt=""/>
+                                    %else:
+                                        <img src="static/images/noprofilepic.jpg" />
+                                    %endif
+									<h2>${course_later[col]['name']}</h2>
+
+                                    %if course_later[col]['shortbio'] == 'None':
+                                        <p>教师暂无简介</p>
+                                    %else:
+                                        <p>${course_later[col]['shortbio'][0:30]}</p>
+                                    %endif
                                 </div>
-                              <p>环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</p>
-                              <h3>水处理工程<i></i></h3>
+                                   %if course_later[col]['short_description']:
+                                        <p>${course_later[col]['short_description'][0:80]}</p>
+                                   %else:
+                                        <p>课程暂无简介</p>
+                                   %endif
                             </div>
                     	</a>
                     </li>
                 </ul>
+                %endfor
             </div>
+            % endif
+
+            % if settings.FEATURES.get('COURSES_ARE_BROWSABLE'):
             <div id="tab3" class="content3">
+              %if len(course_advance):
+                %for coa in range(0,len(course_advance)):
             	<ul class="ul_list">
                      <li>
-                    	<a href="scholl.html">
+                    	<a href="${reverse('about_course', args=[course_advance[coa]['id']])}" target="_blank">
                             <div class="img">
-                                <img src="img/course_17.jpg" width="275" height="152"  alt=""/>
-                                <h4>纪录片之旅</h4>
+                                <img src="${course_advance[coa]['image_url']}" width="275" height="152"  alt=""/>
+                                <h4>${course_advance[coa]['title']}</h4>
                                 <p>
-                                  <span class="left">12小时前更新</span>
-                                  <span>2095听讲</span>
-                                  <span class="right">356评论</span>
+                                  %if course_advance[coa]['course_update_date']:
+                                    <span class="left">${course_advance[coa]['course_update_date']}更新</span>
+                                  %else:
+                                    <span class="left">暂时无更新</span>
+                                  %endif
+                                  <span>${course_advance[coa]['enrollment_number']}听讲</span>
+                                  <span class="right">${course_advance[coa]['count']}评论</span>
                                 </p>
                             </div>
                             <div class="text_con3">
                             	<div class="text_con3_title">
-                                	<img src="img/liuz.jpg" alt=""/>
-									<h2>黄霞</h2>
-                                    <p>清华大学 环境学院 教授</p>
+                                	%if course_advance[coa]['picurl']:
+                                	    <img src="${course_advance[coa]['picurl']}" alt=""/>
+                                    %else:
+                                        <img src="static/images/noprofilepic.jpg" />
+                                    %endif
+									<h2>${course_advance[coa]['name']}</h2>
+
+                                    %if course_advance[coa]['shortbio'] == 'None':
+                                        <p>教师暂无简介</p>
+                                    %else:
+                                        <p>${course_advance[coa]['shortbio'][0:30]}</p>
+                                    %endif
                                 </div>
-                              <p>环境工程、市政工程等专业的主干专业课，主要讲述水和废水处理中主要的物化和生物处理方法的基本原理</p>
-                              <h3>水处理工程<i></i></h3>
+                                    %if course_advance[coa]['short_description']:
+                                        <p>${course_advance[coa]['short_description'][0:80]}</p>
+                                    %else:
+                                        <p>课程暂无简介</p>
+                                    %endif
                             </div>
                     	</a>
                     </li>
                 </ul>
+                %endfor
+              %else:
+                <h1>暂无预告课程</h1>
+              %endif
             </div>
+            % endif
         </div>
 	</section>
   </div>
