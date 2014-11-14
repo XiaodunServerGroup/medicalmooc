@@ -21,7 +21,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .clear{clear:both;}
 html{zoom:expression(function(ele){ele.style.zoom="1";document.execCommand("BackgroundImageCache",false,true);}(this));}
 body{ color:#666; word-break:break-all;}
-.wrapper{margin:0 auto; width:100%;}
+.wrapper{margin:0 auto; width:1180px;}
 /*header*/
 .global{background:#f9f9f9; height:100px; width:100%; border-bottom:4px solid #2883bc;}
 .global .wrapper_bg{height:100px; border-bottom:4px solid #004f9c;}
@@ -55,7 +55,7 @@ body{ color:#666; word-break:break-all;}
 
 /*footer*/
 footer{float:left; background:#333; width:100%; padding:0 0 30px;}
-footer p{color:#fff; text-align:center;}
+footer p{color:#fff; text-align:center;padding: 30px 0 0 0 }
 
 /*scholl content*/
 .content{width:100%; float:left; margin-bottom:40px;}
@@ -244,7 +244,7 @@ transition: transform 0.8s ease;
 .hz_school li:hover .text_con2{display:block;}
 
 /*index*/
-.content5{float:left; width:100%; background:#fbfbfb;}
+.content5{background:#fbfbfb;margin:auto; width:100%;}
 .title_mooc{width:100%;font-size:24px; float:left; padding: 20px 0;}
 .title_mooc h2{width:30%; display:inline-block; font-weight:normal; float:left; margin-top:8px;}
 .title_mooc .nav{width:66%; display:inline-block; text-align:right; color:#c0c0c0; cursor:pointer; float:right;}
