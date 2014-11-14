@@ -52,49 +52,7 @@
 
     <div class="tc-wrapper">
       <a href="#before-transcript_${id}" class="nav-skip sr">${_("Skip to a navigable version of this video's transcript.")}</a>
-
-      <article class="video-wrapper">
-          <span tabindex="0" class="spinner" aria-hidden="false" aria-label="${_('Loading video player')}"></span>
-          <span tabindex="-1" class="btn-play is-hidden" aria-hidden="true" aria-label="${_('Play video')}"></span>
-          <div class="video-player-pre"></div>
-          <section class="video-player">
-              <div id="${id}"></div>
-              <h3 class="hidden">${_('ERROR: No playable video sources found!')}</h3>
-          </section>
-          <div class="video-player-post"></div>
-          <section class="video-controls is-hidden">
-              <div class="slider" title="${_('Video position')}"></div>
-              <div>
-                  <ul class="vcr">
-                      <li><a class="video_control" href="#" title="${_('Play')}" role="button" aria-disabled="false"></a></li>
-                      <li><div class="vidtime">0:00 / 0:00</div></li>
-                  </ul>
-                  <div class="secondary-controls">
-                      <div class="speeds menu-container">
-                          <a href="#" title="${_('Speeds')}" role="button" aria-disabled="false">
-                              <h3>${_('Speed')}</h3>
-                              <p class="active"></p>
-                          </a>
-                          <ol class="video_speeds menu" role="menu"></ol>
-                      </div>
-                      <div class="volume">
-                          <a href="#" title="${_('Volume')}" role="button" aria-disabled="false"></a>
-                          <div class="volume-slider-container">
-                              <div class="volume-slider"></div>
-                          </div>
-                      </div>
-                      <a href="#" class="add-fullscreen" title="${_('Fill browser')}" role="button" aria-disabled="false">${_('Fill browser')}</a>
-                      <a href="#" class="quality_control" title="${_('HD off')}" role="button" aria-disabled="false">${_('HD off')}</a>
-
-                      <div class="lang menu-container">
-                        <a href="#" class="hide-subtitles" title="${_('Turn off captions')}" role="button" aria-
-                        disabled="false">${_('Turn off captions')}</a>
-                      </div>
-                  </div>
-              </div>
-          </section>
-          <a class="nav-skip sr" id="before-transcript_${id}" href="#after-transcript_${id}">${_('Skip to end of transcript.')}</a>
-      </article>
+        <div id="myElement_${id}" style="text-align:center;position:relative;z-index:1111;min-height:300px;">加载中...</div>
 
       <ol id="transcript-captions" class="subtitles" tabindex="0" title="${_('Captions')}" role="group" aria-label="${_('Activating an item in this group will spool the video to the corresponding time point. To skip transcript, go to previous item.')}">
         <li></li>
@@ -117,3 +75,25 @@
     <!--% endif-->
   <!--</ul>-->
 </div>
+
+% if settings.STATIC_URL == '/static/':
+     <script type="text/javascript" src="/static/js/jwplayer/jwplayer6.6/jwplayer.flash.swf"></script>
+     <script type="text/javascript" src="/static/js/jwplayer/jwplayer6.6/jwplayer.js"></script>
+     <script type="text/javascript" src="/static/js/jwplayer/jwplayer6.6/jwplayer.html5.js"></script>
+ % else:
+    <script type="text/javascript" src="/static//js/jwplayer/jwplayer6.6/jwplayer.flash.swf"></script>
+    <script type="text/javascript" src="/static//js/jwplayer/jwplayer6.6/jwplayer.js"></script>
+    <script type="text/javascript" src="/static//js/jwplayer/jwplayer6.6/jwplayer.html5.js"></script>
+%endif
+<script type="text/javascript">
+
+
+
+setTimeout(function(){
+         jwplayer("myElement_${id}").setup({
+                        file: "${sources.get('mp4')}",
+                        width: '100%',
+                        aspectratio: '16:9'
+                    })
+}, 150);
+</script>
