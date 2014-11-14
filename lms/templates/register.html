@@ -19,6 +19,7 @@
 <%block name="bodyclass">view-register</%block>
 
 <%block name="js_extra">
+  <script type="text/javascript" src="static/js/placeholders.js"></script>
   <script type="text/javascript">
     $(function() {
 
@@ -155,15 +156,8 @@
 
         return score;
     }
-
-    $(function() {
-        $('input, textarea').placeholder();
-    }
-
+    $('input, textarea').placeholder();
 </script>
-
-  </script>
-  <script type="text/javascript" src="static/js/placeholders.js"></script>
 </%block>
 <section class="introduction_bg">
 <div class="introduction">

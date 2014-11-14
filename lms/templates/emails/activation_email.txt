@@ -10,11 +10,12 @@ ${_("you can activate it now and enjoy the MOOC services!")}<br>
 % else:
   <a href="http://${ site }/activate/${ key }">${_("Click the Activate message")}</a>
 % endif
-
+<br>
 ${_("If these words click do not work,copy and paste this address into your web browser's address bar!")}<br>
  % if is_secure:
    https://${ site }/activate/${ key }
  % else:
    http://${ site }/activate/${ key }
  % endif
+ <br>
 ${_("this satellite was admires the automatically generated class, the system does not receive an answer, please do not reply!")}
