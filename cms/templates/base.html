@@ -63,7 +63,7 @@
                 "jquery.inputnumber": "js/vendor/html5-input-polyfills/number-polyfill",
                 "jquery.zclip": 'js/vendor/jquery.zclip.min',
                 "jquery.immediateDescendents": "coffee/src/jquery.immediateDescendents",
-                "jquery.gotoTop": 'js/vendor/jquery.gotoTop',
+                //"jquery.gotoTop": 'js/vendor/jquery.gotoTop',
                 "datepair": "js/vendor/timepicker/datepair",
                 "date": "js/vendor/date",
                 "tzAbbr": "js/vendor/tzAbbr",
@@ -159,10 +159,10 @@
                     deps: ["jquery", "tinymce"],
                     exports: "jQuery.fn.tinymce"
                 },
-                "jquery.gotoTop": {
-                    deps: ["jquery"],
-                    exports: "jQuery.fn.gotoTop"
-                },
+               //   "jquery.gotoTop": {
+                 //     deps: ["jquery"],
+                //      exports: "jQuery.fn.gotoTop"
+                 // },
                 "datepair": {
                     deps: ["jquery.ui", "jquery.timepicker"]
                 },
@@ -250,7 +250,7 @@
 
     ## jquery resize content height and goto top
     <script type="text/javascript">
-        require(['jquery', 'jquery.gotoTop'], function($){
+        require(['jquery'], function($){
             // set default min height of content
             var min_height = 618;
             var balance_height = $(window).height();
@@ -269,14 +269,6 @@
 
             $('div#content').css('min-height', (balance_height + 'px'));
 
-            // get current body width
-            var set_width = $(document.body).width();
-            $(window).bind('scroll resize', function(){
-                $('.backToTop').goToTop({
-                    pageWidth: set_width,
-                    duration: 300
-                });
-            });
         });
     </script>
 
