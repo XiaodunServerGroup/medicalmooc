@@ -3,7 +3,7 @@ $(document).ready(function () {
   var dropdownMenuToggle = $('a.dropdown');
   var dropdownMenu = $('ul.dropdown-menu');
   var menuItems = dropdownMenu.find('a');
-  
+
   // bind menu toggle click for later use
   dropdownMenuToggle.toggle(function() {
     dropdownMenu.addClass("expanded").find('a').first().focus();

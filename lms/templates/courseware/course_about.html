@@ -196,8 +196,8 @@
                                 </a>
                             %endif
                         %else:
-                                <a href="/login" class="u-btn-orange">注册课程</a>
-                                <div id="register_error" style='clear: both;'></div>
+                              <a class="register free ${'auth' if user.is_authenticated else ''}"><span class="u-btn-orange">注册课程</span></a>
+                              <div id="register_error" style='clear: both;'></div>
                         %endif
                         </div>
                     </div>
