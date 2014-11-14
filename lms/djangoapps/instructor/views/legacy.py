@@ -742,7 +742,7 @@ def instructor_dashboard(request, course_id):
     # email
 
     # elif action == 'Send email':
-    elif action == 'Send email':
+    elif action == '发送邮件':
         print '----------------debug------------------------------'
         email_to_option = request.POST.get("to_option")
         email_subject = request.POST.get("subject")
@@ -773,7 +773,7 @@ def instructor_dashboard(request, course_id):
                     "to send all emails."
                 )
             else:
-                text = _u('Your email was successfully queued for sending.')
+                text = _u('你的电子邮件已成功加入发送队列.')
             email_msg = '<div class="msg msg-confirm"><p class="copy">{text}</p></div>'.format(text=text)
 
     elif "Show Background Email Task History" in action:

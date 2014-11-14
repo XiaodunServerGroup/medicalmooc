@@ -564,7 +564,7 @@ function goto( mode)
 	<b>${_("A queued email CANNOT be cancelled.")}</b></p>
       </div>
       <br />
-      <input type="submit" onclick="this.value='Send email'" name="action" value="发送邮件">
+      <input type="submit" onclick="this.value='发送邮件'" name="action" value="发送邮件">
     </div>
     <script type="text/javascript">
       $(document).ready(function(){
@@ -626,6 +626,16 @@ function goto( mode)
         var emailEditor = XBlock.initializeBlock($('.xblock-studio_view'));
         document.idashform.onsubmit = function() {
           this.message.value = emailEditor.save()['data'];
+          if(this.student.value==''){
+            alert("收件人地址不能为空")
+            return false;
+          }else if (this.subject.value == ''){
+            alert("邮件主题不能为空")
+            return false;
+          }else if (this.message.value == ''){
+            alert("邮件内容不能为空")
+            return false;
+          }          
           return true;
         }
       });
