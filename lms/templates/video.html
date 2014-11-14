@@ -76,18 +76,11 @@
   <!--</ul>-->
 </div>
 
-% if settings.STATIC_URL == '/static/':
-     <script type="text/javascript" src="/static/js/jwplayer/jwplayer6.6/jwplayer.flash.swf"></script>
-     <script type="text/javascript" src="/static/js/jwplayer/jwplayer6.6/jwplayer.js"></script>
-     <script type="text/javascript" src="/static/js/jwplayer/jwplayer6.6/jwplayer.html5.js"></script>
- % else:
-    <script type="text/javascript" src="/static//js/jwplayer/jwplayer6.6/jwplayer.flash.swf"></script>
-    <script type="text/javascript" src="/static//js/jwplayer/jwplayer6.6/jwplayer.js"></script>
-    <script type="text/javascript" src="/static//js/jwplayer/jwplayer6.6/jwplayer.html5.js"></script>
-%endif
+     <script type="text/javascript" src="${static.url('static/js/jwplayer/jwplayer6.6/jwplayer.flash.swf')}"></script>
+     <script type="text/javascript" src="${static.url('static/js/jwplayer/jwplayer6.6/jwplayer.js')}"></script>
+     <script type="text/javascript" src="${static.url('static/js/jwplayer/jwplayer6.6/jwplayer.html5.js')}"></script>
+
 <script type="text/javascript">
-
-
 
 setTimeout(function(){
          jwplayer("myElement_${id}").setup({
