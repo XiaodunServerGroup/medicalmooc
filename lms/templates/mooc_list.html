@@ -64,11 +64,11 @@
                                 %if courses[co]['shortbio'] == 'None':
                                     <p>教师暂无简介</p>
                                 %else:
-                                    <p>${courses[co]['shortbio']}</p>
+                                    <p>${courses[co]['shortbio'][0:30]}</p>
                                 %endif
                                 </div>
                                %if courses[co]['short_description']:
-                                    <p>${courses[co]['short_description']}</p>
+                                    <p>${courses[co]['short_description'][0:80]}</p>
                                %else:
                                     <p>课程暂无简介</p>
                                %endif
