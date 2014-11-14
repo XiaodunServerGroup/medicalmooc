@@ -64,7 +64,7 @@
                                 %if courses[co]['shortbio'] == 'None':
                                     <p>教师暂无简介</p>
                                 %else:
-                                    <p>${courses[co]['shortbio'][0:30]}</p>
+                                    <p>${courses[co]['shortbio'].decode('utf-8')[:30]}</p>
                                 %endif
                                 </div>
                                %if courses[co]['short_description']:
@@ -112,7 +112,7 @@
                                     %if course_later[col]['shortbio'] == 'None':
                                         <p>教师暂无简介</p>
                                     %else:
-                                        <p>${course_later[col]['shortbio'][0:30]}</p>
+                                        <p>${course_later[col]['shortbio'].decode('utf-8')[:30]}</p>
                                     %endif
                                 </div>
                                    %if course_later[col]['short_description']:
@@ -160,7 +160,7 @@
                                     %if course_advance[coa]['shortbio'] == 'None':
                                         <p>教师暂无简介</p>
                                     %else:
-                                        <p>${course_advance[coa]['shortbio'][0:30]}</p>
+                                        <p>${course_advance[coa]['shortbio'].decode('utf-8')[:30]}</p>
                                     %endif
                                 </div>
                                     %if course_advance[coa]['short_description']:
