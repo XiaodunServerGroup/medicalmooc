@@ -1282,9 +1282,9 @@ def mooc_list(request):
        courses_list = courses_aa
 
     courses = sort_by_announcement(courses_list)
-    courses_later = filter_audited_items_by_later_time(courses)
-    courses_advance = filter_audited_items_by_advance_time(courses)
     cos = filter_audited_items(courses)
+    courses_later = filter_audited_items_by_later_time(cos)
+    courses_advance = filter_audited_items_by_advance_time(cos)
     if len(cos) < 8:
         cos_len = len(cos)
         (cos_list_team) = course_list_team(request, cos_len, cos)
