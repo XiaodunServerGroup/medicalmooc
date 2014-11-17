@@ -1,1 +1,1 @@
-Xiaodun-platform based on edX.
+人卫慕课，基于edx.
