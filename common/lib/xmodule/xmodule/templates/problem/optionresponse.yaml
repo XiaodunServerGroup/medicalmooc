@@ -2,21 +2,16 @@
 metadata:
     display_name: 下拉菜单
     markdown: |
-        Dropdown problems give a limited set of options for students to respond with, and present those options
-        in a format that encourages them to search for a specific answer rather than being immediately presented 
-        with options from which to recognize the correct answer.
+        下拉菜单的问题给出了一组有限的选项让学生回复，并且以某种形式呈现这些选项，帮助他们寻找一个明确的答案，而不是即刻呈现的选项。.
 
-        The answer options and the identification of the correct answer is defined in the <b>optioninput</b> tag.
+        答案选项和正确答案的标识以<b>optioninput</b>标签定义。
 
-        >>Translation between Dropdown and __________ is extremely straightforward:<<
+        >>下拉菜单和__________之间的转换是非常简单的：<<
 
         [[(Multiple Choice), Text Input, Numerical Input, External Response, Image Response]]
 
         [explanation]
-        Multiple Choice also allows students to select from a variety of pre-written responses, although the 
-        format makes it easier for students to read very long response options. Dropdowns also differ
-        slightly because students are more likely to think of an answer and then search for it rather than 
-        relying purely on recognition to answer the question.
+        单项选择也让学生从各种预先写好的回应进行选择，虽然格式更容易为学生阅读。选项​​响应也略有不同，因为学生更容易想到一个答案，然后搜索它，而不是单纯回答这个问题
         [explanation]
 data: |
   <problem>
