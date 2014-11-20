@@ -1249,23 +1249,40 @@ def course_list_team(request, cos_len, cos):
             name = UserProfile.objects.get(user_id=User.objects.get(username=user[0]).id).name
             picurl = UserProfile.objects.get(user_id=User.objects.get(username=user[0]).id).picurl
             shortbio = str(UserProfile.objects.get(user_id=User.objects.get(username=user[0]).id).shortbio)
-            cos_id = cos[i].id
-            (enrollment_number, course_update_date, count) = get_forum_info(request, cos_id, cos[i], 'updates')
-            short_description = get_course_about_section(cos[i], "short_description")
-            course_list_team.append({
-                'id': cos_id,
-                'title': get_course_about_section(cos[i], 'title'),
-                'short_description': short_description,
-                'image_url': course_image_url(cos[i]),
-                'name': name,
-                'picurl': picurl,
-                'shortbio': shortbio,
+        cos_id = cos[i].id
+        short_description = get_course_about_section(cos[i], "short_description")
+        course_list_team.append({
+            'id': cos_id,
+            'title': get_course_about_section(cos[i], 'title'),
+            'short_description': short_description,
+            'image_url': course_image_url(cos[i]),
+            'name': name,
+            'picurl': picurl,
+            'shortbio': shortbio,
+        })
+    return course_list_team
+
+def get_number_count_date(request, cos):
+    context = []
+    if len(cos) < 8:
+        for i in range(0, len(cos)):
+            (enrollment_number, course_update_date, count) = get_forum_info(request, cos[i].id, cos[i], 'updates')
+            context.append({
+                'id': cos[i].id,
                 'enrollment_number': enrollment_number,
                 'course_update_date': course_update_date,
                 'count': count
             })
-    return course_list_team
-
+    else:
+        for i in range(0, 8):
+            (enrollment_number, course_update_date, count) = get_forum_info(request, cos[i].id, cos[i], 'updates')
+            context.append({
+                'id': cos[i].id,
+                'enrollment_number': enrollment_number,
+                'course_update_date': course_update_date,
+                'count': count
+            })
+    return context
 
 def mooc_list(request):
 
@@ -1305,6 +1322,17 @@ def mooc_list(request):
     else:
         cos_len = 8
         (cos_advance_list_team) = course_list_team(request, cos_len, courses_advance)
+
+    if request.is_ajax():
+        context = get_number_count_date(request, cos)
+        context_later = get_number_count_date(request, courses_later)
+        context_advance = get_number_count_date(request, courses_advance)
+        context_list = {
+            'context': context,
+            'context_later': context_later,
+            'context_advance': context_advance
+        }
+        return JsonResponse(context_list)
 
     return render_to_response('mooc_list.html', {'courses': cos_list_team, 'course_later': cos_later_list_team, 'course_advance': cos_advance_list_team})
 

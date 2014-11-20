@@ -12,6 +12,48 @@
 <title>学习平台</title>
 <script type="text/javascript" src="static/js/vendor/jquery.min.js"></script>
 <link href="static/css/vendor/moocheader.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" >
+    $(document).ready(function(){
+        $.get("/mooc_list", function(json){
+                var context = json.context;
+                var context_later = json.context_later;
+                var context_advance = json.context_advance;
+
+                for(var i = 0; i < context.length; i++){
+                    if(context[i]["course_update_date"] != null){
+                        $("#tab1_"+ i + " .left").html(context[i]["course_update_date"]+"更新");
+                    }else{
+                        $("#tab1_"+ i + " .left").html("暂时无更新")
+                    }
+                    $("#tab1_"+ i + " .number").html(context[i]["enrollment_number"]+"听讲");
+                    $("#tab1_"+ i + " .right").html(context[i]["count"]+"讨论");
+                }
+
+                for(var j = 0; j < context_later.length; j++){
+                    if(context_later[j]["course_update_date"] != null){
+                        $("#tab2_"+ j + " .left").html(context_later[j]["course_update_date"]+"更新");
+                    }else{
+                        $("#tab2_"+ j + " .left").html("暂时无更新");
+                    }
+                    $("#tab2_"+ j + " .number").html(context_later[j]["enrollment_number"]+"听讲");
+                    $("#tab2_"+ j + " .right").html(context_later[j]["count"]+"讨论");
+                }
+
+                for(var k = 0; k < context_advance.length; k++){
+                    if(context_advance[k]["course_update_date"] != null){
+                        $("#tab3_"+ k + " .left").html(context_advance[k]["course_update_date"]+"更新");
+                    }else{
+                        $("#tab3_"+ k + " .left").html("暂时无更新");
+                    }
+                    $("#tab3_"+ k + " .number").html(context_advance[k]["enrollment_number"]+"听讲");
+                    $("#tab3_"+ k + " .right").html(context_advance[k]["count"]+"讨论");
+                }
+            }
+        )
+    })
+
+</script>
 </head>
 
 <body>
@@ -41,14 +83,10 @@
                             <div class="img">
                                 <img src="${courses[co]['image_url']}" width="275" height="152"  alt=""/>
                                 <h4>${courses[co]['title']}</h4>
-                                <p>
-                                  %if courses[co]['course_update_date']:
-                                    <span class="left">${courses[co]['course_update_date']}更新</span>
-                                  %else:
-                                    <span class="left">暂时无更新</span>
-                                  %endif
-                                  <span>${courses[co]['enrollment_number']}听讲</span>
-                                  <span class="right">${courses[co]['count']}评论</span>
+                                <p id="tab1_${co}">
+                                  <span class="left"></span>
+                                  <span class="number">听讲</span>
+                                  <span class="right">评论</span>
                                 </p>
                             </div>
                             <div class="text_con3">
@@ -90,14 +128,10 @@
                             <div class="img">
                                 <img src="${course_later[col]['image_url']}" width="275" height="152"  alt=""/>
                                 <h4>${course_later[col]['title']}</h4>
-                                <p>
-                                  %if course_later[col]['course_update_date']:
-                                    <span class="left">${course_later[col]['course_update_date']}更新</span>
-                                  %else:
-                                    <span class="left">暂时无更新</span>
-                                  %endif
-                                  <span>${course_later[col]['enrollment_number']}听讲</span>
-                                  <span class="right">${course_later[col]['count']}评论</span>
+                                <p id="tab2_${col}">
+                                  <span class="left">暂时无更新</span>
+                                  <span class="number">听讲</span>
+                                  <span class="right">评论</span>
                                 </p>
                             </div>
                             <div class="text_con3">
@@ -138,14 +172,10 @@
                             <div class="img">
                                 <img src="${course_advance[coa]['image_url']}" width="275" height="152"  alt=""/>
                                 <h4>${course_advance[coa]['title']}</h4>
-                                <p>
-                                  %if course_advance[coa]['course_update_date']:
-                                    <span class="left">${course_advance[coa]['course_update_date']}更新</span>
-                                  %else:
-                                    <span class="left">暂时无更新</span>
-                                  %endif
-                                  <span>${course_advance[coa]['enrollment_number']}听讲</span>
-                                  <span class="right">${course_advance[coa]['count']}评论</span>
+                                <p id="tab3_${coa}">
+                                  <span class="left">暂时无更新</span>
+                                  <span class="number">听讲</span>
+                                  <span class="right">评论</span>
                                 </p>
                             </div>
                             <div class="text_con3">

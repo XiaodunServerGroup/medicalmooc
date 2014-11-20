@@ -48,7 +48,7 @@ site_status_msg = get_site_status_msg(course_id)
     <!--<a href="${marketing_link('ROOT')}">-->
     <a href="http://www.pmphmooc.com/">
       <%block name="navigation_logo">
-          <img src="${static.url(branding.get_logo_url())}" alt="
+          <img style="width: 250px; height: 52px;" src="${static.url(branding.get_logo_url())}" alt="
           % if course:
           ${course.display_org_with_default | h}: ${course.display_number_with_default | h} ${course.display_name_with_default | h} @
           % endif
