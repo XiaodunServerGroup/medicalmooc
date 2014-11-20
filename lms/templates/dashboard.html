@@ -142,7 +142,7 @@
 
     $("#change_picurl_form").submit(function(){
       var new_picurl = $('#new_picurl_field').val();
-
+      new_picurl=new_picurl.substr(0,7).toLowerCase()=="http://"?new_picurl:"http://"+new_picurl;
       $.post('${reverse("change_picurl")}',
              {"new_picurl":new_picurl},
              function(data) {
