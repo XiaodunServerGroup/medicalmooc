@@ -285,7 +285,7 @@ def courses_list_by_org(request, org):
     
     courses_list = []
     for course in courses:
-        if course.org == org:
+        if course.org.lower() == org.lower():
             courses_list.append(course)
 
     return return_fixed_courses(request, courses_list, None)
