@@ -1043,6 +1043,12 @@ def course_about(request, course_id):
             'shortbio': UserProfile.objects.get(user_id=User.objects.get(username=user).id).shortbio
         })
 
+
+    course_mini_info = course.id.split('/')
+    school_logo_location = StaticContent.compute_location(course_mini_info[0], course_mini_info[1],'school_logo.jpg')
+
+    school_logo_location_href = StaticContent.get_url_path_from_location(school_logo_location)
+
     return render_to_response('courseware/course_about.html',
                               {'course': course,
                                'registered': registered,
@@ -1055,7 +1061,8 @@ def course_about(request, course_id):
                                'is_course_full': is_course_full,
                                'course_duration': course_duration,
                                'course_end': course_end,
-                               'course_dur': course_dur})
+                               'course_dur': course_dur,
+                               'school_logo': school_logo_location_href})
 
 
 @ensure_csrf_cookie
