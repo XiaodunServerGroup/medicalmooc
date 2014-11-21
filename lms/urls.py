@@ -271,13 +271,19 @@ if settings.COURSEWARE_ENABLED:
         #View for mktg site
         url(r'^mktg/(?P<course_id>.*)$',
             'courseware.views.mktg_course_about', name="mktg_about_course"),
-
+        
         # mobile course info url
+        url(r'^mobi/courses-list/org/(?P<org>[\w\-]+)',
+            'courseware.views.courses_list_by_org', name="courses_list_by_org"),
+        url(r'^mobi/courses-list/hot/',
+            'courseware.views.courses_list_by_hot', name="courses_list_by_hot"),   
+        
         url(r'^mobi/courses-list/(?P<action>(homefalls|hot|latest|all|my|rolling|search|sync))',
             'courseware.views.courses_list_handler', name="courses_list_handler"),
-
+                
         url(r'^mobi/courses-list/category/(?P<course_category>[\w\-]+)($|/level/(?P<course_level>[\w\-]+)$)',
             'courseware.views.course_attr_list_handler', name="course_attr_list_handler"),
+                 
 
         #Inside the course
         url(r'^courses/(?P<course_id>[^/]+/[^/]+/[^/]+)/$',

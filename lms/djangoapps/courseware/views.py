@@ -32,6 +32,7 @@ from edxmako.shortcuts import render_to_response, render_to_string
 from django_future.csrf import ensure_csrf_cookie
 from django.views.decorators.cache import cache_control
 from django.db import transaction
+from django.db.models import Count
 from markupsafe import escape
 import django.utils
 
@@ -233,12 +234,12 @@ def return_fixed_courses(request, courses, action=None):
         course_index = (courses.index(index_course) + 1)
     except:
         course_index = 0
+    
+    current_list = courses[course_index:course_index + default_length]
 
-    current_list = courses[course_index:]
-
-    if len(current_list) > default_length:
-        current_list = current_list[0:default_length]
-
+    #if len(current_list) > default_length:
+    #    current_list = current_list[0:default_length]
+    
     course_list = []
     for course in current_list:
         try:
@@ -266,6 +267,56 @@ def course_attr_list_handler(request, course_category, course_level=None):
             continue
 
     return return_fixed_courses(request, courses_list, None)
+
+
+def courses_list_by_org(request, org):
+    """
+    Return courses based by org
+    """
+    try:
+        user = request.user
+    except:
+        user = AnonymousUser()
+
+    if not org:
+        return JsonResponse({"success": False, "errmsg": "params error"})
+    courses = get_courses(user, request.META.get('HTTP_HOST'))
+    courses = sort_and_audited_items(courses)
+    
+    courses_list = []
+    for course in courses:
+        if course.org == org:
+            courses_list.append(course)
+
+    return return_fixed_courses(request, courses_list, None)
+
+
+def courses_list_by_hot(request):
+    """
+    Return courses based by hot
+    """
+    try:
+        user = request.user
+    except:
+        user = AnonymousUser()
+    
+    course_ids = CourseEnrollment.objects.values('course_id').annotate(count=Count('course_id'))
+    
+    course_enrollment_count = {}
+    for item in course_ids:
+        course_id = item.get('course_id', '')
+        if course_id:
+            course_enrollment_count[course_id] = item.get('count', 0)
+            
+            
+    courses = get_courses(user, request.META.get('HTTP_HOST'))
+    for course in courses:
+        course.enrollment_count = course_enrollment_count.get(course.id, 0)
+    
+    courses.sort(key=lambda c: -c.enrollment_count)
+    courses = filter_audited_items(courses)
+    
+    return return_fixed_courses(request, courses, None)
 
 
 def courses_list_handler(request, action):
