@@ -220,10 +220,16 @@ def return_fixed_courses(request, courses, action=None):
 
     course_id = request.GET.get("course_id")
     if course_id:
-        course_id = course_id.replace(".", '/')
+        course_id = course_id.replace(".", '/',2)
 
     try:
-        index_course = get_course_by_id(course_id)
+        # index_course = get_course_by_id(course_id)
+        index_course = 0
+        for i in courses:
+            if i.id != None:
+                if i.id == course_id:
+                    index_course = i
+                    break
         course_index = (courses.index(index_course) + 1)
     except:
         course_index = 0
@@ -362,6 +368,12 @@ def mobi_course_info(request, course, action=None):
         user = request.user
     except:
         user = AnonymousUser()
+
+    cp = 0
+    if not hasattr(course,"display_course_price_with_default"):
+        cp = 0
+    else:
+        cp = course.display_course_price_with_default
 
     result = {
         "id": course.id.replace('/', '.'),
