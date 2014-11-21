@@ -291,34 +291,6 @@ def courses_list_by_org(request, org):
     return return_fixed_courses(request, courses_list, None)
 
 
-def courses_list_by_hot(request):
-    """
-    Return courses based by hot
-    """
-    try:
-        user = request.user
-    except:
-        user = AnonymousUser()
-    
-    course_ids = CourseEnrollment.objects.values('course_id').annotate(count=Count('course_id'))
-    
-    course_enrollment_count = {}
-    for item in course_ids:
-        course_id = item.get('course_id', '')
-        if course_id:
-            course_enrollment_count[course_id] = item.get('count', 0)
-            
-            
-    courses = get_courses(user, request.META.get('HTTP_HOST'))
-    for course in courses:
-        course.enrollment_count = course_enrollment_count.get(course.id, 0)
-    
-    courses.sort(key=lambda c: -c.enrollment_count)
-    courses = filter_audited_items(courses)
-    
-    return return_fixed_courses(request, courses, None)
-
-
 def courses_list_handler(request, action):
     """
     Return courses based on request params
@@ -365,6 +337,23 @@ def courses_list_handler(request, action):
                 for c in courses:
                     if keyword in c.org or keyword in c.id or keyword in c.display_name_with_default:
                         courses_list.append(c)
+        elif action == 'hot':
+            course_ids = CourseEnrollment.objects.values('course_id').annotate(count=Count('course_id'))
+    
+            course_enrollment_count = {}
+            for item in course_ids:
+                course_id = item.get('course_id', '')
+                if course_id:
+                    course_enrollment_count[course_id] = item.get('count', 0)
+                    
+                    
+            courses = get_courses(user, request.META.get('HTTP_HOST'))
+            for course in courses:
+                course.enrollment_count = course_enrollment_count.get(course.id, 0)
+            
+            courses.sort(key=lambda c: -c.enrollment_count)
+            courses_list = filter_audited_items(courses)
+            
         else:
             courses_list = courses
 

@@ -275,8 +275,6 @@ if settings.COURSEWARE_ENABLED:
         # mobile course info url
         url(r'^mobi/courses-list/org/(?P<org>[\w\-]+)',
             'courseware.views.courses_list_by_org', name="courses_list_by_org"),
-        url(r'^mobi/courses-list/hot/',
-            'courseware.views.courses_list_by_hot', name="courses_list_by_hot"),   
         
         url(r'^mobi/courses-list/(?P<action>(homefalls|hot|latest|all|my|rolling|search|sync))',
             'courseware.views.courses_list_handler', name="courses_list_handler"),
