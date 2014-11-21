@@ -1,3 +1,4 @@
+from django.views.generic.simple import *
 from django.conf import settings
 from django.conf.urls import patterns, include, url
 from xmodule.modulestore import parsers
@@ -118,6 +119,10 @@ urlpatterns += patterns(
     url(r'(?ix)^mobi/course-list/search/(?P<keyword>[^/]+)$', 'mobi_search'),
     url(r'(?ix)^mobi/course-list/(?P<datatype>(homefalls|hot|latest|all|my))($|/version$)', 'mobi_course_handler'),
     url(r'(?ix)^mobi/course/(?P<course_id>[\w\-~.:]+)($|/(?P<action>(structure|updates|handouts))($|/))', 'mobi_course_info_handler'),
+)
+urlpatterns += (
+    url(r'^common/vplayer.html', "contentstore.views.public.render",
+        {'template': 'vplayer.html'}, name="vplayer"),
 )
 
 js_info_dict = {
