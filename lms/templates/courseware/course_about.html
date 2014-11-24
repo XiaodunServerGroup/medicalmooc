@@ -139,6 +139,7 @@
         	<div class="container_pad">
                 <div class="course_left">
                     <!--<h2><img src="${course_image_url(course)}" width="228" height="80"  alt=""/></h2>-->
+                    <img id="school_logo_img" src="${school_logo}" width="230" height="90" style="display:none" alt=""/>
                     <h3 class="title">${get_course_about_section(course, "title")}</h3>
                     <p>${get_course_about_section(course, "short_description")}</p>
                 </div>
@@ -334,5 +335,9 @@
 						document.getElementById("shou").innerHTML="展开&nbsp;∨";
 					}
 			)
+
+			$.get($("#school_logo_img").attr("src"), function(result, textStatus){
+                $("#school_logo_img").css("display","block");
+            });
 	})
 </script>

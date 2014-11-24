@@ -1,0 +1,25 @@
+<%namespace name='static' file='static_content.html'/>
+<!doctype html>
+<html>
+<head>
+<title>common video player</title>
+
+<script src="${static.url('js/jwplayer/jwplayer6.6/jwplayer.js')}"></script>
+<script src="${static.url('js/jwplayer/jwplayer6.6/jwplayer.html5.js')}"></script>
+<script src="${static.url('js/jwplayer.js')}"></script>
+</head><body>
+
+<div id="myElement">Loading the player...</div>
+
+<script type="text/javascript">
+    l = window.location.href;
+    vurl = l.substring(l.indexOf("url=")+4);
+
+    jwplayer("myElement").setup({
+        file: vurl,
+        height: 295,
+        width: 540
+    });
+</script>
+</body>
+</html>

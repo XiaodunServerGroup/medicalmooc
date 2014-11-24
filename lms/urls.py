@@ -121,6 +121,10 @@ urlpatterns += (
     url(r'^common/header2.js$', 'static_template_view.views.render',
         {'template': 'common_header_barjs2.html'}, name="common_header_barjs2"),
 )
+urlpatterns += (
+    url(r'^common/vplayer.html', 'static_template_view.views.render',
+        {'template': 'vplayer.html'}, name="vplayer"),
+)
 # Semi-static views only used by edX, not by themes
 if not settings.FEATURES["USE_CUSTOM_THEME"]:
     urlpatterns += (

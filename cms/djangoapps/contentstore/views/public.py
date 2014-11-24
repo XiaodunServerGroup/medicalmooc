@@ -97,3 +97,8 @@ def howitworks(request):
         return redirect('/course')
     else:
         return render_to_response('howitworks.html', {})
+
+
+
+def render(request, template):
+    return render_to_response( template, {})
