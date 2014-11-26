@@ -15,6 +15,7 @@ import socket
 import urllib2
 from suds.client import Client
 import xmltodict
+import  json
 
 from collections import defaultdict
 
@@ -248,7 +249,7 @@ def return_fixed_courses(request, courses, action=None):
         except:
             continue
 
-    import  json
+
     return  HttpResponse("callback("+json.dumps({"count": len(courses), "course-list": course_list})+")", content_type="application/json")
 
 def course_attr_list_handler(request, course_category, course_level=None):
