@@ -248,8 +248,8 @@ def return_fixed_courses(request, courses, action=None):
         except:
             continue
 
-    return JsonResponse({"count": len(courses), "course-list": course_list})
-
+    import  json
+    return  HttpResponse("callback("+json.dumps({"count": len(courses), "course-list": course_list})+")", content_type="application/json")
 
 def course_attr_list_handler(request, course_category, course_level=None):
 
