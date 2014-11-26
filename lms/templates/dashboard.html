@@ -157,7 +157,10 @@
 
     $("#change_shortbio_form").submit(function(){
       var new_shortbio = $('#new_shortbio_field').val();
-
+      if(new_shortbio.length > 1000 ){
+        alert("您输入的字数为" + new_shortbio.length + "字,已经超过限制的1000字,请输入少于1000字的简介");
+        return false;
+      }
       $.post('${reverse("change_shortbio")}',
              {"new_shortbio":new_shortbio},
              function(data) {
