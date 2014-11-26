@@ -96,7 +96,7 @@ msgstr[0] ""
 #: common/lib/xmodule/xmodule/js/src/capa/display.js:86
 msgid "(%(num_points)s point possible)"
 msgid_plural "(%(num_points)s points possible)"
-msgstr[0] "%(num_points)s 是可能获得的分数(比如: 1, 3, 10). 这里默认至少有一分.;"
+msgstr[0] "本组件最高能获得%(num_points)s分"
 
 #. Translators: the word Answer here refers to the answer to a problem the
 #. student must solve.;
