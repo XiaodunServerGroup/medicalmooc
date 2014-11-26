@@ -230,7 +230,7 @@
                         <li style="list-style-type:none">
                 				<h3>${course_team[n]['name']}</h3>
                             %if course_team[n]['shortbio']:
-                                <span id="shou">展开&nbsp;∨</span>
+                                <span class="shou">展开&nbsp;∨</span>
                 				    <div class="p1" style="display:none;">${course_team[n]['shortbio']}</div>
                             %else:
                                 <span id="" style="display:none">展开&nbsp;∨</span>
@@ -324,7 +324,7 @@
 </style>
 <script>
 	$(function (){
-			$("#shou").toggle(
+			$(".shou").toggle(
 				function(){
 						$(this).siblings(".p1").attr("style","display:block");
 						$(this).addClass("");
