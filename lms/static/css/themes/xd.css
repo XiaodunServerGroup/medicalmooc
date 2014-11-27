@@ -290,7 +290,7 @@ html .ui-bar-a .ui-btn:visited,
 html .ui-body-a .ui-btn:visited,
 html body .ui-group-theme-a .ui-btn:visited,
 html head + body .ui-btn.ui-btn-a:visited {
-	background-color: #ff7200 /*{a-bup-background-color}*/;
+	background-color: #2883bc /*{a-bup-background-color}*/;
 	border-color: #dddddd /*{a-bup-border}*/;
 	color: #ffffff /*{a-bup-color}*/;
 	text-shadow: 0 /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #f3f3f3 /*{a-bup-shadow-color}*/;
@@ -301,7 +301,7 @@ html .ui-bar-a .ui-btn:hover,
 html .ui-body-a .ui-btn:hover,
 html body .ui-group-theme-a .ui-btn:hover,
 html head + body .ui-btn.ui-btn-a:hover {
-	background-color: #ff923a /*{a-bhover-background-color}*/;
+	background-color: #2e9add /*{a-bhover-background-color}*/;
 	border-color: #dddddd /*{a-bhover-border}*/;
 	color: #ffffff /*{a-bhover-color}*/;
 	text-shadow: 0 /*{a-bhover-shadow-x}*/ 1px /*{a-bhover-shadow-y}*/ 0 /*{a-bhover-shadow-radius}*/ #f3f3f3 /*{a-bhover-shadow-color}*/;
@@ -341,10 +341,10 @@ html .ui-bar-a .ui-slider-track .ui-btn-active,
 html .ui-body-a .ui-slider-track .ui-btn-active,
 html body .ui-group-theme-a .ui-slider-track .ui-btn-active,
 html body div.ui-slider-track.ui-body-a .ui-btn-active {
-	background-color: #ff7200 /*{a-active-background-color}*/;
-	border-color: #ff7200 /*{a-active-border}*/;
+	background-color: #2883bc /*{a-active-background-color}*/;
+	border-color: #2883bc /*{a-active-border}*/;
 	color: #ffffff /*{a-active-color}*/;
-	text-shadow: 0 /*{a-active-shadow-x}*/ 1px /*{a-active-shadow-y}*/ 0 /*{a-active-shadow-radius}*/ #ff7200 /*{a-active-shadow-color}*/;
+	text-shadow: 0 /*{a-active-shadow-x}*/ 1px /*{a-active-shadow-y}*/ 0 /*{a-active-shadow-radius}*/ #2883bc /*{a-active-shadow-color}*/;
 }
 /* Active radio button icon */
 .ui-page-theme-a .ui-radio-on:after,
@@ -352,7 +352,7 @@ html .ui-bar-a .ui-radio-on:after,
 html .ui-body-a .ui-radio-on:after,
 html body .ui-group-theme-a .ui-radio-on:after,
 .ui-btn.ui-radio-on.ui-btn-a:after {
-	border-color: #ff7200 /*{a-active-background-color}*/;
+	border-color: #2883bc /*{a-active-background-color}*/;
 }
 /* Focus */
 .ui-page-theme-a .ui-btn:focus,
@@ -367,9 +367,9 @@ html .ui-body-a .ui-focus,
 html body .ui-group-theme-a .ui-focus,
 html head + body .ui-btn-a.ui-focus,
 html head + body .ui-body-a.ui-focus {
-	-webkit-box-shadow: 0 0 12px #ff7200 /*{a-active-background-color}*/;
-	-moz-box-shadow: 0 0 12px #ff7200 /*{a-active-background-color}*/;
-	box-shadow: 0 0 12px #ff7200 /*{a-active-background-color}*/;
+	-webkit-box-shadow: 0 0 12px #2883bc /*{a-active-background-color}*/;
+	-moz-box-shadow: 0 0 12px #2883bc /*{a-active-background-color}*/;
+	box-shadow: 0 0 12px #2883bc /*{a-active-background-color}*/;
 }
 /* B
 -----------------------------------------------------------------------------------------------------------*/
@@ -616,7 +616,7 @@ html .ui-bar-c .ui-btn:visited,
 html .ui-body-c .ui-btn:visited,
 html body .ui-group-theme-c .ui-btn:visited,
 html head + body .ui-btn.ui-btn-c:visited {
-	background-color: #ff7200 /*{c-bup-background-color}*/;
+	background-color: #2883bc /*{c-bup-background-color}*/;
 	border-color: #ffe4cf /*{c-bup-border}*/;
 	color: #ffffff /*{c-bup-color}*/;
 	text-shadow: 0 /*{c-bup-shadow-x}*/ 1px /*{c-bup-shadow-y}*/ 0 /*{c-bup-shadow-radius}*/ #f3f3f3 /*{c-bup-shadow-color}*/;
@@ -627,7 +627,7 @@ html .ui-bar-c .ui-btn:hover,
 html .ui-body-c .ui-btn:hover,
 html body .ui-group-theme-c .ui-btn:hover,
 html head + body .ui-btn.ui-btn-c:hover {
-	background-color: #ff923a /*{c-bhover-background-color}*/;
+	background-color: #2e9add /*{c-bhover-background-color}*/;
 	border-color: #ffe4cf /*{c-bhover-border}*/;
 	color: #ffffff /*{c-bhover-color}*/;
 	text-shadow: 0 /*{c-bhover-shadow-x}*/ 1px /*{c-bhover-shadow-y}*/ 0 /*{c-bhover-shadow-radius}*/ #f3f3f3 /*{c-bhover-shadow-color}*/;
@@ -638,7 +638,7 @@ html .ui-bar-c .ui-btn:active,
 html .ui-body-c .ui-btn:active,
 html body .ui-group-theme-c .ui-btn:active,
 html head + body .ui-btn.ui-btn-c:active {
-	background-color: #ff7200 /*{c-bdown-background-color}*/;
+	background-color: #2883bc /*{c-bdown-background-color}*/;
 	border-color: #ffe4cf /*{c-bdown-border}*/;
 	color: #ffffff /*{c-bdown-color}*/;
 	text-shadow: 0 /*{c-bdown-shadow-x}*/ 1px /*{c-bdown-shadow-y}*/ 0 /*{c-bdown-shadow-radius}*/ #f3f3f3 /*{c-bdown-shadow-color}*/;
@@ -667,7 +667,7 @@ html .ui-bar-c .ui-slider-track .ui-btn-active,
 html .ui-body-c .ui-slider-track .ui-btn-active,
 html body .ui-group-theme-c .ui-slider-track .ui-btn-active,
 html body div.ui-slider-track.ui-body-c .ui-btn-active {
-	background-color: #ff7200 /*{c-active-background-color}*/;
+	background-color: #2883bc /*{c-active-background-color}*/;
 	border-color: #ffe4cf /*{c-active-border}*/;
 	color: #ffffff /*{c-active-color}*/;
 	text-shadow: 0 /*{c-active-shadow-x}*/ 1px /*{c-active-shadow-y}*/ 0 /*{c-active-shadow-radius}*/ #c65900 /*{c-active-shadow-color}*/;
@@ -678,7 +678,7 @@ html .ui-bar-c .ui-radio-on:after,
 html .ui-body-c .ui-radio-on:after,
 html body .ui-group-theme-c .ui-radio-on:after,
 .ui-btn.ui-radio-on.ui-btn-c:after {
-	border-color: #ff7200 /*{c-active-background-color}*/;
+	border-color: #2883bc /*{c-active-background-color}*/;
 }
 /* Focus */
 .ui-page-theme-c .ui-btn:focus,
@@ -693,9 +693,9 @@ html .ui-body-c .ui-focus,
 html body .ui-group-theme-c .ui-focus,
 html head + body .ui-btn-c.ui-focus,
 html head + body .ui-body-c.ui-focus {
-	-webkit-box-shadow: 0 0 12px #ff7200 /*{c-active-background-color}*/;
-	-moz-box-shadow: 0 0 12px #ff7200 /*{c-active-background-color}*/;
-	box-shadow: 0 0 12px #ff7200 /*{c-active-background-color}*/;
+	-webkit-box-shadow: 0 0 12px #2883bc /*{c-active-background-color}*/;
+	-moz-box-shadow: 0 0 12px #2883bc /*{c-active-background-color}*/;
+	box-shadow: 0 0 12px #2883bc /*{c-active-background-color}*/;
 }
 
 
