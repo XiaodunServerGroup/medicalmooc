@@ -1349,6 +1349,7 @@ def get_number_count_date(request, cos):
             })
     return context
 
+
 def mooc_list(request):
 
     q = request.GET.get('query', '')
@@ -1365,14 +1366,26 @@ def mooc_list(request):
 
     courses = sort_by_announcement(courses_list)
     cos = filter_audited_items(courses)
+
+    course_enrollment_count = {}
+    for item in courses:
+        course_id= item.id
+        enrollment_number = CourseEnrollment.num_enrolled_in(course_id)
+        course_enrollment_count[course_id] =enrollment_number
+
+    for course in courses:
+        course.enrollment_count = course_enrollment_count.get(course.id, 0)
+    courses.sort(key=lambda c: -c.enrollment_count)
+    courses_list = filter_audited_items(courses)
+
     courses_later = filter_audited_items_by_later_time(cos)
     courses_advance = filter_audited_items_by_advance_time(cos)
-    if len(cos) < 8:
-        cos_len = len(cos)
-        (cos_list_team) = course_list_team(request, cos_len, cos)
+    if len(courses_list) < 8:
+        cos_len = len(courses_list)
+        (cos_list_team) = course_list_team(request, cos_len, courses_list)
     else:
         cos_len = 8
-        (cos_list_team) = course_list_team(request, cos_len, cos)
+        (cos_list_team) = course_list_team(request, cos_len, courses_list)
 
     if len(courses_later) < 8:
         cos_len = len(courses_later)
@@ -1389,7 +1402,7 @@ def mooc_list(request):
         (cos_advance_list_team) = course_list_team(request, cos_len, courses_advance)
 
     if request.is_ajax():
-        context = get_number_count_date(request, cos)
+        context = get_number_count_date(request, courses_list)
         context_later = get_number_count_date(request, courses_later)
         context_advance = get_number_count_date(request, courses_advance)
         context_list = {
@@ -1459,3 +1472,4 @@ def get_threads_new(request, course_id, discussion_id=None, per_page=20):
     query_params['num_pages'] = num_pages
 
     return threads, query_params
+
