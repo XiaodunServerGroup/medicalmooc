@@ -2,7 +2,6 @@
 import Queue
 
 import copy
-from email.mime.text import MIMEText
 import logging
 import re
 
@@ -22,6 +21,9 @@ from xmodule.course_module import CourseDescriptor
 from xmodule.modulestore.draft import DIRECT_ONLY_CATEGORIES
 from student.roles import CourseInstructorRole, CourseStaffRole
 from cms.envs.common import DEFAULT_FROM_EMAIL, EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
 
 
 log = logging.getLogger(__name__)
@@ -279,7 +281,7 @@ class send_mail_update(threading.Thread):
             if self.queue.empty():break
             to_list = self.queue.get()
             me = DEFAULT_FROM_EMAIL
-            msg = MIMEText(self.content, _charset="utf-8")
+            msg = MIMEText(self.content,'html', "utf-8")
             msg['Subject'] = self.sub
             msg['From'] = me
             msg['To'] = to_list
