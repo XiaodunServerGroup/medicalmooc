@@ -1076,6 +1076,7 @@ def students_filter(students):
             context = {
                 'name': post_vars['name'],
                 'key': registration.activation_key,
+                'username': user.username,
                 }
 
             print '----------------------debug-------------------------'

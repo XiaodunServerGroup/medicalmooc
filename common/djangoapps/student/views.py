@@ -1485,6 +1485,7 @@ def mobi_create_account(request, post_override=None):
     context = {
         'name': post_vars['name'],
         'key': registration.activation_key,
+        'username': user.username,
     }
 
     # composes activation email
@@ -1955,7 +1956,8 @@ def reactivation_email_for_user(user):
     context = {
         'name': user.profile.name,
         'key': reg.activation_key,
-    }
+        'username': user.username,
+     }
 
     subject = render_to_string('emails/activation_email_subject.txt', context)
     subject = ''.join(subject.splitlines())
