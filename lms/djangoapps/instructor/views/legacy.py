@@ -1681,20 +1681,13 @@ def send_mail_to_student(student, param_dict):
         'allowed_unenroll': ('emails/unenroll_email_subject.txt', 'emails/unenroll_email_allowedmessage.txt'),
         'enrolled_unenroll': ('emails/unenroll_email_subject.txt', 'emails/unenroll_email_enrolledmessage.txt'),
     }
-    if message_type=='enrolled_enroll':
-        url=param_dict['course_url'].replace('https','http')
-        subject='您已被邀请加入{course_name}课程'.format(course_name=param_dict['course_name'])
-        message ="""亲爱的 {full_name}
-                 您被邀请参加{course_name}课程
-                 课程将会出现在您的{site_name}面板中
-                 要开始学习课程, 请访问 {course_url}
-                 这封邮件通过系统自动发送""".format(full_name=param_dict['full_name'],course_name=param_dict['course_name'],site_name=param_dict['site_name'],course_url=url)
+    if  message_type=='enrolled_enroll':
+        param_dict['course_url'] = param_dict['course_url'].replace('https','http')
+    subject_template, message_template = email_template_dict.get(message_type, (None, None))
 
-    else:
-        subject_template, message_template = email_template_dict.get(message_type, (None, None))
-        if subject_template is not None and message_template is not None:
-            subject = render_to_string(subject_template, param_dict)
-            message = render_to_string(message_template, param_dict)
+    if subject_template is not None and message_template is not None:
+        subject = render_to_string(subject_template, param_dict)
+        message = render_to_string(message_template, param_dict)
 
     if subject and message:
         # Remove leading and trailing whitespace from body
