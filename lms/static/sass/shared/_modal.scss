@@ -26,14 +26,14 @@
   &.video-modal {
     left: 50%;
     padding: 10px;
-    width: 582px;
+    width: 546px;
 
     .inner-wrapper {
       background: #000;
       box-shadow: none;
-      height: 315px;
-      padding: 10px;
-      width: 560px;
+      height: 295px;
+      //padding: 10px;
+      width: 544px;
     }
   }
 
@@ -57,9 +57,9 @@
     border: 1px solid rgba(0, 0, 0, 0.9);
     box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.7);
     overflow: hidden;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 10px;
+    //padding-left: 10px;
+    //padding-right: 10px;
+    //padding-bottom: 10px;
     position: relative;
     z-index: 2;
 
