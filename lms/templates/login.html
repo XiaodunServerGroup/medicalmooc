@@ -15,6 +15,14 @@
 
       // adding js class for styling with accessibility in mind
       $('body').addClass('js');
+        flag = "${flag}";
+       if(flag==1){
+           $('.message.submission-error').addClass('is-shown').focus();
+           jsonrv="感谢您的注册,我们已经给您发送了关于账户激活的电子邮件，请注意查收";
+           $('.message.submission-error .message-copy').html(jsonrv);
+           $('.message-title').hide();
+//            $('.status message submission-error').show()
+        }
 
       // show forgot password modal UI if URL contains matching DOM ID
       if ($.deparam.fragment()['forgot-password-modal'] !== undefined) {
@@ -48,6 +56,7 @@
       toggleSubmitButton(true);
 
       $('#login-form').on('submit', function() {
+        $('.message-title').show();
         toggleSubmitButton(false);
       });
 
@@ -179,14 +188,14 @@
 
       <!-- status messages -->
       <div role="alert" class="status message">
-        <h3 class="message-title">${_("We're Sorry, {platform_name} accounts are unavailable currently").format(platform_name=platform_name)}</h3>
+                <h3 class="message-title">${_("We're Sorry, {platform_name} accounts are unavailable currently").format(platform_name=platform_name)}</h3>
       </div>
 
       <div role="alert" class="status message submission-error" tabindex="-1">
-        <h3 class="message-title">${_("The following errors occurred while logging you in:")} </h3>
-        <ul class="message-copy">
-          <li>${_("Your email or password is incorrect")}</li>
-        </ul>
+          <h3 class="message-title">${_("The following errors occurred while logging you in:")} </h3>
+          <ul class="message-copy">
+              <li>${_("Your email or password is incorrect")}</li>
+          </ul>
       </div>
 
       <p class="instructions sr">
