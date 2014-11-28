@@ -522,6 +522,8 @@ def signin_user(request):
     if request.user.is_authenticated():
         return redirect(reverse('dashboard'))
 
+    flag =request.GET.get('flag',0)
+
     form = CaptchaLoginForm()
 
     if request.is_ajax():
@@ -531,6 +533,7 @@ def signin_user(request):
         return JsonResponse({'captcha_image_url': cpt_image_url})
 
     context = {
+        'flag':flag,
         'course_id': request.GET.get('course_id'),
         'enrollment_action': request.GET.get('enrollment_action'),
         'platform_name': microsite.get_value(
@@ -1694,35 +1697,36 @@ def create_account(request, post_override=None):
     # Immediately after a user creates an account, we log them in. They are only
     # logged in until they close the browser. They can't log in again until they click
     # the activation link from the email.
-    login_user = authenticate(username=post_vars['username'], password=post_vars['password'])
-    login(request, login_user)
-    request.session.set_expiry(0)
-
-    # TODO: there is no error checking here to see that the user actually logged in successfully,
-    # and is not yet an active user.
-    if login_user is not None:
-        AUDIT_LOG.info(u"Login success on new account creation - {0}".format(login_user.username))
-
-    if DoExternalAuth:
-        eamap.user = login_user
-        eamap.dtsignup = datetime.datetime.now(UTC)
-        eamap.save()
-        AUDIT_LOG.info("User registered with external_auth %s", post_vars['username'])
-        AUDIT_LOG.info('Updated ExternalAuthMap for %s to be %s', post_vars['username'], eamap)
-
-        if settings.FEATURES.get('BYPASS_ACTIVATION_EMAIL_FOR_EXTAUTH'):
-            log.info('bypassing activation email')
-            login_user.is_active = True
-            login_user.save()
-            AUDIT_LOG.info(u"Login activated on extauth account - {0} ({1})".format(login_user.username, login_user.email))
-
+#    login_user = authenticate(username=post_vars['username'], password=post_vars['password'])
+#    login(request, login_user)
+#    request.session.set_expiry(0)
+#
+#    # TODO: there is no error checking here to see that the user actually logged in successfully,
+#    # and is not yet an active user.
+#    if login_user is not None:
+#        AUDIT_LOG.info(u"Login success on new account creation - {0}".format(login_user.username))
+#
+#    if DoExternalAuth:
+#        eamap.user = login_user
+#        eamap.dtsignup = datetime.datetime.now(UTC)
+#        eamap.save()
+#        AUDIT_LOG.info("User registered with external_auth %s", post_vars['username'])
+#        AUDIT_LOG.info('Updated ExternalAuthMap for %s to be %s', post_vars['username'], eamap)
+#
+#        if settings.FEATURES.get('BYPASS_ACTIVATION_EMAIL_FOR_EXTAUTH'):
+#            log.info('bypassing activation email')
+#            login_user.is_active = True
+#            login_user.save()
+#            AUDIT_LOG.info(u"Login activated on extauth account - {0} ({1})".format(login_user.username, login_user.email))
+#
     dog_stats_api.increment("common.student.account_created")
 
-    logout(request)
+#    logout(request)
 
     response = JsonResponse({
         'success': True,
-        'redirect_url': try_change_enrollment(request),
+        'redirect_url': '/login?flag=1',
+#        'redirect_url': try_change_enrollment(request),
     })
 
     # set the login cookie for the edx marketing site
@@ -1957,7 +1961,7 @@ def reactivation_email_for_user(user):
         'name': user.profile.name,
         'key': reg.activation_key,
         'username': user.username,
-     }
+    }
 
     subject = render_to_string('emails/activation_email_subject.txt', context)
     subject = ''.join(subject.splitlines())
