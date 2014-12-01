@@ -1,6 +1,6 @@
 ---
 metadata:
-    display_name: 文本框输入
+    display_name: 文本填空题
     markdown: |
         文字输入问题接受学生的文字，根据预期的答案的评估输入的正确性。
 

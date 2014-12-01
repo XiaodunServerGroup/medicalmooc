@@ -1,6 +1,6 @@
 ---
 metadata:
-    display_name: 单选择题
+    display_name: 单项选择题
     markdown: |
       多个问题可供学生选择.学生只能选择提出了一个选项。由于早期发明和采用，单项选择题一直是许多领域的研究对象。
       
