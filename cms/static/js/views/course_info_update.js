@@ -77,7 +77,7 @@ define(["js/views/baseview", "underscore", "codemirror", "js/models/course_updat
                 language_url: tinymce_language_url,
                 plugins: [
                     "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-                    "searchreplace wordcount visualblocks visualchars code",
+                    "searchreplace  visualblocks visualchars code",
                     "insertdatetime media nonbreaking save table contextmenu directionality",
                     "emoticons paste textcolor colorpicker textpattern"
                 ],
@@ -137,7 +137,6 @@ define(["js/views/baseview", "underscore", "codemirror", "js/models/course_updat
             var self = this;
             this.$currentPost = $(event.target).closest('li');
             this.$currentPost.addClass('editing');
-
             $(this.editor(event)).show();
             var $textArea = this.$currentPost.find(".new-update-content").first();
             var targetModel = this.eventModel(event);
@@ -157,7 +156,7 @@ define(["js/views/baseview", "underscore", "codemirror", "js/models/course_updat
                 language_url: tinymce_language_url,
                 plugins: [
                     "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-                    "searchreplace wordcount visualblocks visualchars code",
+                    "searchreplace  visualblocks visualchars code",
                     "insertdatetime media nonbreaking save table contextmenu directionality",
                     "emoticons paste textcolor colorpicker textpattern"
                 ],
