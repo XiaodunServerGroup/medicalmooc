@@ -81,9 +81,14 @@ define(["js/views/baseview", "underscore", "codemirror", "js/models/course_updat
                     "insertdatetime media nonbreaking save table contextmenu directionality",
                     "emoticons paste textcolor colorpicker textpattern"
                 ],
-                toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons",
+                toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor",
 
-                image_advtab: true
+                image_advtab: true,
+                setup: function(editor) {
+                    editor.on('init', function(e) {
+                    	tinymce.activeEditor.setContent($("#"+$textArea.attr('id')).text());
+                    });
+                }
             });
         },
 
@@ -91,7 +96,9 @@ define(["js/views/baseview", "underscore", "codemirror", "js/models/course_updat
             event.preventDefault();
             var targetModel = this.eventModel(event);
             //targetModel.set({ date : this.dateEntry(event).val(), content : this.$codeMirror.getValue() });
-            targetModel.set({ date : this.dateEntry(event).val(), content : tinyMCE.get(this.textarea_id).getContent() });
+            var new_content = tinyMCE.get(this.textarea_id).getContent();
+            targetModel.set({ date : this.dateEntry(event).val(), content : new_content });
+            $("#"+this.textarea_id).text(new_content);
             // push change to display, hide the editor, submit the change
             var saving = new NotificationView.Mini({
                 title: gettext('Saving&hellip;')
@@ -122,6 +129,7 @@ define(["js/views/baseview", "underscore", "codemirror", "js/models/course_updat
             // we wish to remove it from the DOM.
             var targetModel = this.eventModel(event);
             this.closeEditor(!targetModel.id);
+            tinymce.remove();
         },
 
         onEdit: function(event) {
@@ -153,9 +161,15 @@ define(["js/views/baseview", "underscore", "codemirror", "js/models/course_updat
                     "insertdatetime media nonbreaking save table contextmenu directionality",
                     "emoticons paste textcolor colorpicker textpattern"
                 ],
-                toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons",
+                toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor",
 
-                image_advtab: true
+                image_advtab: true,
+                
+                setup: function(editor) {
+                    editor.on('init', function(e) {
+                    	tinymce.activeEditor.setContent($("#"+$textArea.attr('id')).text());
+                    });
+                }
             });
         },
 
