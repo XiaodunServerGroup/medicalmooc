@@ -1,6 +1,6 @@
 ---
 metadata:
-    display_name: 数值输入
+    display_name: 计算填空题
     markdown: |
        一个数字输入问题接受学生的文字输入，并根据其数值评估输入的正确性。
 

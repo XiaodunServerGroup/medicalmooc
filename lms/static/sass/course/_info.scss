@@ -80,10 +80,14 @@ div.info-wrapper {
     > section {
       > article {
         margin-top: 30px;
+        border-bottom: 1px solid #cbd1db;
+        padding-bottom: 30px;
       }
 
       > article:first-child {
         margin-top: 0px;
+        border-bottom: 1px solid #cbd1db;
+        padding-bottom: 30px;
       }
     }
   }

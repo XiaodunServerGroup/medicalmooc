@@ -1,17 +1,12 @@
 <%! from django.utils.translation import ugettext as _ %>
 
-${_("Dear {full_name}").format(full_name=full_name)}
+${"亲爱的 {full_name}：".format(full_name=full_name)}
 
-${_("You have been un-enrolled in {course_name} at {site_name} by a member "
-    "of the course staff. The course will no longer appear on your "
-    "{site_name} dashboard.").format(
-    	course_name=course.display_name_with_default, site_name=site_name
+${"您已退出课程 {course_name} 。这门课程将不会出现在您的课程列表中。".format(
+    	course_name=course.display_name_with_default
     )}
 
-${_("Your other courses have not been affected.")}
+${"您的其它课程不受影响。"}
 
 ----
-${_("This email was automatically sent from {site_name} to "
-	"{full_name}").format(
-    	full_name=full_name, site_name=site_name
-    )}
+${"这封邮件由系统自动发送，请勿回复。"}

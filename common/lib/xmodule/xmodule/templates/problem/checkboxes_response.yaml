@@ -1,6 +1,6 @@
 ---
 metadata:
-    display_name: 复选框
+    display_name: 多项选择题
     markdown: |
       复选框问题供学生选择. 学生可选择一个或者多个.
       >>选择正确的答案<<

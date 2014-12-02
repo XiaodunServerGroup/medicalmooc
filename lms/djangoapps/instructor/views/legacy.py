@@ -695,7 +695,7 @@ def instructor_dashboard(request, course_id):
 
     elif action == 'List students who may enroll but may not have yet signed up':
         ceaset = CourseEnrollmentAllowed.objects.filter(course_id=course_id)
-        datatable = {'header': ['StudentEmail']}
+        datatable = {'header': ['学生电子邮件']}
         datatable['data'] = [[x.email] for x in ceaset]
         datatable['title'] = action
 
@@ -1038,15 +1038,30 @@ def _do_create_student(post_vars):
 
     return (user, profile, registration)
 
-def students_filter(students):
+def rand_list(username):
+    import random
+    rand_list_number=[str(i) for i in range(0,10) ]
+    rand_list_Letter=[chr(i) for i in range(97, 122) ]
+    rand_list = rand_list_number+rand_list_Letter
+    name=username
+    for i in range(0,4):
+        name = name + random.choice(rand_list)
+    flag_email = User.objects.filter(username=name).exists()
+    if flag_email:
+        rand_list(username)
+    return name
 
+
+def students_filter(students):
     new_students, new_students_lc = get_and_clean_student_list(students)
     for student in new_students:
         post_vars = {}
-        flag = User.objects.filter(email=student).exists()
-        if not flag:
+        flag_email = User.objects.filter(email=student).exists()
+        username =  str(re.split(r'[@]', student)[0])
+
+        if not flag_email :
             post_vars['email']= student
-            post_vars['username']= str(re.split(r'[@]', student)[0])
+            post_vars['username']= rand_list(username)
             post_vars['name']= str(re.split(r'[@]', student)[0])
             post_vars['password']='mooc'+str(re.split(r'[@]', student)[0])
             post_vars['gender']= ''
@@ -1560,9 +1575,9 @@ def _do_enroll_students(course, course_id, students, overload=False, auto_enroll
         except:
             status[student] = 'rejected'
 
-    datatable = {'header': ['StudentEmail', 'action']}
+    datatable = {'header': ['学生电子邮件', '活动']}
     datatable['data'] = [[x, status[x]] for x in sorted(status)]
-    datatable['title'] = _u('Enrollment of students')
+    datatable['title'] = _u('学生注册情况')
 
     def sf(stat):
         return [x for x in status if status[x] == stat]
@@ -1636,9 +1651,9 @@ def _do_unenroll_students(course_id, students, email_students=False):
                 if not isok:
                     status[student] = "Error!  Failed to un-enroll"
 
-    datatable = {'header': ['StudentEmail', 'action']}
+    datatable = {'header': ['学生电子邮件', '活动']}
     datatable['data'] = [[x, status[x]] for x in sorted(status)]
-    datatable['title'] = _u('Un-enrollment of students')
+    datatable['title'] = _u('学生取消注册情况')
 
     data = dict(datatable=datatable)
     return data
