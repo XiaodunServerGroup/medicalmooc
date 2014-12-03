@@ -6,9 +6,9 @@ ${_("Hello!")}<br>
 
 ${_("you can activate it now and enjoy the MOOC services!")}<br>
 % if is_secure:
-  <a href="https://${ site }/activate/${ key }">${_("Click the Activate message")}</a>
+  <a href="https://${ site }/activate/${ key }" style="color:blue">${_("Click the Activate message")}</a>
 % else:
-  <a href="http://${ site }/activate/${ key }">${_("Click the Activate message")}</a>
+  <a href="http://${ site }/activate/${ key }" style="color:blue">${_("Click the Activate message")}</a>
 % endif
 <br>
 ${_("If these words click do not work,copy and paste this address into your web browser's address bar!")}<br>
