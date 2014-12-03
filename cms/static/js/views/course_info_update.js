@@ -53,11 +53,11 @@ define(["js/views/baseview", "underscore", "codemirror", "js/models/course_updat
             $(updateEle).prepend($newForm);
 
             var $textArea = $newForm.find(".new-update-content").first();
-            this.$codeMirror = CodeMirror.fromTextArea($textArea.get(0), {
-                mode: "text/html",
-                lineNumbers: true,
-                lineWrapping: true
-            });
+            //this.$codeMirror = CodeMirror.fromTextArea($textArea.get(0), {
+           //     mode: "text/html",
+           //     lineNumbers: true,
+           //     lineWrapping: true
+           // });
 
             $newForm.addClass('editing');
             this.$currentPost = $newForm.closest('li');
@@ -69,12 +69,36 @@ define(["js/views/baseview", "underscore", "codemirror", "js/models/course_updat
 
             $('.date').datepicker('destroy');
             $('.date').datepicker({ 'dateFormat': 'yy年mm月dd日' });
+            
+            this.textarea_id = $textArea.attr('id');
+            tinymce.init({
+                selector: "textarea#"+$textArea.attr('id'),
+                theme: "modern",
+                language_url: tinymce_language_url,
+                plugins: [
+                    "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                    "searchreplace  visualblocks visualchars code",
+                    "insertdatetime media nonbreaking save table contextmenu directionality",
+                    "emoticons paste textcolor colorpicker textpattern"
+                ],
+                toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor",
+
+                image_advtab: true,
+                setup: function(editor) {
+                    editor.on('init', function(e) {
+                    	tinymce.activeEditor.setContent($("#"+$textArea.attr('id')).text());
+                    });
+                }
+            });
         },
 
         onSave: function(event) {
             event.preventDefault();
             var targetModel = this.eventModel(event);
-            targetModel.set({ date : this.dateEntry(event).val(), content : this.$codeMirror.getValue() });
+            //targetModel.set({ date : this.dateEntry(event).val(), content : this.$codeMirror.getValue() });
+            var new_content = tinyMCE.get(this.textarea_id).getContent();
+            targetModel.set({ date : this.dateEntry(event).val(), content : new_content });
+            $("#"+this.textarea_id).text(new_content);
             // push change to display, hide the editor, submit the change
             var saving = new NotificationView.Mini({
                 title: gettext('Saving&hellip;')
@@ -105,6 +129,7 @@ define(["js/views/baseview", "underscore", "codemirror", "js/models/course_updat
             // we wish to remove it from the DOM.
             var targetModel = this.eventModel(event);
             this.closeEditor(!targetModel.id);
+            tinymce.remove();
         },
 
         onEdit: function(event) {
@@ -112,12 +137,11 @@ define(["js/views/baseview", "underscore", "codemirror", "js/models/course_updat
             var self = this;
             this.$currentPost = $(event.target).closest('li');
             this.$currentPost.addClass('editing');
-
             $(this.editor(event)).show();
             var $textArea = this.$currentPost.find(".new-update-content").first();
             var targetModel = this.eventModel(event);
-            this.$codeMirror = CourseInfoHelper.editWithCodeMirror(
-                targetModel, 'content', self.options['base_asset_url'], $textArea.get(0));
+          //  this.$codeMirror = CourseInfoHelper.editWithCodeMirror(
+           //     targetModel, 'content', self.options['base_asset_url'], $textArea.get(0));
 
             // Variable stored for unit test.
             this.$modalCover = ModalUtils.showModalCover(false,
@@ -125,6 +149,27 @@ define(["js/views/baseview", "underscore", "codemirror", "js/models/course_updat
                     self.closeEditor(false)
                 }
             );
+            this.textarea_id = $textArea.attr('id');
+            tinymce.init({
+                selector: "textarea#"+$textArea.attr('id'),
+                theme: "modern",
+                language_url: tinymce_language_url,
+                plugins: [
+                    "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                    "searchreplace  visualblocks visualchars code",
+                    "insertdatetime media nonbreaking save table contextmenu directionality",
+                    "emoticons paste textcolor colorpicker textpattern"
+                ],
+                toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor",
+
+                image_advtab: true,
+                
+                setup: function(editor) {
+                    editor.on('init', function(e) {
+                    	tinymce.activeEditor.setContent($("#"+$textArea.attr('id')).text());
+                    });
+                }
+            });
         },
 
         onDelete: function(event) {
