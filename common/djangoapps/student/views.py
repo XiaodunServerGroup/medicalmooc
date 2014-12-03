@@ -33,7 +33,8 @@ from django.contrib.auth.views import password_reset_confirm
 from django.core.cache import cache
 from django.core.context_processors import csrf
 from django.core.mail import send_mail
-from django.core.mail.message import EmailMultiAlternatives
+from util.email_utils import send_mails
+
 from django.core.urlresolvers import reverse
 from django.core.validators import validate_email, validate_slug, ValidationError
 from django.db import IntegrityError, transaction
@@ -1749,11 +1750,6 @@ def create_account(request, post_override=None):
                         httponly=None)
     return response
 
-def send_mails(subject, body, from_email, recipient_list, fail_silently=False, html=None, *args, **kwargs):
-    msg = EmailMultiAlternatives(subject, body, from_email, recipient_list)
-    if html:
-        msg.attach_alternative(html, "text/html")
-    msg.send(fail_silently)
 
 def auto_auth(request):
     """
@@ -1968,7 +1964,8 @@ def reactivation_email_for_user(user):
     message = render_to_string('emails/activation_email.txt', context)
 
     try:
-        user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)
+        send_mails(subject, "", settings.DEFAULT_FROM_EMAIL, [user.email], fail_silently=False, html=message)
+#        user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)
     except Exception:  # pylint: disable=broad-except
         log.warning('Unable to send reactivation email', exc_info=True)
         return JsonResponse({

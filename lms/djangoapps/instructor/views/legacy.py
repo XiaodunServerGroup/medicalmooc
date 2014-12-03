@@ -24,6 +24,7 @@ from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
 from django.utils import timezone
 
+from util.json_request import JsonResponse
 
 from django.core.validators import validate_email, validate_slug, ValidationError
 from student.models import UserProfile,Registration
@@ -73,6 +74,8 @@ from django.utils.translation import ugettext as _u
 
 from microsite_configuration import microsite
 from contentstore.utils import send_mail_update
+
+from util.email_utils import send_mails
 
 log = logging.getLogger(__name__)
 
@@ -1116,9 +1119,11 @@ def students_filter(students):
                         dest_addr = settings.FEATURES['REROUTE_ACTIVATION_EMAIL']
                         message = ("Activation for %s (%s): %s\n" % (user, user.email, profile.name) +
                                    '-' * 80 + '\n\n' + message)
-                        send_mail(subject, message, from_address, [dest_addr], fail_silently=False)
+#                        send_mail(subject, message, from_address, [dest_addr], fail_silently=False)
+                        send_mails(subject, "", from_address, [dest_addr], fail_silently=False, html=message)
                     else:
-                        user.email_user(subject, message, from_address)
+#                        user.email_user(subject, message, from_address)
+                        send_mails(subject, "", from_address, [user.email], fail_silently=False, html=message)
                 except Exception:  # pylint: disable=broad-except
                     log.warning('Unable to send activation email to user', exc_info=True)
                     js['value'] = _('Could not send activation e-mail.')
