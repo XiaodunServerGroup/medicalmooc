@@ -129,7 +129,7 @@
   <link href="${static.url('css/vendor/course_about.css')}" rel="stylesheet" type="text/css">
 </%block>
 
-<%block name="pagetitle">${_("About {course.display_number_with_default}").format(course=course) | h}</%block>
+<%block name="pagetitle">${_("{course.display_name_with_default}").format(course=course) | h}</%block>
 
 
 
@@ -324,21 +324,23 @@
 </style>
 <script type="text/javascript">
 	$(function (){
-			$(".shou").toggle(
-				function(){
-						$(this).addClass("");
-						$(this).html("收缩&nbsp;∧");
-						var siblings = $(".m-btn .p1").hide();
 
-					$(this).siblings(".p1").attr("style","display:block");
+		$(".shou").toggle(
+		    function(){
+				$(this).addClass("");
+				var sibling1 = $(this).html("收缩&nbsp;∧");
+
+				$(this).siblings(".p1").attr("style","display:block");
 					},
 				function (){
-						$(this).siblings(".p1").attr("style","display:none")
-						$(this).html("展开&nbsp;∨");
+				   $(this).siblings(".p1").attr("style","display:none")
+				    var sibling2=$(this).html("展开&nbsp;∨");
 					}
-			)
-		$.get($("#school_logo_img").attr("src"), function(result, textStatus){
-                $("#school_logo_img").css("display","block");
+			      )
+		  $.get($("#school_logo_img").attr("src"), function(result, textStatus){
+                 $("#school_logo_img").css("display","block");
             });
 	})
+
+
 </script>
