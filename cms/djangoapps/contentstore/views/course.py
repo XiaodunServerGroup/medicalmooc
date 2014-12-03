@@ -652,7 +652,8 @@ def course_info_update_handler(request, tag=None, package_id=None, branch=None, 
             )
     # can be either and sometimes django is rewriting one to the other:
     elif request.method in ('POST', 'PUT'):
-        notice_course_update_to_student(request.json,course_location, package_id)
+        if  request.json.get('is_send_mail','false')=='true':
+            notice_course_update_to_student(request.json,course_location, package_id)
         try:
             return JsonResponse(update_course_updates(updates_location, request.json, provided_id, request.user))
         except:

@@ -108,7 +108,12 @@ define(["js/views/baseview", "underscore", "codemirror", "js/models/course_updat
             var targetModel = this.eventModel(event);
             //targetModel.set({ date : this.dateEntry(event).val(), content : this.$codeMirror.getValue() });
             var new_content = tinyMCE.get(this.textarea_id).getContent();
-            targetModel.set({ date : this.dateEntry(event).val(), content : new_content });
+            if($("#is_send_mail_"+this.textarea_id).attr("checked")){
+                send_mail= 'true'
+            }else{
+                send_mail = 'false'
+            };
+            targetModel.set({ date : this.dateEntry(event).val(), content : new_content,is_send_mail:send_mail });
             $("#"+this.textarea_id).text(new_content);
             // push change to display, hide the editor, submit the change
             var saving = new NotificationView.Mini({
