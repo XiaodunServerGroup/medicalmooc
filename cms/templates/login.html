@@ -34,7 +34,7 @@ from django.utils.translation import ugettext as _
             </li>
 
             <li class="field text required" id="field-password">
-              <a href="${forgot_password_link}" class="action action-forgotpassword" tabindex="-1">${_("Forgot password?")}</a>
+              <a href="${forgot_password_link}" id='forgot_passwd_prompt' class="action action-forgotpassword" tabindex="-1">${_("Forgot password?")}</a>
               <label for="password">${_("Password")}</label>
               <input id="password" type="password" name="password" />
             </li>
@@ -155,6 +155,9 @@ require(["jquery", "jquery.cookie", "utility"], function($) {
 
     return fail_login_time
   }
+    $("#forgot_passwd_prompt").click(function(){
+        alert("系统将自动帮助您接入到人卫慕课学习平台忘记密码功能，在此您可以修改您的密码。");
+    });
 });
 </script>
 </%block>
