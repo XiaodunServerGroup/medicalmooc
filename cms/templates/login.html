@@ -73,7 +73,17 @@ from django.utils.translation import ugettext as _
 <%block name="jsextra">
 <script type="text/javascript">
 require(["jquery", "jquery.cookie", "utility"], function($) {
-  function postJSON(url, data, callback) {
+
+    flag = "${flag}";
+    if(flag==1){
+        jsonrv="感谢您的注册,我们已经给您发送了关于账户激活的电子邮件，请注意查收";
+        $('#login_form').prepend('<div id="login_error" class="message message-status error">' +jsonrv+ '</span></div>');
+        $('#login_error').addClass('is-shown');
+
+//            $('.status message submission-error').show()
+    }
+
+    function postJSON(url, data, callback) {
     $.ajax({type:'POST',
       url: url,
       dataType: 'json',

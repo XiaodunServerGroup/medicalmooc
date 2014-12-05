@@ -64,6 +64,7 @@ def login_page(request):
     """
     Display the login form.
     """
+    flag =request.GET.get('flag',0)
     csrf_token = csrf(request)['csrf_token']
     if (settings.FEATURES['AUTH_USE_CERTIFICATES'] and
             ssl_get_cert_from_request(request)):
@@ -71,7 +72,6 @@ def login_page(request):
         # to course now that the user is authenticated via
         # the decorator.
         return redirect('/course')
-
     form = CaptchaLoginForm()
 
     if request.is_ajax():
@@ -83,6 +83,7 @@ def login_page(request):
     return render_to_response(
         'login.html',
         {
+            'flag':flag,
             'csrf': csrf_token,
             'forgot_password_link': "//{base}/login#forgot-password-modal".format(base=settings.LMS_BASE),
             'platform_name': microsite.get_value('platform_name', settings.PLATFORM_NAME),

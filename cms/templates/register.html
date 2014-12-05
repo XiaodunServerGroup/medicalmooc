@@ -124,7 +124,7 @@ require(["jquery", "jquery.cookie"], function($) {
       data: submit_data,
       headers: {'X-CSRFToken': $.cookie('csrftoken')},
       success: function(json) {
-        location.href = "/course";
+        location.href = "/signin?flag=1";
       },
       error: function(jqXHR, textStatus, errorThrown) {
         json = $.parseJSON(jqXHR.responseText);
