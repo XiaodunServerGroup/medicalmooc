@@ -702,7 +702,7 @@ def instructor_dashboard(request, course_id):
         datatable['data'] = [[x.email] for x in ceaset]
         datatable['title'] = action
 
-    elif action == 'Enroll multiple students':
+    elif action == u'正在招收':
 
         is_shib_course = uses_shib(course)
         students = request.POST.get('multiple_students', '')
@@ -715,7 +715,7 @@ def instructor_dashboard(request, course_id):
         datatable = ret['datatable']
         print '-----------------------finish-------------------------------------------------'
 
-    elif action == 'Unenroll multiple students':
+    elif action == u'正在取消':
 
         students = request.POST.get('multiple_students', '')
         email_students = bool(request.POST.get('email_students'))
