@@ -1310,6 +1310,7 @@ def course_list_team(request, cos_len, cos):
     course_list_team = []
     for i in range(0, cos_len):
         user = CourseStaffRole(cos[i].location).users_with_role()
+        name = picurl = shortbio = ''
         if len(user) >= 1:
             name = UserProfile.objects.get(user_id=User.objects.get(username=user[0]).id).name
             picurl = UserProfile.objects.get(user_id=User.objects.get(username=user[0]).id).picurl
