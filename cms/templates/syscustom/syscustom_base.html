@@ -6,6 +6,12 @@
 <%block name="title">系统设置</%block>
 <%block name="bodyclass">is-signedin course tools view-import</%block>
 
+<%block name="header_extras">
+<meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<meta HTTP-EQUIV="expires" CONTENT="0">
+<script type="text/javascript" src="${static.url('js/vendor/jquery.min.js')}"></script>
+</%block>
 <%block name="content">
 <script type="text/javascript" src="${static.url('js/plupload/plupload.full.min.js')}"></script>
 
@@ -44,20 +50,24 @@
     text-shadow: none;
 }
 .syscustom-nav {
-	
+	 
+}
+.temp_img_div{margin-top:10px;}
+.temp_img_div img{
+	height:80px;
 }
 
-.tb{border:1px solid black;}
-.tb th,.tb td{line-height:30px;padding:5px 8px;vertical-align:top;} 
+.tb{border:1px solid #e5e5e5;width:100%;}
+.tb th,.tb td{border:1px solid #e5e5e5;line-height:30px;padding:5px 8px;text-align:left;vertical-align:top;} 
 
 </style>
 
 <div class="wrapper-mast wrapper">
   <header class="mast has-subtitle">
     <div class="syscustom-nav">
-    	<a href="" class="btn">LOGO设置</a>
+    	<a href="/syscustom/" class="btn">LOGO设置</a>
       	<a href="/syscustom/indexluobo/" class="btn">首页轮播图片</a>
-      	<a href="/syscustom/indexluobo/" class="btn">自定义统计代码</a>
+      	<a href="/syscustom/statistics/" class="btn">自定义统计代码</a>
       	
       	<a href="/syscustom/bootlogo/" class="btn">客户端启动LOGO</a>
       	<a href="/syscustom/clientluobo/" class="btn">客户端轮播图片</a>

@@ -36,7 +36,7 @@ def get_dir(local_dir):
 
 def save_image(img_data, upload_to, ext_filename='.jpg'):
     file_name = get_random_name(ext_filename)
-    img_path = get_dir(os.path.join(settings.MEDIA_ROOT, upload_to))
+    img_path = get_dir(os.path.join(settings.STORE_ROOT, upload_to))
     img_path= os.path.join(img_path, file_name)
     
     fp = open(img_path, 'wb')  #读写打开这个要上传的文件

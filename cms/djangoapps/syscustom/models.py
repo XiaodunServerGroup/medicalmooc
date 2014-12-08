@@ -1,13 +1,7 @@
 #coding:utf-8
 from datetime import datetime, timedelta
 from django.conf import settings
-from django.contrib.auth.models import User
-from django.contrib.auth.signals import user_logged_in, user_logged_out
-from django.db import models, IntegrityError
-from django.db.models import Count
-from django.db.models.signals import post_save
-from django.dispatch import receiver, Signal
-from django.core.exceptions import ObjectDoesNotExist
+from django.db import models
 
 
 class CustomImage(models.Model):
@@ -19,4 +13,13 @@ class CustomImage(models.Model):
     created_time = models.DateTimeField(auto_now_add=True, db_index=True)  #创建时间
     updated_time = models.DateTimeField(auto_now_add=True, db_index=True)  #
 
-
+    
+    def get_image_url(self):
+        if not self.img:
+            return ''
+        return '%s%s' % (settings.STORE_URL, self.img)
+    
+    def get_edir_url(self):
+        return '/syscustom/indexluobo/%s/edit/' % self.id
+    def get_delete_url(self):
+        return '/syscustom/indexluobo/%s/delete/' % self.id 

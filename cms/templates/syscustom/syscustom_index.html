@@ -8,7 +8,7 @@
 	
 	<table class="tb">
 		<tr> 
-			<th>当前Logo:</th>
+			<th width="160px">当前Logo(png格式):</th>
 			<td>
 				% if current_logo_url:
 					<img src="${current_logo_url}" style="width: 250px; height: 52px;"/>
@@ -21,9 +21,10 @@
 			<th></th>
 			<td>
 				<a href="#" id="modify-logo-btn" class="btn">修改</a>
+				<span style="margin-left:8px;font-size:12px;">注意：选择图片后会自动上传</span>
 			</td>
 		</tr>	
-	</table>
+	</table>  
 
 <script type="text/javascript">
 var uploader = new plupload.Uploader({
@@ -52,7 +53,7 @@ var uploader = new plupload.Uploader({
 			window.location.reload();
 		},
 		Error: function(up, err) {
-			document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
+			console= "\nError #" + err.code + ": " + err.message;
 		}
 	}
 });
