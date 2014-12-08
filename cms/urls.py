@@ -8,7 +8,7 @@ from ratelimitbackend import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',  # nopep8
-
+    url(r'^store/(?P<path>.*)$','django.views.static.serve',{'document_root': settings.STORE_ROOT}), 
     url(r'^transcripts/upload$', 'contentstore.views.upload_transcripts', name='upload_transcripts'),
     url(r'^transcripts/download$', 'contentstore.views.download_transcripts', name='download_transcripts'),
     url(r'^transcripts/check$', 'contentstore.views.check_transcripts', name='check_transcripts'),
@@ -147,6 +147,8 @@ if settings.FEATURES.get('ENABLE_SERVICE_STATUS'):
     )
 
 urlpatterns += patterns('', url(r'^admin/', include(admin.site.urls)),)
+
+urlpatterns += patterns('', url(r'^syscustom/', include('syscustom.urls')),)
 
 # enable automatic login
 if settings.FEATURES.get('AUTOMATIC_AUTH_FOR_TESTING'):
