@@ -3,6 +3,7 @@ Views for returning XModule JS (used by requirejs)
 """
 import os
 import json
+import datetime
 
 from django.contrib.auth.decorators import login_required
 from django_future.csrf import ensure_csrf_cookie
@@ -37,6 +38,7 @@ def luobo_edit(request, id=None):
         
         if id:
             obj = CustomImage.objects.get(id=id)
+            obj.updated_time = datetime.datetime.now()
         else:
             obj = CustomImage()
         obj.img = image
