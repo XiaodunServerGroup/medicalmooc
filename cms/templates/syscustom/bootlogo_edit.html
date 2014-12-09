@@ -9,7 +9,18 @@
 	<input type="hidden" name="csrfmiddlewaretoken" value="${csrf_token}" />
 	<table class="tb">
 		<tr>
-			<td width="100px">图片<div style="font-size:12px;">尺寸：1180*350</div></td>  
+			<tr> 
+				<td width="100px">类型</td>  
+				<td colspan=3>
+					<select id="type" name="type">
+						<option value="">请选择客户端类型</option>
+						% for item in type_list:
+							 <option value="${item[0]}" ${'selected="selected"' if obj.type==item[0] else ''}>${item[1]}</option>
+						% endfor
+					</select>
+				</td>
+			</tr>
+			<td>图片<div style="font-size:12px;">尺寸：1180*350</div></td>  
 			<td>  
 				% if obj:
 					<input type="hidden" id="image" name="image" value="${obj.img}"/>
@@ -25,18 +36,6 @@
 			</td>
 		</tr>
 		<tr> 
-			<th>链接</th>
-			<th>
-				<input type="text" class="clear-input" size="60" maxlength="190" name="url" value="${obj.url if obj else ''}"/> 
-			</th>
-		</tr>	
-		<tr> 
-			<th>排序号</th>
-			<th> 
-				<input type="text" class="clear-input" name="order_num"  maxlength="5" value="${obj.order_num if obj else ''}"/>
-			</th> 
-		</tr> 
-		<tr> 
 			<td colspan=3>
 				<a href="#" id="save-btn" class="btn">保存</a>
 			</td>
@@ -46,6 +45,11 @@
 
 <script type="text/javascript">
 $("#save-btn").click(function(){
+	if(!$("#type").val()){
+		alert("请选择客户端类型");
+		return false;
+	}
+	
 	if(!$("#image").val()){
 		alert("请添加图片");
 		return false;

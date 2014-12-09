@@ -17,6 +17,9 @@ urlpatterns = patterns('syscustom.views',  # nopep8
     url(r'^courseclass/add/$',   'courseclass_edit',name="courseclass_add" ),
     url(r'^courseclass/(?P<id>\d+)/edit/$',   'courseclass_edit',name="courseclass_edit" ),
     url(r'^courseclass/del$', 'courseclass_del',name="courseclass_del" ),
+    
+    
+    url(r'^seo/$', 'seo', name="seo"),
 )
 
 urlpatterns += patterns('',  # bootlogo

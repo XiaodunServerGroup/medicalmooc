@@ -25,7 +25,6 @@ def statistics_code(request):
         f.close()
         return JsonResponse({'status':1})
     else:
-        print not os.path.exists(statictics_code_tempate)
         if not os.path.exists(statictics_code_tempate):
             f = codecs.open(statictics_code_tempate, 'w', 'utf-8')
             f.write('')

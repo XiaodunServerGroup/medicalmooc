@@ -1,3 +1,4 @@
+#coding:utf-8
 """
 Views for returning XModule JS (used by requirejs)
 """
@@ -20,18 +21,25 @@ from ..models import *
 from ..image import *
 
 
+_type_list = []
+_type_ids = []
+for item in settings.CUSTOM_IMAGE_CLASS:
+    if item[1].find(u'启动图')>-1:
+        _type_list.append(item)
+        _type_ids.append(item[0])
+
 @login_required
 @ensure_csrf_cookie
 def bootlogo(request):
-    image_list = CustomImage.objects.filter(type=2).order_by('order_num', 'id')
-    return render_to_response('syscustom/index_bootlogo.html', {'store_url':settings.STORE_URL, 'image_list':image_list})
+    image_list = CustomImage.objects.filter(type__in=_type_ids).order_by('id')
+    return render_to_response('syscustom/bootlogo.html', {'store_url':settings.STORE_URL, 'image_list':image_list, 'type_list':_type_list})
 
 @login_required
 @ensure_csrf_cookie
 def bootlogo_edit(request, id=None):
     if request.method == 'POST':
         image = request.POST.get('image', '')
-        url = request.POST.get('url', '')
+        type = request.POST.get('type', '')
         order_num = request.POST.get('order_num')
         try:
             order_num = int(order_num)
@@ -44,9 +52,8 @@ def bootlogo_edit(request, id=None):
         else:
             obj = CustomImage()
         obj.img = image
-        obj.url = url
         obj.order_num = order_num
-        obj.type = 2
+        obj.type = type
         obj.save()
         
         return redirect(reverse('bootlogo'))
@@ -54,7 +61,7 @@ def bootlogo_edit(request, id=None):
         obj = None
         if id:
             obj = CustomImage.objects.get(id=id)
-        return render_to_response('syscustom/bootlogo_edit.html', {'obj':obj})
+        return render_to_response('syscustom/bootlogo_edit.html', {'obj':obj, 'type_list':_type_list})
 
     
 
