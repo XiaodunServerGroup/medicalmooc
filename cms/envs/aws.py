@@ -267,8 +267,9 @@ X_FRAME_OPTIONS = ENV_TOKENS.get('X_FRAME_OPTIONS', X_FRAME_OPTIONS)
 
 COMMENTS_SERVICE_URL = ENV_TOKENS.get("COMMENTS_SERVICE_URL", '')
 
+####syscustom
 STORE_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))) + '/store/'
+STORE_URL = '/store/'
 CUSTOM_IMAGE_DIR = 'focusimg/'
 CUSTOM_IMAGE_CLASS = ((1, u'网站首页轮播'), (2, u'客户端启动logo'), (3, u'客户端轮播'),)
-
-print STORE_ROOT 
+STATISTICS_CODE_TEMPLATE = 'statistics_code.html'
