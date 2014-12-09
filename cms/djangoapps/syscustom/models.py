@@ -20,3 +20,10 @@ class CustomImage(models.Model):
     updated_time = models.DateTimeField(auto_now_add=True, db_index=True)  #
 
 
+class CourseClass(models.Model):
+    code = models.CharField(max_length=20,unique=True)
+    name = models.CharField(max_length=30)
+    order_num = models.IntegerField(default=1) #排序号
+    created_time = models.DateTimeField(auto_now_add=True, db_index=True)  #创建时间
+    updated_time = models.DateTimeField(auto_now_add=True, db_index=True)  #
+
