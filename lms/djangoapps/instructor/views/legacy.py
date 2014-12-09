@@ -240,40 +240,40 @@ def instructor_dashboard(request, course_id):
             except Exception as err:
                 msg += '<br/><p>Error: {0}</p>'.format(escape(err))
 
-    if action == 'Dump list of enrolled students' or action == 'List enrolled students':
+    if action == u'学生人数的转储列表' or action == 'List enrolled students':
         log.debug(action)
         datatable = get_student_grade_summary_data(request, course, course_id, get_grades=False, use_offline=use_offline)
         datatable['title'] = _u('List of students enrolled in {0}').format(course_id)
         track.views.server_track(request, "list-students", {}, page="idashboard")
 
-    elif 'Dump Grades' in action:
+    elif action==u'所有注册这们课程的学生' :
         log.debug(action)
         datatable = get_student_grade_summary_data(request, course, course_id, get_grades=True, use_offline=use_offline)
         datatable['title'] = _u('Summary Grades of students enrolled in {0}').format(course_id)
         track.views.server_track(request, "dump-grades", {}, page="idashboard")
 
-    elif 'Dump all RAW grades' in action:
+    elif action == u'转储所有注册学习这门课的学生RAW等级':
         log.debug(action)
         datatable = get_student_grade_summary_data(request, course, course_id, get_grades=True,
                                                    get_raw_scores=True, use_offline=use_offline)
         datatable['title'] = _u('Raw Grades of students enrolled in {0}').format(course_id)
         track.views.server_track(request, "dump-grades-raw", {}, page="idashboard")
 
-    elif 'Download CSV of all student grades' in action:
+    elif action == u'下载所有学生的成绩' :
         track.views.server_track(request, "dump-grades-csv", {}, page="idashboard")
         return return_csv('grades_{0}.csv'.format(course_id),
                           get_student_grade_summary_data(request, course, course_id, use_offline=use_offline))
 
-    elif 'Download CSV of all RAW grades' in action:
+    elif action == u'下载所有的RAW等级':
         track.views.server_track(request, "dump-grades-csv-raw", {}, page="idashboard")
         return return_csv('grades_{0}_raw.csv'.format(course_id),
                           get_student_grade_summary_data(request, course, course_id, get_raw_scores=True, use_offline=use_offline))
 
-    elif 'Download CSV of answer distributions' in action:
+    elif  action == u'下载答案' :
         track.views.server_track(request, "dump-answer-dist-csv", {}, page="idashboard")
         return return_csv('answer_dist_{0}.csv'.format(course_id), get_answers_distribution(request, course_id))
 
-    elif 'Dump description of graded assignments configuration' in action:
+    elif  action == u'转存作业配置描述信息':
         # what is "graded assignments configuration"?
         track.views.server_track(request, "dump-graded-assignments-config", {}, page="idashboard")
         msg += dump_grading_context(course)
@@ -325,7 +325,7 @@ def instructor_dashboard(request, course_id):
                 )
             )
 
-    elif "Show Background Task History for Student" in action:
+    elif  action == u'显示学生后台操作历史记录':
         # put this before the non-student case, since the use of "in" will cause this to be missed
         unique_student_identifier = request.POST.get('unique_student_identifier', '')
         message, student = get_student_from_identifier(unique_student_identifier)
@@ -337,7 +337,7 @@ def instructor_dashboard(request, course_id):
             message, datatable = get_background_task_table(course_id, problem_url, student)
             msg += message
 
-    elif "Show Background Task History" in action:
+    elif  action == u'显示后台操作历史记录':
         problem_urlname = request.POST.get('problem_for_all_students', '')
         problem_url = get_module_url(problem_urlname)
         message, datatable = get_background_task_table(course_id, problem_url)
@@ -445,7 +445,7 @@ def instructor_dashboard(request, course_id):
                     )
                     )
 
-    elif "Get link to student's progress page" in action:
+    elif  action ==u'获取转向进度页面的链接':
         unique_student_identifier = request.POST.get('unique_student_identifier', '')
         # try to uniquely id student by email address or username
         message, student = get_student_from_identifier(unique_student_identifier)
