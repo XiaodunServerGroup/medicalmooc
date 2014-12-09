@@ -26,6 +26,8 @@ def bootlogo(request):
     image_list = CustomImage.objects.filter(type=2).order_by('order_num', 'id')
     return render_to_response('syscustom/index_bootlogo.html', {'store_url':settings.STORE_URL, 'image_list':image_list})
 
+@login_required
+@ensure_csrf_cookie
 def bootlogo_edit(request, id=None):
     if request.method == 'POST':
         image = request.POST.get('image', '')

@@ -9,7 +9,7 @@
 	<input type="hidden" name="csrfmiddlewaretoken" value="${csrf_token}" />
 	<table class="tb">
 		<tr>
-			<td width="100px">图片</td>  
+			<td width="100px">图片<div style="font-size:12px;">尺寸：1180*350</div></td>  
 			<td>  
 				% if obj:
 					<input type="hidden" id="image" name="image" value="${obj.img}"/>
@@ -20,7 +20,7 @@
 				% else:
 					<input type="hidden" id="image" name="image" value=""/>
 					<a href="#" id="add-pic-btn" class="btn">添加图片</a>
-					<div id="temp_img_div" style="margin-top:10px;"></div>
+					<div id="temp_img_div" class="temp_img_div"></div>
 				%endif
 			</td>
 		</tr>
@@ -81,7 +81,7 @@ var uploader = new plupload.Uploader({
 		FileUploaded: function(up, file, responseObject) {
         	response = $.parseJSON(responseObject.response)
         	$("#image").val(response.image);
-        	var html = '<img src="'+response.url+'" class="temp_img_div"/>'; 
+        	var html = '<img src="'+response.url+'"/>'; 
         	$("#temp_img_div").html(html);
         	
         	$("#add-pic-btn").text("修改").removeClass('disabled'); 

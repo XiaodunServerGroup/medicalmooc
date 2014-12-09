@@ -4,12 +4,6 @@ URL patterns for Javascript files used to load all of the XModule JS in one wad.
 from django.conf.urls import url, patterns
 
 urlpatterns = patterns('syscustom.views',  # nopep8
-    url(r'^$', 'syscustom'),
-    url(r'^courseclass$',  'courseclass_list',name="courseclass_list" ),
-    url(r'^courseclass/add/$',   'courseclass_add',name="courseclass_add" ),
-    url(r'^courseclass/update$',   'courseclass_update',name="courseclass_update" ),
-    url(r'^courseclass/del$', 'courseclass_del',name="courseclass_del" ),
-
     url(r'^$', 'syscustom', name="syscustom"),
     url(r'^statistics/$', 'statistics_code', name="statistics_code"),
     
@@ -18,6 +12,11 @@ urlpatterns = patterns('syscustom.views',  # nopep8
     url(r'^indexluobo/(?P<id>\d+)/edit/$', 'luobo_edit', name="luobo_edit"),
     url(r'^luobo/delete/$', 'luobo_delete', name="luobo_delete"),
     url(r'^image/upload/$', 'image_upload', name="image_upload"),
+    
+    url(r'^courseclass/$',  'courseclass_list',name="courseclass_list" ),
+    url(r'^courseclass/add/$',   'courseclass_edit',name="courseclass_add" ),
+    url(r'^courseclass/(?P<id>\d+)/edit/$',   'courseclass_edit',name="courseclass_edit" ),
+    url(r'^courseclass/del$', 'courseclass_del',name="courseclass_del" ),
 )
 
 urlpatterns += patterns('',  # bootlogo

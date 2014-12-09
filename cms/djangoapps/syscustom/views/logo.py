@@ -32,7 +32,6 @@ def syscustom(request):
         else:
             return JsonResponse({'status':0})
     
-    print current_logo_path
     if not os.path.exists(current_logo_path):
         current_logo_url = ''
     
