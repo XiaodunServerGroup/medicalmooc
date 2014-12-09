@@ -1,0 +1,67 @@
+<%inherit file="syscustom_base.html" />
+<%namespace name='static' file='../static_content.html'/>
+<%!
+  from django.utils.translation import ugettext as _
+%>
+
+<%block name="content_extra">
+	
+	<table class="tb">
+		<tr>
+			<td>图片</td>
+			<td width="400px">链接</td>
+			<td width="50px">排序号</td>
+			<td width="100px">操作</td>
+		</tr>
+		% for item in image_list:
+		<tr> 
+			<td>
+				% if item.get_image_url():
+					<img src="${item.get_image_url()}" height="180px"/>
+				% else:
+				
+				% endif
+			</td>
+			<td>${item.url}</th>
+			<td  style="text-align:center">${item.order_num}</th>
+			<td  style="text-align:center;vertical-align:middle;">
+				<a href="/syscustom/clientluobo/${item.id}/edit/">修改</a>
+				<a href="javascript:void(0)" class="del" data-id="${item.id}">删除</a>
+			</td>
+		</tr>	
+		% endfor
+		<tr> 
+			<td colspan="4" style="text-align:center">
+				<a href="/syscustom/clientluobo/add/" id="modify-logo-btn" class="btn">添加</a>
+			</td>
+		</tr>	
+	</table>
+
+<script type="text/javascript">
+</script>
+</%block>
+<%block name="jsextra">
+
+<script type="text/javascript">
+	$(".del").each(function(){
+		var _id=$(this).attr('data-id');
+		$(this).click(function(){
+			if(!confirm("确认删除？")){
+				return false;
+			}
+			$.ajax({
+	            type: "POST",
+	            url: "/syscustom/luobo/delete/",
+	            data: {id:_id},
+	            dataType: "json",
+	            success: function (response) {
+	            	window.location.reload();
+	            },
+	            error: function (msg) {
+	            }
+	        });
+		});
+	});
+	
+</script>
+</%block>
