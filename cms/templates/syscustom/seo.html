@@ -30,14 +30,20 @@ textarea.seo-textarea{margin-bottom:8px;width:800px;height:60px;}
 				关键字：<textarea id="intro_page_keyword" class="clear-input seo-textarea">${intro_page_keyword | h}</textarea><br/>
 				描　述：<textarea id="intro_page_desc"  class="clear-input seo-textarea">${intro_page_desc | h}</textarea>
 			</td>
-		</tr>	
+		</tr>
+		<tr> 
+			<th width="80px">底部Foot文字</th>
+			<td>
+				Foot文字：<textarea id="bottom_footer_text" class="clear-input seo-textarea">${bottom_footer_text | h}</textarea><br/>
+			</td>
+		</tr>		
 		<tr>   
 			<th></th> 
 			<td>
 				<a href="javascript:void(0);" id="save-btn" class="btn">保存</a> <span id="msg" style="color:red"></span>
 			</td>
 		</tr>	
-	</table> 
+	</table>  
  
 </%block>  
 <%block name="jsextra">
@@ -53,6 +59,7 @@ textarea.seo-textarea{margin-bottom:8px;width:800px;height:60px;}
             	list_page_desc:$("#list_page_desc").val(), 
             	intro_page_keyword:$("#intro_page_keyword").val(), 
             	intro_page_desc:$("#intro_page_desc").val(), 
+            	bottom_footer_text:$("#bottom_footer_text").val(),
             },
             dataType: "json",
             success: function (response) {

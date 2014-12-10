@@ -5,7 +5,6 @@
 <title>人卫慕课丨中国医学教育慕课联盟官方平台</title>
 <%! from syscustom.views import getSeoByKey %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<%! from syscustom.views import getSeoByKey %>
 <meta name="keywords" content="${getSeoByKey('index_page_keyword')}" />
 <meta name="description" content="${getSeoByKey('index_page_desc')}"/>
 </head>
@@ -249,7 +248,7 @@ function getStyle(obj,attr){return obj.currentStyle?obj.currentStyle[attr]:getCo
 <div class="wrapper-footer">
   <footer role="contentinfo" class="primary">
     <div class="colophon">
-      京ICP备14053810号 All Rights Reserved 版权所有 人民卫生出版社有限公司
+      ${getSeoByKey('bottom_footer_text')}
     </div>
   </footer>
 </div>

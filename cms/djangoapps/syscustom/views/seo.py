@@ -22,6 +22,7 @@ seo_class_dict = {
               'list_page_desc':'',
               'intro_page_keyword':'',
               'intro_page_desc':'',
+              'bottom_footer_text':'',
               }
 
 def _init_seo_data():
