@@ -20,10 +20,12 @@ from ..models import *
 from ..image import *
 
 
+type_list = [settings.CUSTOM_IMAGE_CLASS[1], settings.CUSTOM_IMAGE_CLASS[2]]
+type_ids = [item[0] for item in type_list]
 @login_required
 @ensure_csrf_cookie
 def clientluobo(request):
-    image_list = CustomImage.objects.filter(type=10).order_by('order_num', 'id')
+    image_list = CustomImage.objects.filter(type__in=type_ids).order_by('type','order_num', 'id')
     return render_to_response('syscustom/clientluobo.html', {'store_url':settings.STORE_URL, 'image_list':image_list})
 
 @login_required
@@ -32,6 +34,7 @@ def clientluobo_edit(request, id=None):
     if request.method == 'POST':
         image = request.POST.get('image', '')
         url = request.POST.get('url', '')
+        type = request.POST.get('type', '')
         order_num = request.POST.get('order_num')
         try:
             order_num = int(order_num)
@@ -46,7 +49,7 @@ def clientluobo_edit(request, id=None):
         obj.img = image
         obj.url = url
         obj.order_num = order_num
-        obj.type = 10
+        obj.type = type
         obj.save()
         
         return redirect(reverse('clientluobo'))
@@ -54,7 +57,7 @@ def clientluobo_edit(request, id=None):
         obj = None
         if id:
             obj = CustomImage.objects.get(id=id)
-        return render_to_response('syscustom/clientluobo_edit.html', {'obj':obj})
+        return render_to_response('syscustom/clientluobo_edit.html', {'obj':obj, 'type_list':type_list})
 
     
 

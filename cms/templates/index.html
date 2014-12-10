@@ -7,6 +7,12 @@
 
 <%block name="jsextra">
 <script type="text/javascript" xmlns="http://www.w3.org/1999/html">
+course_class_html = "" +
+% for item in course_class_list:
+    "<option value='${item.code}'>${item.name}</option>" +
+% endfor
+"";
+    
 require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
     // showing/hiding creation rights UI
     $('.show-creationrights').click(function(e){

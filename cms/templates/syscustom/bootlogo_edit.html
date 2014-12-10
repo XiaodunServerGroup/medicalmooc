@@ -15,7 +15,7 @@
 					<select id="type" name="type">
 						<option value="">请选择客户端类型</option>
 						% for item in type_list:
-							 <option value="${item[0]}" ${'selected="selected"' if obj.type==item[0] else ''}>${item[1]}</option>
+							 <option value="${item[0]}" ${'selected="selected"' if obj and obj.type==item[0] else ''}>${item[1]}</option>
 						% endfor
 					</select>
 				</td>

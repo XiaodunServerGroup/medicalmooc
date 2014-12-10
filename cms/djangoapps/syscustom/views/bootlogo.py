@@ -31,7 +31,7 @@ for item in settings.CUSTOM_IMAGE_CLASS:
 @login_required
 @ensure_csrf_cookie
 def bootlogo(request):
-    image_list = CustomImage.objects.filter(type__in=_type_ids).order_by('id')
+    image_list = CustomImage.objects.filter(type__in=_type_ids).order_by('type', 'id')
     return render_to_response('syscustom/bootlogo.html', {'store_url':settings.STORE_URL, 'image_list':image_list, 'type_list':_type_list})
 
 @login_required

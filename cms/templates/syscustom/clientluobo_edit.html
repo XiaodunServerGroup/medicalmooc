@@ -8,8 +8,19 @@
 	<form id="form" name="form" method="post" action="">
 	<input type="hidden" name="csrfmiddlewaretoken" value="${csrf_token}" />
 	<table class="tb">
+		<tr> 
+			<td width="100px">类型</td>  
+			<td colspan=3>
+				<select id="type" name="type">
+					<option value="">请选择客户端类型</option>
+					% for item in type_list:
+						 <option value="${item[0]}" ${'selected="selected"' if obj and obj.type==item[0] else ''}>${item[1]}</option>
+					% endfor
+				</select>
+			</td>
+		</tr>
 		<tr>
-			<td width="100px">图片<div style="font-size:12px;">尺寸：1180*350</div></td>  
+			<td width="100px">图片<div style="font-size:12px;"></div></td>  
 			<td>  
 				% if obj:
 					<input type="hidden" id="image" name="image" value="${obj.img}"/>
@@ -46,11 +57,16 @@
 
 <script type="text/javascript">
 $("#save-btn").click(function(){
+	if(!$("#type").val()){
+		alert("请选择客户端类型");
+		return false;
+	}
+	
 	if(!$("#image").val()){
 		alert("请添加图片");
 		return false;
 	}
-	
+	 
 	document.form.submit();
 });
 

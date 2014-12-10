@@ -6,6 +6,11 @@
 <%block name="pagetitle">医学慕课</%block>
 <%! from microsite_configuration import microsite %>
 
+<%block name="seo">
+<%! from syscustom.views import getSeoByKey %>
+<meta name="keywords" content="${getSeoByKey('list_page_keyword')}" />
+<meta name="description" content="${getSeoByKey('list_page_desc')}"/>
+</%block>
 <section class="find-courses">
 
 <%
@@ -597,7 +602,10 @@ function chkform(obj){
                 <div class="subject-right">
                   <ul id="subject">
                       <li class="tab1" name="all"><span>全部</span></li>
-                      <li class="tab1" name="LCHYX"><span>临床医学</span></li>
+                      % for item in course_class_list:
+						 <li class="tab1" name="${item.code}"><span>${item.name}</span></li>
+					 % endfor
+                     <!-- <li class="tab1" name="LCHYX"><span>临床医学</span></li>
                       <li class="tab1" name="JCHYX"><span>基础医学</span></li>
                       <li class="tab1" name="ZHYZHY"><span>中医中药</span></li>
                       <li class="tab1" name="KQYX"><span>口腔医学</span></li>
@@ -605,7 +613,7 @@ function chkform(obj){
                       <li class="tab1" name="HL"><span>护理</span></li>
                       <li class="tab1" name="GGWSHYFYX"><span>公共卫生与预防医学</span></li>
                       <li class="tab1" name="YXYJ"><span>医学检验</span></li>
-                      <!--
+                      
                       <li class="tab1" name="信息安全基础理论"><span>信息安全基础理论</span></li>
                       <li class="tab1" name="通用安全技术"><span>通用安全技术</span></li>
                       <li class="tab1" name="安全管理"><span>安全管理</span></li>

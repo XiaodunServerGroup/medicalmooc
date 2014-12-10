@@ -37,7 +37,7 @@ from django.utils.translation import ugettext as _
 			<td>
 			</td>
 			<td>
-				<input  type="submit" class="btn" name="保存" >
+				<input  type="submit" class="btn" value="保存" >
 				<span id="msg" class="msg-tips"></span>
 			</td>
 		</tr>
@@ -51,11 +51,11 @@ $(document).ready(function(){
 		dataType: 'json',
         beforeSubmit:function(){
         	if(!$("#code").val()){
-        		alert("课程分类代码");
+        		alert("请填写课程分类代码");
         		return false;
         	}
         	if(!$("#name").val()){
-        		alert("课程分类名称");
+        		alert("请填写课程分类名称");
         		return false;
         	}
         },

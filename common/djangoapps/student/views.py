@@ -109,6 +109,8 @@ from util.password_policy_validators import (
     validate_password_dictionary
 )
 
+from syscustom.models import CustomImage
+
 log = logging.getLogger("edx.student")
 AUDIT_LOG = logging.getLogger("audit")
 
@@ -164,7 +166,8 @@ def index(request, extra_context={}, user=AnonymousUser()):
     """
     context = {"courses": audit_courses(request, user)}
     context.update(extra_context)
-
+    luobo_list = CustomImage.objects.filter(type=1).order_by('order_num', 'id')[:8]
+    context['luobo_list'] = luobo_list
     return render_to_response('index.html', context)
 
 

@@ -79,7 +79,7 @@ from course_creators.views import get_course_creator_status, add_user_with_statu
 from contentstore import utils
 from student.roles import CourseInstructorRole, CourseStaffRole, CourseCreatorRole, GlobalStaff
 from student import auth
-
+from syscustom.models import CourseClass
 from microsite_configuration import microsite
 
 __all__ = ['course_info_handler', 'course_handler', 'course_info_update_handler',
@@ -394,7 +394,8 @@ def course_listing(request):
         'wenjuan_link': wenjuan_loginapi,
         'qlist': qlist,
         'profile': profile,
-        'user_institute_teacher_list': user_institute_teacher_list
+        'user_institute_teacher_list': user_institute_teacher_list,
+        "course_class_list": CourseClass.objects.all().order_by('order_num','id')
     })
 
 

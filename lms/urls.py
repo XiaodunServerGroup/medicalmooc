@@ -11,6 +11,8 @@ if settings.DEBUG or settings.FEATURES.get('ENABLE_DJANGO_ADMIN_SITE'):
 
 urlpatterns = ('',  # nopep8
     # certificate view
+    url(r'^store/(?P<path>.*)$','django.views.static.serve',{'document_root': settings.STORE_ROOT}),
+    
     url(r'^update_certificate$', 'certificates.views.update_certificate'),
     url(r'^$', 'branding.views.index', name="root"),   # Main marketing page, or redirect to courseware
     url(r'^dashboard$', 'student.views.dashboard', name="dashboard"),

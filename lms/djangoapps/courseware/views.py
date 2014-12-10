@@ -64,6 +64,7 @@ from xmodule.course_module import CourseDescriptor
 from xmodule.contentstore.content import StaticContent
 import shoppingcart
 
+from syscustom.models import CourseClass
 from microsite_configuration import microsite
 
 log = logging.getLogger("edx.courseware")
@@ -150,7 +151,9 @@ def courses(request):
         ]
 
     }
-
+    
+    course_class_list = CourseClass.objects.all().order_by('order_num','id')
+    
     con_col = {}
     con_courses = []
 
@@ -202,9 +205,9 @@ def courses(request):
         context["courses"] = map(format_course, context["courses"])
         return JsonResponse(context)
 
-    return render_to_response("courseware/courses.html", {'courses': filter_audited_items(courses)})
+    return render_to_response("courseware/courses.html", {'courses': filter_audited_items(courses), 'course_class_list':course_class_list})
 
-
+ 
 def audit_courses(request, user=AnonymousUser()):
     # The course selection work is done in courseware.courses.
     domain = settings.FEATURES.get('FORCE_UNIVERSITY_DOMAIN')  # normally False

@@ -3,9 +3,11 @@
 <html>
 <head>
 <title>人卫慕课丨中国医学教育慕课联盟官方平台</title>
+<%! from syscustom.views import getSeoByKey %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="人卫慕课, 中国医学教育慕课联盟官方平台, 全球首个医学专业慕课平台,www.pmphmooc.com" />
-<meta name="description" content="中国医学教育慕课联盟官方平台, 全球首个医学专业慕课平台"/>
+<%! from syscustom.views import getSeoByKey %>
+<meta name="keywords" content="${getSeoByKey('index_page_keyword')}" />
+<meta name="description" content="${getSeoByKey('index_page_desc')}"/>
 </head>
 <body>
 <script language="javascript" src="/common/header.js"></script>
@@ -168,31 +170,23 @@ function getStyle(obj,attr){return obj.currentStyle?obj.currentStyle[attr]:getCo
 
 <div class="default_banner">
         <div class="big-img" id="big-img">
-        	<a href="#">
-                <li style="width:100%; height:350px; text-align:center; background:#0884c4; position:absolute; top:0; list-style:none; z-index:99">
-                <img class="big_b1" usemap="#testmap" id="big1" src="static/images/banner1_02.jpg" width="1180" height="350" style="opacity:1;z-index:1; filter:alpha(opacity:100);">
-                </img>
-                <!--<div class="btn_pc" style="z-index:10;"></div>-->
-                </li>
-            </a>
-			<a href="#">
-                <li style="width:100%; height:350px; text-align:center; background:#3cb6f5; position:absolute; top:0; list-style:none;">
-                <img class="big_b2" src="static/images/lobby_02.jpg"  id="big2" width="1180" height="350"  style="opacity:1;z-index:0; filter:alpha(opacity:100);"></img>
-                </li>
-            </a>
-			<a href="#">
-                <li style="width:100%; height:350px; text-align:center; background:#ff6833; position:absolute; top:0; list-style:none;">
-                <img class="big_b3"  src="static/images/lobby_04.jpg" id="big3" width="1180" height="350"  style="opacity:1;z-index:0; filter:alpha(opacity:100); "></img>
-                </li>
+        	% for item in luobo_list:
+        		<a href="${item.url if item.url else '#'}">
+	                <li style="width:100%; height:350px; text-align:center; background:#0884c4; position:absolute; top:0; list-style:none; z-index:99">
+	                <img class="big_b1" usemap="#testmap" id="big1" src="${item.get_image_url()}" width="1180" height="350" style="opacity:1;z-index:1; filter:alpha(opacity:100);">
+	                </img>
+	                </li>
+	            </a>
+        	% endfor 
             </a>
         </div>
       	<div class="small">
                 <ul class="small_m">
                       <div class="s_pre" id="prevBtn"></div>
                       <div class="scroll_pic" id="tab-btn">
-                   		<li><img class="cls" src="static/images/index3_07.png" /></li>
-                        <li><img src="static/images/index3_07.png"  alt=""/></li>
-                        <li><img src="static/images/index3_07.png"  alt=""/></li>
+                      	% for item in luobo_list:
+                      		<li><img src="static/images/index3_07.png"  alt=""/></li>
+                      	% endfor
                       </div>
                       <div class="s_next" id="nextBtn"></div>
                 </ul>
@@ -260,6 +254,7 @@ function getStyle(obj,attr){return obj.currentStyle?obj.currentStyle[attr]:getCo
   </footer>
 </div>
 <!--footer end-->
+<%include file="${settings.STATISTICS_CODE_TEMPLATE}" />
 </body>
 </html>
 
@@ -272,3 +267,4 @@ function getStyle(obj,attr){return obj.currentStyle?obj.currentStyle[attr]:getCo
       })
    </script>
 </%block>
+

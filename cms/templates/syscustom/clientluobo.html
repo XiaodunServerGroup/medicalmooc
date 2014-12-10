@@ -10,6 +10,7 @@
 		<tr>
 			<td>图片</td>
 			<td width="400px">链接</td>
+			<td width="100px">类型</td>
 			<td width="50px">排序号</td>
 			<td width="100px">操作</td>
 		</tr>
@@ -23,6 +24,7 @@
 				% endif
 			</td>
 			<td>${item.url}</th>
+			<td>${item.get_type_display()}</td>
 			<td  style="text-align:center">${item.order_num}</th>
 			<td  style="text-align:center;vertical-align:middle;">
 				<a href="/syscustom/clientluobo/${item.id}/edit/">修改</a>

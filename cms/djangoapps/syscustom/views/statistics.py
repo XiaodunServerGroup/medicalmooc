@@ -16,21 +16,24 @@ from edxmako.shortcuts import render_to_response
 @login_required
 @ensure_csrf_cookie
 def statistics_code(request):
-    statictics_code_tempate = os.path.join(settings.STORE_ROOT, settings.STATISTICS_CODE_TEMPLATE)
+    statictics_code_template = settings.STATISTICS_CODE_TEMPLATE_PATH
     
     if request.method == 'POST':
         content = request.POST.get('content')
-        f = codecs.open(statictics_code_tempate, 'w', 'utf-8')
+        f = codecs.open(statictics_code_template, 'w', 'utf-8')
         f.write(content)
         f.close()
         return JsonResponse({'status':1})
     else:
-        if not os.path.exists(statictics_code_tempate):
-            f = codecs.open(statictics_code_tempate, 'w', 'utf-8')
+        if not os.path.exists(os.path.split(statictics_code_template)[0]):
+            os.makedirs(os.path.split(statictics_code_template)[0], int('777', 8))
+            os.chmod(os.path.split(statictics_code_template)[0], 511)
+        if not os.path.exists(statictics_code_template):
+            f = codecs.open(statictics_code_template, 'w', 'utf-8')
             f.write('')
             f.close()
         
-        f = open(statictics_code_tempate, "r")
+        f = open(statictics_code_template, "r")
         content = f.read()
         f.close()
         

@@ -269,13 +269,18 @@ COMMENTS_SERVICE_URL = ENV_TOKENS.get("COMMENTS_SERVICE_URL", '')
 
 ####syscustom
 STORE_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))) + '/store/'
+
 STORE_URL = '/store/'
 CUSTOM_IMAGE_DIR = 'focusimg/'
 CUSTOM_IMAGE_CLASS = ((1, u'网站首页轮播'), 
-                      (10, u'手机端轮播'), 
+                      (10, u'IOS端轮播'), 
+                      (11, u'IPAD端轮播'),
                       (20, u'IOS启动图'), 
                       (21, u'PAD启动图'), 
                       (22, u'Android启动图'), 
                       (23, u'OTT启动图'),)
 STATISTICS_CODE_TEMPLATE = 'statistics_code.html'
+STATISTICS_CODE_TEMPLATE_PATH= os.path.join(STORE_ROOT, 'templates', STATISTICS_CODE_TEMPLATE)
 SEO_TEMPLATE = 'seo.html'
+SEO_TEMPLATE_PATH= os.path.join(STORE_ROOT, SEO_TEMPLATE)
+
