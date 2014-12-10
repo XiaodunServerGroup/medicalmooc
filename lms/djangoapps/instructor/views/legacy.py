@@ -9,6 +9,7 @@ import logging
 import os
 import re
 import requests
+import codecs
 
 from collections import defaultdict, OrderedDict
 from markupsafe import escape
@@ -152,7 +153,8 @@ def instructor_dashboard(request, course_id):
             response['Content-Disposition'] = 'attachment; filename={0}'.format(func)
         else:
             response = file_pointer
-        writer = csv.writer(response, dialect='excel', quotechar='"', quoting=csv.QUOTE_ALL)
+        response.write(codecs.BOM_UTF8)
+        writer=csv.writer(response, dialect='excel', quotechar='"', quoting=csv.QUOTE_ALL)
         encoded_row = [unicode(s).encode('utf-8') for s in datatable['header']]
         writer.writerow(encoded_row)
         for datarow in datatable['data']:
