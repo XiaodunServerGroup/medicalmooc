@@ -245,20 +245,21 @@ def instructor_dashboard(request, course_id):
     if action == u'学生人数的转储列表' or action == 'List enrolled students':
         log.debug(action)
         datatable = get_student_grade_summary_data(request, course, course_id, get_grades=False, use_offline=use_offline)
-        datatable['title'] = _u('List of students enrolled in {0}').format(course_id)
+
+        datatable['title'] = u'学生人数的转储列表 {0}'.format(course_id)
         track.views.server_track(request, "list-students", {}, page="idashboard")
 
     elif action==u'所有注册这们课程的学生' :
         log.debug(action)
         datatable = get_student_grade_summary_data(request, course, course_id, get_grades=True, use_offline=use_offline)
-        datatable['title'] = _u('Summary Grades of students enrolled in {0}').format(course_id)
+        datatable['title'] = u'所有注册这们课程的学生 {0}'.format(course_id)
         track.views.server_track(request, "dump-grades", {}, page="idashboard")
 
     elif action == u'转储所有注册学习这门课的学生RAW等级':
         log.debug(action)
         datatable = get_student_grade_summary_data(request, course, course_id, get_grades=True,
                                                    get_raw_scores=True, use_offline=use_offline)
-        datatable['title'] = _u('Raw Grades of students enrolled in {0}').format(course_id)
+        datatable['title'] = u'转储所有注册学习这门课的学生RAW等级 {0}'.format(course_id)
         track.views.server_track(request, "dump-grades-raw", {}, page="idashboard")
 
     elif action == u'下载所有学生的成绩' :
