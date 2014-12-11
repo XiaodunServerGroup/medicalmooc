@@ -15,45 +15,6 @@
 </script>
 % endfor
 <script type="text/javascript">
-    function change_picurl(){
-      var new_picurl = $('#new_picurl_field').val();
-      new_picurl=new_picurl.substr(0,7).toLowerCase()=="http://"?new_picurl:"http://"+new_picurl;
-      $.post('${reverse("change_picurl")}',
-             {"new_picurl":new_picurl},
-             function(data) {
-               if(data.success) {
-                 location.reload();
-               } else {
-                 $("#change_picurl_error").html(data.error).stop().css("display", "block");
-               }
-             });
-       return false;
-    }
-
-    function change_shortbio(){
-      var new_shortbio = $('#new_shortbio_field').val();
-      if(new_shortbio.length > 1000 ){
-        alert("您输入的字数为" + new_shortbio.length + "字,已经超过限制的1000字,请输入少于1000字的简介");
-        return false;
-      }
-      $.post('${reverse("change_shortbio")}',
-             {"new_shortbio":new_shortbio},
-             function(data) {
-               if(data.success) {
-                 location.reload();
-               } else {
-                 $("#change_shortbio_error").html(data.error).stop().css("display", "block");
-               }
-             });
-       return false;
-    }
-
-    function close_pic(){
-        $('#apply_picurl_change').css('display', 'none');
-        $('#apply_shortbio_change').css('display', 'none');
-        $('#lean_overlay').css('display','none');
-    }
-    accessible_modal(".edit-picurl", "#apply_picurl_change .close-modal", "#apply_picurl_change", "#dashboard-main");
 </script>
 
 <style type="text/css">
@@ -67,123 +28,61 @@
             <!--
             <small class="subtitle">${_("Content")}</small>
             -->
-            <span class="sr">&gt; </span>教师简介
+            <span class="sr">&gt; </span>教师信息编辑
         </h1>
     </header>
-<section class="container dashboard" id="dashboard-main" aria-hidden="false">
-    <section class="profile-sidebar">
-        <header class="profile">
-
-        </header>
-        <section class="user-info">
-            <ul>
-
-                <li class="info--pic">
-                    <span class="title"><div class="icon picurl-icon"></div>头像 (<a href="#apply_picurl_change" rel="leanModal" class="edit-picurl">${_("edit")}</a>)</span></br>
-            <span class="data">
-                %if context['picurl']:
-                    <img src="${ context['picurl'] | h }" width="70" height="70" style="border-radius:50%;"/>
-                %else:
-                    <img src="${static.url('images/noprofilepic.jpg')}" width="70" height="70" style="border-radius:50%;"/>
-                %endif
-            </span>
-                </li>
-
-
-                <li class="info--shortbio">
-                    <span class="title"><div class="icon shortbio-icon"></div>个人简介 (<a href="#apply_shortbio_change" rel="leanModal" class="edit-shortbio">${_("edit")}</a>)</span></br>
-            <span style="color: #646464;font-weight: 700;margin-left: 0px;margin-right: 16px; text-overflow: ellipsis;overflow: hidden; width:100px;">
-                %if context['shortbio']:
-                    ${ context['shortbio'] | h }
-                %endif
-            </span>
-                </li>
-
-            </ul>
-        </section>
-
+    <section class="content">
+    <style>
+    	.tb{}
+    	.tb td{padding:5px;}
+    </style>
+    <form method="post" action="">
+    <input type='hidden' name='csrfmiddlewaretoken' value='${csrf_token}' />
+        	<table class="tb">
+        		<tr>
+        			<td width="100px">头像链接地址</td>
+        			<td>
+        				<input type="text" name="picurl" value="" size="60" maxlength="160"/><br/>
+        				
+        				 %if profile and profile.picurl:
+		                    <img src="${ profile.picurl}" width="70" height="70" style="border-radius:50%;"/>
+		                %else:
+		                    <img src="${static.url('images/noprofilepic.jpg')}" width="70" height="70" style="border-radius:50%;" maxlength="1000"/>
+		                %endif
+        			</td>
+        		</tr>
+        		<tr>
+        			<td >个人简介 </td>
+        			<td>
+        				<textarea name="shortbio" style="width:600px;height:200px;" >${profile.shortbio|h}</textarea>
+        			</td>
+        		</tr>
+        		<tr>
+        			<td ></td>
+        			<td>
+        				 <input type="submit" id="submit" value="保存" class="button upload-button new-button" style="font-size:14px;">
+        			</td>
+        		</tr>
+        	</table> 
+    </form>
     </section>
-</div>
-<section id="apply_picurl_change" class="modal" aria-hidden="true">
-  <div class="inner-wrapper" role="dialog" aria-labelledby="change-picurl-title">
-    <button class="close-modal" onclick="return close_pic(this)" style="float: right;">&#10005;
-      <span class="sr">
-        ## Translators: this is a control to allow users to exit out of this modal interface (a menu or piece of UI that takes the full focus of the screen)
-        ${_('Close Modal')}
-      </span>
-    </button>
 
-    <header>
-      <h2 id="change-picurl-title">
-        更改您的头像链接
-        <span class="sr">,
-          ## Translators: this text gives status on if the modal interface (a menu or piece of UI that takes the full focus of the screen) is open or not
-          ${_("modal open")}
-        </span>
-      </h2>
-      <hr/>
-    </header>
-    <div id="change_picurl_body">
-      <form id="change_picurl_form">
-        <div id="change_picurl_error" class="modal-form-error"> </div>
-        ## Translators: note that {platform} {cert_name_short} will look something like: "edX certificate". Please do not change the order of these placeholders.
-        <p> <p>为了维护您在中国医学教育慕课联盟的可信度，所有的更改都被做记录.</p></p>
-        <br/>
-        <fieldset>
-          <div class="input-group">
-            ## Translators: note that {platform} {cert_name_short} will look something like: "edX certificate". Please do not change the order of these placeholders.
-            <label>请输入您的头像链接,请使用jpg或png格式，修改后您的全名将出现在您的中国医学教育慕课联盟资料中：</label>
-            <input id="new_picurl_field" value="" type="text" />
-          </div>
-          <div class="submit">
-            <input type="submit" id="submit" value="更改我的头像" onclick="return change_picurl(this)">
-          </div>
-        </fieldset>
-      </form>
-    </div>
-  </div>
-</section>
-</section>
 
-<section id="apply_shortbio_change" class="modal" aria-hidden="true">
-  <div class="inner-wrapper" role="dialog" aria-labelledby="change-shortbio-title">
-    <button class="close-modal" onclick="return close_pic(this)" style="float: right;">&#10005;
-      <span class="sr">
-        ## Translators: this is a control to allow users to exit out of this modal interface (a menu or piece of UI that takes the full focus of the screen)
-        ${_('Close Modal')}
-      </span>
-    </button>
 
-    <header>
-      <h2 id="change-shortbio-title">
-        更改您的个人简介
-        <span class="sr">,
-          ## Translators: this text gives status on if the modal interface (a menu or piece of UI that takes the full focus of the screen) is open or not
-          ${_("modal open")}
-        </span>
-      </h2>
-      <hr/>
-    </header>
-    <div id="change_shortbio_body">
-      <form id="change_shortbio_form">
-        <div id="change_shortbio_error" class="modal-form-error"> </div>
-        ## Translators: note that {platform} {cert_name_short} will look something like: "edX certificate". Please do not change the order of these placeholders.
-        <p> <p>为了维护您在中国医学教育慕课联盟的可信度，所有的更改都被做记录.</p></p>
-        <br/>
-        <fieldset>
-          <div class="input-group">
-            ## Translators: note that {platform} {cert_name_short} will look something like: "edX certificate". Please do not change the order of these placeholders.
-            <label>请输入您个人简介，修改后您的个人简介将出现在您的中国医学教育慕课联盟资料中：</label>
-            <textarea id="new_shortbio_field" value=""></textarea>
-          </div>
-          <div class="submit">
-            <input type="submit" id="submit" value="更改我的简介" onclick="return change_shortbio(this)">
-          </div>
-        </fieldset>
-      </form>
-    </div>
-  </div>
-</section>
+<br/><br/><br/><br/><br/><br/>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </%block>
 

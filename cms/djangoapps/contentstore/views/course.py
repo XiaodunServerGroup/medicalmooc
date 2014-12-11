@@ -1309,23 +1309,25 @@ def remove_institute_teacher(request):
 
 @login_required
 @ensure_csrf_cookie
-def teacher_intro_edit(request, id=None):
-    userprofile = UserProfile.objects.get(user_id=id)
-    if userprofile.picurl:
-        picurl = userprofile.picurl
+def teacher_intro_edit(request, id):
+    if request.user.id !=int(id):
+        raise Http404
+    if request.method == 'POST':
+        picurl = request.POST.get('picurl', '')
+        shortbio = request.POST.get('shortbio', '')
+        
+        profile = UserProfile.objects.get(user_id=id)
+        
+        if picurl:
+            profile.picurl = picurl
+        profile.shortbio = shortbio
+        profile.save()
+    
     else:
-        picurl=None
-
-    if userprofile.shortbio:
-        shortbio = userprofile.shortbio
-    else:
-        shortbio=None
-
-    context = {
-        'picurl': picurl,
-        'shortbio': shortbio
-    }
-    return render_to_response('teacher_intro_edit.html', context)
+        profile = UserProfile.objects.get(user_id=id)
+        if not profile.shortbio:
+            profile.shortbio = ""
+    return render_to_response('teacher_intro_edit.html', {'profile':profile})
 
 @ensure_csrf_cookie
 def change_picurl_request(request):
