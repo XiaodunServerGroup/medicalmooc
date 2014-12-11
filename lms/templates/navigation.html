@@ -46,7 +46,7 @@ site_status_msg = get_site_status_msg(course_id)
 
   <h1 class="logo">
     <!--<a href="${marketing_link('ROOT')}">-->
-    <a href="http://www.pmphmooc.com/">
+    <a href="/">
       <%block name="navigation_logo">
           <img style="width: 250px; height: 52px;" src="${static.url(branding.get_logo_url())}" alt="
           % if course:
@@ -65,16 +65,16 @@ site_status_msg = get_site_status_msg(course_id)
             <a style="color:#2883bc;" href="${marketing_link('COURSES')}">慕课</a>
           </li>
           <li class="nav-global-01">
-            <a href="http://www.pmphmooc.com/gkk/">公开课</a>
+            <a href="/gkk/">公开课</a>
           </li>
           <li class="nav-global-01">
-            <a href="http://www.pmphmooc.com/lmcy/">联盟成员</a>
+            <a href="/lmcy/">联盟成员</a>
           </li>
           <li class="nav-global-01">
-            <a href="http://www.pmphmooc.com/gg/">公告</a>
+            <a href="/gg/">公告</a>
           </li>
           <li class="nav-global-01">
-            <a href="http://www.pmphmooc.com/gy/">关于</a>
+            <a href="/gy/">关于</a>
           </li>
         % endif
       </%block>
