@@ -430,8 +430,8 @@ function goto( mode)
     </div>
     % endif
 
-    <input type="submit" onclick="this.value='List enrolled students'" name="action" value="登记学生列表" class="${'is-disabled' if disable_buttons else ''}">
-    <input type="submit" onclick="this.value='List students who may enroll but may not have yet signed up'" name="action" value="已经等登记但是尚未注册学生名单" class="${'is-disabled' if disable_buttons else ''}">
+    <input type="submit" onclick="this.value='登记学生列表'" name="action" value="登记学生列表" class="${'is-disabled' if disable_buttons else ''}">
+    <input type="submit" onclick="this.value='已经等登记但是尚未注册学生名单'" name="action" value="已经等登记但是尚未注册学生名单" class="${'is-disabled' if disable_buttons else ''}">
     <hr width="40%" style="align:left">
 
   %if settings.FEATURES.get('REMOTE_GRADEBOOK_URL','') and instructor_access:
@@ -564,7 +564,7 @@ function goto( mode)
 	<b>${_("A queued email CANNOT be cancelled.")}</b></p>
       </div>
       <br />
-      <input type="submit" onclick="this.value='Send email'" name="action" value="发送邮件">
+      <input type="submit" onclick="this.value='发送邮件'" name="action" value="发送邮件">
     </div>
     <script type="text/javascript">
       $(document).ready(function(){

@@ -9,9 +9,11 @@ TO DO sync instructor and staff flags
         {instructor: true, staff: false}
         {instructor: true, staff: true}
 """
-
+from student.models import UserProfile
 import logging
 from django_comment_common.models import Role
+
+
 
 from student.roles import CourseBetaTesterRole, CourseInstructorRole, CourseStaffRole
 
@@ -25,9 +27,9 @@ ROLES = {
 
 def get_one_instructor_name(course):
     instructors = ROLES['instructor'](course.location).users_with_role()
-    
-    if len(instructors) > 0: 
-        return instructors[0].username
+    if len(instructors) > 0:
+        name=instructors[0].profile.name
+        return name
     else:
         return "未知"
 

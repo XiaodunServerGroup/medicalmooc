@@ -10,6 +10,7 @@ import os
 import re
 import requests
 import codecs
+import random
 
 from collections import defaultdict, OrderedDict
 from markupsafe import escape
@@ -242,7 +243,7 @@ def instructor_dashboard(request, course_id):
             except Exception as err:
                 msg += '<br/><p>Error: {0}</p>'.format(escape(err))
 
-    if action == u'学生人数的转储列表' or action == 'List enrolled students':
+    if action == u'学生人数的转储列表' or action == u'登记学生列表':
         log.debug(action)
         datatable = get_student_grade_summary_data(request, course, course_id, get_grades=False, use_offline=use_offline)
 
@@ -699,7 +700,7 @@ def instructor_dashboard(request, course_id):
     #----------------------------------------
     # enrollment
 
-    elif action == 'List students who may enroll but may not have yet signed up':
+    elif action == u'已经等登记但是尚未注册学生名单':
         ceaset = CourseEnrollmentAllowed.objects.filter(course_id=course_id)
         datatable = {'header': ['学生电子邮件']}
         datatable['data'] = [[x.email] for x in ceaset]
@@ -747,7 +748,7 @@ def instructor_dashboard(request, course_id):
     #----------------------------------------
     # email
 
-    elif action == 'Send email':
+    elif action == u'发送邮件':
         print '----------------debug------------------------------'
         email_to_option = request.POST.get("to_option")
         email_subject = request.POST.get("subject")
@@ -1045,7 +1046,6 @@ def _do_create_student(post_vars):
     return (user, profile, registration)
 
 def rand_list(username):
-    import random
     rand_list_number=[str(i) for i in range(0,10) ]
     rand_list_Letter=[chr(i) for i in range(97, 122) ]
     rand_list = rand_list_number+rand_list_Letter
