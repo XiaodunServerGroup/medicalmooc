@@ -327,7 +327,7 @@ def _get_asset_json(display_name, date, location, thumbnail_location, locked):
     Helper method for formatting the asset information to send to client.
     """
     asset_url = StaticContent.get_url_path_from_location(location)
-    external_url = settings.LMS_BASE + asset_url
+    external_url = 'http://'+settings.LMS_BASE + asset_url
     return {
         'display_name': display_name,
         'date_added': strftime_localized(date, "%Y年%m月%d日 %H:%M"),

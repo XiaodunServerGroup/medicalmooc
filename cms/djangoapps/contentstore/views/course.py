@@ -5,6 +5,8 @@ import sys,os
 from envs.common import PROJECT_ROOT
 import xlrd
 from student.views import do_institution_import_teacher_create_account
+from student.models import PendingNameChange
+from student.views import accept_picurl_change_by_id, accept_shortbio_change_by_id
 
 
 reload(sys)
@@ -38,7 +40,7 @@ from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseBadRequest, HttpResponseNotFound, HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseBadRequest, HttpResponseNotFound, HttpResponseRedirect, HttpResponse, Http404
 from util.json_request import JsonResponse
 from edxmako.shortcuts import render_to_response
 
@@ -93,7 +95,7 @@ __all__ = ['course_info_handler', 'course_handler', 'course_info_update_handler'
            'calendar_common_updateevent',
            'calendar_settings_getevents',
            'textbooks_list_handler',
-           'textbooks_detail_handler', 'course_audit_api', 'institution_upload_teacher', 'remove_institute_teacher']
+           'textbooks_detail_handler', 'course_audit_api', 'institution_upload_teacher', 'remove_institute_teacher', 'teacher_intro_edit', 'change_picurl_request', 'change_shortbio_request']
 
 WENJUAN_STATUS = {
     "0": "未发布",
@@ -1255,7 +1257,7 @@ def institution_upload_teacher(request):
         if form.is_valid():
             filename = form.cleaned_data['file']
             filename_suffix = filename.name.split('.')[-1]
-            if filename_suffix == 'xls':
+            if filename_suffix == 'xls' or filename_suffix == 'xlsx':
                 f = handle_uploaded_file(filename)
                 xls_insert_into_db(request, f, use_id)
                 messg = '教师导入成功'
@@ -1304,3 +1306,74 @@ def remove_institute_teacher(request):
     profile_user.institute = None
     profile_user.save()
     return JsonResponse('/course')
+
+@login_required
+@ensure_csrf_cookie
+def teacher_intro_edit(request, id=None):
+    userprofile = UserProfile.objects.get(user_id=id)
+    if userprofile.picurl:
+        picurl = userprofile.picurl
+    else:
+        picurl=None
+
+    if userprofile.shortbio:
+        shortbio = userprofile.shortbio
+    else:
+        shortbio=None
+
+    context = {
+        'picurl': picurl,
+        'shortbio': shortbio
+    }
+    return render_to_response('teacher_intro_edit.html', context)
+
+@ensure_csrf_cookie
+def change_picurl_request(request):
+    """ Log a request for a new name. """
+    print 'change_picurl_request'
+    if not request.user.is_authenticated:
+        raise Http404
+
+    try:
+        pnc = PendingNameChange.objects.get(user=request.user)
+    except PendingNameChange.DoesNotExist:
+        pnc = PendingNameChange()
+    pnc.user = request.user
+    pnc.new_name = request.POST['new_picurl']
+    if len(pnc.new_name) < 15:
+        return JsonResponse({
+            "success": False,
+            "error": "请输入头像链接",
+        })  # TODO: this should be status code 400  # pylint: disable=fixme
+    pnc.save()
+
+    # The following automatically accepts name change requests. Remove this to
+    # go back to the old system where it gets queued up for admin approval.
+    accept_picurl_change_by_id(pnc.id)
+
+    return JsonResponse({"success": True})
+
+@ensure_csrf_cookie
+def change_shortbio_request(request):
+    """ Log a request for a new name. """
+    if not request.user.is_authenticated:
+        raise Http404
+
+    try:
+        pnc = PendingNameChange.objects.get(user=request.user)
+    except PendingNameChange.DoesNotExist:
+        pnc = PendingNameChange()
+    pnc.user = request.user
+    pnc.rationale = request.POST['new_shortbio']
+    if len(pnc.rationale) < 1:
+        return JsonResponse({
+            "success": False,
+            "error": "请输入您的个人简介",
+        })  # TODO: this should be status code 400  # pylint: disable=fixme
+    pnc.save()
+
+    # The following automatically accepts name change requests. Remove this to
+    # go back to the old system where it gets queued up for admin approval.
+    accept_shortbio_change_by_id(pnc.id)
+
+    return JsonResponse({"success": True})

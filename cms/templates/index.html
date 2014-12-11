@@ -103,17 +103,18 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
         var file=$("input[name='file']").val();
         var filename=file.replace(/.*(\/|\\)/, "");
         var fileExt=(/[.]/.exec(filename)) ? /[^.]+$/.exec(filename.toLowerCase()) : '';
-        if(fileExt != 'xls'){
-            alert('上传失败!上传文件为excel格式');
+        if(fileExt == 'xls' || fileExt == 'xlsx'){
+            //alert('上传成功!');
             //$('#content').innerHTML="上传失败!上传文件为excel格式";
-            return false;
         }else{
-            alert('上传成功!')
+            alert('上传失败!上传文件为excel格式')
+            return false;
         }
     })
 
     accessible_modal(".edit-name", "#apply_name_change .close-modal", "#apply_name_change", "#index-main");
     accessible_modal(".edit-name", "#apply_name_change_file .close-modal", "#apply_name_change_file", "#index-main");
+
 });
 </script>
 
@@ -803,4 +804,7 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
     </div>
   </div>
 </section>
+
+
+
 </%block>
