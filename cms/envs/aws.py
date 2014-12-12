@@ -195,8 +195,8 @@ if "TRACKING_IGNORE_URL_PATTERNS" in ENV_TOKENS:
 with open(CONFIG_ROOT / CONFIG_PREFIX + "auth.json") as auth_file:
     AUTH_TOKENS = json.load(auth_file)
 
-EMAIL_HOST_USER = AUTH_TOKENS.get('EMAIL_HOST_USER', 'servicemooc')
-EMAIL_HOST_PASSWORD = AUTH_TOKENS.get('EMAIL_HOST_PASSWORD', 'pmph59787000')
+EMAIL_HOST_USER = AUTH_TOKENS.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = AUTH_TOKENS.get('EMAIL_HOST_PASSWORD', '')
 
 # If Segment.io key specified, load it and turn on Segment.io if the feature flag is set
 # Note that this is the Studio key. There is a separate key for the LMS.
