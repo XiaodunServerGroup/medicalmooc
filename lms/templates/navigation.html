@@ -35,7 +35,27 @@ site_status_msg = get_site_status_msg(course_id)
 </div>
 % endif
 </%block>
-
+<style>
+	.downloads{ margin-left:37px;}
+    .downloads li{ width:140px; height:45px; background:url(static/images/pic_001.png) 16px center no-repeat; background-color:#f4f4f4; border-radius:5px; border:1px solid #e7e7e7; line-height:45px; position:relative;}
+	.downloads li span{ margin-left:45px;}
+	.bg_pic001{ background:url(static/images/new.png) left center no-repeat; position:absolute; left:103px; top:0px;  width:28px; height:16px;}
+	.downloads li ul.app_01{ display:none;  position:absolute; right:-1px; width:207px; height:240px; background-color:#f4f4f4; border:1px solid #e7e7e7; z-index:200;}
+	.downloads li ul.app_01 li{ width:166px; margin:25px 0 0 20px; background:#2984bd; }
+	.downloads li ul.app_01 li.anzhuo01{ background:#2984bd url(static/images/anzhuo_01.png) 16px center no-repeat; position:relative; z-index:1;}
+	.downloads li ul.app_01 li.anzhuo01 a{ line-height:32px; color:#fff; display:block; margin-left:43px; width:68px; border-right:1px solid #2b8cc9; float:left;}
+	.downloads li ul.app_01 li.weixin01{ background:#2984bd url(static/images/weixin_01.png) 16px center no-repeat; position:relative; z-index:1;}
+	.downloads li ul.app_01 li.ios01{ background:#2984bd url(static/images/anzhuo_01.png) 16px center no-repeat; position:relative; z-index:200;}
+	.downloads li ul.app_01 li.weixin01 a{ line-height:32px; color:#fff; display:block; margin-left:53px; width:58px; border-right:1px solid #2b8cc9; float:left;}
+	.downloads li ul.app_01 li.anzhuo01 .bg_weixin{ display:inline;margin-left:10px; }
+	.erweima{ display:none;  width:240px; height:239px; border:1px solid #e7e7e7; background-color:#f4f4f4; position:absolute; left:-261px; top:-27px; z-index:50; margin-top:1px;  }
+	.erweima2{  display:none;  width:240px; height:239px; border:1px solid #e7e7e7; background-color:#f4f4f4; position:absolute; left:-261px; top:-27px; z-index:50;   }
+	.downloads li:hover ul.app_01{ display:block; z-index:1; border-top:none; margin-top:-2px; }
+	.downloads li ul.app_01 li.anzhuo01 .bg_weixin:hover .erweima{ display:block; }
+	.downloads li ul.app_01 li.weixin01 .bg_weixin:hover .erweima2{ display:block;}
+	.empty1{ display:none; position:absolute; left:-1px; top:0; width:69px; height:100px; border-top:1px solid #e7e7e7;}
+	.downloads li:hover .empty1{ display:block;}
+    </style>
 
 % if course:
   <header class="global slim" aria-label="${_('Global Navigation')}">
@@ -95,6 +115,35 @@ site_status_msg = get_site_status_msg(course_id)
     % endif
 
     % if user.is_authenticated():
+    <ol class="right downloads" style="float:left;">
+          <li style="font-size: 15px; z-index:100; margin-left:-10px; margin-top:10px;"><span>客户端下载</span>
+            <div class="bg_pic001"></div>
+            <ul style="z-index:10;" class="app_01">
+            <li class="anzhuo01"><a href="#">Phone</a>
+              <div style="" class="bg_weixin"><img width="23" height="23" class="x_show1" src="/static/images/bg_weixin.png">
+                <div style="" class="erweima show"><img width="225" height="225" style="display:inline-block; margin:7px 0 0 7px;" src="/static/images/erweima.jpg"></div>
+              </div>
+            </li>
+            <li class="weixin01"><a href="#">微信</a>
+              <div style="margin-left:10px; width:23px; position:relative; left:122px; top:-43px; z-index:20;" class="bg_weixin2"><img width="23" height="23" class="x_show2" src="/static/images/bg_weixin.png">
+              </div>
+              </li>
+           <li class="weixin01 ios01"><a href="#">Pad</a>
+              <div style="margin-left:10px; width:23px; position:relative; left:122px; top:-43px; z-index:20;" class="bg_weixin2"><img width="23" height="23" class="x_show3" src="/static/images/bg_weixin.png">
+              </div>
+              </li>
+               <div class="empty1"></div>
+            </ul>
+
+<script>
+        $(function(){
+                $(".x_show1").hover(function(){$(".show").children("img").attr("src","/static/images/qr_android_phone.png");$(".show").show();},function(){$(".show").hide()});
+                $(".x_show2").hover(function(){$(".show").children("img").attr("src","/static/images/qr_wechat.jpg");$(".show").show();},function(){$(".show").hide()});
+                $(".x_show3").hover(function(){$(".show").children("img").attr("src","/static/images/qr_android_pad.png");$(".show").show();},function(){$(".show").hide()});
+        })
+</script>
+          </li>
+    </ol>
     <ol class="user">
       <li class="primary">
         <a href="${reverse('dashboard')}" class="user-link">
@@ -137,8 +186,8 @@ site_status_msg = get_site_status_msg(course_id)
         % endif
       </%block>
     </ol>
-
-    <ol class="right nav-courseware" style="margin-right:108px;">
+    
+    <ol class="right nav-courseware" style=" border:none; margin-right:65px; background-color:#fff;">
      <li class="nav-courseware-01">
       % if not settings.FEATURES['DISABLE_LOGIN_BUTTON']:
           % if course and settings.FEATURES.get('RESTRICT_ENROLL_BY_REG_METHOD') and course.enrollment_domain:
@@ -162,6 +211,36 @@ site_status_msg = get_site_status_msg(course_id)
           </li>
           % endif
       % endif
+    </ol>
+    
+     <ol class="right downloads">
+          <li style="font-size: 15px; z-index:100; margin-left:-10px; margin-top:10px;"><span>客户端下载</span>
+            <div class="bg_pic001"></div>
+            <ul style="z-index:10;" class="app_01">
+            <li class="anzhuo01"><a href="#">Phone</a>
+              <div style="" class="bg_weixin"><img width="23" height="23" class="x_show1" src="/static/images/bg_weixin.png">
+                <div style="" class="erweima show"><img width="225" height="225" style="display:inline-block; margin:7px 0 0 7px;" src="/static/images/erweima.jpg"></div>
+              </div>
+            </li>
+            <li class="weixin01"><a href="#">微信</a>
+              <div style="margin-left:10px; width:23px; position:relative; left:122px; top:-43px; z-index:20;" class="bg_weixin2"><img width="23" height="23" class="x_show2" src="/static/images/bg_weixin.png">
+              </div>
+              </li>
+           <li class="weixin01 ios01"><a href="#">Pad</a>
+              <div style="margin-left:10px; width:23px; position:relative; left:122px; top:-43px; z-index:20;" class="bg_weixin2"><img width="23" height="23" class="x_show3" src="/static/images/bg_weixin.png">
+              </div>
+              </li>
+               <div class="empty1"></div>
+            </ul>
+
+<script>
+        $(function(){
+                $(".x_show1").hover(function(){$(".show").children("img").attr("src","/static/images/qr_android_phone.png");$(".show").show();},function(){$(".show").hide()});
+                $(".x_show2").hover(function(){$(".show").children("img").attr("src","/static/images/qr_wechat.jpg");$(".show").show();},function(){$(".show").hide()});
+                $(".x_show3").hover(function(){$(".show").children("img").attr("src","/static/images/qr_android_pad.png");$(".show").show();},function(){$(".show").hide()});
+        })
+</script>
+          </li>
     </ol>
     % endif
   </nav>

@@ -100,7 +100,7 @@ def get_logger_config(log_dir,
         }
     }
 
-    if dev_env:
+    if 1 or  dev_env:
         tracking_file_loc = os.path.join(log_dir, tracking_filename)
         edx_file_loc = os.path.join(log_dir, edx_filename)
         logger_config['handlers'].update({

@@ -256,9 +256,9 @@ EMAIL_USE_TLS = False
 EMAIL_HOST_USER = 'servicemooc'
 EMAIL_HOST_PASSWORD = 'pmph59787000'
 
-DEFAULT_FROM_EMAIL = 'servicemooc@pmph.com'
-DEFAULT_FEEDBACK_EMAIL = 'servicemooc@pmph.com'
-SERVER_EMAIL = 'servicemooc@pmph.com'
+DEFAULT_FROM_EMAIL = 'servicemooc@test.com'
+DEFAULT_FEEDBACK_EMAIL = 'servicemooc@test.com'
+SERVER_EMAIL = 'servicemooc@test.com'
 ADMINS = ()
 MANAGERS = ADMINS
 
