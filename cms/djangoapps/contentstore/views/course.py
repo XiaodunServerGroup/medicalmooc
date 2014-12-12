@@ -1313,12 +1313,14 @@ def teacher_intro_edit(request, id):
     if request.user.id !=int(id):
         raise Http404
     if request.method == 'POST':
-        picurl = request.POST.get('picurl', '')
+        picurl = request.POST.get('picurl', '').strip()
         shortbio = request.POST.get('shortbio', '')
         
         profile = UserProfile.objects.get(user_id=id)
         
         if picurl:
+            if not picurl.startswith('http://'):
+                picurl = 'http://' + picurl
             profile.picurl = picurl
         profile.shortbio = shortbio
         profile.save()
