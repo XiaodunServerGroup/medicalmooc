@@ -135,7 +135,7 @@ def instructor_dashboard(request, course_id):
             # 'title': _u('Course Statistics At A Glance'),
             'title': _u('课程统计'),
         }
-        data = [['# Enrolled', enrollment_number]]
+        data = [[u'学员', enrollment_number]]
         data += [['Date', timezone.now().isoformat()]]
         data += compute_course_stats(course).items()
         if request.user.is_staff:
@@ -282,7 +282,7 @@ def instructor_dashboard(request, course_id):
         track.views.server_track(request, "dump-graded-assignments-config", {}, page="idashboard")
         msg += dump_grading_context(course)
 
-    elif "Rescore ALL students' problem submissions" in action:
+    elif  action == u'重评所有学生提交的作业':
         problem_urlname = request.POST.get('problem_for_all_students', '')
         problem_url = get_module_url(problem_urlname)
         try:
@@ -305,7 +305,7 @@ def instructor_dashboard(request, course_id):
                 )
             )
 
-    elif "Reset ALL students' attempts" in action:
+    elif  action == u'恢复所有学生的尝试次数':
         problem_urlname = request.POST.get('problem_for_all_students', '')
         problem_url = get_module_url(problem_urlname)
         try:
@@ -347,9 +347,9 @@ def instructor_dashboard(request, course_id):
         message, datatable = get_background_task_table(course_id, problem_url)
         msg += message
 
-    elif ("Reset student's attempts" in action or
-          "Delete student state for module" in action or
-          "Rescore student's problem submission" in action):
+    elif ( action == u'恢复特定学生的尝试次数' or
+            action ==u'删除学生状态模块'  or
+           action == u'重评特定学生提交的作业'):
         # get the form data
         unique_student_identifier = request.POST.get(
             'unique_student_identifier', ''
@@ -375,7 +375,7 @@ def instructor_dashboard(request, course_id):
                 log.debug(error_msg)
 
         if student_module is not None:
-            if "Delete student state for module" in action:
+            if  action == u'删除学生状态模块':
                 # delete the state
                 try:
                     student_module.delete()
@@ -399,7 +399,7 @@ def instructor_dashboard(request, course_id):
                     )
                     msg += "<font color='red'>{err_msg} ({err})</font>".format(err_msg=error_msg, err=err)
                     log.exception(error_msg)
-            elif "Reset student's attempts" in action:
+            elif  action==u'恢复特定学生的尝试次数':
                 # modify the problem's state
                 try:
                     # load the state json

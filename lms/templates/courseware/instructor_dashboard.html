@@ -262,8 +262,8 @@ function goto( mode)
     </p>
     <p>
       ${_("Then select an action:")}
-      <input type="submit" onclick="this.value='Reset ALL students' attempts'" name="action" value="恢复所有学生的尝试次数">
-      <input type="submit" onclick="this.value='Rescore ALL students' problem submissions'" name="action" value="重评所有学生提交的作业">
+      <input type="submit" onclick="this.value='恢复所有学生的尝试次数'" name="action" value="恢复所有学生的尝试次数">
+      <input type="submit" onclick="this.value='重评所有学生提交的作业'" name="action" value="重评所有学生提交的作业">
     </p>
     <p>
     <p>${_("These actions run in the background, and status for active tasks will appear in a table below. To see status for all tasks submitted for this problem, click on this button:")}
@@ -297,16 +297,16 @@ function goto( mode)
     </p>
     <p>
       ${_("Then select an action:")}
-      <input type="submit" onclick="this.value='Reset student\'s attempts'" name="action" value="恢复所有学生的尝试次数">
+      <input type="submit" onclick="this.value='恢复特定学生的尝试次数'" name="action" value="恢复特定学生的尝试次数">
       %if settings.FEATURES.get('ENABLE_INSTRUCTOR_BACKGROUND_TASKS'):
-      <input type="submit" onclick="this.value='Rescore student\'s problem submission'" name="action" value="重评所有学生提交的作业">
+      <input type="submit" onclick="this.value='重评特定学生提交的作业'" name="action" value="重评特定学生提交的作业">
       %endif
     </p>
 
     %if instructor_access:
     <p>
       ${_("You may also delete the entire state of a student for the specified module:")}
-      <input type="submit" onclick="this.value='Delete student state for module'" name="action" value="删除学生状态模块">
+      <input type="submit" onclick="this.value='删除学生状态模块'" name="action" value="删除学生状态模块">
     </p>
     %endif
     %if settings.FEATURES.get('ENABLE_INSTRUCTOR_BACKGROUND_TASKS'):
