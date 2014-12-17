@@ -1,8 +1,9 @@
 <!--footer begin-->
+<%! from syscustom.views import getSeoByKey %>
 <div class="wrapper-footer wrapper">
   <footer role="contentinfo" class="primary">
     <div class="colophon">
-      京ICP备14053810号 All Rights Reserved 版权所有 人民卫生出版社有限公司
+      ${getSeoByKey('bottom_footer_text')}
     </div>
   </footer>
 </div>

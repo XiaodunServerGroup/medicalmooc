@@ -10,7 +10,7 @@
 
     <div class="wrapper wrapper-l">
       ## "edX Studio" should not be translated
-      <h1 class="branding"><a href="/"><img  style="width: 250px; height: 52px;" src="${static.url('img/logo-studio.png')}" alt="" /></a></h1>
+      <h1 class="branding"><a href="/"><img  style="width: 250px; height: 52px;" src="/store/images/logo.png" alt="" /></a></h1>
 
       % if context_course:
       <%
@@ -169,6 +169,9 @@
                   </li>
                   <li class="nav-item nav-account-dashboard">
                     <a href="/teacher_intro_edit/${ user.id }/">教师简介</a>
+                  </li>
+                  <li class="nav-item nav-account-dashboard">
+                    <a href="/syscustom/">系统设置</a>
                   </li>
                   <li class="nav-item nav-account-signout">
                     <a class="action action-signout" href="${reverse('logout')}">退出登录</a>

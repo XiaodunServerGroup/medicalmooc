@@ -1,0 +1,44 @@
+<%inherit file="syscustom_base.html" />
+<%namespace name='static' file='../static_content.html'/>
+<%!
+from django.utils.translation import ugettext as _
+%>
+
+<%block name="content_extra">
+<script  type="text/javascript">
+
+        function show_confirm(id)
+        {
+            if(confirm("您确认要删除分类"))
+            {
+               window.location.href="/syscustom/courseclass/del?id=" +id
+            }
+        }
+
+</script>
+
+<table class="tb">
+    <tr>
+        <th>课程代码</th><th>名称</th><th>排序号</th><th>操作</th>
+    </tr>
+    %for courseclass in courseclass_list:
+        <tr >
+            <td>${courseclass.code}</td>
+            <td>${courseclass.name}</td>
+            <td>${courseclass.order_num}</td>
+            <td>
+            	<a href="/syscustom/courseclass/${courseclass.id}/edit/">修改</a>
+            	<a href="#" onclick="show_confirm(${courseclass.id})" >删除</a>
+            </td>
+        </tr>
+    %endfor
+
+    <tr>
+	    <td colspan="4" style="text-align:center">
+	    	<a href="/syscustom/courseclass/add/" class="btn">添加分类</a>
+	    </td>
+    </tr>
+
+</table>
+</%block>
+

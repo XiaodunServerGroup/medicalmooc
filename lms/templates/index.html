@@ -3,12 +3,13 @@
 <!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="${LANGUAGE_CODE}"><![endif]-->
 <!--[if IE 9]><html class="ie ie9 lte9" lang="${LANGUAGE_CODE}"><![endif]-->
 <!--[if gt IE 9]><!--><html lang="${LANGUAGE_CODE}"><!--<![endif]-->
+<%! from syscustom.views import getSeoByKey %>
 <html>
 <head>
-<title>人卫慕课丨中国医学教育慕课联盟官方平台</title>
+<title>丨${getSeoByKey('title_suffix')}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="人卫慕课, 中国医学教育慕课联盟官方平台, 全球首个医学专业慕课平台,www.pmphmooc.com" />
-<meta name="description" content="中国医学教育慕课联盟官方平台, 全球首个医学专业慕课平台"/>
+<meta name="keywords" content="${getSeoByKey('index_page_keyword')}" />
+<meta name="description" content="${getSeoByKey('index_page_desc')}"/>
 <%namespace name='static' file='static_content.html'/>
 <%static:css group='style-vendor'/>
     <%static:css group='style-app'/>
@@ -17,195 +18,31 @@
     <%static:js group='main_vendor'/>
 </head>  
 
-<body>
-<!-- <script language="javascript" src="/common/header.js"></script>
+<body> 
+<script language="javascript" src="/common/header.js"></script> 
 <script language="javascript" src="/common/header2.js"></script>
- -->
- 
-<%include file="navigation.html" />
+<%include file="navigation.html" /> 
 <link href="static/css/vendor/moocheader.css" rel="stylesheet" type="text/css">
-<script type="text/javascript">
-window.onload = function()
-{
-	var tabBtnBox = document.getElementById('tab-btn');
-	var tabBtn = tabBtnBox.getElementsByTagName('img');
-	var iNow = 0;
-
-	//******************Tab**************************
-	var prevBtn = document.getElementById('prevBtn');
-	var nextBtn = document.getElementById('nextBtn');
-	var bigImg = document.getElementById('big-img').getElementsByTagName('li');
-
-	for(var i=0; i<tabBtn.length; i++)
-	{
-
-
-		tabBtn[i].index = i;
-		tabBtn[i].onmouseover = function()
-		{
-
-			clearInterval(timer);
-			tabBtn[iNow].className = '';
-			goOpa(bigImg[iNow],{target:0,speed:5,endFn:function(){
-			bigImg[iNow].style.zIndex=0;
-			}});
-			this.className = 'cls';
-
-			iNow=this.index;
-			goOpa(bigImg[iNow],{target:100,speed:5,endFn:function(){
-			bigImg[iNow].style.zIndex = 10;
-			}});
-			if(iNow==0){
-				$(".btn_pc").show();
-			}else
-			{
-				$(".btn_pc").hide();
-			}
-
-		};
-
-		tabBtn[i].onmouseout = function()
-		{
-
-			timer = setInterval(auto,3000);
-		};
-
-		tabBtn[i].onclick =  function()
-		{
-			if(i==2){
-				$(".btn_pc").show();
-			}else
-			{
-				$(".btn_pc").hide();
-			}
-			tabBtn[iNow].className = '';
-			goOpa(bigImg[iNow],{target:0,speed:5,endFn:function(){
-			bigImg[iNow].style.zIndex=0;
-			}});
-			this.className = 'cls';
-			iNow=this.index;
-			goOpa(bigImg[iNow],{target:100,speed:5,endFn:function(){
-			bigImg[iNow].style.zIndex = 10;
-			}});
-				if(iNow!=0){
-				$(".btn_pc").hide();
-			}
-		};
-
-	};
-
-
-	prevBtn.onclick = function(){
-		clearInterval(timer);
-		var _iNow = iNow;
-
-		tabBtn[iNow].className = '';
-		goOpa(bigImg[_iNow],{target:0,speed:5,endFn:function(){
-		bigImg[_iNow].style.zIndex = 0;
-		}});
-
-		iNow--;if(iNow < 0)iNow = bigImg.length-1;
-		tabBtn[iNow].className = 'cls';
-		goOpa(bigImg[iNow],{target:100,speed:5,endFn:function(){
-		bigImg[iNow].style.zIndex = 10;
-		}});
-		timer = setInterval(auto,3000);
-	};
-
-	nextBtn.onclick = function(){
-
-		clearInterval(timer);
-		var _iNow = iNow;
-		tabBtn[iNow].className = '';
-		goOpa(bigImg[_iNow],{target:0,speed:5,endFn:function(){//alert(iNow);
-		bigImg[_iNow].style.zIndex = 0;
-		//alert(iNow);
-		}});
-
-		//alert(iNow);
-		iNow++;if(iNow == bigImg.length)iNow = 0;
-		//alert(iNow);
-
-		tabBtn[iNow].className = 'cls';
-		goOpa(bigImg[iNow],{target:100,speed:5,endFn:function(){bigImg[iNow].style.zIndex=1;}});
-		timer = setInterval(auto,3000);
-	};
-
-
-
-	function auto(){
-		var _iNow = iNow;
-		/*if(_iNow!=2){
-			$(".btn_pc").hide();
-			}else{
-				$(".btn_pc").show();
-			}*/
-
-		tabBtn[_iNow].className = '';
-		goOpa(bigImg[_iNow],{target:0,speed:5,endFn:function(){bigImg[_iNow].style.zIndex=0;}});
-
-		iNow++;if(iNow == bigImg.length)iNow = 0;
-
-		tabBtn[iNow].className = 'cls';
-		goOpa(bigImg[iNow],{target:100,speed:5,endFn:function(){bigImg[iNow].style.zIndex=1;}});
-	};
-	$(".btn_pc").show();
-	goOpa(bigImg[2],{target:0,speed:5,endFn:function(){bigImg[2].style.zIndex=0;}});
-
-
-	var timer = setInterval(auto,3000);
-	/*
-	tabBtnBox.onmouseover = function()
-	{
-		clearInterval(timer);
-		alert(this.index);
-	};
-
-	tabBtnBox.onmouseout = function()
-	{
-		timer = setInterval(auto,3000);
-	};
-	*/
-};
-function goOpa(obj,json)
-{
-	clearInterval(obj.timer);var opa = getStyle(obj,'opacity')*100;var iSpeed = json.target > opa ? json.speed : -json.speed;
-	obj.timer = setInterval(function(){
-		if( Math.abs(json.target-opa) <= Math.abs(iSpeed) )
-		{obj.style.opacity = json.target/100;obj.style.filter = 'alpha(opacity:'+json.target+')';clearInterval(obj.timer);json.endFn  &&  json.endFn();}
-		else{opa = opa + iSpeed;obj.style.opacity = opa/100;obj.style.filter = 'alpha(opacity:'+opa+')';};
-	},30);
-};
-function getStyle(obj,attr){return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj,false)[attr];};
-</script>
+<script type="text/javascript" src="${static.url('js/index_lms.js')}"></script>
 
 <div class="default_banner">
         <div class="big-img" id="big-img">
-        	<a href="#">
-                <li style="width:100%; height:350px; text-align:center; background:#0884c4; position:absolute; top:0; list-style:none; z-index:99">
-                <img class="big_b1" usemap="#testmap" id="big1" src="static/images/banner1_02.jpg" width="1180" height="350" style="opacity:1;z-index:1; filter:alpha(opacity:100);">
-                </img>
-                <!--<div class="btn_pc" style="z-index:10;"></div>-->
-                </li>
-            </a>
-			<a href="#">
-                <li style="width:100%; height:350px; text-align:center; background:#3cb6f5; position:absolute; top:0; list-style:none;">
-                <img class="big_b2" src="static/images/lobby_02.jpg"  id="big2" width="1180" height="350"  style="opacity:1;z-index:0; filter:alpha(opacity:100);"></img>
-                </li>
-            </a>
-			<a href="#">
-                <li style="width:100%; height:350px; text-align:center; background:#ff6833; position:absolute; top:0; list-style:none;">
-                <img class="big_b3"  src="static/images/lobby_04.jpg" id="big3" width="1180" height="350"  style="opacity:1;z-index:0; filter:alpha(opacity:100); "></img>
-                </li>
-            </a>
+        	% for item in luobo_list:
+        		<a href="${item.url if item.url else '#'}">
+	                <li style="width:100%; height:350px; text-align:center; background:#0884c4; position:absolute; top:0; list-style:none; z-index:99">
+	                <img class="big_b1" usemap="#testmap" id="big1" src="${item.get_image_url()}" width="1180" height="350" style="opacity:1;z-index:1; filter:alpha(opacity:100);">
+	                </img>
+	                </li>
+	            </a>
+        	% endfor 
         </div>
       	<div class="small">
                 <ul class="small_m">
                       <div class="s_pre" id="prevBtn"></div>
                       <div class="scroll_pic" id="tab-btn">
-                   		<li><img class="cls" src="static/images/index3_07.png" /></li>
-                        <li><img src="static/images/index3_07.png"  alt=""/></li>
-                        <li><img src="static/images/index3_07.png"  alt=""/></li>
+                   		% for item in luobo_list:
+                      		<li><img src="static/images/index3_07.png"  alt=""/></li>
+                      	% endfor
                       </div>
                       <div class="s_next" id="nextBtn"></div>
                 </ul>
@@ -214,17 +51,45 @@ function getStyle(obj,attr){return obj.currentStyle?obj.currentStyle[attr]:getCo
 	<!--banner end-->
 
 <!--content begin-->
-<div class="content5" style="background: #fff;">
+<div class="content5" style="background:#fff;float:left;">
     <div class="wrapper">
-<div class="content2">
-    <iframe src="/mooc_list" frameborder="0" height="600" scrolling="no" style="margin:0 auto;width: 100%;"></iframe>
-</div>
+		<div class="content2">
+		    <iframe src="/mooc_list" frameborder="0" height="600" scrolling="no" style="margin:0 auto;width: 100%;"></iframe>
+		</div>
   </div>
 </div>
-<div class="content2">
-    <iframe src="http://www.pmphmooc.com/index.shtml" frameborder="0" height="928" scrolling="no" id="tabs" style="margin:0 auto;width: 100%;"></iframe>
-</div>
 <!--content end-->
+<style>
+.alliance_members ul {
+    float: left;
+    padding: 0 !important;
+    width: 1180px;
+}
+
+.alliance_members .wrapper_list {
+    margin: 0 auto;
+    width: 1180px;
+}
+</style>
+<section class="alliance_members">
+  <div class="wrapper_list">
+   	  <h2>
+        	<span>联盟成员</span>
+            <a href="#"><img width="24" height="6" alt="" src="static/images/index_03.png"></a>
+      </h2>
+      <ul>
+   	    <li class="one"><a href="#"><img width="223" height="223" alt="" src="static/images/index_07.jpg"></a></li>
+          <li><a href="#"><img alt="" src="static/images/index_09.jpg"></a></li>
+          <li><a href="#"><img alt="" src="static/images/index_11.jpg"></a></li>
+          <li><a href="#"><img alt="" src="static/images/index_13.jpg"></a></li>
+          <li><a href="#"><img alt="" src="static/images/index_15.jpg"></a></li>
+          <li><a href="#"><img alt="" src="static/images/index_20.jpg"></a></li>
+          <li><a href="#"><img alt="" src="static/images/index_21.jpg"></a></li>
+          <li><a href="#"><img alt="" src="static/images/index_23.jpg"></a></li>
+          <li><a href="#"><img alt="" src="static/images/index_24.jpg"></a></li>
+      </ul>
+    </div>
+</section>
 
 <script>
     function resetTabs(){
@@ -268,11 +133,12 @@ function getStyle(obj,attr){return obj.currentStyle?obj.currentStyle[attr]:getCo
 <div class="wrapper-footer">
   <footer role="contentinfo" class="primary">
     <div class="colophon">
-      京ICP备14053810号 All Rights Reserved 版权所有 人民卫生出版社有限公司
+       ${getSeoByKey('bottom_footer_text')}
     </div>
   </footer>
 </div>
 <!--footer end-->
+<%include file="${settings.STATISTICS_CODE_TEMPLATE}" />
 </body>
 </html>
 

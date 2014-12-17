@@ -1,0 +1,63 @@
+<%inherit file="syscustom_base.html" />
+<%namespace name='static' file='../static_content.html'/>
+<%!
+  from django.utils.translation import ugettext as _
+%>
+
+<%block name="content_extra">
+	
+	<table class="tb">
+		<tr> 
+			<th width="160px">当前Logo(png格式):<br/>尺寸：250*52</th>
+			<td>
+				% if current_logo_url:
+					<img src="${current_logo_url}" style="width: 250px; height: 52px;"/>
+				% else:
+					没有Logo文件
+				% endif
+			</td>
+		</tr>	
+		<tr> 
+			<th></th>
+			<td>
+				<a href="#" id="modify-logo-btn" class="btn">修改</a>
+				<span style="margin-left:8px;font-size:12px;">注意：选择图片后会自动上传</span>
+			</td>
+		</tr>	
+	</table>  
+
+<script type="text/javascript">
+var uploader = new plupload.Uploader({
+	runtimes : 'html5,flash,silverlight,html4',
+	browse_button : 'modify-logo-btn', // you can pass in id...
+	url : '/syscustom/',
+	flash_swf_url : '${static.url('js/plupload/Moxie.swf')}',
+	silverlight_xap_url : '${static.url('js/plupload/Moxie.xap')}',
+	  filters : [
+	                {title: "Image files", extensions: "png"},
+	            ],
+	multipart:true,
+	multi_selection:false,
+	headers : {'X-Requested-With' : 'XMLHttpRequest', 'X-CSRFToken' : '${csrf_token}'}, 
+	init: {
+		PostInit: function() {
+		},
+
+		FilesAdded: function(up, files) {
+			uploader.start()
+		},
+		UploadFile: function(up, files) {
+			$("#modify-logo-btn").text("正在上传").addClass('disabled'); 
+		},
+		UploadComplete: function(up, files) {
+			window.location.reload();
+		},
+		Error: function(up, err) {
+			console= "\nError #" + err.code + ": " + err.message;
+		}
+	}
+});
+
+uploader.init();
+</script>
+</%block>

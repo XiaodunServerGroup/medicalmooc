@@ -48,7 +48,7 @@ site_status_msg = get_site_status_msg(course_id)
     <!--<a href="${marketing_link('ROOT')}">-->
     <a href="/">
       <%block name="navigation_logo">
-          <img style="width: 250px; height: 52px;" src="${static.url(branding.get_logo_url())}" alt="
+          <img style="width: 250px; height: 52px;" src="/store/images/logo.png" alt="
           % if course:
           ${course.display_org_with_default | h}: ${course.display_number_with_default | h} ${course.display_name_with_default | h} @
           % endif
@@ -65,16 +65,16 @@ site_status_msg = get_site_status_msg(course_id)
             <a style="color:#2883bc;" href="${marketing_link('COURSES')}">慕课</a>
           </li>
           <li class="nav-global-01">
-            <a href="http://www.pmphmooc.com/gkk/">公开课</a>
+            <a href="/gkk/">公开课</a>
           </li>
           <li class="nav-global-01">
-            <a href="http://www.pmphmooc.com/lmcy/">联盟成员</a>
+            <a href="/lmcy/">联盟成员</a>
           </li>
           <li class="nav-global-01">
-            <a href="http://www.pmphmooc.com/gg/">公告</a>
+            <a href="/gg/">公告</a>
           </li>
           <li class="nav-global-01">
-            <a href="http://www.pmphmooc.com/gy/">关于</a>
+            <a href="/gy/">关于</a>
           </li>
         % endif
       </%block>
@@ -95,6 +95,27 @@ site_status_msg = get_site_status_msg(course_id)
     % endif
 
     % if user.is_authenticated():
+    <ol class="right downloads">
+          <li style="font-size: 15px; z-index:100; margin-left:-10px; margin-top:10px;"><span>客户端下载</span>
+            <div class="bg_pic001"></div>
+            <ul style="z-index:10;" class="app_01">
+            <li class="anzhuo01"><a href="#">Phone</a>
+              <div style="" class="bg_weixin"><img width="23" height="23" class="x_show1" src="/static/images/bg_weixin.png">
+                <div style="" class="erweima show"><img width="225" height="225" style="display:inline-block; margin:7px 0 0 7px;" src="/static/images/erweima.jpg"></div>
+              </div>
+            </li>
+            <li class="weixin01"><a href="#">微信</a>
+              <div style="margin-left:10px; width:23px; position:relative; left:122px; top:-43px; z-index:20;" class="bg_weixin2"><img width="23" height="23" class="x_show2" src="/static/images/bg_weixin.png">
+              </div>
+              </li>
+           <li class="weixin01 ios01"><a href="#">Pad</a>
+              <div style="margin-left:10px; width:23px; position:relative; left:122px; top:-43px; z-index:20;" class="bg_weixin2"><img width="23" height="23" class="x_show3" src="/static/images/bg_weixin.png">
+              </div>
+              </li>
+               <div class="empty1"></div>
+            </ul>
+          </li>
+    </ol> 
     <ol class="user">
       <li class="primary">
         <a href="${reverse('dashboard')}" class="user-link">
@@ -137,8 +158,28 @@ site_status_msg = get_site_status_msg(course_id)
         % endif
       </%block>
     </ol>
-
-    <ol class="right nav-courseware" style="margin-right:108px;">
+	<ol class="right downloads">
+          <li style="font-size: 15px; z-index:100; margin-left:-10px; margin-top:10px;"><span>客户端下载</span>
+            <div class="bg_pic001"></div>
+            <ul style="z-index:10;" class="app_01">
+            <li class="anzhuo01"><a href="#">Phone</a>
+              <div style="" class="bg_weixin"><img width="23" height="23" class="x_show1" src="/static/images/bg_weixin.png">
+                <div style="" class="erweima show"><img width="225" height="225" style="display:inline-block; margin:7px 0 0 7px;" src="/static/images/erweima.jpg"></div>
+              </div>
+            </li>
+            <li class="weixin01"><a href="#">微信</a>
+              <div style="margin-left:10px; width:23px; position:relative; left:122px; top:-43px; z-index:20;" class="bg_weixin2"><img width="23" height="23" class="x_show2" src="/static/images/bg_weixin.png">
+              </div>
+              </li>
+           <li class="weixin01 ios01"><a href="#">Pad</a>
+              <div style="margin-left:10px; width:23px; position:relative; left:122px; top:-43px; z-index:20;" class="bg_weixin2"><img width="23" height="23" class="x_show3" src="/static/images/bg_weixin.png">
+              </div>
+              </li>
+               <div class="empty1"></div>
+            </ul>
+          </li>
+    </ol>
+    <ol class="right nav-courseware" style="margin-right:5px; background-color:#fff;">
      <li class="nav-courseware-01">
       % if not settings.FEATURES['DISABLE_LOGIN_BUTTON']:
           % if course and settings.FEATURES.get('RESTRICT_ENROLL_BY_REG_METHOD') and course.enrollment_domain:
@@ -166,7 +207,13 @@ site_status_msg = get_site_status_msg(course_id)
     % endif
   </nav>
 </header>
-
+<script>
+	$(function(){
+		$(".x_show1").hover(function(){$(".show").children("img").attr("src","/static/images/qr_android_phone.png");$(".show").show();},function(){$(".show").hide()});
+		$(".x_show2").hover(function(){$(".show").children("img").attr("src","/static/images/qr_wechat.jpg");$(".show").show();},function(){$(".show").hide()});
+		$(".x_show3").hover(function(){$(".show").children("img").attr("src","/static/images/qr_android_pad.png");$(".show").show();},function(){$(".show").hide()});
+	})
+</script>
 
 <!--[if IE]>
 <div class="ie-banner" aria-hidden="true">${_('<strong>Warning:</strong> Your browser is not fully supported. We strongly recommend using {chrome_link_start}Chrome{chrome_link_end} or {ff_link_start}Firefox{ff_link_end}.').format(chrome_link_start='<a href="https://www.google.com/intl/en/chrome/browser/" target="_blank">', chrome_link_end='</a>', ff_link_start='<a href="http://www.mozilla.org/en-US/firefox/new/" target="_blank">', ff_link_end='</a>')}</div>

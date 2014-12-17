@@ -3,11 +3,14 @@
 <!--[if IE 8]><html class="ie ie8 lte9 lte8" lang="${LANGUAGE_CODE}"><![endif]-->
 <!--[if IE 9]><html class="ie ie9 lte9" lang="${LANGUAGE_CODE}"><![endif]-->
 <!--[if gt IE 9]><!--><html lang="${LANGUAGE_CODE}"><!--<![endif]-->
+<%! from syscustom.views import getSeoByKey %>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <%block name="seo">
     <meta name="keywords" content="慕课,人卫慕课, 医学慕课,中国医学教育慕课联盟官方平台, 全球首个医学专业慕课平台,www.pmphmooc.com" />
     <meta name="description" content="中国医学教育慕课联盟官方平台, 全球首个医学专业慕课平台,精彩卓绝的全新医学慕课"/>
+	</%block>
 <%! from django.utils.translation import ugettext as _ %>
 <%! from microsite_configuration import microsite %>
 <%! from microsite_configuration import page_title_breadcrumbs %>
@@ -36,8 +39,7 @@
 <%def name="pagetitle()" />
   <%block name="title">
       <title>
-       ${page_title_breadcrumbs(self.pagetitle())}
-       中国医学教育慕课联盟官方平台
+       ${page_title_breadcrumbs(self.pagetitle())}${getSeoByKey('title_suffix')}
       </title>
   </%block>
 
@@ -166,6 +168,7 @@
   <%static:js group='module-js'/>
 
   <%block name="js_extra"/>
+  <%include file="${settings.STATISTICS_CODE_TEMPLATE}" />
 </body>
 </html>
 
