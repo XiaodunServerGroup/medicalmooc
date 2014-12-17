@@ -6,6 +6,7 @@
 <%block name="bodyclass">is-signedin index view-dashboard</%block>
 
 <%block name="jsextra">
+<script type="text/javascript" src="static//js/plupload/plupload.full.min.js"></script>
 <script type="text/javascript" xmlns="http://www.w3.org/1999/html">
 require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
     // showing/hiding creation rights UI
@@ -77,7 +78,31 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
         }
     });
 
+    $('.reset').click(function(){
+       console.log('dsdgjh');
+      $('#lean_overlay').css('display','none');
+      $('.modal').hide();
+    })
+
     $('.remove-button').click(function(){
+        if(confirm('确定要删除吗?')){
+            $.ajax({
+                url: "/remove_institute_teacher?id=" + $(this).attr("value"),
+                type: "GET",
+                dataType: "jsonp",
+                jsonp: false,
+                'cache': true,
+                success: function(){
+
+                }
+            })
+            alert('移除成功!')
+        }else{
+            return false;
+        }
+    });
+
+    $('.remove-button-student').click(function(){
         if(confirm('确定要删除吗?')){
             $.ajax({
                 url: "/remove_institute_teacher?id=" + $(this).attr("value"),
@@ -99,22 +124,105 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
         $('#lean_overlay').css('display','none');
     })
 
-    $('#submit_button').click(function(){
-        var file=$("input[name='file']").val();
-        var filename=file.replace(/.*(\/|\\)/, "");
-        var fileExt=(/[.]/.exec(filename)) ? /[^.]+$/.exec(filename.toLowerCase()) : '';
-        if(fileExt == 'xls' || fileExt == 'xlsx'){
-            //alert('上传成功!');
-            //$('#content').innerHTML="上传失败!上传文件为excel格式";
-        }else{
-            alert('上传失败!上传文件为excel格式')
-            return false;
-        }
-    })
+
+
+    var uploader_teacher = new plupload.Uploader({
+	runtimes : 'html5,flash,silverlight,html4',
+	browse_button : 'teacher_file', // you can pass in id...
+	url : '/institution_upload_teacher?id=' + $('.teacher_id').val(),
+	flash_swf_url : 'static/js/plupload/Moxie.swf',
+	silverlight_xap_url : 'static/js/plupload/Moxie.xap',
+	  //filters : [
+	                //{title: "files", extensions: "xls,xlsx"},
+	            //],
+	multipart:true,
+	multi_selection:false,
+	multipart_params:{'csrfmiddlewaretoken' : '${csrf_token}'},
+	headers : {'X-Requested-With' : 'XMLHttpRequest', 'X-CSRFToken' : '${csrf_token}'},
+	init: {
+		PostInit: function() {
+		},
+
+		FilesAdded: function(up, files) {
+            var file=files[0]['name'];
+            var filename=file.replace(/.*(\/|\\)/, "");
+            var fileExt=(/[.]/.exec(filename)) ? /[^.]+$/.exec(filename.toLowerCase()) : '';
+            if(fileExt == 'xls' || fileExt == 'xlsx'){
+                $("#teacher_success_info").html(file);
+            }else{
+                alert('导入文件要为excel格式')
+            }
+		},
+		UploadFile: function(up, files) {
+			$("#teacher_file").text("正在上传").addClass('disabled');
+		},
+		UploadComplete: function(up, files) {
+		},
+		FileUploaded: function(up, file, responseObject) {
+        	response = $.parseJSON(responseObject.response)
+        	$("#teacher_success_info").html(response.messg);
+        },
+		Error: function(up, err) {
+			document.getElementById('teacher_file').innerHTML += "\nError #" + err.code + ": " + err.message;
+		}
+	}
+});
+uploader_teacher.init();
+$('#submit_button').click(function(){
+        uploader_teacher.start()
+});
+
+    var uploader_student = new plupload.Uploader({
+	runtimes : 'html5,flash,silverlight,html4',
+	browse_button : 'student_file', // you can pass in id...
+	url : '/import_student?id=' + $('.student_id').val(),
+	flash_swf_url : 'static/js/plupload/Moxie.swf',
+	silverlight_xap_url : 'static/js/plupload/Moxie.xap',
+	  //filters : [
+	                //{title: "files", extensions: "xls,xlsx"},
+	            //],
+	multipart:true,
+	multi_selection:false,
+	multipart_params:{'csrfmiddlewaretoken' : '${csrf_token}'},
+	headers : {'X-Requested-With' : 'XMLHttpRequest', 'X-CSRFToken' : '${csrf_token}'},
+	init: {
+		PostInit: function() {
+		},
+
+		FilesAdded: function(up, files) {
+            var file=files[0]['name'];
+            var filename=file.replace(/.*(\/|\\)/, "");
+            var fileExt=(/[.]/.exec(filename)) ? /[^.]+$/.exec(filename.toLowerCase()) : '';
+            if(fileExt == 'xls' || fileExt == 'xlsx'){
+                $("#temp_img_div").html(file);
+            }else{
+                alert('导入文件要为excel格式')
+            }
+		},
+		UploadFile: function(up, files) {
+			$("#student_file").text("正在上传").addClass('disabled');
+		},
+		UploadComplete: function(up, files) {
+		},
+		FileUploaded: function(up, file, responseObject) {
+        	response = $.parseJSON(responseObject.response)
+        	$("#temp_img_div").html(response.messg);
+        },
+		Error: function(up, err) {
+			document.getElementById('student_file').innerHTML += "\nError #" + err.code + ": " + err.message;
+		}
+	}
+});
+
+uploader_student.init();
+$('#submit_button1').click(function(){
+         uploader_student.start()
+});
 
     accessible_modal(".edit-name", "#apply_name_change .close-modal", "#apply_name_change", "#index-main");
+    accessible_modal(".edit-name", "#list_student_change .close-modal", "#list_student_change", "#index-main");
     accessible_modal(".edit-name", "#apply_name_change_file .close-modal", "#apply_name_change_file", "#index-main");
-
+    accessible_modal(".edit-name", "#apply_name_change_student .close-modal", "#apply_name_change_student", "#index-main");
 });
 </script>
 
@@ -453,6 +561,22 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
       </div>
         % endif
 
+      <div class="bit">
+        <h3 class="title title-3">导入学生管理</h3>
+        <p>以下操作可进行导入学生的相关管理.</p>
+
+        <ol class="list-actions">
+          <li class="action-item">
+            <a href="#apply_name_change_student" rel="leanModal" title="批量导入学生" class="edit-name">批量导入学生</a>
+            <p>导入的文件为excel文件,填写的顺序为邮箱,密码,用户名,姓名</p>
+            <br/>
+            <!--<a href="#add-teachers-modal"  rel="leanModal"  id="show-add-teachers-modal" title="添加审核教师">添加审核教师</a>-->
+            <!--<br/>-->
+            <a href="#list_student_change" rel="leanModal" title="导入" class="edit-name">管理导入的学生</a>
+          </li>
+        </ol>
+      </div>
+
       % if course_creator_status=='disallowed_for_this_site' and settings.FEATURES.get('STUDIO_REQUEST_EMAIL',''):
       <div class="bit">
         <h3 class="title title-3">${_('Can I create courses in Studio?')}</h3>
@@ -670,7 +794,7 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
 .upload_text b , .upload_text strong{ float:left; font-weight:normal; }
 .btn01{ width:250px; margin:0 auto; margin-top:67px;  line-height:30px;}
 .submit1{ float:left; display:inline-block; background-color:#0e74b4;  line-height:28px; color:#fff; cursor:pointer; margin-left:24px; border:1px solid #0e74b4; width:75px;}
-.reset1{ float:left; width:75px;  display:inline-block; background-color:#fff;  line-height:28px; color:#626262; cursor:pointer; border:1px solid #0e74b4;margin-left:44px;}
+.reset{ float:left; width:75px;  display:inline-block; background-color:#fff;  line-height:28px; color:#626262; cursor:pointer; border:1px solid #0e74b4;margin-left:44px;}
 
 </style>
 <section id="wenjuan-list-modal" class="modal wenjuan-data" aria-hidden="true">
@@ -792,19 +916,97 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
     </header>
     <div class="up_text">
     <p>配置文件上传</p>
-    <form action="/institution_upload_teacher?id=${ profile.user_id }" method="post" enctype="multipart/form-data" accept-charset="utf-8">
-        <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='{% csrf_token %}' /></div>
+    <form action="" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+        <input type='hidden' name='csrfmiddlewaretoken' value='${csrf_token}' />
+        <input type="hidden" class="teacher_id" value="${ profile.user_id }" />
 
-        <div class="upload_text"><p><label for="id_file">请上传文件:</label> <input type="file" name="file" id="id_file" /></p></div>
+        <div class="upload_text"><p><label for="id_file">请上传文件:</label> <input type="file" name="file" id="teacher_file" /></p></div>
+        <div id="teacher_success_info" style="margin-top:10px;margin-left: 20px;"></div>
         <div class="btn01">
-        <button id="submit_button" class="submit1">提交</button>
-        <button id="return_course" name="return_course" class="reset1">返回</button>
+
+        <button id="submit_button" type="button" class="submit1">提交</button>
         </div>
     </form>
+        <button id="return_course" name="return_course" class="reset">返回</button>
     </div>
   </div>
 </section>
 
 
+<section id="apply_name_change_student" class="modal" aria-hidden="true">
+  <div class="inner-wrapper" role="dialog" aria-labelledby="change-name-title">
+    <button class="close-modal">&#10005;
+      <span class="sr">
+        ## Translators: this is a control to allow users to exit out of this modal interface (a menu or piece of UI that takes the full focus of the screen)
+        ${_('Close Modal')}
+      </span>
+    </button>
 
+    <header>
+      <div class="change-name-title">
+        <strong>
+        批量导入学生
+        </strong>
+      </div>
+    </header>
+    <div class="up_text">
+    <p>配置文件上传</p>
+    <form action="" id="form" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+        <input type='hidden' name='csrfmiddlewaretoken' value='${csrf_token}' />
+        <input type="hidden" class="student_id" value="${ profile.user_id }" />
+        <div class="upload_text"><p><label for="id_file">请上传文件:</label> <input type="file" name="file" id="student_file" /></p></div>
+		<div id="temp_img_div" style="margin-top:10px;margin-left: 20px;"></div>
+        <div class="btn01">
+        <button id="submit_button1" type="button" class="submit1">提交</button>
+
+        </div>
+    </form>
+       <button id="" name="return_course" class="reset">返回</button>
+    </div>
+  </div>
+</section>
+
+<section id="list_student_change" class="modal" aria-hidden="true">
+  <div class="inner-wrapper" role="dialog" aria-labelledby="change-name-title">
+    <button class="close-modal">&#10005;
+      <span class="sr">
+        ## Translators: this is a control to allow users to exit out of this modal interface (a menu or piece of UI that takes the full focus of the screen)
+        ${_('Close Modal')}
+      </span>
+    </button>
+
+    <header>
+      <div class="change-name-title">
+        <strong>
+        学生管理
+        </strong>
+      </div>
+    </header>
+    <div class="change_name_body">
+            <fieldset style="height:460px; overflow:auto;">
+            <table width="800" class="table1">
+        % if len(user_student_list):
+                <tr>
+                    <td>用户名</td>
+                    <td>姓名</td>
+                    <td>邮箱</td>
+                    <td>操作</td>
+                </tr>
+            %for st in range(0, len(user_student_list)):
+                <tr>
+                    <td>${user_student_list[st]['username']}</td>
+                    <td>${user_student_list[st]['name']}</td>
+                    <td>${user_student_list[st]['email']}</td>
+                    <td><a href="" class="remove-button-student" value="${ user_student_list[st]['id'] }">移除</a></td>
+                </tr>
+            %endfor
+        % else:
+            本教师暂无导入学生
+        %endif
+        </table>
+        </fieldset>
+    </div>
+  </div>
+    </div>
+</section>
 </%block>

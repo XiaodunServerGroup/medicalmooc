@@ -4,9 +4,8 @@ import Queue
 import sys,os
 from envs.common import PROJECT_ROOT
 import xlrd
-from student.views import do_institution_import_teacher_create_account
-from student.models import PendingNameChange
-from student.views import accept_picurl_change_by_id, accept_shortbio_change_by_id
+from student.views import do_institution_import_teacher_create_account,do_institution_import_student_create_account
+import random
 
 
 reload(sys)
@@ -95,7 +94,7 @@ __all__ = ['course_info_handler', 'course_handler', 'course_info_update_handler'
            'calendar_common_updateevent',
            'calendar_settings_getevents',
            'textbooks_list_handler',
-           'textbooks_detail_handler', 'course_audit_api', 'institution_upload_teacher', 'remove_institute_teacher', 'teacher_intro_edit', 'change_picurl_request', 'change_shortbio_request']
+           'textbooks_detail_handler', 'course_audit_api', 'institution_upload_teacher', 'remove_institute_teacher', 'teacher_intro_edit', 'import_student']
 
 WENJUAN_STATUS = {
     "0": "未发布",
@@ -377,7 +376,7 @@ def course_listing(request):
     userprofile_list = UserProfile.objects.all()
     user_institute_teacher_list = []
     for ul in userprofile_list:
-        if ul.institute == profile.user_id:
+        if ul.institute == profile.user_id and ul.profile_role == 'th':
             u = User.objects.get(id=ul.user_id)
             content = {
                 'id': int(u.id),
@@ -386,6 +385,19 @@ def course_listing(request):
                 'name': ul.name.encode('utf8')
             }
             user_institute_teacher_list.append(content)
+
+    # import student
+    user_student_list = []
+    for sl in userprofile_list:
+        if sl.institute == profile.user_id and sl.profile_role == 'st':
+            s = User.objects.get(id=sl.user_id)
+            student_context = {
+               'id': int(s.id),
+                'username': s.username.encode('utf8'),
+                'email': s.email.encode('utf8'),
+                'name': sl.name.encode('utf8')
+            }
+            user_student_list.append(student_context)
 
     return render_to_response('index.html', {
         'courses': [format_course_for_view(c) for c in courses if not isinstance(c, ErrorDescriptor)],
@@ -396,7 +408,8 @@ def course_listing(request):
         'wenjuan_link': wenjuan_loginapi,
         'qlist': qlist,
         'profile': profile,
-        'user_institute_teacher_list': user_institute_teacher_list
+        'user_institute_teacher_list': user_institute_teacher_list,
+        'user_student_list': user_student_list
     })
 
 
@@ -1265,12 +1278,7 @@ def institution_upload_teacher(request):
                 messg = '上传文件要为excel格式'
     else:
         form = UploadFileForm()
-    content = {
-        'form': form,
-        'id': use_id,
-        'messg': messg
-    }
-    return HttpResponseRedirect('/course')
+    return JsonResponse({'messg': messg})
 
 
 def handle_uploaded_file(f):
@@ -1331,53 +1339,45 @@ def teacher_intro_edit(request, id):
             profile.shortbio = ""
     return render_to_response('teacher_intro_edit.html', {'profile':profile})
 
-@ensure_csrf_cookie
-def change_picurl_request(request):
-    """ Log a request for a new name. """
-    print 'change_picurl_request'
-    if not request.user.is_authenticated:
-        raise Http404
 
-    try:
-        pnc = PendingNameChange.objects.get(user=request.user)
-    except PendingNameChange.DoesNotExist:
-        pnc = PendingNameChange()
-    pnc.user = request.user
-    pnc.new_name = request.POST['new_picurl']
-    if len(pnc.new_name) < 15:
-        return JsonResponse({
-            "success": False,
-            "error": "请输入头像链接",
-        })  # TODO: this should be status code 400  # pylint: disable=fixme
-    pnc.save()
+# import_student
+@csrf_exempt
+def import_student(request):
+    messg=''
+    if request.method == 'POST':
+        use_id = request.GET['id']
+        print use_id
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            filename = form.cleaned_data['file']
+            filename_suffix = filename.name.split('.')[-1]
+            if filename_suffix == 'xls' or filename_suffix == 'xlsx':
+                f = handle_uploaded_file(filename)
+                xls_student_insert_into_db(request, f, use_id)
+                messg = '学生导入成功'
+            else:
+                messg = '导入文件要为excel格式'
+    else:
+        form = UploadFileForm()
+    return JsonResponse({'messg': messg})
 
-    # The following automatically accepts name change requests. Remove this to
-    # go back to the old system where it gets queued up for admin approval.
-    accept_picurl_change_by_id(pnc.id)
+def xls_student_insert_into_db(request, xlsfile, instutition_id):
+    wb = xlrd.open_workbook(xlsfile)
+    sh = wb.sheet_by_index(0)
+    rows = sh.nrows
 
-    return JsonResponse({"success": True})
-
-@ensure_csrf_cookie
-def change_shortbio_request(request):
-    """ Log a request for a new name. """
-    if not request.user.is_authenticated:
-        raise Http404
-
-    try:
-        pnc = PendingNameChange.objects.get(user=request.user)
-    except PendingNameChange.DoesNotExist:
-        pnc = PendingNameChange()
-    pnc.user = request.user
-    pnc.rationale = request.POST['new_shortbio']
-    if len(pnc.rationale) < 1:
-        return JsonResponse({
-            "success": False,
-            "error": "请输入您的个人简介",
-        })  # TODO: this should be status code 400  # pylint: disable=fixme
-    pnc.save()
-
-    # The following automatically accepts name change requests. Remove this to
-    # go back to the old system where it gets queued up for admin approval.
-    accept_shortbio_change_by_id(pnc.id)
-
-    return JsonResponse({"success": True})
+    for i in range(1, rows):
+        username = sh.cell(i, 2).value
+        email = sh.cell(i, 0).value
+        password = sh.cell(i, 1).value
+        name = sh.cell(i, 3).value
+        post_vars = {
+            'username': username,
+            'email': email,
+            'password': password,
+            'name': name
+        }
+        if len(User.objects.filter(username=post_vars['username'])) > 0:
+            post_vars['username'] = post_vars['username'] + str(random.randint(0,10000))
+        do_institution_import_student_create_account(post_vars, instutition_id)
+    return HttpResponseRedirect('/course')
