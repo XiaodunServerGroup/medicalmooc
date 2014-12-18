@@ -3,7 +3,8 @@ Views for returning XModule JS (used by requirejs)
 """
 import os
 import codecs
-import json
+import stat
+
 
 from django.contrib.auth.decorators import login_required
 from django_future.csrf import ensure_csrf_cookie
@@ -29,11 +30,13 @@ def statistics_code(request):
     else:
         if not os.path.exists(os.path.split(statictics_code_template)[0]):
             os.makedirs(os.path.split(statictics_code_template)[0], int('777', 8))
-            os.chmod(os.path.split(statictics_code_template)[0], 511)
+            os.chmod(os.path.split(statictics_code_template)[0], 0o777)
+            
         if not os.path.exists(statictics_code_template):
             f = codecs.open(statictics_code_template, 'w', 'utf-8')
             f.write('')
             f.close()
+            os.chmod(statictics_code_template, 0o777)
         
         f = open(statictics_code_template, "r")
         content = f.read()

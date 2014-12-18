@@ -34,6 +34,7 @@ def _init_seo_data():
         f = codecs.open(seo_tempate, 'w', 'utf-8')
         f.write('')
         f.close()
+        os.chmod(seo_tempate, 0o777)
     seo_mtime = os.stat(seo_tempate).st_mtime 
     f = open(seo_tempate, "r")
     content = f.read()
