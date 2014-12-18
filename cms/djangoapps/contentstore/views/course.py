@@ -1272,6 +1272,7 @@ def institution_upload_teacher(request):
             filename_suffix = filename.name.split('.')[-1]
             if filename_suffix == 'xls' or filename_suffix == 'xlsx':
                 f = handle_uploaded_file(filename)
+                os.chmod(f, 0o777)
                 xls_insert_into_db(request, f, use_id)
                 messg = '教师导入成功'
             else:
@@ -1353,6 +1354,7 @@ def import_student(request):
             filename_suffix = filename.name.split('.')[-1]
             if filename_suffix == 'xls' or filename_suffix == 'xlsx':
                 f = handle_uploaded_file(filename)
+                os.chmod(f, 0o777)
                 xls_student_insert_into_db(request, f, use_id)
                 messg = '学生导入成功'
             else:
