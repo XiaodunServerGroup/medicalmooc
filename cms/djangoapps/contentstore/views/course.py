@@ -1368,10 +1368,17 @@ def xls_student_insert_into_db(request, xlsfile, instutition_id):
     sh = wb.sheet_by_index(0)
     rows = sh.nrows
 
+    def as_display_string(cell):
+        if cell.ctype in (2,3):
+            cell_value = int(cell.value)
+        else:
+            cell_value = cell.value
+        return str(cell_value).strip()
+
     for i in range(1, rows):
         username = sh.cell(i, 2).value
         email = sh.cell(i, 0).value
-        password = sh.cell(i, 1).value
+        password = as_display_string(sh.cell(i, 1))
         name = sh.cell(i, 3).value
         post_vars = {
             'username': username,
