@@ -600,6 +600,11 @@ urlpatterns += (
     url(r'^lmcy', 'static_template_view.views.render', {'template': 'lm_member.html'}, name="lm_member"),
     url(r'^alliance_members_scholl.html', 'static_template_view.views.render', {'template': 'alliance_members_scholl.html'}, name="lm_member11"),
 )
+
+urlpatterns += (
+    url(r'^sys/api/', include('sys_api.urls')),
+)
+ 
 urlpatterns = patterns(*urlpatterns)
 
 if settings.DEBUG:
