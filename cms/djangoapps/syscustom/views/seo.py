@@ -12,6 +12,8 @@ from django.http import HttpResponse
 from util.json_request import JsonResponse
 from edxmako.shortcuts import render_to_response
 
+from .perm import is_super
+
 seo_tempate = settings.SEO_TEMPLATE_PATH
 global seo_mtime
 seo_mtime = 0
@@ -46,6 +48,7 @@ def _init_seo_data():
 _init_seo_data()
 
 @login_required
+@is_super
 @ensure_csrf_cookie
 def seo(request):
     if request.method == 'POST':

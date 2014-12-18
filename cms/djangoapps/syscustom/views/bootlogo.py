@@ -19,6 +19,8 @@ from edxmako.shortcuts import render_to_response
 
 from ..models import *
 from ..image import *
+from .perm import is_super
+
 
 
 _type_list = []
@@ -29,12 +31,14 @@ for item in settings.CUSTOM_IMAGE_CLASS:
         _type_ids.append(item[0])
 
 @login_required
+@is_super
 @ensure_csrf_cookie
 def bootlogo(request):
     image_list = CustomImage.objects.filter(type__in=_type_ids).order_by('type', 'id')
     return render_to_response('syscustom/bootlogo.html', {'store_url':settings.STORE_URL, 'image_list':image_list, 'type_list':_type_list})
 
 @login_required
+@is_super
 @ensure_csrf_cookie
 def bootlogo_edit(request, id=None):
     if request.method == 'POST':

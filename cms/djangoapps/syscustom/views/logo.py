@@ -11,8 +11,10 @@ from django.http import HttpResponse
 from util.json_request import JsonResponse
 from edxmako.shortcuts import render_to_response
 
+from .perm import is_super
 
 @login_required
+@is_super
 @ensure_csrf_cookie
 def syscustom(request):
     current_logo_url = '/store/images/logo.png'

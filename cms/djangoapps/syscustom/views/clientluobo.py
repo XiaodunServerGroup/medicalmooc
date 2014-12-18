@@ -18,17 +18,19 @@ from edxmako.shortcuts import render_to_response
 
 from ..models import *
 from ..image import *
-
+from .perm import is_super
 
 type_list = [settings.CUSTOM_IMAGE_CLASS[1], settings.CUSTOM_IMAGE_CLASS[2]]
 type_ids = [item[0] for item in type_list]
 @login_required
+@is_super
 @ensure_csrf_cookie
 def clientluobo(request):
     image_list = CustomImage.objects.filter(type__in=type_ids).order_by('type','order_num', 'id')
     return render_to_response('syscustom/clientluobo.html', {'store_url':settings.STORE_URL, 'image_list':image_list})
 
 @login_required
+@is_super
 @ensure_csrf_cookie
 def clientluobo_edit(request, id=None):
     if request.method == 'POST':

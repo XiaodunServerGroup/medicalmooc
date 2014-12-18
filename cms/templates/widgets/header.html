@@ -170,9 +170,11 @@
                   <li class="nav-item nav-account-dashboard">
                     <a href="/teacher_intro_edit/${ user.id }/">教师简介</a>
                   </li>
+                  % if request.user.is_staff:
                   <li class="nav-item nav-account-dashboard">
                     <a href="/syscustom/">系统设置</a>
                   </li>
+                  % endif
                   <li class="nav-item nav-account-signout">
                     <a class="action action-signout" href="${reverse('logout')}">退出登录</a>
                   </li>

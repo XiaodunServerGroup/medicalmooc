@@ -18,15 +18,17 @@ from edxmako.shortcuts import render_to_response
 
 from ..models import *
 from ..image import *
-
+from .perm import is_super
 
 @login_required
+@is_super
 @ensure_csrf_cookie
 def indexluobo(request):
     image_list = CustomImage.objects.filter(type=1).order_by('order_num', 'id')
     return render_to_response('syscustom/index_luobo.html', {'store_url':settings.STORE_URL, 'image_list':image_list})
 
 @login_required
+@is_super
 @ensure_csrf_cookie
 def luobo_edit(request, id=None):
     if request.method == 'POST':
@@ -57,6 +59,7 @@ def luobo_edit(request, id=None):
         return render_to_response('syscustom/luobo_edit.html', {'obj':obj})
 
 @login_required
+@is_super
 @ensure_csrf_cookie
 def luobo_delete(request):
     id = request.POST.get('id','')

@@ -10,15 +10,18 @@ from edxmako.shortcuts import render_to_response
 
 import datetime
 from  syscustom.models import CourseClass
-from datetime import timedelta
+
+from .perm import is_super
 
 @login_required
+@is_super
 @ensure_csrf_cookie
 def courseclass_list(request):
     courseclass_list= CourseClass.objects.all().order_by('order_num', 'id')
     return render_to_response('syscustom/courseclass_list.html', {'courseclass_list':courseclass_list})
 
 @login_required
+@is_super
 @ensure_csrf_cookie
 def courseclass_edit(request, id=None):
     if request.method == 'POST':
@@ -56,6 +59,7 @@ def courseclass_edit(request, id=None):
 
 
 @login_required
+@is_super
 @ensure_csrf_cookie
 def courseclass_del(request):
     id =request.GET.get('id',0)
