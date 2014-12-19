@@ -376,7 +376,7 @@ def course_listing(request):
     userprofile_list = UserProfile.objects.all()
     user_institute_teacher_list = []
     for ul in userprofile_list:
-        if ul.institute == profile.user_id and ul.profile_role == 'th':
+        if ul.institute == str(profile.user_id) and ul.profile_role == 'th':
             u = User.objects.get(id=ul.user_id)
             content = {
                 'id': int(u.id),
@@ -389,7 +389,7 @@ def course_listing(request):
     # import student
     user_student_list = []
     for sl in userprofile_list:
-        if sl.institute == profile.user_id and sl.profile_role == 'st':
+        if sl.institute == str(profile.user_id) and sl.profile_role == 'st':
             s = User.objects.get(id=sl.user_id)
             student_context = {
                'id': int(s.id),
