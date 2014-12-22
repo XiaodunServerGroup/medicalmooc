@@ -83,6 +83,7 @@ from student.roles import CourseInstructorRole, CourseStaffRole, CourseCreatorRo
 from student import auth
 
 from microsite_configuration import microsite
+from syscustom.models import CourseClass
 
 __all__ = ['course_info_handler', 'course_handler', 'course_info_update_handler',
            'settings_handler',
@@ -396,7 +397,8 @@ def course_listing(request):
         'wenjuan_link': wenjuan_loginapi,
         'qlist': qlist,
         'profile': profile,
-        'user_institute_teacher_list': user_institute_teacher_list
+        'user_institute_teacher_list': user_institute_teacher_list,
+        "course_class_list": CourseClass.objects.all().order_by('order_num','id')
     })
 
 

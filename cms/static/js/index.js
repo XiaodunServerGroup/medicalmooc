@@ -162,15 +162,6 @@
 
         domReady(function () {
             $('.new-course-button').bind('click', addNewCourse);
-            $('select.new-course-category').html("" +
-                "<option value='LCHYX'>临床医学</option>" +
-                "<option value='JCHYX'>基础医学</option>" +
-                "<option value='ZHYZHY'>中医中药</option>" +
-                "<option value='KQYX'>口腔医学</option>" +
-                "<option value='YX'>药学</option>" +
-                "<option value='HL'>护理</option>" +
-                "<option value='GGWSHYFYX'>公共卫生与预防医学</option>" +
-                "<option value='YXYJ'>医学检验</option>"
-            )
+            $('select.new-course-category').html(course_class_html);
         });
     });

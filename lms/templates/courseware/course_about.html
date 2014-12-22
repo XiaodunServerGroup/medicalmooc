@@ -15,7 +15,11 @@
 <%! from microsite_configuration import microsite %>
 
 <%inherit file="../main.html" />
-
+<%block name="seo">
+<%! from syscustom.views import getSeoByKey %>
+<meta name="keywords" content="${getSeoByKey('intro_page_keyword')}" />
+<meta name="description" content="${getSeoByKey('intro_page_desc')}"/>
+</%block>
 <%block name="headextra">
 
   <%

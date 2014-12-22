@@ -65,7 +65,7 @@ from xmodule.contentstore.content import StaticContent
 import shoppingcart
 
 from microsite_configuration import microsite
-
+from syscustom.models import CourseClass
 log = logging.getLogger("edx.courseware")
 
 template_imports = {'urllib': urllib}
@@ -150,7 +150,7 @@ def courses(request):
         ]
 
     }
-
+    course_class_list = CourseClass.objects.all().order_by('order_num','id')
     con_col = {}
     con_courses = []
 
@@ -202,7 +202,7 @@ def courses(request):
         context["courses"] = map(format_course, context["courses"])
         return JsonResponse(context)
 
-    return render_to_response("courseware/courses.html", {'courses': filter_audited_items(courses)})
+    return render_to_response("courseware/courses.html", {'courses': filter_audited_items(courses), 'course_class_list':course_class_list})
 
 
 def audit_courses(request, user=AnonymousUser()):
@@ -249,8 +249,8 @@ def return_fixed_courses(request, courses, action=None):
         except:
             continue
 
-
-    return  HttpResponse("callback("+json.dumps({"count": len(courses), "course-list": course_list})+")", content_type="application/json")
+    return JsonResponse({"count": len(courses), "course-list": course_list})
+    #return  HttpResponse("callback("+json.dumps({"count": len(courses), "course-list": course_list})+")", content_type="application/json")
 
 def course_attr_list_handler(request, course_category, course_level=None):
 
@@ -259,10 +259,10 @@ def course_attr_list_handler(request, course_category, course_level=None):
     courses_list = []
 
     for course in courses:
-        if course_level:
-            if course.course_level == course_level and course.course_category == course_category:
-                courses_list.append(course)
-        elif course.course_category == course_category:
+        #if course_level:
+        #    if course.course_level == course_level and course.course_category == course_category:
+        #        courses_list.append(course)
+        if course.course_category == course_category:
             courses_list.append(course)
         else:
             continue
