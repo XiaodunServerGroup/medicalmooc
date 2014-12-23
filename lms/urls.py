@@ -120,6 +120,9 @@ urlpatterns += (
         {'template': 'common_header_barjs.html'}, name="common_header_barjs"),
     url(r'^common/header2.js$', 'static_template_view.views.render',
         {'template': 'common_header_barjs2.html'}, name="common_header_barjs2"),
+
+    url(r'^common/footer.js$', 'static_template_view.views.render',
+            {'template': 'common_footer_js.html'}, name="common_footer_js"),
 )
 urlpatterns += (
     url(r'^common/vplayer.html', 'static_template_view.views.render',
