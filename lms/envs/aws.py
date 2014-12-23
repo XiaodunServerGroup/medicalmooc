@@ -1,3 +1,4 @@
+#coding:utf-8
 """
 This is the default template for our main set of AWS servers. This does NOT
 cover the content machines, which use content.py
@@ -313,8 +314,8 @@ MONGODB_LOG = AUTH_TOKENS.get('MONGODB_LOG', {})
 OPEN_ENDED_GRADING_INTERFACE = AUTH_TOKENS.get('OPEN_ENDED_GRADING_INTERFACE',
                                                OPEN_ENDED_GRADING_INTERFACE)
 
-EMAIL_HOST_USER = AUTH_TOKENS.get('EMAIL_HOST_USER', 'servicemooc')  # django default is ''
-EMAIL_HOST_PASSWORD = AUTH_TOKENS.get('EMAIL_HOST_PASSWORD', 'pmph59787000')  # django default is ''
+EMAIL_HOST_USER = AUTH_TOKENS.get('EMAIL_HOST_USER', '')  # django default is ''
+EMAIL_HOST_PASSWORD = AUTH_TOKENS.get('EMAIL_HOST_PASSWORD', '')  # django default is ''
 
 # Datadog for events!
 DATADOG = AUTH_TOKENS.get("DATADOG", {})
@@ -392,3 +393,21 @@ if not os.path.exists(load_thesaurus_path):
     open(str(load_thesaurus_path), 'a').close()
 
 THESAURUS_PATH = load_thesaurus_path
+
+
+####syscustom
+STORE_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))) + '/store/'
+MAKO_TEMPLATES['main'].append(STORE_ROOT+'templates')
+STORE_URL = '/store/'
+CUSTOM_IMAGE_DIR = 'focusimg/'
+CUSTOM_IMAGE_CLASS = ((1, u'网站首页轮播'), 
+                      (10, u'手机端轮播'), 
+                      (20, u'IOS启动图'), 
+                      (21, u'PAD启动图'), 
+                      (22, u'Android启动图'), 
+                      (23, u'OTT启动图'),)
+STATISTICS_CODE_TEMPLATE = 'statistics_code.html'
+STATISTICS_CODE_TEMPLATE_PATH= os.path.join(STORE_ROOT, 'templates', STATISTICS_CODE_TEMPLATE)
+
+SEO_TEMPLATE = 'seo.html'
+SEO_TEMPLATE_PATH= os.path.join(STORE_ROOT, SEO_TEMPLATE)

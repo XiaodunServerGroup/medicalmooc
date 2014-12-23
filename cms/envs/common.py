@@ -253,8 +253,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'mail.pmph.com'
 EMAIL_PORT = 25
 EMAIL_USE_TLS = False
-EMAIL_HOST_USER = 'servicemooc'
-EMAIL_HOST_PASSWORD = 'pmph59787000'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 
 DEFAULT_FROM_EMAIL = 'servicemooc@pmph.com'
 DEFAULT_FEEDBACK_EMAIL = 'servicemooc@pmph.com'
@@ -513,6 +513,7 @@ INSTALLED_APPS = (
     'django_openid_auth',
 
     'embargo',
+    'syscustom',
 )
 
 

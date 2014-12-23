@@ -5,7 +5,11 @@
 
 <%block name="pagetitle">医学慕课</%block>
 <%! from microsite_configuration import microsite %>
-
+<%block name="seo">
+<%! from syscustom.views import getSeoByKey %>
+<meta name="keywords" content="${getSeoByKey('list_page_keyword')}" />
+<meta name="description" content="${getSeoByKey('list_page_desc')}"/>
+</%block>
 <section class="find-courses">
 
 <%
@@ -597,6 +601,10 @@ function chkform(obj){
                 <div class="subject-right">
                   <ul id="subject">
                       <li class="tab1" name="all"><span>全部</span></li>
+                       % for item in course_class_list:
+						 <li class="tab1" name="${item.code}"><span>${item.name}</span></li>
+					 % endfor
+                     <!--
                       <li class="tab1" name="LCHYX"><span>临床医学</span></li>
                       <li class="tab1" name="JCHYX"><span>基础医学</span></li>
                       <li class="tab1" name="ZHYZHY"><span>中医中药</span></li>

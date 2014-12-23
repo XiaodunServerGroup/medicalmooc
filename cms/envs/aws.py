@@ -1,3 +1,4 @@
+#coding:utf-8
 """
 This is the default template for our main set of AWS servers.
 """
@@ -195,8 +196,8 @@ if "TRACKING_IGNORE_URL_PATTERNS" in ENV_TOKENS:
 with open(CONFIG_ROOT / CONFIG_PREFIX + "auth.json") as auth_file:
     AUTH_TOKENS = json.load(auth_file)
 
-EMAIL_HOST_USER = AUTH_TOKENS.get('EMAIL_HOST_USER', 'servicemooc')
-EMAIL_HOST_PASSWORD = AUTH_TOKENS.get('EMAIL_HOST_PASSWORD', 'pmph59787000')
+EMAIL_HOST_USER = AUTH_TOKENS.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = AUTH_TOKENS.get('EMAIL_HOST_PASSWORD', '')
 
 # If Segment.io key specified, load it and turn on Segment.io if the feature flag is set
 # Note that this is the Studio key. There is a separate key for the LMS.
@@ -265,3 +266,22 @@ X_FRAME_OPTIONS = ENV_TOKENS.get('X_FRAME_OPTIONS', X_FRAME_OPTIONS)
 
 
 COMMENTS_SERVICE_URL = ENV_TOKENS.get("COMMENTS_SERVICE_URL", '')
+
+
+
+####syscustom
+STORE_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))) + '/store/'
+
+STORE_URL = '/store/'
+CUSTOM_IMAGE_DIR = 'focusimg/'
+CUSTOM_IMAGE_CLASS = ((1, u'网站首页轮播'), 
+                      (10, u'IOS端轮播'), 
+                      (11, u'IPAD端轮播'),
+                      (20, u'IOS启动图'), 
+                      (21, u'PAD启动图'), 
+                      (22, u'Android启动图'), 
+                      (23, u'OTT启动图'),)
+STATISTICS_CODE_TEMPLATE = 'statistics_code.html'
+STATISTICS_CODE_TEMPLATE_PATH= os.path.join(STORE_ROOT, 'templates', STATISTICS_CODE_TEMPLATE)
+SEO_TEMPLATE = 'seo.html'
+SEO_TEMPLATE_PATH= os.path.join(STORE_ROOT, SEO_TEMPLATE)

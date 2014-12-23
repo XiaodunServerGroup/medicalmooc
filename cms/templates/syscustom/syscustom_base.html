@@ -1,0 +1,136 @@
+<%inherit file="../base.html" />
+<%namespace name='static' file='../static_content.html'/>
+<%!
+  from django.utils.translation import ugettext as _
+%>
+<%block name="title">系统设置</%block>
+<%block name="bodyclass">is-signedin course tools view-import</%block>
+
+<%block name="header_extras">
+<meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<meta HTTP-EQUIV="expires" CONTENT="0">
+<script type="text/javascript" src="${static.url('js/vendor/jquery.min.js')}"></script>
+<script type="text/javascript" src="${static.url('js/vendor/jquery.form.js')}"></script>
+</%block>
+<%block name="content">
+<script type="text/javascript" src="${static.url('js/plupload/plupload.full.min.js')}"></script>
+
+<style>
+.btn{
+    -moz-user-select: none;
+    background: linear-gradient(#fafafa, #f2f2f2) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    color: #444;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 12px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    white-space: nowrap;
+}
+
+.btn:hover {
+    background: linear-gradient(#fff, #f7f7f7) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 0 white inset, 0 1px 0 rgba(255, 255, 255, 0.05);
+    color: #444;
+    text-decoration: none;
+}
+.btn.disabled {
+    background: none repeat scroll 0 0 #f2f2f2;
+    border: 1px solid #d9d9d9;
+    box-shadow: none;
+    color: #bbb;
+    cursor: default;
+    text-shadow: none;
+}
+.btn.active {
+	background:#0e74b4;
+	color:#fff;
+	border:1px solid #0e74b4;
+}
+.btn.active:hover {
+	box-shadow:none;
+}
+.clear-input {
+    background: none repeat scroll 0 0 #fcfcfc;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) inset;
+    color: #777;
+    display: inline-block;
+    font-size: 12px;
+    height: 36px;
+    line-height: 1;
+    padding: 0 10px;
+    width: 250px;
+}
+.clear-input:focus {
+    background: none repeat scroll 0 0 #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+    color: #444;
+}
+textarea {
+    overflow: auto;
+}
+textarea {
+    background: none repeat scroll 0 0 #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 1px rgba(34, 25, 25, 0.15) inset, 0 1px rgba(255, 255, 255, 0.8);
+    color: #221919;
+    display: inline-block;
+    padding: 6px 10px;
+    width: 250px;
+}
+textarea.clear-input {
+    height: auto;
+    line-height: 1.5;
+    min-height:30px;
+    padding: 5px 10px;
+}
+
+.syscustom-nav {
+	 
+}
+.temp_img_div{margin-top:10px;}
+.temp_img_div img{
+	height:80px;
+}
+.msg-tips{color:red;font-size:12px;}
+
+.tb{border:1px solid #e5e5e5;width:100%;font-size:12px;}
+.tb th,.tb td{border:1px solid #e5e5e5;line-height:30px;padding:5px 8px;text-align:left;vertical-align:top;} 
+
+</style>
+<div class="wrapper-mast wrapper">
+  <header class="mast has-subtitle">
+    <div class="syscustom-nav">
+    	<a href="/syscustom/" class="btn ${'active' if request.path == '/syscustom/' else ''}">LOGO设置</a>
+      	<a href="/syscustom/indexluobo/" class="btn ${'active' if request.path.startswith('/syscustom/indexluobo') else ''}">首页轮播图片</a>
+      	<a href="/syscustom/statistics/" class="btn ${'active' if request.path.startswith('/syscustom/statistics') else ''}">自定义统计代码</a>
+      	
+      	<a href="/syscustom/bootlogo/" class="btn ${'active' if request.path.startswith('/syscustom/bootlogo') else ''}">客户端启动LOGO</a>
+      	<a href="/syscustom/clientluobo/" class="btn ${'active' if request.path.startswith('/syscustom/clientluobo') else ''}">客户端轮播图片</a>
+      	<a href="/syscustom/courseclass/" class="btn ${'active' if request.path.startswith('/syscustom/courseclass') else ''}">课程分类</a>
+      	<a href="/syscustom/seo/" class="btn ${'active' if request.path.startswith('/syscustom/seo') else ''}">SEO设置</a>
+    </div>
+  </header>
+</div>
+ 
+<div class="wrapper-content wrapper">
+	<section class="content">
+		<%block name="content_extra">
+		</%block>
+	</section>
+</div>
+
+</%block>
+
+<%block name="jsextra">
+</%block>

@@ -1,0 +1,97 @@
+<%inherit file="syscustom_base.html" />
+<%namespace name='static' file='../static_content.html'/>
+<%!
+  from django.utils.translation import ugettext as _
+%>
+
+<%block name="content_extra">
+	<form id="form" name="form" method="post" action="">
+	<input type="hidden" name="csrfmiddlewaretoken" value="${csrf_token}" />
+	<table class="tb">
+		<tr>
+			<td width="100px">图片<div style="font-size:12px;">尺寸：1180*350</div></td>   
+			<td>  
+				% if obj:
+					<input type="hidden" id="image" name="image" value="${obj.img}"/>
+					<a href="#" id="add-pic-btn" class="btn">修改图片</a>
+					<div id="temp_img_div" class="temp_img_div">
+						<img src="${obj.get_image_url()}"/>
+					</div>
+				% else:
+					<input type="hidden" id="image" name="image" value=""/>
+					<a href="#" id="add-pic-btn" class="btn">添加图片</a>
+					<div id="temp_img_div"  class="temp_img_div"></div>
+				%endif
+			</td> 
+		</tr>
+		<tr> 
+			<th>链接</th>
+			<th>
+				<input type="text" class="clear-input" size="60" maxlength="190" name="url" value="${obj.url if obj else ''}"/> 
+			</th>
+		</tr>	
+		<tr> 
+			<th>排序号</th>
+			<th> 
+				<input type="text" class="clear-input" name="order_num"  maxlength="5" value="${obj.order_num if obj else ''}"/>
+			</th> 
+		</tr> 
+		<tr> 
+			<td colspan=3>
+				<a href="#" id="save-btn" class="btn">保存</a>
+			</td>
+		</tr>	
+	</table>
+	</form>
+
+<script type="text/javascript">
+$("#save-btn").click(function(){
+	if(!$("#image").val()){
+		alert("请添加图片");
+		return false;
+	}
+	
+	document.form.submit();
+});
+
+var uploader = new plupload.Uploader({
+	runtimes : 'html5,flash,silverlight,html4',
+	browse_button : 'add-pic-btn', // you can pass in id...
+	url : '/syscustom/image/upload/',
+	flash_swf_url : '${static.url('js/plupload/Moxie.swf')}',
+	silverlight_xap_url : '${static.url('js/plupload/Moxie.xap')}',
+	  filters : [
+	                {title: "Image files", extensions: "png,jpg,jpeg"},
+	            ],
+	multipart:true,
+	multi_selection:false,
+	headers : {'X-Requested-With' : 'XMLHttpRequest', 'X-CSRFToken' : '${csrf_token}'}, 
+	init: {
+		PostInit: function() {
+		}, 
+
+		FilesAdded: function(up, files) {
+			uploader.start()
+		},
+		UploadFile: function(up, files) {
+			$("#add-pic-btn").text("正在上传").addClass('disabled'); 
+		},
+		UploadComplete: function(up, files) {
+		},
+		FileUploaded: function(up, file, responseObject) {
+        	response = $.parseJSON(responseObject.response)
+        	$("#image").val(response.image);
+        	var html = '<img src="'+response.url+'" />'; 
+        	$("#temp_img_div").html(html);
+        	
+        	$("#add-pic-btn").text("修改").removeClass('disabled'); 
+        },
+		Error: function(up, err) {
+			document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
+		}
+	}
+});
+
+uploader.init();
+</script>
+</%block>

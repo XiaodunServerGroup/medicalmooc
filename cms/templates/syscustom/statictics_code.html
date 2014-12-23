@@ -1,0 +1,43 @@
+<%inherit file="syscustom_base.html" />
+<%namespace name='static' file='../static_content.html'/>
+<%!
+  from django.utils.translation import ugettext as _
+%>
+
+<%block name="content_extra">
+	
+	<table class="tb">
+		<tr> 
+			<th>统计代码:</th>
+			<td>
+				<textarea id="_code" style="width:700px;height:300px;">${content | h}</textarea>
+			</td>
+		</tr>	
+		<tr>  
+			<th></th>
+			<td>
+				<a href="javascript:void(0);" id="save-btn" class="btn">保存</a> <span id="msg" style="color:red"></span>
+			</td>
+		</tr>	
+	</table>
+ 
+</%block>  
+<%block name="jsextra">
+
+<script type="text/javascript">
+	$("#save-btn").click(function(){
+		$.ajax({
+            type: "POST",
+            url: "",
+            data: {content:$("#_code").val()},
+            dataType: "json",
+            success: function (response) {
+                $("#msg").html("保存成功");
+            },
+            error: function (msg) {
+                alert(msg);
+            }
+        });
+	});
+</script>
+</%block>
