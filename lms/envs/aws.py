@@ -427,8 +427,10 @@ SSO_LOGIN_URL = 'http://192.168.1.2:8091/mp/login?input=%s&type=1&noscode=no&dae
 #SSO_REG_URL = 'http://meet.guoshi.com/mp/user?op=add&input=%s'
 SSO_REG_URL = 'http://192.168.1.2:8091/mp/user?op=add&input=%s'
 
-SSO_LOGOUT_URL = 'http://meet.guoshi.com/mp/sso/Logout.jsp'
+#SSO_LOGOUT_URL = 'http://meet.guoshi.com/mp/sso/Logout.jsp'
 SSO_LOGOUT_URL = 'http://192.168.1.2:8091/mp/sso/Logout.jsp?pageurl=&loginname=%s'
 
-
+#SSO_ADDUPDATE_COURSE_URL = 'http://operation.guoshi.com/cetvossFront'
+SSO_ADDUPDATE_COURSE_URL = 'http://202.101.75.74:8100/cetvossFront'
+SSO_BUY_URL = 'http://202.101.75.74:8100/cetvossFront/account/buy.action?uuid='
 

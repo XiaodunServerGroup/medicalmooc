@@ -1,7 +1,8 @@
 #coding:utf-8
 from datetime import datetime, timedelta
-from django.conf import settings
 from django.db import models
+from django.contrib.auth.models import User
+from django.conf import settings
 
 
 class CustomImage(models.Model):
@@ -30,12 +31,13 @@ class CourseClass(models.Model):
     created_time = models.DateTimeField(auto_now_add=True, db_index=True)  #创建时间
     updated_time = models.DateTimeField(auto_now_add=True, db_index=True)  #
 
- 
-'''
+class CourseUuid(models.Model):
+    uuid = models.CharField(max_length=50, unique=True, db_index=True)
+    course_id = models.CharField(max_length=80, unique=True, db_index=True)
+
 class UserBuyCourse(models.Model):
     user = models.ForeignKey(User)
-    course_id = models.CharField(max_length=50)
+    course_id = models.CharField(max_length=50, unique=True, db_index=True)
     created_time = models.DateTimeField(auto_now_add=True, db_index=True)  #创建时间
-'''    
     
     

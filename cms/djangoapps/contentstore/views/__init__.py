@@ -24,3 +24,4 @@ try:
     from .dev import *
 except ImportError:
     pass
+print dir(public)

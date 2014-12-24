@@ -198,16 +198,23 @@
 
                             %if show_courseware_link:
                                 <strong><span id="j-startLearn" class="u-btn-orange">${_("View Courseware")}</span></strong>
-                                </a>
+                                </a> 
                             %endif
+                        %elif course.course_price>0: 
+                        	  <a class="free" id="buycourse" target="_blank" href="#purchase-modal"  url="${settings.SSO_BUY_URL}${course.uuid}" rel='leanModal'><span class="u-btn-orange">购买课程</span></a>
+                        	  
+                              <div id="register_error" style='clear: both;'></div>
                         %else:
                               <a class="register free ${'auth' if user.is_authenticated else ''}"><span class="u-btn-orange">注册课程</span></a>
                               <div id="register_error" style='clear: both;'></div>
                         %endif
                         </div>
-                    </div>
+                    </div> 
                     <div class="m-btnList">
                         <h2>课程信息</h2>
+                        %if course.course_price:
+                        	<p><span>课程价格：</span><span class="cor_red" style='font-size:18px;font-family:"Microsoft YaHei","Open Sans",Verdana"'>￥${course.course_price}</span></p>
+                        %endif
                         %if course_dur:
                             <p><span>课程时长：</span><span class="cor_red">${course_dur[0] + "天"}</span></p>
                         %else:
@@ -344,7 +351,77 @@
 		  $.get($("#school_logo_img").attr("src"), function(result, textStatus){
                  $("#school_logo_img").css("display","block");
             });
-	})
-
-
+		$("#buycourse").click(function(){
+			window.open($(this).attr('url'), '_blank');
+		});
+	});
 </script>
+
+<style>
+  section#purchase-modal header { padding: 0px; margin: 25px 0px 10px; border-bottom: 1px solid #d2d2d2}
+
+  section#purchase-modal div#purchase-oper { margin: 15px 0px 0px;}
+  section#purchase-modal div#purchase-oper a:first-child {margin-right: 30px; }
+  section#purchase-modal div#purchase-oper a.trade_class {
+      width: 100%;
+      border: 1px solid #8a0b00;
+      border-bottom: 1px solid #810000;
+      box-shadow: inset 0 1px 0 0 #ff973d;
+      color: white;
+      display: inline-block;
+      font-size: 14px;
+      background-color: #ff7a31;
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ff7a31),color-stop(50%, #c74810),color-stop(50%, #a92f01),color-stop(100%, #b03403));
+      background-image: -webkit-linear-gradient(top, #ff7a31 0%,#c74810 50%,#a92f01 50%,#b03403 100%);
+      background-image: linear-gradient(to bottom,#ff7a31 0%,#c74810 50%,#a92f01 50%,#b03403 100%);
+      padding: 8px 20px;
+      text-align: center;
+      text-decoration: none;
+      text-shadow: 0 -1px 1px #730000;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      border-radius: 3px;
+      display: inline-block;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-align: center;
+  }
+
+  section#purchase-modal div#purchase-oper a.trade_class:hover {
+    cursor:pointer;
+    background-color: #f26b1f;
+    background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #f26b1f),color-stop(50%, #bd3c00),color-stop(50%, #a22500),color-stop(100%, #a92a00));
+    background-image:-webkit-linear-gradient(top, #f26b1f 0%,#bd3c00 50%,#a22500 50%,#a92a00 100%);
+    background-image: linear-gradient(to bottom,#f26b1f 0%,#bd3c00 50%,#a22500 50%,#a92a00 100%)
+  }
+</style>
+<section id='purchase-modal' class="modal">
+  <div class="inner-wrapper" role='dialog' aria-labelledby="purchase-modal-title" style="border-bottom: 1px solid #d2d2d2">
+    <button class="close-modal">&#10005;
+      <span class="sr">
+        ## Translators: this is a control to allow users to exit out of this modal interface (a menu or piece of UI that takes the full focus of the screen)
+        ${_('Close Modal')}
+      </span>
+    </button>
+
+    <header style="padding: 0;">
+      <h2 id="portfolio-modal-title">
+        <span class="sr">,
+          ## Translators: this text gives status on if the modal interface (a menu or piece of UI that takes the full focus of the screen) is open or not
+          ${_("modal open")}
+        </span>
+      </h2>
+    </header>
+
+    <section class="purchase-content" style="width: auto; padding: 0 40px 20px">
+      <div id='purchase-prompt'>
+        <span>支付进行中。。。如果支付完成，请点击下面按钮来注册加入课程</span>
+      </div>
+
+      <div id='purchase-oper'>
+        <a class="trade_class" id="finish_purchase" style="display: inline-block; padding: 8px 20px">确定已支付&注册课程</a>
+      </div>
+    </section>
+  </div>
+</section>

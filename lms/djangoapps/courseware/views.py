@@ -12,6 +12,7 @@ import logging
 import urllib
 import hashlib
 import socket
+import uuid
 import urllib2
 from suds.client import Client
 import xmltodict
@@ -65,7 +66,7 @@ from xmodule.contentstore.content import StaticContent
 import shoppingcart
 
 from microsite_configuration import microsite
-from syscustom.models import CourseClass
+from syscustom.models import CourseClass,CourseUuid, UserBuyCourse
 log = logging.getLogger("edx.courseware")
 
 template_imports = {'urllib': urllib}
@@ -1001,6 +1002,51 @@ def course_about(request, course_id):
         raise Http404
 
     course = get_course_with_access(request.user, course_id, 'see_exists')
+    try:
+        course_price = int(course.course_price)
+    except:
+        course_price = 0
+    course.course_price = course_price
+    course.uuid=''
+    if request.user.is_authenticated() and course_price>0:
+        is_buy = UserBuyCourse.objects.filter(user__id=request.user.id, course_id=course_id).count()
+        if not is_buy:
+            has_course = False
+            try:
+                u = CourseUuid.objects.get(course_id=course_id)
+                _uuid = u.uuid
+                has_course = True
+            except CourseUuid.DoesNotExist:
+                _uuid = str(uuid.uuid1())
+                u = CourseUuid(course_id=course_id, uuid=_uuid)
+                u.save()
+            course.uuid = _uuid
+            if not has_course:
+                url = "{}/services/OssWebService?wsdl".format(settings.SSO_ADDUPDATE_COURSE_URL)
+                print url
+                client = Client(url)
+                push_update, course_purchased = True, False
+                xml_course_info = render_to_string('xmls/pcourse_xml.xml', {'uuid':_uuid, 'course': course, 'user': request.user})
+        
+                print xml_course_info.encode('utf-8')
+                try:
+                    p_xml = client.service.addorUpdateCommodities(xml_course_info, demd5_webservicestr(xml_course_info + "VTEC_#^)&*("))
+                    print '---------------push xcourse'
+                    print p_xml.encode('utf-8')
+                    print '---------------push xcourse'
+        
+                    # parse xml to dict
+                    docdict = xmltodict.parse(p_xml.encode('utf-8'))
+                    # TODO: course table add a column mark is-push-data or not; when modify price column reset the column as false
+                    print 'result RESULT : %s ' % docdict['UPDATECOMMODITIESRESPONSE']['RESULT']
+                    if docdict['UPDATECOMMODITIESRESPONSE']['RESULT'] != '0':
+                        push_update = False
+                        CourseUuid.objects.filter(uuid=_uuid).delete()
+                except:
+                    CourseUuid.objects.filter(uuid=_uuid).delete()
+                    print "Fail to push course information to "
+                    push_update = False
+    
     course.course_uid = str(course.course_uuid)[-12:]
     registered = registered_for_course(course, request.user)
 

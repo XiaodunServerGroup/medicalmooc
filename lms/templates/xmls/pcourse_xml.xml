@@ -2,8 +2,8 @@
 	<AP_ID>4</AP_ID>
 	<COMMODITIES>
 		<COMMODITY>
-			<COMMODITY_NO>${ course.course_uid }</COMMODITY_NO>
-			<COMMODITY_GUID>${ course.course_uid }</COMMODITY_GUID>
+			<COMMODITY_NO>${uuid}</COMMODITY_NO>
+			<COMMODITY_GUID>${uuid}</COMMODITY_GUID>
 			<COMMODITY_VERTIFY>2</COMMODITY_VERTIFY>
 			<NAME>${ course.display_name  }</NAME>
 			<SERVICE_SPAN_TYPE>2</SERVICE_SPAN_TYPE>
@@ -16,10 +16,10 @@
 			<USEPATH></USEPATH>
 			<SOURCEFROM></SOURCEFROM>
 			<END_DATE>2099-07-12</END_DATE>
-			<ICON_URL>http://data2.video.guoshi.com/img/image/topic/6d118387-686e-59ad-f51c-5c36ebc0d3c9_t_w120.jpg</ICON_URL>
-			<COMMODITY_URL>http://xuexi.guoshi.com/mp/play/?guid=6d118387-686e-59ad-f51c-5c36ebc0d3c9</COMMODITY_URL>
+			<ICON_URL></ICON_URL>
+			<COMMODITY_URL></COMMODITY_URL>
 			<QUOTE_ID></QUOTE_ID>
-			<USER_LOGIN>${ user.username }</USER_LOGIN>
+			<USER_LOGIN>amd0081</USER_LOGIN>
 			<OWNER_ID>2855484</OWNER_ID>
 			<DESCRIPTION><![CDATA[09]]></DESCRIPTION>
 			<CHANNEL_NO>20226</CHANNEL_NO>
