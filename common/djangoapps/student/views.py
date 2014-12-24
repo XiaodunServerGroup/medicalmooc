@@ -109,6 +109,7 @@ from util.password_policy_validators import (
     validate_password_dictionary
 )
 from syscustom.models import CustomImage
+from util.common import *
 
 log = logging.getLogger("edx.student")
 AUDIT_LOG = logging.getLogger("audit")
@@ -982,6 +983,38 @@ def login_failure_count(request):
 
     return JsonResponse({'failure_time': failure_time(request)})
 
+import xml.dom.minidom
+def _login_guoshi(data):
+    print data
+    request_str = data.get('email','') + "#" + hashlib.md5(data.get('password', '')).hexdigest()
+    des_enxml_str = des_encrypt(request_str)
+    print des_enxml_str
+    result = {'success': False}
+    try:
+        request_url = '%s' % (settings.SSO_LOGIN_URL % des_enxml_str)
+        socket.setdefaulttimeout(10)
+        req = urllib2.Request(request_url)
+        response = urllib2.urlopen(req).read()
+        response = des_decrypt(response)
+        print request_url
+        print 'response: %s ' % response
+        
+        dom_obj = xml.dom.minidom.parseString(response)
+        rootNode = dom_obj.documentElement
+        status = rootNode.getElementsByTagName("status")[0].childNodes[0].nodeValue
+        print status
+        print rootNode.getElementsByTagName("synLoginStr")[0].childNodes[0].nodeValue
+        if str(status) == '1':
+            result["success"] = True
+            result['iframe'] = rootNode.getElementsByTagName("synLoginStr")[0].childNodes[0].nodeValue
+        else:
+            result["errmsg"] = "登陆失败"
+    except:
+        import traceback
+        print traceback.format_exc()
+        result['errmsg'] = "服务器错误，请稍后再试!"
+    print result 
+    return result 
 
 # Need different levels of logging
 @ensure_csrf_cookie
@@ -1098,13 +1131,17 @@ def login_user(request, error=""):
             log.critical("Login failed - Could not create session. Is memcached running?")
             log.exception(e)
             raise
-
+        
+        guoshi_login_result = _login_guoshi({'email':email, 'password':password})
+        iframe = guoshi_login_result.get('iframe', '')
+        
         redirect_url = try_change_enrollment(request)
 
         dog_stats_api.increment("common.student.successful_login")
         response = JsonResponse({
             "success": True,
             "redirect_url": redirect_url,
+            "iframe":iframe
         })
 
         # set the login cookie for the edx marketing site
@@ -1145,6 +1182,7 @@ def login_user(request, error=""):
     })  # TODO: this should be status code 400  # pylint: disable=fixme
 
 
+
 @ensure_csrf_cookie
 def logout_user(request):
     """
@@ -1154,6 +1192,7 @@ def logout_user(request):
     """
     # We do not log here, because we have a handler registered
     # to perform logging on successful logouts.
+    
     logout(request)
     if settings.FEATURES.get('AUTH_USE_CAS'):
         target = reverse('cas-logout')
@@ -1508,6 +1547,30 @@ def mobi_create_account(request, post_override=None):
     return response
 
 
+def _reg_guoshi(data):
+    xml_format = render_to_string('xmls/account_dict.xml', data)
+    print xml_format
+    des_enxml_str = des_encrypt(xml_format.encode('utf-8'))#.replace('+', '$')
+    print des_enxml_str
+    result = {'success': False}
+    try:
+        request_url = '%s' % (settings.SSO_REG_URL % des_enxml_str)
+        socket.setdefaulttimeout(10)
+        req = urllib2.Request(request_url)
+        response = urllib2.urlopen(req).read()
+        print response
+        response = response.replace('GBK', 'utf-8').encode('utf-8')
+        response_dict = xmltodict.parse(response)
+        if response_dict.get("SSOUSER",{}).get('status', '') == '1':
+            result["success"] = True
+        else:
+            result["errmsg"] = response_dict["SSOUSER"]["description"]
+    except:
+        import traceback
+        print traceback.format_exc()
+        result['errmsg'] = "服务器错误，请稍后再试!"
+    return result 
+
 @ensure_csrf_cookie
 def create_account(request, post_override=None):
     """
@@ -1636,6 +1699,19 @@ def create_account(request, post_override=None):
         js['field'] = 'username'
         return JsonResponse(js, status=400)
 
+    
+    js = {'success': False}
+    # Figure out the cause of the integrity error
+    if len(User.objects.filter(username=post_vars['username'])) > 0:
+        js['value'] = _("An account with the Public Username '{username}' already exists.").format(username=post_vars['username'])
+        js['field'] = 'username'
+        return JsonResponse(js, status=400)
+
+    if len(User.objects.filter(email=post_vars['email'])) > 0:
+        js['value'] = _("An account with the Email '{email}' already exists.").format(email=post_vars['email'])
+        js['field'] = 'email'
+        return JsonResponse(js, status=400)
+
     # enforce password complexity as an optional feature
     if settings.FEATURES.get('ENFORCE_PASSWORD_POLICY', False):
         try:
@@ -1649,7 +1725,12 @@ def create_account(request, post_override=None):
             js['field'] = 'password'
             return JsonResponse(js, status=400)
 
-    # Ok, looks like everything is legit.  Create the account.
+    data = {'email':post_vars['email'], 'username':post_vars['username'], 'password':post_vars['password']}
+    guoshi_reg_result = _reg_guoshi(data)
+    if not guoshi_reg_result['success']:
+        js['value'] = guoshi_reg_result['errmsg']
+        return JsonResponse(js, status=400)
+    
     if request_type == 'ins':
         ret = _do_institution_create_account(post_vars)
     elif request_type == 'th':
@@ -1685,10 +1766,10 @@ def create_account(request, post_override=None):
                 dest_addr = settings.FEATURES['REROUTE_ACTIVATION_EMAIL']
                 message = ("Activation for %s (%s): %s\n" % (user, user.email, profile.name) +
                            '-' * 80 + '\n\n' + message)
-                send_mails(subject, "", from_address, [user.email], fail_silently=False, html=message)
+                #send_mails(subject, "", from_address, [user.email], fail_silently=False, html=message)
             else:
-                #user.email_user(subject, message, from_address)
-                send_mails(subject, "", from_address, [user.email], fail_silently=False, html=message)
+                pass
+                #send_mails(subject, "", from_address, [user.email], fail_silently=False, html=message)
         except Exception:  # pylint: disable=broad-except
             log.warning('Unable to send activation email to user', exc_info=True)
             js['value'] = _('Could not send activation e-mail.')

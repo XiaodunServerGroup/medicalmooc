@@ -14,12 +14,12 @@
 <%! from datetime import date %>
 <%! import calendar %>
 
-<%block name="pagetitle">中国医学教育慕课联盟注册</%block>
+<%block name="pagetitle">慕课平台注册</%block>
 
 <%block name="bodyclass">view-register</%block>
 
 <%block name="js_extra">
-  <script type="text/javascript" src="static/js/placeholders.js"></script>
+  <script type="text/javascript" src="${static.url('js/placeholders.js')}"></script>
   <script type="text/javascript">
     $(function() {
 
@@ -54,8 +54,8 @@
         // get password score
         var pwd_score = passwordScore($('input#password').val());
         if (pwd_score < 25) {
-          showErrors("密码强度太弱，不能够注册！");
-          return false;
+          //showErrors("密码强度太弱，不能够注册！");
+          //return false;
         }
       });
 
@@ -163,7 +163,7 @@
 <div class="introduction">
   <header>
     <h1 class="title">
-      <span class="title-super">欢迎访问人卫慕课，请创建属于您的账户.</span>
+      <span class="title-super">欢迎访问慕课平台，请创建属于您的账户.</span>
     </h1>
   </header>
   <p style="padding-top:20px;"><span style="color:#fff; margin-left:120px;">
@@ -201,7 +201,7 @@
           </li>
           <li class="field required password" id="field-password">
             <label for="password">${_('Password')}</label>
-            <input id="password" type="password" name="password" value="" required aria-required="true"/>
+            <input id="password" type="password" name="password" value="" maxlength="16" required aria-required="true"/>
             <div id="J_PwdStrength" class="pw-strength pw-weak">
               <div class="pw-bar"></div>
               <div class="pw-letter">
@@ -215,7 +215,7 @@
           <li class="field required text" id="field-username">
             <!--<label for="username">${_('Public Username')}</label>-->
             <label for="username">用户名</label>
-            <input id="username" type="text" name="username" value="" placeholder="${_('example: JaneDoe')}" required aria-required="true" aria-describedby="username-tip"/>
+            <input id="username" type="text" name="username" value="" placeholder="${_('example: JaneDoe')}" required aria-required="true" maxlength="15" aria-describedby="username-tip"/>
             <span class="tip tip-input" id="username-tip">用户名应当包含英文字母A到Z，阿拉伯数字0到9，并且不能包含空格. <strong>(${_('cannot be changed later')})</strong></span>
           </li>
           <li class="field required text" id="field-name">
@@ -370,7 +370,7 @@
 
           % if settings.REGISTRATION_EXTRA_FIELDS['goals'] != 'hidden':
           <li class="field ${settings.REGISTRATION_EXTRA_FIELDS['goals']} text" id="field-goals">
-            <label for="goals">请分享您注册中国医学教育慕课联盟的原因</label>
+            <label for="goals">请分享您注册慕课平台的原因</label>
             <textarea id="goals" name="goals" value="" ${'required aria-required="true"' if settings.REGISTRATION_EXTRA_FIELDS['goals'] == 'required' else ''}></textarea>
           </li>
           % endif
@@ -408,7 +408,7 @@
             </div>
             % endif
           </li>
-        </ol>
+        </ol> 
       </div>
 
 % if course_id and enrollment_action:

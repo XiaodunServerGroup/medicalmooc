@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<user>
+	<hongyununame>${ username }</hongyununame>
+	<pwd>${ password }</pwd>
+	<appuname></appuname>
+	<apppwd></apppwd>
+	<fullname></fullname>
+	<gender></gender>
+	<orgid></orgid>
+	<orgname></orgname>
+	<orgfullname></orgfullname>
+	<higherorgid></higherorgid>
+	<partyid></partyid>
+	<pwdsysid></pwdsysid>
+	<del></del>
+	<add></add>
+	<username></username>
+	<identitycard></identitycard>
+	<jobtitle></jobtitle>
+	<province></province>
+	<city></city>
+	<county></county>
+	<address></address>
+	<postcode></postcode>
+	<company></company>
+	<mobile></mobile>
+	<telphone></telphone>
+	<email>${ email }</email>
+	<qq></qq>
+	<msn></msn>
+	<headerimagebig></headerimagebig>
+	<birthday></birthday>
+	<resume></resume>
+	<ssoisrealauth>0</ssoisrealauth>
+	<fromsys>23</fromsys>
+</user>

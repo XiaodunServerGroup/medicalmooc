@@ -92,7 +92,7 @@ site_status_msg = get_site_status_msg(course_id)
         -->
         <!--${course.display_name_with_default}-->
       </h2>
-    % endif
+    % endif 
 
     % if user.is_authenticated():
     <ol class="right downloads">
@@ -129,7 +129,7 @@ site_status_msg = get_site_status_msg(course_id)
           <%block name="navigation_dropdown_menu_links" >
             <li><a href="${marketing_link('FAQ')}">${_("Help")}</a></li>
           </%block>
-          <li><a href="${reverse('logout')}" role="menuitem">退出登录</a></li>
+          <li><a href="javascript:void(0)" url="${reverse('logout')}" id="logout" role="menuitem">退出登录</a></li>
         </ul>
       </li>
     </ol>
@@ -213,6 +213,22 @@ site_status_msg = get_site_status_msg(course_id)
 		$(".x_show2").hover(function(){$(".show").children("img").attr("src","/static/images/qr_wechat.jpg");$(".show").show();},function(){$(".show").hide()});
 		$(".x_show3").hover(function(){$(".show").children("img").attr("src","/static/images/qr_android_pad.png");$(".show").show();},function(){$(".show").hide()});
 	})
+	
+	$(
+		function(){
+			$("#logout").click(function(){
+				% if user.is_authenticated():
+					var surl = "${settings.SSO_LOGOUT_URL.replace('%s', request.user.email)}";
+					var iframe="<iframe src='"+surl+"' security='restricted' sandbox='' style='display:none;'></iframe>";
+					$("body").append(iframe); 
+			    % endif
+			    var to_url=$(this).attr('url');
+			    setTimeout(function(){
+			    	window.location.href=to_url;
+			    },1200);
+			}); 
+		}
+	);
 </script>
 
 <!--[if IE]>

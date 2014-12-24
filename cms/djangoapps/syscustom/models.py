@@ -30,3 +30,12 @@ class CourseClass(models.Model):
     created_time = models.DateTimeField(auto_now_add=True, db_index=True)  #创建时间
     updated_time = models.DateTimeField(auto_now_add=True, db_index=True)  #
 
+ 
+'''
+class UserBuyCourse(models.Model):
+    user = models.ForeignKey(User)
+    course_id = models.CharField(max_length=50)
+    created_time = models.DateTimeField(auto_now_add=True, db_index=True)  #创建时间
+'''    
+    
+    

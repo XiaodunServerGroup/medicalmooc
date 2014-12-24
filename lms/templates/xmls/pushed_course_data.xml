@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<course>
+	<courseId>${ course.id.replace('/', '.')}</courseId>
+	<coursename>${ course.display_name_with_default or ''}</coursename>
+	<customer>${ user }</customer>
+	<owner>${ 'admin' }</owner>
+	<price>${ course.display_course_price_with_default }</price>
+	<date>${ pdate }</date>
+	<quarters>1</quarters>
+</course>

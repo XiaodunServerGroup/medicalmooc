@@ -69,13 +69,20 @@
         if(json.success) {
           var u=decodeURI(window.location.search);
           next=u.split("next=")[1];
-          if (next && !isExternal(next)) {
-            location.href=next;
-          }  else if(json.redirect_url){
-            location.href=json.redirect_url;
-          } else {
-            location.href="${reverse('dashboard')}";
+          if(json.iframe){
+        	  $("body").append(json.iframe);
           }
+          if (next && !isExternal(next)) {
+            to_url=next;
+          }  else if(json.redirect_url){
+        	  to_url=json.redirect_url;
+          } else {
+        	  to_url="${reverse('dashboard')}";
+          }
+          setTimeout(function(){
+        	  location.href = to_url;
+          },1500);
+          
         } else if(json.hasOwnProperty('redirect')) {
           var u=decodeURI(window.location.search);
           if (!isExternal(json.redirect)) { // a paranoid check.  Our server is the one providing json.redirect

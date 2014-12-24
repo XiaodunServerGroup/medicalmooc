@@ -411,3 +411,24 @@ STATISTICS_CODE_TEMPLATE_PATH= os.path.join(STORE_ROOT, 'templates', STATISTICS_
 
 SEO_TEMPLATE = 'seo.html'
 SEO_TEMPLATE_PATH= os.path.join(STORE_ROOT, SEO_TEMPLATE)
+
+
+
+
+
+
+######## guoshi api####
+
+SSO_KEY = "SSOFOUNDER"
+
+#SSO_LOGIN_URL = 'http://meet.guoshi.com/mp/login?input=%s&type=1&noscode=no&daemon=yes&fromSys=23'
+SSO_LOGIN_URL = 'http://192.168.1.2:8091/mp/login?input=%s&type=1&noscode=no&daemon=yes&fromSys=23'
+
+#SSO_REG_URL = 'http://meet.guoshi.com/mp/user?op=add&input=%s'
+SSO_REG_URL = 'http://192.168.1.2:8091/mp/user?op=add&input=%s'
+
+SSO_LOGOUT_URL = 'http://meet.guoshi.com/mp/sso/Logout.jsp'
+SSO_LOGOUT_URL = 'http://192.168.1.2:8091/mp/sso/Logout.jsp?pageurl=&loginname=%s'
+
+
+
