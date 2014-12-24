@@ -267,7 +267,7 @@ li a:hover, li a:active{color:#ff7a31;}
 .course-content #searbar li div strong{ line-height:20px; text-align:center; float:left; }
 .course-content #searbar li{ display: none; }
 /*hfy6 begin*/
-.course-content .select-menu{ height:60px; width:100%; position:absolute; background:#ffffff; left:0;top: 40px; border-bottom: 1px solid #dddddd;border-right: 1px solid #dddddd; border-left: 1px solid #dddddd;}
+/*.course-content .select-menu{ height:60px; width:100%; position:absolute; background:#ffffff; left:0;top: 40px; border-bottom: 1px solid #dddddd;border-right: 1px solid #dddddd; border-left: 1px solid #dddddd;}*/
 /*hfy6 end*/
 .course-content .select-base{ height:40px; width:100%; position:absolute; left:0; top:0;}
 .course-content .base{ height:40px; width:960px;padding-left:40px; position:absolute; left:0; top:0;}
@@ -282,9 +282,9 @@ li a:hover, li a:active{color:#ff7a31;}
 .course-content .base-right .live span{background:#ff7a31; padding: 10px 10px 0; height:30px; color:#fff;width:auto;}
 .course-content .base-more{ width:70px; height:40px; line-height:40px;}
 /*hfy6 begin*/
-.course-content .select-subject{position:absolute; height:60px; width:100%; background:#fff;}
+/*.course-content .select-subject{position:absolute; height:60px; width:100%; background:#fff;}
 .course-content .subject {height:40px; width:960px; padding-left:40px; position:absolute; left:0;top:0;}
-.course-content .subject-left {float:left; height:40px; line-height:40px; font-weight:bold; color:#fff;}
+.course-content .subject-left {float:left; height:40px; line-height:40px; font-weight:bold; color:#fff;}*/
 /*hfy6 end*/
 .course-content .subject-right ul {float:left;}
 /*hfy6 begin*/
@@ -594,11 +594,11 @@ function chkform(obj){
               </ul>
             </div>
           </div>
-          <div class="select-menu">
+          <div class="select-menu" style="float:left; border:1px solid #dddddd; margin-top:40px; width:1180px;">
             <div class="select-subject">
-              <div class="subject">
-                <div class="subject-left">科目：</div>
-                <div class="subject-right">
+              <div class="subject" style="width:1140px;">
+                <div class="subject-left" style="width:60px; padding-top:12px;">科目：</div>
+                <div class="subject-right" style="float:left; width:1060px;">
                   <ul id="subject">
                       <li class="tab1" name="all"><span>全部</span></li>
                        % for item in course_class_list:
@@ -645,7 +645,7 @@ function chkform(obj){
         </form>
        </nav>
     </section>
-
+    <div style="float:left; width:100%;">
     <section class="courses">
       % if len(courses):
       <ul class="courses">
@@ -660,7 +660,7 @@ function chkform(obj){
         无匹配课程
     % endif
     </section>
-
+    </div>
   </section>
 </section>
 
@@ -694,7 +694,7 @@ function chkform(obj){
 .course-content #searbar li div strong{ line-height:20px; text-align:center; float:left; }
 .course-content #searbar li{ display: none; }
 /*hfy6 begin*/
-.course-content .select-menu{ height:60px; width:100%; position:absolute; background:#ffffff; left:0;top: 40px; border-bottom: 1px solid #dddddd;border-right: 1px solid #dddddd; border-left: 1px solid #dddddd;}
+/*.course-content .select-menu{ height:60px; width:100%; position:absolute; background:#ffffff; left:0;top: 40px; border-bottom: 1px solid #dddddd;border-right: 1px solid #dddddd; border-left: 1px solid #dddddd;}*/
 /*hfy6 end*/
 .course-content .select-base{ height:40px; width:100%; position:absolute; left:0; top:0;}
 .course-content .base{ height:40px; width:960px;padding-left:40px; position:absolute; left:0; top:0;}
@@ -709,9 +709,9 @@ function chkform(obj){
 .course-content .base-right .live span{background:#ff7a31; padding: 10px 10px 0; height:30px; color:#fff;width:auto;}
 .course-content .base-more{ width:70px; height:40px; line-height:40px;}
 /*hfy6 begin*/
-.course-content .select-subject{position:absolute; height:60px; width:100%; background:#fff;}
-.course-content .subject {height:40px; width:960px; padding-left:40px; position:absolute; left:0;top:0;}
-.course-content .subject-left {float:left; height:40px; line-height:40px; font-weight:bold; color:#fff;}
+.course-content .select-subject{/*position:absolute; height:60px;*/ width:100%; background:#fff; float:left;}
+.course-content .subject {/*height:40px;*/ width:960px; padding-left:40px; /*position:absolute; left:0;top:0;*/ float:left;}
+.course-content .subject-left {float:left; height:40px; line-height:40px; font-weight:bold; color:#333;}
 /*hfy6 end*/
 .course-content .subject-right ul {float:left;padding: 0 0 0 0px;}
 /*hfy6 begin*/
@@ -723,7 +723,7 @@ function chkform(obj){
 
 .course-content .live span{background:#2883bc; height:20px; color:#fff;}
 
-.search_box{width:100%; height:52px;box-shadow:0 1px 0 0 rgba(255,255,255,1),inset 0 0 5px 0 rgba(221,221,221,1); border:1px solid #ddd; position:relative;}
+.search_box{width:100%; height:52px;box-shadow:0 1px 0 0 rgba(255,255,255,1),inset 0 0 5px 0 rgba(221,221,221,1); border:1px solid #ddd; position:relative;float:left;}
 .search_icon{position:absolute; width:26px; height:21px; top:15px; left:15px; background:url(search_03.gif)left top no-repeat;}
 .search_button{position:absolute; right:2px; height:48px; top:2px;}
 .filter_courses{padding-top:40px;}
