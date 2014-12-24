@@ -9,10 +9,11 @@ from syscustom.models import CourseClass
 
 from xmodule.contentstore.content import StaticContent
 from student.roles import CourseInstructorRole, CourseStaffRole
-from django.contrib.auth.models import User, AnonymousUser
-from courseware.courses import course_image_url,get_courses,get_course_about_section,mobi_course_info,registered_for_course
+from django.contrib.auth.models import  AnonymousUser
+from courseware.courses import course_image_url,get_courses,get_course_about_section
+from courseware.views import mobi_course_info,registered_for_course
 from student.models import UserTestGroup, CourseEnrollment, UserProfile
-from django.core.urlresolvers import reverse
+
 
 def boot_image(request, client_type):
     try:
