@@ -6,6 +6,14 @@ from django.conf import settings
 from util.json_request import JsonResponse
 from syscustom.models import CustomImage
 from syscustom.models import CourseClass
+
+from xmodule.contentstore.content import StaticContent
+from student.roles import CourseInstructorRole, CourseStaffRole
+from django.contrib.auth.models import User, AnonymousUser
+from courseware.courses import course_image_url,get_courses,get_course_about_section,mobi_course_info,registered_for_course
+from student.models import UserTestGroup, CourseEnrollment, UserProfile
+from django.core.urlresolvers import reverse
+
 def boot_image(request, client_type):
     try:
         obj = CustomImage.objects.filter(type=client_type).order_by('order_num', 'id')[-1:]
@@ -14,6 +22,8 @@ def boot_image(request, client_type):
     except:
         data = {'type':client_type, 'image':''}
     return JsonResponse(data)
+
+
 
 def luobo_image(request, client_type):
     try:
@@ -24,6 +34,29 @@ def luobo_image(request, client_type):
     except:
         data = {'type':client_type, 'image':images}
     return JsonResponse(data)
+
+def  luobo_image_courseinfo(request,luoboimg_id):
+    try:
+        user = request.user
+    except:
+        user = AnonymousUser()
+    courses = get_courses(user, request.META.get('HTTP_HOST'))
+
+    try:
+        obj = CustomImage.objects.get(id=luoboimg_id)
+    except:
+        return  JsonResponse({'error': u'轮播图不存在'})
+
+    url_split=obj.url.split('/')
+    course_id = '%s/%s/%s' % (url_split[-4],url_split[-3],url_split[-2])
+
+    for  course in courses:
+        if course.id == course_id:
+            try:
+                course_json = mobi_course_info(request, course)
+            except:
+                continue
+    return JsonResponse({"courseinfo": course_json})
 
 
 def get_courseclass(request):
