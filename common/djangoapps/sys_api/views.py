@@ -50,13 +50,14 @@ def  luobo_image_courseinfo(request,luoboimg_id):
 
     url_split=obj.url.split('/')
     course_id = '%s/%s/%s' % (url_split[-4],url_split[-3],url_split[-2])
-
+    course_json={}
     for  course in courses:
         if course.id == course_id:
             try:
                 course_json = mobi_course_info(request, course)
             except:
-                continue
+                pass
+            break
     return JsonResponse({"courseinfo": course_json})
 
 
