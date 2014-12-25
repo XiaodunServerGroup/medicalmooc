@@ -16,7 +16,7 @@ class CustomImage(models.Model):
     def get_image_url(self):
         if not self.img:
             return ''
-        return '%s%s' % (settings.STORE_URL, self.img)
+        return '%s%s%s' % (settings.SITE_NAME,settings.STORE_URL, self.img)
     
     def get_edir_url(self):
         return '/syscustom/indexluobo/%s/edit/' % self.id

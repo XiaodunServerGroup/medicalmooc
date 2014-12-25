@@ -14,7 +14,9 @@ from courseware.courses import course_image_url,get_courses,get_course_about_sec
 from courseware.views import mobi_course_info,registered_for_course
 from student.models import UserTestGroup, CourseEnrollment, UserProfile
 
+from xmodule.modulestore.django import modulestore
 
+type_list = [settings.CUSTOM_IMAGE_CLASS[1], settings.CUSTOM_IMAGE_CLASS[2],settings.CUSTOM_IMAGE_CLASS[3]]
 def boot_image(request, client_type):
     try:
         obj = CustomImage.objects.filter(type=client_type).order_by('order_num', 'id')[-1:]
@@ -28,10 +30,25 @@ def boot_image(request, client_type):
 
 def luobo_image(request, client_type):
     try:
-        img_list = CustomImage.objects.filter(type=client_type).order_by('order_num', 'id')
-        
-        images = [{'url':obj.url, 'image':obj.get_image_url()} for obj in img_list]
-        data = {'type':client_type, 'images':images}
+        course_list =[]
+        type_list_key =[type[0] for type in type_list]
+        client_type = int(client_type)
+        if client_type in  type_list_key:
+            img_list = CustomImage.objects.filter(type=client_type).order_by('order_num', 'id')
+            for obj in img_list:
+                course_id ='%s/%s/%s' % (obj.url.split('/')[-4],obj.url.split('/')[-3],obj.url.split('/')[-2])
+                try:
+                    course=modulestore().get_course(course_id)
+                    course_json = mobi_course_info(request, course)
+                    course_json['image']= obj.get_image_url()
+                    course_list.append(course_json)
+                except :
+                    continue
+            return JsonResponse({'count':len(course_list),'course_list':course_list})
+        else:
+            img_list = CustomImage.objects.filter(type=client_type).order_by('order_num', 'id')
+            images = [{'url':obj.url, 'image':obj.get_image_url()} for obj in img_list]
+            data = {'type':client_type, 'images':images}
     except:
         data = {'type':client_type, 'image':images}
     return JsonResponse(data)
@@ -58,7 +75,7 @@ def  luobo_image_courseinfo(request,luoboimg_id):
             except:
                 pass
             break
-    return JsonResponse({"courseinfo": course_json})
+    return JsonResponse( course_json)
 
 
 def get_courseclass(request):

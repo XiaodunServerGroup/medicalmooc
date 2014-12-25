@@ -418,10 +418,6 @@ def mobi_course_info(request, course, action=None):
         cp = course.display_course_price_with_default
 
     result = {
-
-        'MoocLink':host + reverse('about_course', args=[course.id]),
-        'Author':  UserProfile.objects.get(user_id=User.objects.get(username=Author[0]).id).name,
-        'AuthorInfo':UserProfile.objects.get(user_id=User.objects.get(username=Author[0]).id).shortbio,
         "id": course.id.replace('/', '.'),
         "name": course.display_name_with_default,
         "logo": host + course_logo,
