@@ -401,7 +401,9 @@ MAKO_TEMPLATES['main'].append(STORE_ROOT+'templates')
 STORE_URL = '/store/'
 CUSTOM_IMAGE_DIR = 'focusimg/'
 CUSTOM_IMAGE_CLASS = ((1, u'网站首页轮播'), 
-                      (10, u'手机端轮播'), 
+                      (10, u'手机端轮播'),
+                      (11, u'IPAD端轮播'),
+                      (12, u'TV端轮播'  ),
                       (20, u'IOS启动图'), 
                       (21, u'PAD启动图'), 
                       (22, u'Android启动图'), 

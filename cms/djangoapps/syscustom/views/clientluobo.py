@@ -20,7 +20,7 @@ from ..models import *
 from ..image import *
 from .perm import is_super
 
-type_list = [settings.CUSTOM_IMAGE_CLASS[1], settings.CUSTOM_IMAGE_CLASS[2]]
+type_list = [settings.CUSTOM_IMAGE_CLASS[1], settings.CUSTOM_IMAGE_CLASS[2],settings.CUSTOM_IMAGE_CLASS[3]]
 type_ids = [item[0] for item in type_list]
 @login_required
 @is_super
