@@ -208,12 +208,6 @@ site_status_msg = get_site_status_msg(course_id)
   </nav>
 </header>
 <script>
-	$(function(){
-		$(".x_show1").hover(function(){$(".show").children("img").attr("src","/static/images/qr_android_phone.png");$(".show").show();},function(){$(".show").hide()});
-		$(".x_show2").hover(function(){$(".show").children("img").attr("src","/static/images/qr_wechat.jpg");$(".show").show();},function(){$(".show").hide()});
-		$(".x_show3").hover(function(){$(".show").children("img").attr("src","/static/images/qr_android_pad.png");$(".show").show();},function(){$(".show").hide()});
-	})
-	
 	$(
 		function(){
 			$("#logout").click(function(){

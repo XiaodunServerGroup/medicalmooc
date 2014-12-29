@@ -201,9 +201,13 @@
                                 </a> 
                             %endif
                         %elif course.course_price>0: 
-                        	  <a class="free" id="buycourse" target="_blank" href="#purchase-modal"  url="${settings.SSO_BUY_URL}${course.uuid}" rel='leanModal'><span class="u-btn-orange">购买课程</span></a>
-                        	  
+                        	  % if is_buy>0:
+                        	      <a class="register free ${'auth' if user.is_authenticated else ''}"><span class="u-btn-orange">注册课程</span></a>
+                        	  % else:
+                        	  <a class="free" id="buycourse" has_course="${has_course}" target="_blank" href="#purchase-modal"  url="${settings.SSO_BUY_URL}${course.uuid}" rel='leanModal1'><span class="u-btn-orange">购买课程</span></a>
+                        	  <a class="free" id="alert_tips"  href="#purchase-modal"  rel='leanModal' style="display:none;"><span class="u-btn-orange"></span></a>
                               <div id="register_error" style='clear: both;'></div>
+                              % endif
                         %else:
                               <a class="register free ${'auth' if user.is_authenticated else ''}"><span class="u-btn-orange">注册课程</span></a>
                               <div id="register_error" style='clear: both;'></div>
@@ -351,8 +355,17 @@
 		  $.get($("#school_logo_img").attr("src"), function(result, textStatus){
                  $("#school_logo_img").css("display","block");
             });
-		$("#buycourse").click(function(){
-			window.open($(this).attr('url'), '_blank');
+		$("#buycourse").click(function(e){
+			e.preventDefault();
+			if($(this).attr('has_course')!='True'){
+				alert("获取课程数据失败，请刷新再试");
+				return false;
+			}else{
+				window.open($(this).attr('url'), '_blank');
+				$("#alert_tips").trigger('click');
+			}
+			
+			
 		});
 	});
 </script>

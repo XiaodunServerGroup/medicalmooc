@@ -9,7 +9,7 @@ USE_I18N = True
 TEMPLATE_DEBUG = DEBUG
 TIME_ZONE = 'Asia/Shanghai'
 LANGUAGE_CODE = 'zh_CN'
-SITE_NAME = '119.254.225.106:18010'
+SITE_NAME = '127.0.0.1:8006' 
 
 ################################ LOGGERS ######################################
 

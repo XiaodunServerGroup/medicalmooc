@@ -1,0 +1,8 @@
+<%! from syscustom.views import getSeoByKey %>
+document.writeln("<div class=\"wrapper-footer\">");
+document.writeln("  <footer role=\"contentinfo\" class=\"primary\">");
+document.writeln("    <div class=\"colophon\">");
+document.writeln("${getSeoByKey('bottom_footer_text')}");
+document.writeln("    </div>");
+document.writeln("  </footer>");
+document.writeln("</div>");

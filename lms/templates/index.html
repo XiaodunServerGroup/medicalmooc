@@ -17,9 +17,9 @@
     <%static:css group='style-app-extend2'/>
     <%static:js group='main_vendor'/>
 </head>  
-
+ 
 <body> 
-<!--  
+<!-- 
 <script language="javascript" src="/common/header.js"></script> 
 <script language="javascript" src="/common/header2.js"></script>
  -->
@@ -34,7 +34,7 @@
 	                <img class="big_b1" usemap="#testmap" id="big1" src="${item.get_image_url()}" width="1180" height="350" style="opacity:1;z-index:1; filter:alpha(opacity:100);">
 	                </img>
 	                </li>
-	            </a>
+	            </a> 
         	% endfor 
         </div>
       	<div class="small">
@@ -137,8 +137,11 @@
        ${getSeoByKey('bottom_footer_text')}
     </div>
   </footer>
-</div>
+</div> 
 <!--footer end-->
+<!--
+<script language="javascript" src="/common/footer.js"></script>    
+-->
 <%include file="${settings.STATISTICS_CODE_TEMPLATE}" />
 </body>
 </html>
