@@ -142,7 +142,7 @@ function goto( mode)
              | <a href="#" onclick="goto('Email')" class="${modeflag.get('Email')}">${_("Email")}</a>
           %endif
           %if show_email_tab_free:
-             | <a href="#" onclick="goto('Email_free')" class="${modeflag.get('Email_free')}">自由发送电子邮件</a>
+             | <a href="#" onclick="goto('Email_free')" class="${modeflag.get('Email_free')}">群发邮件</a>
           %endif
           %if settings.FEATURES.get('ENABLE_INSTRUCTOR_ANALYTICS'):
              | <a href="#" onclick="goto('Analytics');" class="${modeflag.get('Analytics')}">${_("Analytics")}</a>
@@ -459,9 +459,9 @@ function goto( mode)
   <input type="checkbox" name="email_students"> ${_("Notify students by email")}
   <p>
   <input type="checkbox" name="auto_enroll"> ${_("Auto-enroll students when they activate")}
-  <input type="submit" onclick="this.value='正在招收'" name="action" value="招收多名学生">
+  <input type="submit" onclick="this.value='正在招收'" name="action" value="确定批量招收学生" style="float: right;margin-top: 20px;margin-right: 955px;">
   <p>
-  <input type="submit" onclick="this.value='正在取消'" name="action" value="取消注册多个学生">
+  <input type="submit" onclick="this.value='正在取消'" name="action" value="取消批量招收学生" style="margin-left: 170px;margin-top: -41.5px;">
 
 %endif
 
