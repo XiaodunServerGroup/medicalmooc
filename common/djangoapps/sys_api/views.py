@@ -33,11 +33,11 @@ def luobo_image(request, client_type):
         course_list =[]
         type_list_key =[type[0] for type in type_list]
         client_type = int(client_type)
+        img_list = CustomImage.objects.filter(type=client_type).order_by('order_num', 'id')
         if client_type in  type_list_key:
-            img_list = CustomImage.objects.filter(type=client_type).order_by('order_num', 'id')
             for obj in img_list:
-                course_id ='%s/%s/%s' % (obj.url.split('/')[-4],obj.url.split('/')[-3],obj.url.split('/')[-2])
                 try:
+                    course_id ='%s/%s/%s' % (obj.url.split('/')[-4],obj.url.split('/')[-3],obj.url.split('/')[-2])
                     course=modulestore().get_course(course_id)
                     course_json = mobi_course_info(request, course)
                     course_json['image']= obj.get_image_url()
@@ -46,7 +46,6 @@ def luobo_image(request, client_type):
                     continue
             return JsonResponse({'count':len(course_list),'course_list':course_list})
         else:
-            img_list = CustomImage.objects.filter(type=client_type).order_by('order_num', 'id')
             images = [{'url':obj.url, 'image':obj.get_image_url()} for obj in img_list]
             data = {'type':client_type, 'images':images}
     except:
