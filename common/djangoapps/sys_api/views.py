@@ -18,10 +18,13 @@ from xmodule.modulestore.django import modulestore
 
 type_list = [settings.CUSTOM_IMAGE_CLASS[1], settings.CUSTOM_IMAGE_CLASS[2],settings.CUSTOM_IMAGE_CLASS[3]]
 def boot_image(request, client_type):
+
     try:
-        obj = CustomImage.objects.filter(type=client_type).order_by('order_num', 'id')[-1:]
+        obj = CustomImage.objects.filter(type=client_type).order_by('-order_num', '-id')[:1]
         if obj and obj[0]:
-            data = {'type':client_type, 'image':obj.get_image_url()}
+            data = {'type':client_type, 'image':obj[0].get_image_url()}
+        else:
+            data = {'type':client_type, 'image':''}
     except:
         data = {'type':client_type, 'image':''}
     return JsonResponse(data)
@@ -44,7 +47,7 @@ def luobo_image(request, client_type):
                     course_list.append(course_json)
                 except :
                     continue
-            return JsonResponse({'count':len(course_list),'course_list':course_list})
+            return JsonResponse({'count':len(course_list),'course-list':course_list})
         else:
             images = [{'url':obj.url, 'image':obj.get_image_url()} for obj in img_list]
             data = {'type':client_type, 'images':images}
