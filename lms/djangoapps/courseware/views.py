@@ -1056,7 +1056,7 @@ def course_about(request, course_id):
             
             
             print '---------------push xcourse'
-            xml_purchase = render_to_string('xmls/auth_purchase.xml', {'username': request.user.username, 'course_uuid': course._uuid})
+            xml_purchase = render_to_string('xmls/auth_purchase.xml', {'username': request.user.username, 'course_uuid': course.uuid})
             print xml_purchase
             try:
                 aresult = client.service.confirmBillEvent(xml_purchase, demd5_webservicestr(xml_purchase + "VTEC_#^)&*("))
