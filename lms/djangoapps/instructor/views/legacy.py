@@ -794,7 +794,7 @@ def instructor_dashboard(request, course_id):
     #----------------------------------------
     # 发送添加邮箱邮件
 
-    elif action == '发送添加邮箱邮件':
+    elif action == '发送':
         email_to_option_select = request.POST.get("student")
         email_subject = request.POST.get("subject")
         html_message = request.POST.get("message")
