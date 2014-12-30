@@ -18,9 +18,9 @@ from courseware.views import mobi_course_info,registered_for_course
 
 def boot_image(request, client_type):
     try:
-        obj = CustomImage.objects.filter(type=client_type).order_by('order_num', 'id')[-1:]
+        obj = CustomImage.objects.filter(type=client_type).order_by('-order_num', '-id')[:1]
         if obj and obj[0]:
-            data = {'type':client_type, 'image':obj.get_image_url()}
+            data = {'type':client_type, 'image':obj[0].get_image_url()}
     except:
         data = {'type':client_type, 'image':''}
     return JsonResponse(data)
