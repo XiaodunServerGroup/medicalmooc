@@ -420,7 +420,7 @@ def mobi_course_info(request, course, action=None):
     result = {
         "id": course.id.replace('/', '.'),
         "name": course.display_name_with_default,
-        "logo": host + course_logo,
+        "logo": settings.SITE_NAME + course_logo,
         "org": course.display_org_with_default,
         "course_number": course.display_number_with_default,
         "start_date": course.start.strftime("%Y-%m-%d"),
@@ -436,14 +436,14 @@ def mobi_course_info(request, course, action=None):
         course_mini_info = course.id.split('/')
         asset_location = StaticContent.compute_location(course_mini_info[0], course_mini_info[1], imgname)
 
-        return host + StaticContent.get_url_path_from_location(asset_location)
+        return settings.SITE_NAME + StaticContent.get_url_path_from_location(asset_location)
 
 
     for imgname in ['mobi', 'mobi_r', 'ott_r']:
         try:
             result[imgname] = compute_action_imgurl(imgname + '_logo.jpg')
         except:
-            result[imgname] = host + course_logo
+            result[imgname] = settings.SITE_NAME + course_logo
 
     return result
 
