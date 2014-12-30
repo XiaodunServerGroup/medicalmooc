@@ -199,17 +199,17 @@
                             %if show_courseware_link:
                                 <strong><span id="j-startLearn" class="u-btn-orange">${_("View Courseware")}</span></strong>
                                 </a> 
-                            %endif
+                            %endif  
                         %elif course.course_price>0: 
                         	  % if is_buy>0:
-                        	      <a class="register free ${'auth' if user.is_authenticated else ''}"><span class="u-btn-orange">注册课程</span></a>
+                        	      <a class="register free ${'auth' if user.is_authenticated() else ''}"><span class="u-btn-orange">注册课程</span></a>
                         	  % else:
-                        	  <a class="free" id="buycourse" has_course="${has_course}" target="_blank" href="#purchase-modal"  url="${settings.SSO_BUY_URL}${course.uuid}" rel='leanModal1'><span class="u-btn-orange">购买课程</span></a>
+                        	  <a class="free" id="buycourse" has_course="${has_course}" target="_blank" href="javascript:;"  url="${settings.SSO_BUY_URL}${course.uuid}"><span class="u-btn-orange">购买课程</span></a>
                         	  <a class="free" id="alert_tips"  href="#purchase-modal"  rel='leanModal' style="display:none;"><span class="u-btn-orange"></span></a>
                               <div id="register_error" style='clear: both;'></div>
                               % endif
                         %else:
-                              <a class="register free ${'auth' if user.is_authenticated else ''}"><span class="u-btn-orange">注册课程</span></a>
+                              <a class="register free ${'auth' if user.is_authenticated() else ''}"><span class="u-btn-orange">注册课程</span></a>
                               <div id="register_error" style='clear: both;'></div>
                         %endif
                         </div>
@@ -357,6 +357,13 @@
             });
 		$("#buycourse").click(function(e){
 			e.preventDefault();
+			
+			var is_auth = "${user.is_authenticated()}";
+			if(is_auth=="False"){
+				window.location.href="/login";
+				return false;
+			}
+			
 			if($(this).attr('has_course')!='True'){
 				alert("获取课程数据失败，请刷新再试");
 				return false;
