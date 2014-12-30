@@ -1024,14 +1024,15 @@ def course_about(request, course_id):
                 u.save()
             course.uuid = _uuid
             if not has_course:
-                url = "{}/services/OssWebService?wsdl".format(settings.SSO_ADDUPDATE_COURSE_URL)
-                print url
-                client = Client(url)
-                push_update, course_purchased = True, False
-                xml_course_info = render_to_string('xmls/pcourse_xml.xml', {'uuid':_uuid, 'course': course, 'user': request.user})
-        
-                print xml_course_info.encode('utf-8')
                 try:
+                    url = "{}/services/OssWebService?wsdl".format(settings.SSO_ADDUPDATE_COURSE_URL)
+                    print url
+                    client = Client(url)
+                    push_update, course_purchased = True, False
+                    xml_course_info = render_to_string('xmls/pcourse_xml.xml', {'uuid':_uuid, 'course': course, 'user': request.user})
+            
+                    print xml_course_info.encode('utf-8')
+                    
                     p_xml = client.service.addorUpdateCommodities(xml_course_info, demd5_webservicestr(xml_course_info + "VTEC_#^)&*("))
                     print '---------------push xcourse'
                     print p_xml.encode('utf-8')
