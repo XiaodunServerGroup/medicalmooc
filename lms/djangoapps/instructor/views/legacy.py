@@ -1098,6 +1098,7 @@ def students_filter(students):
                 'name': post_vars['name'],
                 'key': registration.activation_key,
                 'username': user.username,
+                'password': post_vars['password'],
                 }
 
             print '----------------------debug-------------------------'
@@ -1109,7 +1110,7 @@ def students_filter(students):
             subject = ''.join(subject.splitlines())
 
 
-            message = render_to_string('emails/activation_email.txt', context)
+            message = render_to_string('emails/student_activation_email.txt', context)
 
             # don't send email if we are doing load testing or random user generation for some reason
             if not (settings.FEATURES.get('AUTOMATIC_AUTH_FOR_TESTING')):
