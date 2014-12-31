@@ -372,7 +372,10 @@
 				$("#alert_tips").trigger('click');
 			}
 			
-			
+		});
+		
+		$("#finish_purchase").click(function(){
+			window.location.href="${course_url}";
 		});
 	});
 </script>
@@ -436,11 +439,11 @@
 
     <section class="purchase-content" style="width: auto; padding: 0 40px 20px">
       <div id='purchase-prompt'>
-        <span>支付进行中。。。如果支付完成，请点击下面按钮来注册加入课程</span>
+        <span>支付进行中。。。如果支付完成，请点击下面按钮来进入课程</span>
       </div>
 
       <div id='purchase-oper'>
-        <a class="trade_class" id="finish_purchase" style="display: inline-block; padding: 8px 20px">确定已支付&注册课程</a>
+        <a class="trade_class" id="finish_purchase" style="display: inline-block; padding: 8px 20px">确定已支付&进入课程</a>
       </div>
     </section>
   </div>
