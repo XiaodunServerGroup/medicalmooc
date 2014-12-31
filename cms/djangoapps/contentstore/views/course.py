@@ -551,10 +551,12 @@ def create_new_course(request):
     # it can also add other parameter on Advanced settings
     course_location = loc_mapper().translate_locator_to_location(new_location)
     course_module = get_modulestore(course_location).get_item(course_location) 
-     
+
+    key_val = "/courses/" + org +"/"+ number +"/"+ run + "/notes/api"
     data_json = {
       "showanswer": "always",
-      "course_audit": "1"
+      "advanced_modules": ["notes"],
+      "annotation_storage_url": key_val
     }
     CourseMetadata.update_from_json(course_module, data_json, True, request.user)
     # end 
