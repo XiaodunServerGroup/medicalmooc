@@ -1041,10 +1041,11 @@ def login_user_with_guoshi_account(request):
     # DES MODE_ECB decrypt string and acquire params
     try:
         de_passport_arr = des_decrypt(passport).split("#")
+        print '222: %s' % de_passport_arr
         username, certificate = de_passport_arr[0], de_passport_arr[3]
     except:
         raise Http404("passport string out of range")
-
+    '''
     # request passport url and get details of user des encrypt string
     try: 
         request_url = "{}/proxyValidateuser?input={}".format(settings.SSO_DOMAIN, certificate)  # "".join(["{}/proxyValidateuser?input=", certificate])
@@ -1055,6 +1056,7 @@ def login_user_with_guoshi_account(request):
     except:
         raise Http404('failure on getting user details')
 
+    print '11: %s' % req_result
     parser = ET.XMLParser(encoding="utf-8")
     parse_xml_obj = ET.fromstring(unicode(des_decrypt(req_result), errors='replace').replace('GBK', 'utf-8'), parser=parser)
     # parse_xml_obj = ET.fromstring(des_decrypt(req_result).decode('gbk').encode('utf-8').replace('GBK', 'utf-8'), parser=parser)
@@ -1077,15 +1079,17 @@ def login_user_with_guoshi_account(request):
 
     # decrypt_string = des_decrypt(str)
     # parse decrypt string get email paddword username and so on
+    '''
     try:
         # username = "xiaodun_dev_test_2"
         # email = "xiaodun_dev_test_2@163.com"
         # password = "Xiaodun"
-        user = User.objects.get(email=xml_user_detail_dict.get('email'))
-
+       # user = User.objects.get(email=xml_user_detail_dict.get('email'))
+        user = User.objects.get(username=de_passport_arr[0])
         # verify user get login user
 
     except User.DoesNotExist:
+        '''
         user = User(
                     username=xml_user_detail_dict.get('loginName', ''),
                     email=xml_user_detail_dict.get('email'),
@@ -1097,9 +1101,10 @@ def login_user_with_guoshi_account(request):
         profile = UserProfile(user=user)
         profile.name = xml_user_detail_dict.get('fullName')
         profile.save()
-
-    if not constant_time_compare(user.password, xml_user_detail_dict.get('password')):
-        raise Http404('authenticate failure!')
+        '''
+        pass
+   # if not constant_time_compare(user.password, xml_user_detail_dict.get('password')):
+    #    raise Http404('authenticate failure!')
 
     # there every things looks well, then we login user
     backend = load_backend(settings.AUTHENTICATION_BACKENDS[0])
@@ -1107,6 +1112,7 @@ def login_user_with_guoshi_account(request):
     login(request, user)
     suc_response = render_to_response('des_auth_login.html')
     suc_response["P3P"] = 'CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"'
+    suc_response.set_cookie("logged_username","sjw")
 
     return suc_response
 
