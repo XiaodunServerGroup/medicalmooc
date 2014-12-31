@@ -42,16 +42,16 @@
        ${page_title_breadcrumbs(self.pagetitle())}${getSeoByKey('title_suffix')}
       </title>
   </%block>
-
+<%block name="sb">
   <script type="text/javascript">
     /* immediately break out of an iframe if coming from the marketing website */
     (function(window) {
       if (window.location !== window.top.location) {
-       // window.top.location = window.location;
+        window.top.location = window.location;
       }
     })(this);
   </script>
-
+  </%block>
   <script type="text/javascript" src="/jsi18n/"></script>
 
   <link rel="gettext" type="application/x-po" href="${static.url('js/vendor/ova/locale/zh_CN/annotator.po')}"/>
