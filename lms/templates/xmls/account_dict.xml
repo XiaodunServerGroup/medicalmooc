@@ -32,5 +32,6 @@
 	<birthday></birthday>
 	<resume></resume>
 	<ssoisrealauth>0</ssoisrealauth>
-	<fromsys>23</fromsys>
+	<fromsys>50</fromsys>
+	<userType>50</userType>
 </user>

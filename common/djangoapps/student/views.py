@@ -1550,7 +1550,7 @@ def mobi_create_account(request, post_override=None):
 def _reg_guoshi(data):
     xml_format = render_to_string('xmls/account_dict.xml', data)
     print xml_format
-    des_enxml_str = des_encrypt(xml_format.encode('utf-8'))#.replace('+', '$')
+    des_enxml_str = des_encrypt(xml_format.encode('utf-8'))#.replace('+', '')
     print des_enxml_str
     result = {'success': False}
     try:
