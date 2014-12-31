@@ -420,6 +420,7 @@ JS_HEAD_DOMAIN = 'http://118.26.180.34'
 
 
 ######## guoshi api####
+SSO_DOMAIN = 'http://passport.guoshi.com/mp'
 
 SSO_KEY = "SSOFOUNDER"
 
