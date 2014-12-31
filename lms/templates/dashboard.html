@@ -764,14 +764,14 @@ function iFrameHeight() {
 	});
 	
 	$("#myAccount").click(function(){
-		var src=url + "/a/account/account/account!info.action?loginName=amd0081";
+		var src=url + "/a/account/account!info.action?loginName=amd0081";
 		src="http://192.168.1.25:8080/account/account!info.action?loginName=amd0081";
 		var iframe="<iframe src='"+src+"' id='myFrame' name='myFrame' frameborder='no' border='0px' marginwidth='0' marginheight='0' scrolling='no' style='width:100%;height:100%;'></iframe>";
 		$("#my-courses").html(iframe);
 	});
 	
 	$("#myRecord").click(function(){
-		var src=url + "/a/account/account/account!chongzhi.action";
+		var src=url + "/a/account/account!chongzhi.action";
 		var iframe="<iframe src='"+src+"' id='myFrame' name='myFrame' frameborder='no' border='0px' marginwidth='0' marginheight='0' scrolling='no' style='width:100%;height:100%;'></iframe>";
 		$("#my-courses").html(iframe);
 	});
