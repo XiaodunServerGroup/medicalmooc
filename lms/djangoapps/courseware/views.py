@@ -1053,6 +1053,8 @@ def course_about(request, course_id):
                     else:
                         has_course = True
                 except:
+                    import traceback
+                    print traceback.format_exc()
                     CourseUuid.objects.filter(uuid=_uuid).delete()
                     print "Fail to push course information to "
                     push_update = False
