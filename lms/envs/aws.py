@@ -424,15 +424,15 @@ JS_HEAD_DOMAIN = 'http://118.26.180.34'
 SSO_KEY = "SSOFOUNDER"
 
 #SSO_LOGIN_URL = 'http://meet.guoshi.com/mp/login?input=%s&type=1&noscode=no&daemon=yes&fromSys=23'
-SSO_LOGIN_URL = 'http://192.168.1.2:8091/mp/login?input=%s&type=1&noscode=no&daemon=yes&fromSys=23'
+SSO_LOGIN_URL = 'http://202.101.75.74:8100/mp/login?input=%s&type=1&noscode=no&daemon=yes&fromSys=23'
 
 #SSO_REG_URL = 'http://meet.guoshi.com/mp/user?op=add&input=%s'
-SSO_REG_URL = 'http://192.168.1.2:8091/mp/user?op=add&input=%s'
+SSO_REG_URL = 'http://202.101.75.74:8100/mp/user?op=add&input=%s'
 
 #SSO_LOGOUT_URL = 'http://meet.guoshi.com/mp/sso/Logout.jsp'
-SSO_LOGOUT_URL = 'http://192.168.1.2:8091/mp/sso/Logout.jsp?pageurl=&loginname=%s'
+SSO_LOGOUT_URL = 'http://202.101.75.74:8100/mp/sso/Logout.jsp?pageurl=&loginname=%s'
 
 #SSO_ADDUPDATE_COURSE_URL = 'http://operation.guoshi.com/cetvossFront'
-SSO_ADDUPDATE_COURSE_URL = 'http://202.101.75.74:8100/cetvossFront'
-SSO_BUY_URL = 'http://202.101.75.74:8100/cetvossFront/account/buy.action?uuid='
+SSO_ADDUPDATE_COURSE_URL = 'http://202.101.75.74:8100/a'
+SSO_BUY_URL = 'http://202.101.75.74:8100/a/account/buy.action?uuid='
 
