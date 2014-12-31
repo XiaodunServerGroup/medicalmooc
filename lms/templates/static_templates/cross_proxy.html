@@ -1,0 +1,6 @@
+<script>
+var pParentFrame = parent.parent.document.getElementById("myFrame");  
+var locationUrlHash = parent.parent.frames["myFrame"].frames["myFrame"].location.hash;   
+pParentFrame.style.width = locationUrlHash.split("#")[1].split("|")[0]+"px";   
+pParentFrame.style.height = locationUrlHash.split("#")[1].split("|")[1]+"px";  
+</script>

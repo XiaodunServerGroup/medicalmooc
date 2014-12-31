@@ -1008,10 +1008,12 @@ def course_about(request, course_id):
         course_price = 0
     course.course_price = course_price
     course.uuid=''
+    has_course = False
+    is_buy = 0
     if request.user.is_authenticated() and course_price>0:
+        
         is_buy = UserBuyCourse.objects.filter(user__id=request.user.id, course_id=course_id).count()
         if not is_buy:
-            has_course = False
             try:
                 u = CourseUuid.objects.get(course_id=course_id)
                 _uuid = u.uuid
@@ -1022,14 +1024,15 @@ def course_about(request, course_id):
                 u.save()
             course.uuid = _uuid
             if not has_course:
-                url = "{}/services/OssWebService?wsdl".format(settings.SSO_ADDUPDATE_COURSE_URL)
-                print url
-                client = Client(url)
-                push_update, course_purchased = True, False
-                xml_course_info = render_to_string('xmls/pcourse_xml.xml', {'uuid':_uuid, 'course': course, 'user': request.user})
-        
-                print xml_course_info.encode('utf-8')
                 try:
+                    url = "{}/services/OssWebService?wsdl".format(settings.SSO_ADDUPDATE_COURSE_URL)
+                    print url
+                    client = Client(url)
+                    push_update, course_purchased = True, False
+                    xml_course_info = render_to_string('xmls/pcourse_xml.xml', {'uuid':_uuid, 'course': course, 'user': request.user})
+            
+                    print xml_course_info.encode('utf-8')
+                    
                     p_xml = client.service.addorUpdateCommodities(xml_course_info, demd5_webservicestr(xml_course_info + "VTEC_#^)&*("))
                     print '---------------push xcourse'
                     print p_xml.encode('utf-8')
@@ -1042,10 +1045,33 @@ def course_about(request, course_id):
                     if docdict['UPDATECOMMODITIESRESPONSE']['RESULT'] != '0':
                         push_update = False
                         CourseUuid.objects.filter(uuid=_uuid).delete()
+                        has_course = False
+                    else:
+                        has_course = True
                 except:
                     CourseUuid.objects.filter(uuid=_uuid).delete()
                     print "Fail to push course information to "
                     push_update = False
+                    has_course = False
+            
+            
+            print '---------------push xcourse'
+            xml_purchase = render_to_string('xmls/auth_purchase.xml', {'username': request.user.username, 'course_uuid': course.uuid})
+            print xml_purchase
+            try:
+                aresult = client.service.confirmBillEvent(xml_purchase, demd5_webservicestr(xml_purchase + "VTEC_#^)&*("))
+                print aresult.encode('utf-8')
+                redict = xmltodict.parse(aresult.encode('utf-8'))
+                if redict['EVENTRETURN']['RESULT'].strip() in ['0', '1']:
+                # if redict['EVENTRETURN']['RESULT'].strip() in ['1']:
+                    try:
+                        UserBuyCourse.objects.create(user_id=request.user.id, course_id=course_id)
+                        is_buy = 1
+                    except:
+                        import traceback
+                        print traceback.format_exc()
+            except:
+                print "Fail to get trade info about the course"
     
     course.course_uid = str(course.course_uuid)[-12:]
     registered = registered_for_course(course, request.user)
@@ -1114,7 +1140,10 @@ def course_about(request, course_id):
                                'course_duration': course_duration,
                                'course_end': course_end,
                                'course_dur': course_dur,
-                               'school_logo': school_logo_location_href})
+                               'school_logo': school_logo_location_href,
+                               'has_course': has_course,
+                               'is_buy':is_buy
+                               })
 
 
 @ensure_csrf_cookie

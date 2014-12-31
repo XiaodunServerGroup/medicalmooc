@@ -314,6 +314,28 @@
           </span>
         </li>
 -->
+<!--
+		<li class="control--appointment">
+          <span class="title">
+              <div class='icon'></div>
+              <a href='javascript:void(0)' id="myOrder">我的订单</a>
+          </span>
+        </li>
+		
+		<li class="control--appointment">
+          <span class="title">  
+              <div class='icon'></div>
+              <a href='javascript:void(0)' id="myAccount">我的账户</a>
+          </span>
+        </li>
+        <li class="control--appointment">
+          <span class="title">
+              <div class='icon'></div>
+              <a href='javascript:void(0)' id="myRecord">充值记录</a>
+          </span>
+        </li>
+        -->
+
         <%include file='dashboard/_dashboard_status_verification.html' />
 
         <%include file='dashboard/_dashboard_reverification_sidebar.html' />
@@ -724,3 +746,39 @@
     </div>
   </div>
 </section>
+
+<script>
+function iFrameHeight() {
+	var ifm= document.getElementById("myOrderFrame");
+	var subWeb = document.frames ? document.frames["myOrderFrame"].document :ifm.contentDocument;
+		if(ifm != null && subWeb != null) {
+		alert(subWeb.body.scrollHeight);
+		ifm.height = subWeb.body.scrollHeight;
+
+		}  
+}
+	$("#myOrder").click(function(){
+		var src="http://192.168.1.25:8080/account/account!buy.action";
+		//src = 'http://test.com/iframe.html'
+		var iframe="<iframe src='"+src+"' id='myFrame' name='myFrame' frameborder='no' border='0px' marginwidth='0' marginheight='0' scrolling='no' style='width:100%;height:100%;'></iframe>";
+		$("#my-courses").html(iframe);
+		
+	});
+	
+	$("#myAccount").click(function(){
+		var src="http://meet.guoshi.com/cetvossFront/account/account!info.action?loginName=amd0081";
+		src="http://192.168.1.25:8080/account/account!info.action?loginName=amd0081";
+		var iframe="<iframe src='"+src+"' id='myFrame' name='myFrame' frameborder='no' border='0px' marginwidth='0' marginheight='0' scrolling='no' style='width:100%;height:100%;'></iframe>";
+		$("#my-courses").html(iframe);
+	});
+	
+	$("#myRecord").click(function(){
+		var src="http://meet.guoshi.com/cetvossFront/account/account!chongzhi.action";
+		src="http://192.168.1.25:8080/account/account!chongzhi.action";
+		var iframe="<iframe src='"+src+"' id='myFrame' name='myFrame' frameborder='no' border='0px' marginwidth='0' marginheight='0' scrolling='no' style='width:100%;height:100%;'></iframe>";
+		$("#my-courses").html(iframe);
+	});
+	
+	
+	  
+</script>

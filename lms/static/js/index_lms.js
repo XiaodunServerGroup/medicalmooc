@@ -1,6 +1,8 @@
+var site_domain = site_domain || '';
 window.onload = function()
 {
 	var tabBtnBox = document.getElementById('tab-btn');
+	if(!tabBtnBox) return false;
 	var tabBtn = tabBtnBox.getElementsByTagName('img');
 	var iNow = 0;
 
@@ -150,3 +152,10 @@ function goOpa(obj,json)
 	},30);
 };
 function getStyle(obj,attr){return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj,false)[attr];};
+
+
+$(function(){
+	$(".x_show1").hover(function(){$(".show").children("img").attr("src", site_domain + "/static/images/qr_android_phone.png");$(".show").show();},function(){$(".show").hide()});
+	$(".x_show2").hover(function(){$(".show").children("img").attr("src", site_domain + "/static/images/qr_wechat.jpg");$(".show").show();},function(){$(".show").hide()});
+	$(".x_show3").hover(function(){$(".show").children("img").attr("src", site_domain + "/static/images/qr_android_pad.png");$(".show").show();},function(){$(".show").hide()});
+})
