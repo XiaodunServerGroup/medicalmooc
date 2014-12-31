@@ -288,6 +288,7 @@ SEO_TEMPLATE = 'seo.html'
 SEO_TEMPLATE_PATH= os.path.join(STORE_ROOT, SEO_TEMPLATE)
 
 
+JS_HEAD_DOMAIN = 'http://118.26.180.34'
 ######## guoshi api####
 
 SSO_KEY = "SSOFOUNDER"
