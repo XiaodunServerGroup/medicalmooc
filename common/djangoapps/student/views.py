@@ -3035,3 +3035,62 @@ def do_institution_import_teacher_create_account(post_vars, institute_id):
     except Exception:
         log.exception("UserProfile creation failed for user {id}.".format(id=user.id))
     return (user, profile, registration)
+
+def do_institution_import_student_create_account(post_vars, institute_id):
+    """
+    Given cleaned post variables, create the User and UserProfile objects, as well as the
+    registration for this user.
+    Returns a tuple (User, UserProfile, Registration).
+    Note: this function is also used for creating test users.
+    """
+    user = User(username=post_vars['username'],
+                email=post_vars['email'],
+                is_active=True)
+    user.set_password(post_vars['password'])
+    registration = Registration()
+    # TODO: Rearrange so that if part of the process fails, the whole process fails.
+    # Right now, we can have e.g. no registration e-mail sent out and a zombie account
+    try:
+        user.save()
+    except IntegrityError:
+        js = {'success': False}
+        # Figure out the cause of the integrity error
+        if len(User.objects.filter(username=post_vars['username'])) > 0:
+            js['value'] = _("An account with the Public Username '{username}' already exists.").format(username=post_vars['username'])
+            js['field'] = 'username'
+            return JsonResponse(js, status=400)
+
+        if len(User.objects.filter(email=post_vars['email'])) > 0:
+            js['value'] = _("An account with the Email '{email}' already exists.").format(email=post_vars['email'])
+            js['field'] = 'email'
+            profile = UserProfile.objects.get(user_id=User.objects.get(email=post_vars['email']).id)
+            profile.institute = institute_id
+            profile.save()
+            return JsonResponse(js, status=400)
+
+        raise
+
+    registration.register(user)
+
+    profile = UserProfile(user=user)
+    profile.name = post_vars['name']
+    profile.level_of_education = post_vars.get('level_of_education')
+    profile.gender = post_vars.get('gender')
+    profile.mailing_address = post_vars.get('mailing_address')
+    profile.city = post_vars.get('city')
+    profile.country = post_vars.get('country')
+    profile.goals = post_vars.get('goals')
+    profile.profile_role = 'st'
+    profile.institute = institute_id
+
+    try:
+        profile.year_of_birth = int(post_vars['year_of_birth'])
+    except (ValueError, KeyError):
+        # If they give us garbage, just ignore it instead
+        # of asking them to put an integer.
+        profile.year_of_birth = None
+    try:
+        profile.save()
+    except Exception:
+        log.exception("UserProfile creation failed for user {id}.".format(id=user.id))
+    return (user, profile, registration)
