@@ -575,6 +575,12 @@ except ImportError:
 else:
     INSTALLED_APPS += ('edx_jsdraw',)
 
+############## SSO KEY ################
+SSO_KEY = "SSOFOUNDER"
+
+############## video mettings ##################
+VEDIO_MEETING_DOMAIN = "http://passport.guoshi.com/mp"
+
 
 ############## user auth ##############
 PASSWORD_HASHERS = (
