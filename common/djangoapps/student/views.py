@@ -978,6 +978,36 @@ def des_auth_login(request):
 
     return render_to_response('des_auth_login.html', context)
 
+@login_required
+def sync_class_appointment(request):
+    """
+    Synchronous classroom Appointment
+    """
+    user = request.user
+
+    # load settings viedio meeting domain
+    video_meeting_domain = settings.VEDIO_MEETING_DOMAIN   # "http://192.168.1.6:8091"
+
+    # des encrypt user info for login into video meetting sys
+    pad = lambda s: s + (8 - len(s) % 8) * chr(8 - len(s) % 8)
+    def des_encrypt(input_str):
+        obj = DES.new(settings.SSO_KEY[0:8], DES.MODE_ECB)
+
+        return base64.b64encode(obj.encrypt(pad(input_str)))
+
+    des_user_info = des_encrypt(user.username + "#" + user.password)
+
+    # Test
+    # des_user_info = 'HdZGyS7Rp0n0k3w8/xAabLZCTejAT27KApJr2YGyQAgVE7LWpU5JoA=='
+    des_user_info = 'gwRz4rZHXMtbbPORcrVTgjnoi4oaEnkd/wIMDjUGklRqQfIlN7gypcbbstLUWdxg'
+
+    tabs = [
+        ["我的小屋", "{}/sns/meeting/edx_list_class_room.jsp?userInfo={}".format(video_meeting_domain, des_user_info), True],
+        ["查找小屋", "{}/sns/meeting/edx_find_class_room.jsp?userInfo={}".format(video_meeting_domain, des_user_info), False],
+        ["信息通知", "{}/sns/pm/edx_pm.jsp?userInfo={}".format(video_meeting_domain, des_user_info), False],
+    ]
+
+    return render_to_response("sync_class_appointment.html", {"user": user, 'ftabs': tabs})
 
 def login_failure_count(request):
 
