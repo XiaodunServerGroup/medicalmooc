@@ -16,7 +16,7 @@ from student.models import UserTestGroup, CourseEnrollment, UserProfile
 
 from xmodule.modulestore.django import modulestore
 
-type_list = [settings.CUSTOM_IMAGE_CLASS[1], settings.CUSTOM_IMAGE_CLASS[2],settings.CUSTOM_IMAGE_CLASS[3]]
+type_list = [settings.CUSTOM_IMAGE_CLASS[1], settings.CUSTOM_IMAGE_CLASS[2],settings.CUSTOM_IMAGE_CLASS[3],settings.CUSTOM_IMAGE_CLASS[4]]
 def boot_image(request, client_type):
 
     try:
