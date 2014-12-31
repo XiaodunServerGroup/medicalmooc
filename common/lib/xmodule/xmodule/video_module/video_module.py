@@ -447,7 +447,7 @@ class VideoDescriptor(VideoFields, TabsEditingDescriptor, EmptyDataRawDescriptor
 
     tabs = [
         {
-            'name': "Basic",
+            'name': u"基本",
             'template': "video/transcripts.html",
             'current': True
         },
