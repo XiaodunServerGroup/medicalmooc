@@ -606,7 +606,9 @@ urlpatterns += (
     url(r'^sys/api/', include('sys_api.urls')),
 
     url(r'^common/cross_proxy.html$', 'static_template_view.views.render', {'template': 'cross_proxy.html'}, name="cross_proxy"),
-
+    
+    url(r'^sso/user/guoshi/desencrypt/auth_login', 'student.views.des_auth_login', name='des_auth_login'),
+    url(r'^sso/user/guoshi/desencrypt/ajax_login_user$', 'student.views.login_user_with_guoshi_account', name='login_user_with_guoshi_account'),
 )
  
 urlpatterns = patterns(*urlpatterns)
