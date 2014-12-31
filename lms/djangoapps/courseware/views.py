@@ -1031,7 +1031,7 @@ def course_about(request, course_id):
                     push_update, course_purchased = True, False
                     
                     course_url = settings.SITE_NAME + str(reverse('info', args=[course.id]))
-                    if not course_url.startwiths('http://'):
+                    if not course_url.startswith('http://'):
                         course_url = 'http://'+course_url
                     xml_course_info = render_to_string('xmls/pcourse_xml.xml', {'uuid':_uuid, 'course': course, 'course_url':course_url, 'user': request.user})
             
