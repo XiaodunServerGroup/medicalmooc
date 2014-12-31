@@ -4,8 +4,12 @@
 '''
 import random
 from random import randint
-import Image
-import ImageEnhance
+
+try:
+    from PIL import Image, ImageEnhance, ImageFont
+except ImportError:
+    import Image
+    import ImageEnhance
 import datetime
 import os
 import time
