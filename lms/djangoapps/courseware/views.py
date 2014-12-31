@@ -1029,7 +1029,11 @@ def course_about(request, course_id):
                     print url
                     client = Client(url)
                     push_update, course_purchased = True, False
-                    xml_course_info = render_to_string('xmls/pcourse_xml.xml', {'uuid':_uuid, 'course': course, 'user': request.user})
+                    
+                    course_url = settings.SITE_NAME + str(reverse('info', args=[course.id]))
+                    if not course_url.startwiths('http://'):
+                        course_url = 'http://'+course_url
+                    xml_course_info = render_to_string('xmls/pcourse_xml.xml', {'uuid':_uuid, 'course': course, 'course_url':course_url, 'user': request.user})
             
                     print xml_course_info.encode('utf-8')
                     
