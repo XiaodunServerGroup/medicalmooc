@@ -1012,6 +1012,11 @@ def course_about(request, course_id):
     has_course = False
     is_buy = 0
     
+    can_enroll=False
+    if has_access(user, course, 'enroll'):
+        can_enroll=True
+    
+    
     course_url = settings.SITE_NAME + str(reverse('info', args=[course.id]))
     if not course_url.startswith('http://'):
         course_url = 'http://'+course_url
@@ -1154,7 +1159,8 @@ def course_about(request, course_id):
                                'school_logo': school_logo_location_href,
                                'has_course': has_course,
                                'is_buy':is_buy,
-                               'course_url':course_url
+                               'course_url':course_url,
+                               'can_enroll':can_enroll
                                })
 
 
