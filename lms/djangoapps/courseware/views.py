@@ -1080,6 +1080,8 @@ def course_about(request, course_id):
                         import traceback
                         print traceback.format_exc()
             except:
+                import traceback
+                print traceback.format_exc()
                 print "Fail to get trade info about the course"
     
     course.course_uid = str(course.course_uuid)[-12:]
