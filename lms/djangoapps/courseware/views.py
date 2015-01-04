@@ -1068,7 +1068,7 @@ def course_about(request, course_id):
             print xml_purchase
             try:
                 aresult = client.service.confirmBillEvent(xml_purchase, demd5_webservicestr(xml_purchase + "VTEC_#^)&*("))
-                print aresult.encode('utf-8')
+                print aresult
                 redict = xmltodict.parse(aresult.encode('utf-8'))
                 if redict['EVENTRETURN']['RESULT'].strip() in ['0', '1']:
                 # if redict['EVENTRETURN']['RESULT'].strip() in ['1']:
