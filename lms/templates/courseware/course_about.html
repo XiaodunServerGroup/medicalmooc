@@ -137,7 +137,7 @@
     background-color: #ccc;
     background-image: linear-gradient(#ccc, #ccc);
     background-repeat: repeat-x;
-    border: 1px solid #0e74b4;
+    border: 1px solid #ccc;
     border-radius: 0;
     box-shadow: 0 1px 0 #ccc inset, 0 1px 2px #ccc;
     color: #eee;
@@ -231,14 +231,14 @@
 		                              <div id="register_error" style='clear: both;'></div>
 	                              % endif
 	                          % else:
-	                          		<a class="register free disabled"><span class="u-btn-orange disabled">注册已关闭</span></a>
+	                          		<a class="register1 free disabled"><span class="u-btn-orange disabled">注册已关闭</span></a>
                               % endif
                         %else:
                         	% if can_enroll == 'True':  
                               <a class="register free ${'auth' if user.is_authenticated() else ''}"><span class="u-btn-orange">注册课程</span></a>
                               <div id="register_error" style='clear: both;'></div>
                             % else:
-	                          		<a class="register free disabled"><span class="u-btn-orange disabled">注册已关闭</span></a>
+	                          		<a class="register1 free disabled"><span class="u-btn-orange disabled">注册已关闭</span></a>
                             % endif
                         %endif
                         </div>
