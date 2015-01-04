@@ -1029,11 +1029,11 @@ def course_about(request, course_id):
                 u = CourseUuid(course_id=course_id, uuid=_uuid)
                 u.save()
             course.uuid = _uuid
+            url = "{}/services/OssWebService?wsdl".format(settings.SSO_ADDUPDATE_COURSE_URL)
+            print url
+            client = Client(url)
             if not has_course:
                 try:
-                    url = "{}/services/OssWebService?wsdl".format(settings.SSO_ADDUPDATE_COURSE_URL)
-                    print url
-                    client = Client(url)
                     push_update, course_purchased = True, False
                     
                     xml_course_info = render_to_string('xmls/pcourse_xml.xml', {'uuid':_uuid, 'course': course, 'course_url':course_url, 'user': request.user})
