@@ -1066,10 +1066,10 @@ def course_about(request, course_id):
             
             print '---------------push xcourse111  %s' % datetime.datetime.now()
             xml_purchase = render_to_string('xmls/auth_purchase.xml', {'username': request.user.username, 'course_uuid': course.uuid})
-            print xml_purchase
+            log.debug(xml_purchase)
             try:
                 aresult = client.service.confirmBillEvent(xml_purchase, demd5_webservicestr(xml_purchase + "VTEC_#^)&*("))
-                print aresult
+                log.debug(aresult)
                 redict = xmltodict.parse(aresult.encode('utf-8'))
                 if redict['EVENTRETURN']['RESULT'].strip() in ['0', '1']:
                 # if redict['EVENTRETURN']['RESULT'].strip() in ['1']:
@@ -1080,7 +1080,7 @@ def course_about(request, course_id):
                         import traceback
                         print traceback.format_exc()
             except:
-                print "Fail to get trade info about the course"
+                log.debug("Fail to get trade info about the course")
     
     course.course_uid = str(course.course_uuid)[-12:]
     registered = registered_for_course(course, request.user)
