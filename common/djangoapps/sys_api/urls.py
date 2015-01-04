@@ -8,4 +8,6 @@ urlpatterns = patterns('',
     
     url(r'^reg_course/$', reg_course, name="reg_course"),
     
+    url(r'^isbuy/$', is_buy, name="is_buy"),
+    
 )

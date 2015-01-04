@@ -131,4 +131,17 @@ def reg_course(request):
     return JsonResponse({'status':'1', 'msg':'Enrollment Success'})
     
     
-
+def is_buy(request):
+    course_id = request.POST.get('cid', '')
+    
+    try:
+        user_id = request.user.id
+        count = UserBuyCourse.objects.filter(user_id=user_id, course_id=course_id).count()
+        if count:
+            return JsonResponse({'status':'1'})
+        
+    except:
+        import traceback
+        print traceback.format_exc()
+    
+    return JsonResponse({'status':'0'})

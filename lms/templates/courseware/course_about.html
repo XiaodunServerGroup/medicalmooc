@@ -375,7 +375,20 @@
 		});
 		
 		$("#finish_purchase").click(function(){
-			window.location.href="${course_url}";
+			$.ajax({
+			   type: "POST",
+			   url: "/sys/api/isbuy/",
+			   data: {"cid":"${course.id}"},
+			   success: function(response){
+				   if(response.status && response.status=='1'){
+					   window.location.href="${course_url}";
+				   }else{
+					   alert("请先购买课程");
+				   }
+				   
+			   }
+			});
+			
 		});
 	});
 </script>
