@@ -209,7 +209,7 @@
                         </select>
                     </div>
                     <div class="m-btnList">
-                        <div class="main-cta">
+                        <div class="main-cta ${can_enroll} ${can_enroll=='True'}">
                         %if user.is_authenticated() and registered:
                             %if show_courseware_link:
                                 <a href="${course_target}">
