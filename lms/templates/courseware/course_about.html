@@ -131,6 +131,27 @@
 
   <script src="${static.url('js/course_info.js')}"></script>
   <link href="${static.url('css/vendor/course_about.css')}" rel="stylesheet" type="text/css">
+  <style>
+  
+  .content .container .section_right .disabled{
+    background-color: #ccc;
+    background-image: linear-gradient(#ccc, #ccc);
+    background-repeat: repeat-x;
+    border: 1px solid #0e74b4;
+    border-radius: 0;
+    box-shadow: 0 1px 0 #ccc inset, 0 1px 2px #ccc;
+    color: #eee;
+    cursor: pointer;
+    display: block;
+    font-size: 20px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+.content .container .section_right .disabled:hover {
+    background: none repeat scroll 0 0 #ccc;
+}
+  </style>
 </%block>
 
 <%block name="pagetitle">${_("{course.display_name_with_default}").format(course=course) | h}</%block>
@@ -201,16 +222,24 @@
                                 </a> 
                             %endif  
                         %elif course.course_price>0: 
-                        	  % if is_buy>0:
-                        	      <a class="register free ${'auth' if user.is_authenticated() else ''}"><span class="u-btn-orange">注册课程</span></a>
-                        	  % else:
-                        	  <a class="free" id="buycourse" has_course="${has_course}" target="_blank" href="javascript:;"  url="${settings.SSO_BUY_URL}${course.uuid}"><span class="u-btn-orange">购买课程</span></a>
-                        	  <a class="free" id="alert_tips"  href="#purchase-modal"  rel='leanModal' style="display:none;"><span class="u-btn-orange"></span></a>
-                              <div id="register_error" style='clear: both;'></div>
+                              % if can_enroll == 'True':  
+	                        	  % if is_buy>0:
+	                        	      <a class="register free ${'auth' if user.is_authenticated() else ''}"><span class="u-btn-orange">注册课程</span></a>
+	                        	  % else:
+		                        	  <a class="free" id="buycourse" has_course="${has_course}" target="_blank" href="javascript:;"  url="${settings.SSO_BUY_URL}${course.uuid}"><span class="u-btn-orange">购买课程</span></a>
+		                        	  <a class="free" id="alert_tips"  href="#purchase-modal"  rel='leanModal' style="display:none;"><span class="u-btn-orange"></span></a>
+		                              <div id="register_error" style='clear: both;'></div>
+	                              % endif
+	                          % else:
+	                          		<a class="register free disabled"><span class="u-btn-orange disabled">注册已关闭</span></a>
                               % endif
                         %else:
+                        	% if can_enroll == 'True':  
                               <a class="register free ${'auth' if user.is_authenticated() else ''}"><span class="u-btn-orange">注册课程</span></a>
                               <div id="register_error" style='clear: both;'></div>
+                            % else:
+	                          		<a class="register free disabled"><span class="u-btn-orange disabled">注册已关闭</span></a>
+                            % endif
                         %endif
                         </div>
                     </div> 
