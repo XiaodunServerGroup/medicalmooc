@@ -7,6 +7,7 @@ sys.setdefaultencoding('utf8')
 
 import lms.lib.comment_client as cc
 import django_comment_client.utils as utils
+import datetime
 from datetime import timedelta
 import logging
 import urllib
@@ -1063,7 +1064,7 @@ def course_about(request, course_id):
                     has_course = False
             
             
-            print '---------------push xcourse'
+            print '---------------push xcourse111  %s' % datetime.datetime.now()
             xml_purchase = render_to_string('xmls/auth_purchase.xml', {'username': request.user.username, 'course_uuid': course.uuid})
             print xml_purchase
             try:
