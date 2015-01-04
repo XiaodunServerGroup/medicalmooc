@@ -209,7 +209,7 @@
                         </select>
                     </div>
                     <div class="m-btnList">
-                        <div class="main-cta ${can_enroll} ${can_enroll=='True'}">
+                        <div class="main-cta">
                         %if user.is_authenticated() and registered:
                             %if show_courseware_link:
                                 <a href="${course_target}">
@@ -222,7 +222,7 @@
                                 </a> 
                             %endif  
                         %elif course.course_price>0: 
-                              % if can_enroll == 'True':  
+                              % if can_enroll:  
 	                        	  % if is_buy>0:
 	                        	      <a class="register free ${'auth' if user.is_authenticated() else ''}"><span class="u-btn-orange">注册课程</span></a>
 	                        	  % else:
@@ -234,7 +234,7 @@
 	                          		<a class="register1 free disabled"><span class="u-btn-orange disabled">注册已关闭</span></a>
                               % endif
                         %else:
-                        	% if can_enroll == 'True':  
+                        	% if can_enroll:  
                               <a class="register free ${'auth' if user.is_authenticated() else ''}"><span class="u-btn-orange">注册课程</span></a>
                               <div id="register_error" style='clear: both;'></div>
                             % else:
