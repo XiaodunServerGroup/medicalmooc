@@ -108,6 +108,24 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
         }
     });
 
+    $('.remove-button-student').click(function(){
+        if(confirm('确定要删除吗?')){
+            $.ajax({
+                url: "/remove_institute_teacher?id=" + $(this).attr("value"),
+                type: "GET",
+                dataType: "jsonp",
+                jsonp: false,
+                'cache': true,
+                success: function(){
+
+                }
+            })
+            alert('移除成功!')
+        }else{
+            return false;
+        }
+    });
+
     $('.close-modal').click(function(){
         $('#lean_overlay').css('display','none');
     })
