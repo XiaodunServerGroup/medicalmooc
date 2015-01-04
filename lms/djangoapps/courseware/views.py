@@ -1013,7 +1013,7 @@ def course_about(request, course_id):
     is_buy = 0
     
     can_enroll=False
-    if has_access(user, course, 'enroll'):
+    if has_access(request.user, course, 'enroll'):
         can_enroll=True
     
     
