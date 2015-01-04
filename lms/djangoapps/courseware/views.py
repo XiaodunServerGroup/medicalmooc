@@ -1012,11 +1012,11 @@ def course_about(request, course_id):
     has_course = False
     is_buy = 0
     
-    can_enroll=False
-    if has_access(request.user, course, 'enroll'):
-        can_enroll=True
+    can_enroll=True
+    if not has_access(request.user, course, 'enroll'):
+        can_enroll=False
     
-    
+    print 'can_enroll: %s' % can_enroll
     course_url = settings.SITE_NAME + str(reverse('info', args=[course.id]))
     if not course_url.startswith('http://'):
         course_url = 'http://'+course_url
