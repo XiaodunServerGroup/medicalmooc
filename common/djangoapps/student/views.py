@@ -1092,7 +1092,8 @@ def login_user(request, error=""):
                 request.session.set_expiry(604800)
                 log.debug("Setting user session to never expire")
             else:
-                request.session.set_expiry(0)
+                pass
+#                request.session.set_expiry(0)
         except Exception as e:
             AUDIT_LOG.critical("Login failed - Could not create session. Is memcached running?")
             log.critical("Login failed - Could not create session. Is memcached running?")

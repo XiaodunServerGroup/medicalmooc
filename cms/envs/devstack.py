@@ -9,7 +9,7 @@ USE_I18N = True
 TEMPLATE_DEBUG = DEBUG
 TIME_ZONE = 'Asia/Shanghai'
 LANGUAGE_CODE = 'zh_CN'
-SITE_NAME = '119.254.225.106:18010'
+SITE_NAME = 'http://192.168.1.31:8001'
 
 ################################ LOGGERS ######################################
 
@@ -26,7 +26,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 ################################# LMS INTEGRATION #############################
 
-LMS_BASE = "119.254.225.106"
+LMS_BASE = "http://192.168.1.31:8000"
 FEATURES['PREVIEW_LMS_BASE'] = LMS_BASE
 
 ################################# CELERY ######################################

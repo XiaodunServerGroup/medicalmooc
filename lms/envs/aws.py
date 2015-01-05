@@ -42,7 +42,7 @@ DEBUG = False
 TEMPLATE_DEBUG = False
 
 EMAIL_BACKEND = 'django_ses.SESBackend'
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+#SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 # MEDIA_ROOT = ENV_ROOT / "uploads"
 MEDIA_ROOT = PROJECT_PATH / SERVICE_VARIANT / "static/uploads"
@@ -149,7 +149,7 @@ EMAIL_HOST = ENV_TOKENS.get('EMAIL_HOST', 'mail.pmph.com')  # django default is 
 EMAIL_PORT = ENV_TOKENS.get('EMAIL_PORT', 25)  # django default is 25
 EMAIL_USE_TLS = ENV_TOKENS.get('EMAIL_USE_TLS', False)  # django default is False
 SITE_NAME = ENV_TOKENS['SITE_NAME']
-SESSION_ENGINE = ENV_TOKENS.get('SESSION_ENGINE', SESSION_ENGINE)
+#SESSION_ENGINE = ENV_TOKENS.get('SESSION_ENGINE', SESSION_ENGINE)
 SESSION_COOKIE_DOMAIN = ENV_TOKENS.get('SESSION_COOKIE_DOMAIN')
 REGISTRATION_EXTRA_FIELDS = ENV_TOKENS.get('REGISTRATION_EXTRA_FIELDS', REGISTRATION_EXTRA_FIELDS)
 

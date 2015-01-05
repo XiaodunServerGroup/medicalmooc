@@ -612,11 +612,14 @@ def index(request, course_id, chapter=None, section=None,
 
     return result
 
-@login_required
+#@login_required
 @ensure_csrf_cookie
 @cache_control(no_cache=True, no_store=True, must_revalidate=True)
 def mobi_index(request, course_id, chapter=None, section=None,
           position=None):
+    print '----------debug--------------------'
+    print request
+    print '-----------------finish--------------'
     user = User.objects.prefetch_related("groups").get(id=request.user.id)
     request.user = user  # keep just one instance of User
     course = get_course_with_access(user, course_id, 'load', depth=2)
@@ -1292,7 +1295,8 @@ def mobi_login_ajax(request, error=""):
             if request.POST.get('remember') == "true":
                 request.session.set_expiry(604800)
             else:
-                request.session.set_expiry(0)
+                pass
+#                request.session.set_expiry(0)
         except Exception as e:
             raise
 

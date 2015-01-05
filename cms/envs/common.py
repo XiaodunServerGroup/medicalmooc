@@ -279,7 +279,7 @@ STATICFILES_DIRS = [
 # Locale/Internationalization
 TIME_ZONE = 'Asia/Shanghai'  # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 LANGUAGE_CODE = 'zh-cn'  # http://www.i18nguy.com/unicode/language-identifiers.html
-SITE_NAME = '119.254.225.106:18010'
+SITE_NAME = 'http://192.168.1.31:8001'
 
 LANGUAGES = lms.envs.common.LANGUAGES
 USE_I18N = True

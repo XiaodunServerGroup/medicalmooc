@@ -108,6 +108,7 @@ define(["js/views/baseview", "underscore", "codemirror", "js/models/course_updat
             var targetModel = this.eventModel(event);
             //targetModel.set({ date : this.dateEntry(event).val(), content : this.$codeMirror.getValue() });
             var new_content = tinyMCE.get(this.textarea_id).getContent();
+            new_content=new_content.replace("<p>","").replace("</p>","");
             if($("#is_send_mail_"+this.textarea_id).attr("checked")){
                 send_mail= 'true'
             }else{
