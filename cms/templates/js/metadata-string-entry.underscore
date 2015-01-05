@@ -1,3 +1,7 @@
+<% if (model.get("value") == 'Video') { %>
+	<% model.set("value", d) %>
+<% }; %>
+
 <div class="wrapper-comp-setting">
 	<label class="label setting-label" for="<%= uniqueId %>"><%= model.get('display_name') %></label>
 	<input class="input setting-input" type="text" id="<%= uniqueId %>" value='<%= model.get("value") %>'/>
@@ -6,3 +10,7 @@
     </button>
 </div>
 <span class="tip setting-help"><%= model.get('help') %></span>
+<script>
+d = $('.unit-display-name-input').val();;
+$(d);
+</script>
