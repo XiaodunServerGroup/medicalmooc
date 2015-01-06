@@ -159,3 +159,20 @@ $(function(){
 	$(".x_show2").hover(function(){$(".show").children("img").attr("src", site_domain + "/static/images/qr_wechat.jpg");$(".show").show();},function(){$(".show").hide()});
 	$(".x_show3").hover(function(){$(".show").children("img").attr("src", site_domain + "/static/images/qr_android_pad.png");$(".show").show();},function(){$(".show").hide()});
 })
+
+
+$(
+var SSO_LOGOUT_URL = SSO_LOGOUT_URL || "";
+	function(){
+		$("#logout").click(function(){
+			var username = $("#logout").text();
+			var surl = SSO_LOGOUT_URL.replace('%s', username);
+			var iframe="<iframe src='"+surl+"' security='restricted' sandbox='' style='display:none;'></iframe>";
+			$("body").append(iframe); 
+		    var to_url=$(this).attr('url');
+		    setTimeout(function(){
+		    	window.location.href=to_url;
+		    },1200);
+		}); 
+	}
+);

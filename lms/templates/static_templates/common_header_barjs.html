@@ -3,6 +3,7 @@ document.writeln("<html><head>");
 document.writeln("           <script");
 document.writeln("> ");
 document.writeln("var site_domain='${settings.JS_HEAD_DOMAIN}'");
+document.writeln("var SSO_LOGOUT_URL='${settings.SSO_LOGOUT_URL}'");
 document.writeln("");
 document.writeln("           </script");
 
@@ -81,7 +82,7 @@ document.writeln("      <li class=\"primary\">");
 document.writeln("        <a href=\"#\" class=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><span class=\"sr\">更多选择下拉列表<\/span> &#9662;<\/a>");
 document.writeln("        <ul class=\"dropdown-menu\" aria-label=\"More Options\" role=\"menu\">");
 document.writeln("            <li><a href=\"${settings.JS_HEAD_DOMAIN}\/faq\">帮助<\/a><\/li>");
-document.writeln("          <li><a href=\"${settings.JS_HEAD_DOMAIN}\/logout\" role=\"menuitem\">退出登录<\/a><\/li>");
+document.writeln("          <li><a id=\"logout\" href=\"javascript:void(0)\" url=\"\/logout\" role=\"menuitem\">退出登录<\/a><\/li>");
 document.writeln("        <\/ul>");
 document.writeln("      <\/li>");
 document.writeln("    <\/ol>");
