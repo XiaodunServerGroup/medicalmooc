@@ -192,7 +192,7 @@
  </aside>
   <section role="main" class="content">
     <form role="form" id="login-form" method="post" data-remote="true" action="/login_ajax" novalidate>
-
+		<input type="hidden" name="redirect" value="${redirect}"/>
       <!-- status messages -->
       <div role="alert" class="status message">
                 <h3 class="message-title">${_("We're Sorry, {platform_name} accounts are unavailable currently").format(platform_name=platform_name)}</h3>

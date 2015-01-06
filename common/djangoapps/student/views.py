@@ -545,6 +545,7 @@ def signin_user(request):
             settings.PLATFORM_NAME
         ),
         'form': form,
+        'redirect':request.GET.get('redirect','')
     }
     return render_to_response('login.html', context)
 
@@ -1269,7 +1270,11 @@ def login_user(request, error=""):
         iframe = guoshi_login_result.get('iframe', '')
         
         redirect_url = try_change_enrollment(request)
-
+        
+        redirect = request.POST.get('redirect', '').strip()
+        if redirect:
+            redirect_url = redirect
+        
         dog_stats_api.increment("common.student.successful_login")
         response = JsonResponse({
             "success": True,

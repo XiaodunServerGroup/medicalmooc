@@ -208,7 +208,7 @@
                         %endif
                         </select>
                     </div>
-                    <div class="m-btnList">
+                    <div class="m-btnList"> 
                         <div class="main-cta">
                         %if user.is_authenticated() and registered:
                             %if show_courseware_link:
@@ -389,7 +389,7 @@
 			
 			var is_auth = "${user.is_authenticated()}";
 			if(is_auth=="False"){
-				window.location.href="/login";
+				window.location.href="/login?redirect=/courses/${course.id}/about";
 				return false;
 			}
 			
