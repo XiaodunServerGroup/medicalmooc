@@ -168,7 +168,7 @@ $(document).ready(function(){
 		var surl = SSO_LOGOUT_URL.replace('%s', username);
 		var iframe="<iframe src='"+surl+"' security='restricted' sandbox='' style='display:none;'></iframe>";
 		$("body").append(iframe); 
-	    var to_url='http://www.diandiyun.com'+$(this).attr('url');
+	    var to_url='http://mooc.diandiyun.com'+$(this).attr('url');
 	    setTimeout(function(){
 	    	window.location.href=to_url;
 	    },1200);
