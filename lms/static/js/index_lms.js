@@ -175,4 +175,4 @@ var SSO_LOGOUT_URL = SSO_LOGOUT_URL || "";
 		    },1200);
 		}); 
 	}
-);
+)
