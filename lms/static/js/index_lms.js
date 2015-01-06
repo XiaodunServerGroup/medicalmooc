@@ -161,18 +161,17 @@ $(function(){
 })
 
 
-$(
-var SSO_LOGOUT_URL = SSO_LOGOUT_URL || "";
-	function(){
-		$("#logout").click(function(){
-			var username = $("#logout").text();
-			var surl = SSO_LOGOUT_URL.replace('%s', username);
-			var iframe="<iframe src='"+surl+"' security='restricted' sandbox='' style='display:none;'></iframe>";
-			$("body").append(iframe); 
-		    var to_url=$(this).attr('url');
-		    setTimeout(function(){
-		    	window.location.href=to_url;
-		    },1200);
-		}); 
-	}
-)
+$(document).ready(function(){
+	var SSO_LOGOUT_URL = SSO_LOGOUT_URL || "";
+	$("#logout").click(function(){
+		var username = $("#logout").text();
+		var surl = SSO_LOGOUT_URL.replace('%s', username);
+		var iframe="<iframe src='"+surl+"' security='restricted' sandbox='' style='display:none;'></iframe>";
+		$("body").append(iframe); 
+	    var to_url=$(this).attr('url');
+	    setTimeout(function(){
+	    	window.location.href=to_url;
+	    },1200);
+	}); 
+});
+
