@@ -494,9 +494,6 @@ def parse_updates_html_str(html_str):
 
 def mobi_course_action(request, course_id, action):
     try:
-        print '-----------------debug-------------------------'
-        print  request
-        print '---------------------------------'
         course_id_bak = course_id.replace('.', '/')
         if action in ["updates", "handouts", "structure"]:
             user = request.user
@@ -519,17 +516,12 @@ def mobi_course_action(request, course_id, action):
                     wrap_xmodule_display=False,
                     static_asset_path=course.static_asset_path
                 )
-                return JsonResponse({'updates': [item for item in course_module.items if item["status"] != "deleted"]})
+                return JsonResponse({'updates': [item for item in course_module.items if item["status"] != "deleted"][::-1]})
             elif action == "handouts" and registered:
                 course_handouts = get_course_info_section(request, course, action)
                 return JsonResponse({"handouts": course_handouts})
             elif action == "structure":
-                print '22222222222222222'
-                print  request.get_host()
-                print course_id_bak
-                print '==============='
                 url_name = request.get_host() + '/m/courses/' + course_id_bak + '/courseware'
-                print  url_name
                 return JsonResponse(_course_json(course=course, course_id=course.location.course_id, url_name=url_name))
             else:
                 raise Exception
