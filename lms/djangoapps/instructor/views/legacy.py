@@ -169,14 +169,13 @@ def instructor_dashboard(request, course_id):
         writer.writerow(encoded_row)
         for datarow in datatable['data']:
             # 's' here may be an integer, float (eg score) or string (eg student name)
-            encoded_row = [
-                # If s is already a UTF-8 string, trying to make a unicode
-                # object out of it will fail unless we pass in an encoding to
-                # the constructor. But we can't do that across the board,
-                # because s is often a numeric type. So just do this.
-                s if isinstance(s, str) else unicode(s).encode('utf-8')
-                for s in datarow
-            ]
+
+
+            if clientSystem.find('Windows') > -1:
+                encoded_row = [s if isinstance(s, str) else unicode(s).encode('cp936')  for s in datarow ]
+            else:
+                encoded_row = [s if isinstance(s, str) else unicode(s).encode('utf-8')  for s in datarow ]
+
             writer.writerow(encoded_row)
         return response
 
