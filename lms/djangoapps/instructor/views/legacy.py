@@ -154,9 +154,18 @@ def instructor_dashboard(request, course_id):
             response['Content-Disposition'] = 'attachment; filename={0}'.format(func)
         else:
             response = file_pointer
-        response.write(codecs.BOM_UTF8)
+        #response.write(codecs.BOM_UTF8)
         writer=csv.writer(response, dialect='excel', quotechar='"', quoting=csv.QUOTE_ALL)
-        encoded_row = [unicode(s).encode('utf-8') for s in datatable['header']]
+       # encoded_row = [unicode(s).encode('utf-8') for s in datatable['header']]
+
+        clientSystem = request.META['HTTP_USER_AGENT']
+            #如果是windows则按cp936编码,否则按utf-8编码
+        if clientSystem.find('Windows') > -1:
+            encoded_row = [unicode(s).encode('cp936') for s in datatable['header']]
+        else:
+            encoded_row = [unicode(s).encode('utf-8') for s in datatable['header']]
+
+
         writer.writerow(encoded_row)
         for datarow in datatable['data']:
             # 's' here may be an integer, float (eg score) or string (eg student name)
