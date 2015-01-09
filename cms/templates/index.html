@@ -223,6 +223,98 @@ $('#submit_button1').click(function(){
     accessible_modal(".edit-name", "#list_student_change .close-modal", "#list_student_change", "#index-main");
     accessible_modal(".edit-name", "#apply_name_change_student .close-modal", "#apply_name_change_student", "#index-main");
 
+
+    function isChinese(s) {
+        var patrn=/[\u4E00-\u9FA5]|[\uFE30-\uFFA0]/gi;
+        if(!patrn.exec(s)){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    function bb(){
+        var a=$('#new-course-org').val();
+        var b=$('#new-course-number').val();
+        var c=$('#new-course-run').val();
+
+        if(a && !isChinese(a) && b&& !isChinese(b) && c && !isChinese(c) ){
+            $("#do_submit").removeClass("is-disabled");
+        }
+    }
+    var ss='<span class="sss" style="display:block;color:red;font-size:12px;">请不要填写中文</span>';
+    $(document).ready(function(){
+        $('#new-course-org').keyup(function(){
+            var val1=$(this).val();
+            if(isChinese(val1)){
+               $("#do_submit").addClass("is-disabled");
+                $(this).focus();
+                if($(this).parent().find(".sss").length==0){
+                    $(this).parent().append(ss)
+                }
+            }else{
+                $(this).parent().find(".sss").remove();
+                bb();
+            }
+        });
+
+        $('#new-course-number').keyup(function(){
+            var val1=$(this).val();
+            if(isChinese(val1)){
+                $("#do_submit").addClass("is-disabled");
+                $(this).focus();
+                if($(this).parent().find(".sss").length==0){
+                    $(this).parent().append(ss)
+                }
+            }else{
+                $(this).parent().find(".sss").remove();
+                bb();
+            }
+        });
+
+        $('#new-course-run').keyup(function(){
+            var val1=$(this).val();
+            if(isChinese(val1)){
+                $("#do_submit").addClass("is-disabled");
+                $(this).focus();
+                if($(this).parent().find(".sss").length==0){
+                    $(this).parent().append(ss)
+                }
+            }else{
+                $(this).parent().find(".sss").remove();
+                bb();
+            }
+        })
+
+
+        $("#do_submit").click(function(){
+            var a=$('#new-course-org')
+            var b=$('#new-course-number')
+            var c=$('#new-course-run')
+
+            if(a && isChinese(a.val())){
+                if(a.parent().find(".sss").length==0){
+                    a.parent().append(ss)
+                }
+                return false;
+            }
+
+            if(b && isChinese(b.val())){
+                if(b.parent().find(".sss").length==0){
+                    b.parent().append(ss)
+                }
+                return false;
+            }
+
+            if(c && isChinese(c.val())){
+                if(c.parent().find(".sss").length==0){
+                    c.parent().append(ss)
+                }
+                return false;
+            }
+        });
+    });
+
 });
 </script>
 
@@ -351,8 +443,10 @@ $('#submit_button1').click(function(){
             </fieldset>
           </div>
 
+
+
           <div class="actions">
-            <input type="submit" value="${_('Create')}" class="action action-primary new-course-save" />
+            <input type="submit" id="do_submit" value="${_('Create')}" class="action action-primary new-course-save" />
             <input type="button" value="${_('Cancel')}" class="action action-secondary action-cancel new-course-cancel" />
           </div>
         </form>
