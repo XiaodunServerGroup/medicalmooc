@@ -623,7 +623,8 @@ def create_new_course(request):
     data_json = {
       "showanswer": "always",
       "advanced_modules": ["notes"],
-      "annotation_storage_url": key_val
+      "annotation_storage_url": key_val,
+      'course_audit':'1'
     }
     CourseMetadata.update_from_json(course_module, data_json, True, request.user)
     # end 
