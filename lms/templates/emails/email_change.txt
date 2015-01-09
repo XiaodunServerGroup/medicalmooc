@@ -3,11 +3,17 @@ We received a request to change the e-mail associated with your
 ${settings.PLATFORM_NAME} account from ${old_email} to ${new_email}.
 If this is correct, please confirm your new e-mail address by
 visiting:
-
+<%
+    if site.startswith('http://'):
+        site_new =site[7:]
+    else:
+        site_new=site
+    endif
+%>
 % if is_secure:
- https://${ site }/email_confirm/${ key }
+ https://${ site_new }/email_confirm/${ key }
 % else:
- http://${ site }/email_confirm/${ key }
+ http://${ site_new }/email_confirm/${ key }
 % endif
 
 ## TODO: fix this ugly hack
