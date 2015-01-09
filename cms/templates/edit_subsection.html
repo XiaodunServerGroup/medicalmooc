@@ -66,7 +66,7 @@
         <div class="field field-start-date">
         <label for="due_date">${_("Due Day")}</label>
           <input type="text" id="due_date" name="due_date"
-          value="${subsection.due.strftime('%m/%d/%Y') if subsection.due else ''}"
+          value="${subsection.due.strftime('%Y年%m月%d日') if subsection.due else ''}"
           placeholder="MM/DD/YYYY" class="date" size='15' autocomplete="off"/>
         </div>
         <div class="field field-start-time">
