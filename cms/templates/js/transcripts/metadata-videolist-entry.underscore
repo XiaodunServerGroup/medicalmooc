@@ -2,7 +2,7 @@
   <label class="label setting-label" for="<%= uniqueId %>"><%= model.get('display_name')%></label>
   <div class="wrapper-videolist-settings">
     <div class="wrapper-videolist-url videolist-settings-item"><input type="text" id="<%= uniqueId %>"  class="input videolist-url" value="<%= model.get('value')[0] %>"><a href="#" id="clear" style="float:right; margin-right: -40px; margin-top: 10px;">清空</a></div>
-    <div class="tip videolist-url-tip setting-help"><%= model.get('help') %></div>
+    <!--<div class="tip videolist-url-tip setting-help"><%= model.get('help') %></div>
     <div class="wrapper-videolist-urls">
       <a href="#" class="collapse-action collapse-setting">
         <i class="icon-plus"></i><%= gettext("添加更多的视频资源") %> <span class="sr"><%= model.get('display_name')%></span>
@@ -17,7 +17,7 @@
               <input type="text" class="input" value="<%= model.get('value')[2] %>">
             </li>
         </ol>
-      </div>
+      </div>-->
     </div>
   </div>
 </div>
