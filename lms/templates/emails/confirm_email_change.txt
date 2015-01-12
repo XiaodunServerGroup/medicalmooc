@@ -3,6 +3,14 @@
 ## Again, ugly hack that needs to be changed
 ## TODO: this probably needs better formatting to look nice in an
 ##       email client (Mako leaves awkward whitespace)
+<%
+    if site.startswith('http://'):
+        site_new =site[7:]
+    else:
+        site_new=site
+    endif
+%>
+
 % if stanford_theme_enabled():
   This is to confirm that you changed the e-mail associated with
   ${settings.PLATFORM_NAME} from ${old_email} to ${new_email}. If you
@@ -14,11 +22,10 @@
   ${settings.PLATFORM_NAME} from ${old_email} to ${new_email}. If you
   did not make this request, please contact us immediately. Contact
   information is listed at:
-
   % if is_secure:
-    https://${ site }${reverse('contact')}
+    https://${ site_new }${reverse('contact')}
   % else:
-    http://${ site }${reverse('contact')}
+    http://${ site_new }${reverse('contact')}
   % endif
 % endif
 

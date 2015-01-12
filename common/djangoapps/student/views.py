@@ -1904,10 +1904,9 @@ def create_account(request, post_override=None):
                 dest_addr = settings.FEATURES['REROUTE_ACTIVATION_EMAIL']
                 message = ("Activation for %s (%s): %s\n" % (user, user.email, profile.name) +
                            '-' * 80 + '\n\n' + message)
-                #send_mails(subject, "", from_address, [user.email], fail_silently=False, html=message)
+                send_mails(subject, "", from_address, [user.email], fail_silently=False, html=message)
             else:
-                pass
-                #send_mails(subject, "", from_address, [user.email], fail_silently=False, html=message)
+                send_mails(subject, "", from_address, [user.email], fail_silently=False, html=message)
         except Exception:  # pylint: disable=broad-except
             log.warning('Unable to send activation email to user', exc_info=True)
             js['value'] = _('Could not send activation e-mail.')

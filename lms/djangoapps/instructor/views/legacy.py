@@ -250,10 +250,10 @@ def instructor_dashboard(request, course_id):
         datatable['title'] = u'学生人数的转储列表 {0}'.format(course_id)
         track.views.server_track(request, "list-students", {}, page="idashboard")
 
-    elif action==u'所有注册这们课程的学生' :
+    elif action==u'所有注册这门课程的学生' :
         log.debug(action)
         datatable = get_student_grade_summary_data(request, course, course_id, get_grades=True, use_offline=use_offline)
-        datatable['title'] = u'所有注册这们课程的学生 {0}'.format(course_id)
+        datatable['title'] = u'所有注册这门课程的学生 {0}'.format(course_id)
         track.views.server_track(request, "dump-grades", {}, page="idashboard")
 
     elif action == u'转储所有注册学习这门课的学生RAW等级':

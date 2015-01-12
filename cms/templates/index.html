@@ -223,6 +223,98 @@ $('#submit_button1').click(function(){
     accessible_modal(".edit-name", "#list_student_change .close-modal", "#list_student_change", "#index-main");
     accessible_modal(".edit-name", "#apply_name_change_student .close-modal", "#apply_name_change_student", "#index-main");
 
+
+    function isChinese(s) {
+        var patrn=/[\u4E00-\u9FA5]|[\uFE30-\uFFA0]/gi;
+        if(!patrn.exec(s)){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    function bb(){
+        var a=$('#new-course-org').val();
+        var b=$('#new-course-number').val();
+        var c=$('#new-course-run').val();
+
+        if(a && !isChinese(a) && b&& !isChinese(b) && c && !isChinese(c) ){
+            $("#do_submit").removeClass("is-disabled");
+        }
+    }
+    var ss='<span class="sss" style="display:block;color:red;font-size:12px;">请不要填写中文</span>';
+    $(document).ready(function(){
+        $('#new-course-org').keyup(function(){
+            var val1=$(this).val();
+            if(isChinese(val1)){
+               $("#do_submit").addClass("is-disabled");
+                $(this).focus();
+                if($(this).parent().find(".sss").length==0){
+                    $(this).parent().append(ss)
+                }
+            }else{
+                $(this).parent().find(".sss").remove();
+                bb();
+            }
+        });
+
+        $('#new-course-number').keyup(function(){
+            var val1=$(this).val();
+            if(isChinese(val1)){
+                $("#do_submit").addClass("is-disabled");
+                $(this).focus();
+                if($(this).parent().find(".sss").length==0){
+                    $(this).parent().append(ss)
+                }
+            }else{
+                $(this).parent().find(".sss").remove();
+                bb();
+            }
+        });
+
+        $('#new-course-run').keyup(function(){
+            var val1=$(this).val();
+            if(isChinese(val1)){
+                $("#do_submit").addClass("is-disabled");
+                $(this).focus();
+                if($(this).parent().find(".sss").length==0){
+                    $(this).parent().append(ss)
+                }
+            }else{
+                $(this).parent().find(".sss").remove();
+                bb();
+            }
+        })
+
+
+        $("#do_submit").click(function(){
+            var a=$('#new-course-org')
+            var b=$('#new-course-number')
+            var c=$('#new-course-run')
+
+            if(a && isChinese(a.val())){
+                if(a.parent().find(".sss").length==0){
+                    a.parent().append(ss)
+                }
+                return false;
+            }
+
+            if(b && isChinese(b.val())){
+                if(b.parent().find(".sss").length==0){
+                    b.parent().append(ss)
+                }
+                return false;
+            }
+
+            if(c && isChinese(c.val())){
+                if(c.parent().find(".sss").length==0){
+                    c.parent().append(ss)
+                }
+                return false;
+            }
+        });
+    });
+
 });
 </script>
 
@@ -329,20 +421,20 @@ $('#submit_button1').click(function(){
                 -->
                 <li class="field text required" id="field-organization">
                   <label for="new-course-org">${_("Organization")}</label>
-                  <input class="new-course-org" id="new-course-org" type="text" name="new-course-org" aria-required="true" value="${course_org}" placeholder="${_('e.g. UniversityX or OrganizationX')}" />
+                  <input class="new-course-org" id="new-course-org" type="text" name="new-course-org" aria-required="true" value="${course_org}" placeholder="example: UniversityX or OrganizationX" />
                   <span class="tip">${_("The name of the organization sponsoring the course.")}  <strong>${_("Note: This is part of your course URL, so no spaces or special characters are allowed.")}</strong> ${_("This cannot be changed, but you can set a different display name in Advanced Settings later.")},请勿使用.点号和中文.</span>
                   <span class="tip tip-error is-hiding"></span>
                 </li>
                 <li class="field text required" id="field-course-number">
                   <label for="new-course-number">${_("Course Number")}</label>
-                  <input class="new-course-number" id="new-course-number" type="text" name="new-course-number" aria-required="true" placeholder="${_('e.g. CS101')}" />
+                  <input class="new-course-number" id="new-course-number" type="text" name="new-course-number" aria-required="true" placeholder="example: CS101" />
                   <span class="tip">${_("The unique number that identifies your course within your organization.")} <strong>${_("Note: This is part of your course URL, so no spaces or special characters are allowed and it cannot be changed.")},请勿使用.点号和中文.</strong></span>
                   <span class="tip tip-error is-hiding"></span>
                 </li>
 
                 <li class="field text required" id="field-course-run">
                   <label for="new-course-run">${_("Course Run")}</label>
-                  <input class="new-course-run" id="new-course-run" type="text" name="new-course-run" aria-required="true"placeholder="${_('e.g. 2014_T1')}" />
+                  <input class="new-course-run" id="new-course-run" type="text" name="new-course-run" aria-required="true"placeholder="example: 2014_T1" />
                   <span class="tip">${_("The term in which your course will run.")} <strong>${_("Note: This is part of your course URL, so no spaces or special characters are allowed and it cannot be changed.")},请勿使用.点号和中文.</strong></span>
                   <span class="tip tip-error is-hiding"></span>
                 </li>
@@ -351,8 +443,10 @@ $('#submit_button1').click(function(){
             </fieldset>
           </div>
 
+
+
           <div class="actions">
-            <input type="submit" value="${_('Create')}" class="action action-primary new-course-save" />
+            <input type="submit" id="do_submit" value="${_('Create')}" class="action action-primary new-course-save" />
             <input type="button" value="${_('Cancel')}" class="action action-secondary action-cancel new-course-cancel" />
           </div>
         </form>
