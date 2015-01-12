@@ -8,7 +8,6 @@
 % if display_name is not UNDEFINED and display_name is not None:
     <h2>${display_name}</h2>
 % endif
-
 <div
     id="video_${id}"
     class="video closed"
@@ -81,18 +80,22 @@
   <!--</ul>-->
 </div>
 
-     <script type="text/javascript" src="${static.url('static/js/jwplayer/jwplayer6.6/jwplayer.flash.swf')}"></script>
-     <script type="text/javascript" src="${static.url('static/js/jwplayer/jwplayer6.6/jwplayer.js')}"></script>
-     <script type="text/javascript" src="${static.url('static/js/jwplayer/jwplayer6.6/jwplayer.html5.js')}"></script>
+     <script type="text/javascript" src="${static.url('/static/js/jwplayer/jwplayer6.6/jwplayer.flash.swf')}"></script>
+     <script type="text/javascript" src="${static.url('/static/js/jwplayer/jwplayer6.6/jwplayer.js')}"></script>
+     <script type="text/javascript" src="${static.url('/static/js/jwplayer/jwplayer6.6/jwplayer.html5.js')}"></script>
 
 <script type="text/javascript">
-
 setTimeout(function(){
          jwplayer("myElement_${id}").setup({
                         file: "${sources.get('mp4')}",
                         width: '100%',
-                        height: '484'
-                        //aspectratio: '16:9'
+                        height: '484',
+                        usecaptions:false,
+                       	tracks:
+                               [
+                                   { file: "" }
+                               ]
                     })
 }, 150);
+
 </script>

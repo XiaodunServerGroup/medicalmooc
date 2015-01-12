@@ -232,7 +232,7 @@ class VideoModule(VideoFields, XModule):
         track_url = None
 
         get_ext = lambda filename: filename.rpartition('.')[-1]
-        sources = {get_ext(src): src for src in self.html5_sources}
+        sources = {get_ext(src.split('?')[0]): src for src in self.html5_sources}
 
         if self.download_video:
             if self.source:
