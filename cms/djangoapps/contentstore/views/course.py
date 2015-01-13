@@ -681,7 +681,7 @@ def notice_course_update_to_student(json,course_location,package_id):
     # 发送邮件给所有的注册学生
     queue = Queue.Queue()
     course_module = modulestore().get_item(course_location, depth=0)
-    sub = "课程  [" + course_module.display_name_with_default.encode("utf-8") + ']  更新提醒'
+    sub = "课程  [" + course_module.display_name_with_default + ']  更新提醒'
     try:
         update_content = json['content']
         update_content = "<p>感谢您参加人卫慕课"+course_module.display_name_with_default.encode("utf-8")+"课程，目前该门课程有新内容更新，具体如下：</p><p>"+"\n\n"+update_content+"\n\n"+"</p><p>为了保证您的学习进度，请尽快开始学习，"+course_module.display_name_with_default.encode("utf-8")+"课程团队竭诚为您服务。<br/>祝您学习愉快!<br/>"+course_module.display_name_with_default.encode("utf-8")+"课程团队</p>"
