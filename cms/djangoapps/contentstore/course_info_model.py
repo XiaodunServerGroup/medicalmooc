@@ -1,3 +1,4 @@
+#coding:utf-8
 """
 Views for viewing, adding, updating and deleting course updates.
 
@@ -56,7 +57,6 @@ def update_course_updates(location, update, passed_id=None, user=None):
         course_updates = modulestore('direct').get_item(location)
 
     course_update_items = list(reversed(get_course_update_items(course_updates)))
-
     if passed_id is not None:
         passed_index = _get_index(passed_id)
         # oldest update at start of list
@@ -64,6 +64,7 @@ def update_course_updates(location, update, passed_id=None, user=None):
             course_update_dict = course_update_items[passed_index - 1]
             course_update_dict["date"] = update["date"]
             course_update_dict["content"] = update["content"]
+            course_update_dict["is_top"] = update.get("is_top", "0")
             course_update_items[passed_index - 1] = course_update_dict
         else:
             return HttpResponseBadRequest(_("Invalid course update id."))
@@ -72,10 +73,10 @@ def update_course_updates(location, update, passed_id=None, user=None):
             "id": len(course_update_items) + 1,
             "date": update["date"],
             "content": update["content"],
-            "status": CourseInfoModule.STATUS_VISIBLE
+            "status": CourseInfoModule.STATUS_VISIBLE,
+            "is_top":update.get("is_top", "0")
         }
         course_update_items.append(course_update_dict)
-
     # update db record
     save_course_update_items(location, course_updates, course_update_items, user)
     # remove status key
@@ -105,6 +106,7 @@ def _make_update_dict(update):
         "id": update["id"],
         "date": update["date"],
         "content": update["content"],
+        "is_top": update.get("is_top", "0"),
     }
 
 
@@ -214,7 +216,6 @@ def get_course_update_items(course_updates, provided_id=None):
                         course_update_items.append(payload)
                     elif provided_id == computed_id:
                         return payload
-
         return course_update_items
 
 
@@ -223,10 +224,23 @@ def _get_html(course_updates_items):
     Method to create course_updates_html from course_updates items
     """
     list_items = []
-    for update in reversed(course_updates_items):
+    temp_list1 = []
+    temp_list2=[]
+    for item in reversed(course_updates_items):
+        if item.get("is_top")== "1":
+            temp_list2.append(item)
+        else:
+            temp_list1.append(item)
+    temp_list2.extend(temp_list1)
+        
+    for update in temp_list2:
         # filter course update items which have status "deleted".
         if update.get("status") != CourseInfoModule.STATUS_DELETED:
-            list_items.append(u"<article><h2>{date}</h2>{content}</article>".format(**update))
+            if update.get("is_top")=="1":
+                s=u"<article><h2><span style='color:red;'>[置顶]</span>{date}</h2>{content}</article>".format(**update)
+            else:
+                s=u"<article><h2>{date}</h2>{content}</article>".format(**update)
+            list_items.append(s)
     return u"<section>{list_items}</section>".format(list_items="".join(list_items))
 
 

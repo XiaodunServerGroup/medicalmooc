@@ -13,7 +13,9 @@
 			<!-- cid rather than id b/c new ones have cid's not id's -->
 			<a href="#" class="save-button" name="<%= updateModel.cid %>">保存</a>
 			<a href="#" class="cancel-button" name="<%= updateModel.cid %>">取消</a>
-			&nbsp;&nbsp;<input type='checkbox' name='course_date' id='is_send_mail_<%= updateModel.cid %>' value=1><label for="is_send_mail_<%= updateModel.cid %>" style="display:inline-block;">发送邮件通知</label><br>
+			&nbsp;&nbsp;<input type='checkbox' name='course_date' id='is_send_mail_<%= updateModel.cid %>' value=1> <label for="is_send_mail_<%= updateModel.cid %>" style="display:inline-block;">发送邮件通知</label>
+			&nbsp;&nbsp;<input type='checkbox' name='is_top' id='is_top_<%= updateModel.cid %>' value="1" <%if(updateModel.get('is_top')== "1"){%>checked<%}%> > <label for="is_top_<%= updateModel.cid %>" style="display:inline-block;">置顶</label>
+			<br>
 		</div>
 	</form>
 	<div class="post-preview">
@@ -22,8 +24,15 @@
 			<a href="#" class="delete-button" name="<%- updateModel.cid %>"><span class="delete-icon"></span>删除</a>
 		</div>
 		<h2>
-			<span class="calendar-icon"></span><span class="date-display"><%=
-				updateModel.get('date') %></span>
+			 <%if(updateModel.get('is_top')== "1") {%>
+	            <span style="color:red">
+					[置顶]
+				</span>
+	        <%}%>
+			<span class="calendar-icon"></span>
+			<span class="date-display">
+				<%=updateModel.get('date') %>
+			</span>
 		</h2>
 		<div class="update-contents"><%= updateModel.get('content') %></div>
 	</div>

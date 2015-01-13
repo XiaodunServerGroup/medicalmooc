@@ -25,6 +25,20 @@ define(["js/views/baseview", "underscore", "codemirror", "js/models/course_updat
             // remove and then add all children
             $(updateEle).empty();
             var self = this;
+            
+            var top_list = new Array();
+            this.collection.each(function (update) {
+                if(update.get('is_top')=="1"){
+                	top_list.push(update);
+                }
+            });
+            this.collection.each(function (update) {
+                if(update.get('is_top')!="1"){
+                	top_list.push(update);
+                }
+            });
+            
+            /*
             this.collection.each(function (update) {
                 try {
                     CourseInfoHelper.changeContentToPreview(
@@ -32,9 +46,19 @@ define(["js/views/baseview", "underscore", "codemirror", "js/models/course_updat
                     var newEle = self.template({ updateModel : update });
                     $(updateEle).append(newEle);
                 } catch (e) {
-                    // ignore
                 }
             });
+            **/
+            $.each(top_list, function (i, update) {
+                try {
+                    CourseInfoHelper.changeContentToPreview(
+                        update, 'content', self.options['base_asset_url']);
+                    var newEle = self.template({ updateModel : update });
+                    $(updateEle).append(newEle);
+                } catch (e) {
+                }
+            });
+            
             this.$el.find(".new-update-form").hide();
             this.$el.find('.date').datepicker({ 'dateFormat': 'yy年mm月dd日' });
             return this;
@@ -113,7 +137,11 @@ define(["js/views/baseview", "underscore", "codemirror", "js/models/course_updat
             }else{
                 send_mail = 'false'
             };
-            targetModel.set({ date : this.dateEntry(event).val(), content : new_content,is_send_mail:send_mail });
+            var is_top="0";
+            if($("#is_top_"+this.textarea_id).attr("checked")){
+            	is_top= '1';
+            }
+            targetModel.set({ date : this.dateEntry(event).val(), content : new_content,is_send_mail:send_mail,is_top:is_top});
             $("#"+this.textarea_id).text(new_content);
             // push change to display, hide the editor, submit the change
             var saving = new NotificationView.Mini({

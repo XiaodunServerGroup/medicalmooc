@@ -642,8 +642,9 @@ def course_info_update_handler(request, tag=None, package_id=None, branch=None, 
         CourseLocator(package_id=package_id), get_course=True
     )
     updates_location = course_location.replace(category='course_info', name=block)
-    print course_location
-    print updates_location
+    print request.path
+    print 'course_location: ' , course_location
+    print 'updates_location:', updates_location
     if provided_id == '':
         provided_id = None
 
