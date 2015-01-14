@@ -957,7 +957,7 @@ PIPELINE_JS = {
     },
     'wechat_main_vendor': {
         'source_filenames': wechat_main_js,
-        'output_filename': 'js/lms-main_vendor.js',
+        'output_filename': 'js/lms-main_vendor1.js',
         'test_order': 0,
     },
     'module-descriptor-js': {
