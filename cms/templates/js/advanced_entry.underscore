@@ -9,3 +9,29 @@
     <textarea class="json text" id="<%= valueUniqueId %>"><%= value %></textarea>
   </div>
 </li>
+<script type='text/javascript'>
+    var key = $('#<%= keyUniqueId %>').val();
+    if(key=='advanced_modules'){
+        $('#<%= valueUniqueId %>').after("<span>显示笔记模块</span>");
+    }
+
+    if(key=='course_audit'){
+        $('#<%= valueUniqueId %>').after("<span>课程是否显示，1为显示，0为不显示。</span>");
+    }
+
+    if(key=='annotation_storage_url'){
+        $('#<%= valueUniqueId %>').after("<span>我的笔记链接</span>");
+    }
+
+    if(key=='course_price'){
+        $('#<%= valueUniqueId %>').after('<span>课程价格</span>');
+    }
+
+    if(key=='display_name'){
+        $('#<%= valueUniqueId %>').after('<span>课程名称</span>');
+    }
+
+    if(key=='showanswer'){
+        $('#<%= valueUniqueId %>').after('<span>课程单元中的问题的显示答案按钮的显示方式，always为一直显示。</span>');
+    }
+</script>
