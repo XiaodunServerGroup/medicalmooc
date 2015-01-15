@@ -64,6 +64,9 @@ define ["jquery", "underscore", "gettext", "xblock/runtime.v1",
 
     createItem: (parent, payload, callback=->) ->
       payload.parent_locator = parent
+      var unit_name = $("#unit-display-name-input").val();
+      var video_count = $("ol.components").find(".xmodule_VideoModule").length+1;
+      payload.display_name = unit_name+""+video_count;
       $.postJSON(
           @model.urlRoot
           payload
