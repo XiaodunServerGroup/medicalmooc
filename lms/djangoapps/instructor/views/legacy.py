@@ -700,7 +700,7 @@ def instructor_dashboard(request, course_id):
     #----------------------------------------
     # enrollment
 
-    elif action == u'已经等登记但是尚未注册学生名单':
+    elif action == u'已经登记但是尚未注册学生名单':
         ceaset = CourseEnrollmentAllowed.objects.filter(course_id=course_id)
         datatable = {'header': ['学生电子邮件']}
         datatable['data'] = [[x.email] for x in ceaset]

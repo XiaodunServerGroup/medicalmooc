@@ -347,7 +347,7 @@ function goto( mode)
   %if instructor_access:
     <hr width="40%" style="align:left">
     <p>
-    <input type="submit" onclick="this.value='List course staff members'" name="action" value="列出所有参与这么课程的工作人员">
+    <input type="submit" onclick="this.value='List course staff members'" name="action" value="列出所有参与这门课程的工作人员">
     <p>
     <input type="text" name="staffuser">
     <input type="submit" onclick="this.value='Remove course staff'" name="action" value="删除课程管理者">
@@ -358,7 +358,7 @@ function goto( mode)
   %if admin_access:
     <hr width="40%" style="align:left">
     <p>
-    <input type="submit" onclick="this.value='List course instructors'" name="action" value="列出所有这么课的导师">
+    <input type="submit" onclick="this.value='List course instructors'" name="action" value="列出所有这门课的导师">
     <p>
     <input type="text" name="instructor"> <input type="submit" onclick="this.value='Remove instructor'" name="action" value="删除导师">
     <input type="submit" onclick="this.value='Add instructor'" name="action" value="添加导师">
@@ -431,7 +431,7 @@ function goto( mode)
     % endif
 
     <input type="submit" onclick="this.value='登记学生列表'" name="action" value="登记学生列表" class="${'is-disabled' if disable_buttons else ''}">
-    <input type="submit" onclick="this.value='已经等登记但是尚未注册学生名单'" name="action" value="已经等登记但是尚未注册学生名单" class="${'is-disabled' if disable_buttons else ''}">
+    <input type="submit" onclick="this.value='已经登记但是尚未注册学生名单'" name="action" value="已经登记但是尚未注册学生名单" class="${'is-disabled' if disable_buttons else ''}">
     <hr width="40%" style="align:left">
 
   %if settings.FEATURES.get('REMOTE_GRADEBOOK_URL','') and instructor_access:
