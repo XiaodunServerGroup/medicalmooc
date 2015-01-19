@@ -11,9 +11,6 @@
 </li>
 <script type='text/javascript'>
     var key = $('#<%= keyUniqueId %>').val();
-    if(key=='advanced_modules'){
-        $('#<%= valueUniqueId %>').after("<span>显示笔记模块</span>");
-    }
 
     if(key=='course_audit'){
         $('#<%= valueUniqueId %>').after("<span>课程是否显示，1为显示，0为不显示。</span>");
