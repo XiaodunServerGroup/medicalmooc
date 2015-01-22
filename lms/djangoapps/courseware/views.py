@@ -421,12 +421,9 @@ def mobi_course_info(request, course, action=None):
 
     result = {
 
-        'MoocLink':host + reverse('about_course', args=[course.id]),
-        'Author':  UserProfile.objects.get(user_id=User.objects.get(username=Author[0]).id).name,
-        'AuthorInfo':UserProfile.objects.get(user_id=User.objects.get(username=Author[0]).id).shortbio,
         "id": course.id.replace('/', '.'),
         "name": course.display_name_with_default,
-        "logo": host + course_logo,
+        "logo": settings.SITE_NAME + course_logo,
         "org": course.display_org_with_default,
         "course_number": course.display_number_with_default,
         "start_date": course.start.strftime("%Y-%m-%d"),
@@ -435,21 +432,22 @@ def mobi_course_info(request, course, action=None):
         "registered": registered_for_course(course, user),
         "about": get_course_about_section(course, 'short_description'),
         "category": course.category,
-        "course_price": course.display_course_price_with_default
+        "course_price": float('%0.2f'%int(course.display_course_price_with_default))
+
     }
 
     def compute_action_imgurl(imgname):
         course_mini_info = course.id.split('/')
         asset_location = StaticContent.compute_location(course_mini_info[0], course_mini_info[1], imgname)
 
-        return host + StaticContent.get_url_path_from_location(asset_location)
+        return settings.SITE_NAME + StaticContent.get_url_path_from_location(asset_location)
 
 
     for imgname in ['mobi', 'mobi_r', 'ott_r']:
         try:
             result[imgname] = compute_action_imgurl(imgname + '_logo.jpg')
         except:
-            result[imgname] = host + course_logo
+            result[imgname] = settings.SITE_NAME + course_logo
 
     return result
 
@@ -522,7 +520,7 @@ def mobi_course_action(request, course_id, action):
                     wrap_xmodule_display=False,
                     static_asset_path=course.static_asset_path
                 )
-                return JsonResponse({'updates': [item for item in course_module.items if item["status"] != "deleted"]})
+                return JsonResponse({'updates': [item for item in course_module.items if item["status"] != "deleted"][::-1]})
             elif action == "handouts" and registered:
                 course_handouts = get_course_info_section(request, course, action)
                 return JsonResponse({"handouts": course_handouts})

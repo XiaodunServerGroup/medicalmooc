@@ -522,7 +522,7 @@ def handle_xblock_callback_noauth(request, course_id, usage_id, handler, suffix=
 
     return _invoke_xblock_handler(request, course_id, usage_id, handler, suffix, request.user)
 
-
+@csrf_exempt
 def handle_xblock_callback(request, course_id, usage_id, handler, suffix=None):
     """
     Generic view for extensions. This is where AJAX calls go.
