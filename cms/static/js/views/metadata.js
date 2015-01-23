@@ -15,10 +15,17 @@ function(BaseView, _, MetadataModel, AbstractEditor, VideoList) {
                 console.error("Couldn't load metadata editor template");
             }
             this.template = _.template(tpl);
-
             this.$el.html(this.template({numEntries: this.collection.length}));
             var counter = 0;
-
+            
+            var models =  this.collection.models ;
+            if(models.length<9){
+            	models.sort(function(a, b){
+                	alert(a.get("field_name") +"--"+b.get("field_name"))
+                	return a.get("field_name") >b.get("field_name")
+                })
+            }
+            
             var self = this;
             this.collection.each(
                 function (model) {

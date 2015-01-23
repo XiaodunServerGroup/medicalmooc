@@ -166,6 +166,13 @@ class VideoFields(object):
         scope=Scope.preferences,
         default=1.0
     )
+    
+    video_cc_id = String(
+        help="CC视频ID",
+        display_name="CC视频ID",
+        scope=Scope.settings,
+        default=""
+    )
 
 
 class VideoModule(VideoFields, XModule):
@@ -230,7 +237,6 @@ class VideoModule(VideoFields, XModule):
 
     def get_html(self):
         track_url = None
-
         get_ext = lambda filename: filename.rpartition('.')[-1]
         sources = {get_ext(src.split('?')[0]): src for src in self.html5_sources}
 
@@ -621,7 +627,7 @@ class VideoDescriptor(VideoFields, TabsEditingDescriptor, EmptyDataRawDescriptor
             'display_name': '视频URL',
             'field_name': 'video_url',
             'type': 'VideoList',
-            'default_value': [get_youtube_link(youtube_id_1_0['default_value'])]
+            'default_value': '' #[get_youtube_link(youtube_id_1_0['default_value'])]
         })
 
         youtube_id_1_0_value = get_youtube_link(youtube_id_1_0['value'])
@@ -630,11 +636,13 @@ class VideoDescriptor(VideoFields, TabsEditingDescriptor, EmptyDataRawDescriptor
             video_url['value'].insert(0, youtube_id_1_0_value)
 
         if video_url['value'] == ['http://youtu.be/OEoXaMPEzfM']:
-           video_url['value'] = ['http://mooc.diandiyun.com/c4x/staff/cs005/asset/FZ1.mp4']
+            #http://mooc.diandiyun.com/c4x/staff/cs005/asset/FZ1.mp4
+            video_url['value'] = ['']
 
         metadata = {
             'display_name': display_name,
-            'video_url': video_url
+            'video_url': video_url,
+            'video_cc_id':metadata_fields['video_cc_id'],
         }
 
         _context.update({'transcripts_basic_tab_metadata': metadata})

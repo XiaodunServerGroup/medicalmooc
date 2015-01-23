@@ -2,8 +2,8 @@
   <label class="label setting-label" for="<%= uniqueId %>"><%= model.get('display_name')%></label>
   <div class="wrapper-videolist-settings">
     <div class="wrapper-videolist-url videolist-settings-item"><input type="text" id="<%= uniqueId %>"  class="input videolist-url" value="<%= model.get('value')[0] %>"></div>
-    <div class="tip videolist-url-tip setting-help"><%= model.get('help') %></div>
-    <div class="wrapper-videolist-urls">
+    <div class="tip videolist-url-tip setting-help">MP4视频链接地址</div>
+    <div class="wrapper-videolist-urls" style="display:none;">
       <a href="#" class="collapse-action collapse-setting">
         <i class="icon-plus"></i><%= gettext("添加更多的视频资源") %> <span class="sr"><%= model.get('display_name')%></span>
       </a>
