@@ -735,6 +735,7 @@ def mobi_index(request, course_id, chapter=None, section=None,
                 }
             ))
         result = render_to_response('wechat/mobi_courseware.html', context)
+        result.set_cookie('sessionid', request.COOKIES.get('sessionid',''))
     except Exception as e:
         if isinstance(e, Http404):
             # let it propagate
@@ -1292,7 +1293,8 @@ def mobi_login_ajax(request, error=""):
             if request.POST.get('remember') == "true":
                 request.session.set_expiry(604800)
             else:
-                request.session.set_expiry(0)
+                #request.session.set_expiry(0)
+                pass
         except Exception as e:
             raise
 
