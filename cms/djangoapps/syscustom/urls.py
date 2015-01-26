@@ -32,5 +32,11 @@ urlpatterns += patterns('',  # clientluobo
     url(r'^clientluobo/$', 'syscustom.views.clientluobo.clientluobo', name="clientluobo"),
     url(r'^clientluobo/add/$', 'syscustom.views.clientluobo.clientluobo_edit', name="clientluobo_edit"),
     url(r'^clientluobo/(?P<id>\d+)/edit/$', 'syscustom.views.clientluobo.clientluobo_edit', name="clientluobo_edit"),
-
 )
+
+urlpatterns += patterns('',  # caption
+    url(r'^caption/upload/$', 'syscustom.views.caption_upload', name="caption_upload"),
+)
+
+
+

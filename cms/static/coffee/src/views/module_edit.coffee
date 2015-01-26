@@ -99,6 +99,7 @@ define ["jquery", "underscore", "gettext", "xblock/runtime.v1",
         id: _this.model.id
 
       data.metadata = _.extend(data.metadata || {}, @changedMetadata())
+      data.metadata['video_captions']=$("#temp_file_div span").text()
       ModalUtils.hideModalCover()
       saving = new NotificationView.Mini
         title: gettext('Saving&hellip;')

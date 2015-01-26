@@ -2,7 +2,7 @@ define(
     [
         "jquery", "backbone", "underscore", "js/views/abstract_editor",
         "js/views/transcripts/utils", "js/views/transcripts/message_manager",
-        "js/views/metadata"
+        "js/views/metadata","js/plupload/plupload.full.min"
     ],
 function($, Backbone, _, AbstractEditor, Utils, MessageManager, MetadataView) {
     VideoList = AbstractEditor.extend({

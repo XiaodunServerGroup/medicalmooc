@@ -3,6 +3,27 @@
   <div class="wrapper-videolist-settings">
     <div class="wrapper-videolist-url videolist-settings-item"><input type="text" id="<%= uniqueId %>"  class="input videolist-url" value="<%= model.get('value')[0] %>"></div>
     <div class="tip videolist-url-tip setting-help">MP4视频链接地址</div>
+    <!--upload file-->
+    	<form id="form" name="form" method="post" action="">
+    	    <input type="hidden"  id='add_csrf_id' name="csrfmiddlewaretoken" value="" />
+
+          	    <div id="video_up_caption">
+          	            <%if(model.get('video_captions')){%>
+          	                <span  id="video_caption" >[已有字幕]</span>
+          	                <a href="javascript:void(0)" id="add-caption-btn" class="upload-setting" >修改</a>
+          	                <a href="javascript:void(0)" id="video_caption_del" style="color:#2883bc">删除</a>
+                         <%}else{%>
+                            <span  id="video_caption" style="display:none">[已有字幕]</span>
+                             <a href="javascript:void(0)" id="add-caption-btn" class="upload-setting" >上传字幕</a>
+                             <a href="javascript:void(0)" id="video_caption_del" style="display:none;color:#2883bc">删除</a>
+                         <%}%>
+
+               </div>
+               <!-- <div id="video_caption_file" class="video_caption_file" ><span><%= model.get('video_captions')%></span></div>-->
+          	    <input id="temp_file_div" class="temp_file_div" type="hidden" value="<%= model.get('video_captions_path')%>"/>
+         </form>
+    <!--end-->
+    
     <div class="wrapper-videolist-urls" style="display:none;">
       <a href="#" class="collapse-action collapse-setting">
         <i class="icon-plus"></i><%= gettext("添加更多的视频资源") %> <span class="sr"><%= model.get('display_name')%></span>
@@ -21,3 +42,64 @@
     </div>
   </div>
 </div>
+
+<script language="javascript" >
+    var csrf_token =$("#csrf_id").text();
+    $("#video_caption_del").click(function(){
+        $("#temp_file_div span").empty();
+        $("#video_caption_file span").empty();
+        $("#add-caption-btn").text("上传字幕");
+         $("#video_caption").hide();
+        $("#video_caption_del").hide();
+    });
+    var uploader = new plupload.Uploader({
+        runtimes : 'html5,flash,silverlight,html4',
+        browse_button : 'add-caption-btn', // you can pass in id...
+        url : '/syscustom/caption/upload/',
+        flash_swf_url : '/static//js/plupload/Moxie.swf/js',
+        silverlight_xap_url : '/static//js/plupload/Moxie.xap',
+        filters : {
+			max_file_size : '60KB',
+			mime_types: [
+				{title : "Image files", extensions : "srt,SRT"},
+			]
+		},
+		multipart:true,
+		multipart_params:{
+		},
+        multi_selection:false,
+        headers : {'X-Requested-With' : 'XMLHttpRequest', 'X-CSRFToken' : csrf_token},
+        init: {
+            PostInit: function() {
+            	uploader.settings.multipart_params.old_srt_file = $("#temp_file_div").val();
+            },
+
+        FilesAdded: function(up, files) {
+            uploader.start();
+            },
+        UploadFile: function(up, files) {
+            $("#video_caption").text("正在上传").addClass('disabled');
+            },
+        UploadComplete: function(up, files) {
+            },
+        FileUploaded: function(up, file, responseObject) {
+            response = $.parseJSON(responseObject.response);
+            var arr = response.caption.split('/');
+            var filename= arr[arr.length-1];
+            $("#temp_file_div").val(response.caption);
+            $("#video_caption_file span").text(filename);
+            $("#video_caption").text("[已有字幕]").show();
+            $("#video_caption_del").show();
+            $("#add-caption-btn").text("修改");
+            },
+        Error: function(up, err) {
+            document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
+            }
+        }
+    });
+    uploader.bind('BeforeUpload', function(up) {
+	    uploader.settings.multipart_params.old_srt_file = $("#temp_file_div").val();
+	});
+    uploader.init();
+
+ </script>

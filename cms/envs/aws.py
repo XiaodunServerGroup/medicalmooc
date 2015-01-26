@@ -309,4 +309,5 @@ SSO_BUY_URL = 'http://202.101.75.74:8100/a/account/buy.action?uuid='
 
 
 
-print STATIC_URL
+VIDEO_SUBTITLE_DIR ='srt/'
+

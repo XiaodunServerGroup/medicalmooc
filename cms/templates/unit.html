@@ -42,6 +42,7 @@ require(["domReady!", "jquery", "js/models/module_info", "coffee/src/views/unit"
 
 </%block>
 <%block name="content">
+ <div id="csrf_id" style="display:none;">${csrf_token}</div>
   <div class="main-wrapper edit-state-${unit_state}" data-locator="${unit_locator}">
     <div class="inner-wrapper">
       <!--
