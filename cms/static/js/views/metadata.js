@@ -21,7 +21,6 @@ function(BaseView, _, MetadataModel, AbstractEditor, VideoList) {
             var models =  this.collection.models ;
             if(models.length<9){
             	models.sort(function(a, b){
-                	alert(a.get("field_name") +"--"+b.get("field_name"))
                 	return a.get("field_name") >b.get("field_name")
                 })
             }

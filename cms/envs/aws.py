@@ -95,7 +95,7 @@ if STATIC_URL_BASE:
     STATIC_URL = STATIC_URL_BASE.encode('ascii')
     if not STATIC_URL.endswith("/"):
         STATIC_URL += "/"
-    STATIC_URL += "/"
+    #STATIC_URL += "/"
     # STATIC_URL += git.revision + "/"
 
 ###############################################################################
@@ -309,3 +309,4 @@ SSO_BUY_URL = 'http://202.101.75.74:8100/a/account/buy.action?uuid='
 
 
 
+print STATIC_URL

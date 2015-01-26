@@ -14,6 +14,10 @@ in XML.
 import os
 import json
 import logging
+import time
+import hashlib
+import xmltodict
+import urllib2
 from operator import itemgetter
 
 from lxml import etree
@@ -274,7 +278,42 @@ class VideoModule(VideoFields, XModule):
 
         # OrderedDict for easy testing of rendered context in tests
         sorted_languages = OrderedDict(sorted(languages.items(), key=itemgetter(1)))
-
+        
+        video_url = "http://bm1.43.play.bokecc.com/flvs/ca/Qxrei/ul75jtwR2Y-10.mp4?t=1422011717&key=7F1B70A2718CC88A869B17FC98B9808A"
+        
+        def get_video_url():
+            key="YRbFWhO8A0gwB8U5QmZpUrOpcNOHIbTX"
+            user_id = '70AC5AA799D98650'
+            #video_id = '491D68CD178CC5F89C33DC5901307461'
+            
+            video_id = self.video_cc_id.strip()
+            if not video_id:
+                return sources.get("mp4", '')
+            
+            query_str = 'userid=%s&videoid=%s' % (user_id, video_id)
+            
+            t = int(time.time())
+            hash = '%s&time=%s&salt=%s' % (query_str, t, key)
+            hash = hashlib.md5(hash).hexdigest().upper()
+            
+            #url = "http://spark.bokecc.com/api/user"+"?"+query_str+"&time="+t+"&hash="+hash;
+            url = "http://union.bokecc.com/api/mobile?%s&time=%s&hash=%s" % (query_str, t, hash)
+            
+            try:
+                page = urllib2.urlopen(url).read()  
+                print page 
+                result = xmltodict.parse(page.encode('utf-8'))
+                print result
+                if result.has_key("video") and len(result["video"])>0:
+                    video_url = result["video"]['copy'][-1]['#text']
+                else:
+                    video_url = ''
+                return video_url
+            except:
+                import traceback
+                print traceback.format_exc()
+                return ''
+        
         return self.system.render_template('video.html', {
             'ajax_url': self.system.ajax_url + '/save_user_state',
             'autoplay': settings.FEATURES.get('AUTOPLAY_VIDEOS', False),
@@ -301,6 +340,7 @@ class VideoModule(VideoFields, XModule):
             'transcript_languages': json.dumps(sorted_languages),
             'transcript_translation_url': self.runtime.handler_url(self, 'transcript').rstrip('/?') + '/translation',
             'transcript_available_translations_url': self.runtime.handler_url(self, 'transcript').rstrip('/?') + '/available_translations',
+            'video_url':get_video_url()
         })
 
     def get_transcript(self):
