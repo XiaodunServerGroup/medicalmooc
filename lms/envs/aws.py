@@ -438,3 +438,7 @@ SSO_LOGOUT_URL = 'http://202.101.75.74:8100/mp/sso/Logout.jsp?pageurl=&loginname
 SSO_ADDUPDATE_COURSE_URL = 'http://202.101.75.74:8100/a'
 SSO_BUY_URL = 'http://202.101.75.74:8100/a/account/buy.action?uuid='
 
+#webqq
+APP_ID = '101189620'
+APP_KEY = '54c3c4d2adbd0db106795fc00e3ef7cc'
+REDIRECT_URL = 'mooc.diandiyun.com/get_openapi'

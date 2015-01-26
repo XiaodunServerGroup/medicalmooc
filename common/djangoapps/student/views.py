@@ -3,6 +3,10 @@
 Student Views
 """
 import sys
+
+import simplejson
+from lms.envs.aws import APP_ID, APP_KEY, REDIRECT_URL
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -39,7 +43,7 @@ from django.core.urlresolvers import reverse
 from django.core.validators import validate_email, validate_slug, ValidationError
 from django.db import IntegrityError, transaction
 from django.http import (HttpResponse, HttpResponseBadRequest, HttpResponseForbidden,
-                         Http404)
+                         Http404, HttpResponseRedirect)
 from django.views.decorators.cache import cache_control
 from django.shortcuts import redirect
 from django_future.csrf import ensure_csrf_cookie
@@ -3098,3 +3102,238 @@ def do_institution_import_student_create_account(post_vars, institute_id):
     except Exception:
         log.exception("UserProfile creation failed for user {id}.".format(id=user.id))
     return (user, profile, registration)
+
+#生成请求code的url
+def get_code_url(request):
+    auth_url = '%s?%s'%('https://graph.qq.com/oauth2.0/authorize', urllib.urlencode({
+        'response_type': 'code',
+        'client_id': APP_ID,
+        'redirect_uri': REDIRECT_URL,
+        # 'scope': self.scope,
+        # 'state': crsf_token,
+    }))
+    return auth_url
+
+def get_token_url(request, code):
+    token_url = '%s?%s'%('https://graph.qq.com/oauth2.0/token', urllib.urlencode({
+        'grant_type': 'authorization_code',
+        'client_id': APP_ID,
+        'client_secret': APP_KEY,
+        'code': code,
+        'redirect_uri': REDIRECT_URL,
+    }))
+    return token_url
+
+def get_token(request, token_url):
+    req = urllib2.Request(token_url)
+    resp = urllib2.urlopen(req)
+    content = resp.read()
+    access_token = urllib2.urlparse.parse_qs(content).get('access_token', [''])[0]
+    return access_token
+
+#然后再用urllib2库,access_token构造请求获取openid；
+def get_openid_url(request, access_token):
+    openid_url = '%s?%s'%('https://graph.qq.com/oauth2.0/me', urllib.urlencode({
+        'access_token': access_token,
+    }))
+    return openid_url
+#获得openapi
+def get_openid(request, openid_url):
+    req = urllib2.Request(openid_url)
+    resp = urllib2.urlopen(req)
+    content = resp.read()
+    content = content[content.find('(')+1:content.rfind(')')]
+    data = simplejson.loads(content)
+    return data.get('openid')
+
+
+def webqq_login(request):
+    code_url = get_code_url(request)
+
+    return HttpResponseRedirect(code_url)
+
+@csrf_exempt
+def get_openapi(request):
+    user = None
+    code = access_token = qqapi = username = ''
+    code = request.REQUEST.get('code')
+    token_url = get_token_url(request, code)
+    access_token = get_token(request, token_url)
+    openid_url = get_openid_url(request, access_token)
+    qqapi = get_openid(request, openid_url)
+    url = '%s?%s'%('https://graph.qq.com/user/get_user_info', urllib.urlencode({
+        'access_token': access_token,
+        'oauth_consumer_key': APP_ID,
+        'openid': qqapi,
+    }))
+    req = urllib2.Request(url)
+    resp = urllib2.urlopen(req)
+    content = resp.read()
+    data = simplejson.loads(content)
+    username = data.get('nickname')
+    try:
+        userprofile = UserProfile.objects.get(qqapi=qqapi)
+        try:
+            user = User.objects.get(id=userprofile.user_id)
+        except User.DoesNotExist:
+            user = None
+    except UserProfile.DoesNotExist:
+        userprofile = None
+    if user is not None and user.is_active:
+        try:
+            # We do not log here, because we have a handler registered
+            # to perform logging on successful logins.
+            backend = load_backend(settings.AUTHENTICATION_BACKENDS[0])
+            user.backend = "%s.%s" % (backend.__module__, backend.__class__.__name__)
+            login(request, user)
+            if request.POST.get('remember') == 'true':
+                request.session.set_expiry(604800)
+                log.debug("Setting user session to never expire")
+            else:
+                request.session.set_expiry(0)
+        except Exception as e:
+            AUDIT_LOG.critical("Login failed - Could not create session. Is memcached running?")
+            log.critical("Login failed - Could not create session. Is memcached running?")
+            log.exception(e)
+            raise
+        return HttpResponseRedirect('/dashboard')
+    else:
+        return render_to_response('webqq.html', {'username': username, 'access_token': access_token, 'qqapi': qqapi})
+
+@csrf_exempt
+def webqq_login_post(request):
+    email = passd = nickname = access_token = qqapi = mess = ''
+    if request.method == 'POST':
+        email = request.POST['email']
+        passd = request.POST['passd']
+        nickname = request.POST['nickname']
+        access_token = request.POST['access_token']
+        qqapi = request.POST['qqapi']
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            AUDIT_LOG.warning(u"Login failed - Unknown user email: {0}".format(email))
+            user = None
+        if settings.FEATURES.get('AUTH_USE_SHIB') and user:
+            try:
+                eamap = ExternalAuthMap.objects.get(user=user)
+                if eamap.external_domain.startswith(external_auth.views.SHIBBOLETH_DOMAIN_PREFIX):
+                    return JsonResponse({
+                        "success": False,
+                        "redirect": reverse('shib-login'),
+                    })
+            except ExternalAuthMap.DoesNotExist:
+            # This is actually the common case, logging in user without external linked login
+                AUDIT_LOG.info("User %s w/o external auth attempting login", user)
+
+        user_found_by_email_lookup = user
+
+        if user_found_by_email_lookup and LoginFailures.is_feature_enabled():
+            if LoginFailures.is_user_locked_out(user_found_by_email_lookup):
+                return JsonResponse({
+                    "success": False,
+                    "value": "This account has been temporarily locked due to excessive login failures. Try again later."\
+                })
+
+        username = user.username if user else ""
+
+        try:
+            user = authenticate(username=username, password=passd, request=request)
+        except RateLimitException:
+            return JsonResponse({
+                "success": False,
+                "value": "Too many failed login attempts. Try again later."
+            })
+
+        if user is None:
+            if user_found_by_email_lookup and LoginFailures.is_feature_enabled():
+                LoginFailures.increment_lockout_counter(user_found_by_email_lookup)
+
+            if username != "":
+                AUDIT_LOG.warning(u"Login failed - password for {0} is invalid".format(email))
+            return JsonResponse({
+                "success": False,
+                "value": "邮箱或密码错误.",
+            })
+
+        if LoginFailures.is_feature_enabled():
+            LoginFailures.clear_lockout_counter(user)
+
+        if user is not None and user.is_active:
+            userprofile = UserProfile.objects.get(user_id=user.id)
+            userprofile.qqapi = qqapi
+            userprofile.save()
+            try:
+                login(request, user)
+                # get token and expires for return
+            except Exception as e:
+                AUDIT_LOG.critical("Login failed - Could not create session. Is memcached running?")
+                log.critical("Login failed - Could not create session. Is memcached running?")
+                log.exception(e)
+                raise
+            return JsonResponse({
+                "success": True,
+                'redirect_url': '/dashboard'
+            })
+
+
+def webqq_register_post(request):
+    email = passd = nickname = access_token = qqapi = mess = username = name = ''
+    if request.method == 'POST':
+        email = request.POST['email']
+        passd = request.POST['passd']
+        nickname = request.POST['nickname']
+        access_token = request.POST['access_token']
+        qqapi = request.POST['qqapi']
+        username = request.POST['username']
+        name = request.POST['name']
+        user = User(username=username,
+                    email=email,
+                    is_active=True)
+        user.set_password(passd)
+        registration = Registration()
+        # TODO: Rearrange so that if part of the process fails, the whole process fails.
+        # Right now, we can have e.g. no registration e-mail sent out and a zombie account
+        try:
+            user.save()
+        except IntegrityError:
+            js = {'success': False}
+            # Figure out the cause of the integrity error
+            if len(User.objects.filter(username=username)) > 0:
+                js['value'] = _("An account with the Public Username '{username}' already exists.").format(username=username)
+                js['field'] = 'username'
+                return JsonResponse(js, status=400)
+
+            if len(User.objects.filter(email=email)) > 0:
+                js['value'] = _("An account with the Email '{email}' already exists.").format(email=email)
+                js['field'] = 'email'
+                return JsonResponse(js, status=400)
+            raise
+
+        registration.register(user)
+
+        profile = UserProfile(user=user)
+        profile.name = name
+        profile.qqapi = qqapi
+        try:
+            profile.save()
+        except Exception:
+            log.exception("UserProfile creation failed for user {id}.".format(id=user.id))
+        if user is not None and user.is_active:
+            try:
+                # We do not log here, because we have a handler registered
+                # to perform logging on successful logins.
+                backend = load_backend(settings.AUTHENTICATION_BACKENDS[0])
+                user.backend = "%s.%s" % (backend.__module__, backend.__class__.__name__)
+                login(request, user)
+                if request.POST.get('remember') == 'true':
+                    request.session.set_expiry(604800)
+                    log.debug("Setting user session to never expire")
+                else:
+                    request.session.set_expiry(0)
+            except Exception as e:
+                AUDIT_LOG.critical("Login failed - Could not create session. Is memcached running?")
+                log.critical("Login failed - Could not create session. Is memcached running?")
+                log.exception(e)
+                raise
+            return JsonResponse('/dashboard')

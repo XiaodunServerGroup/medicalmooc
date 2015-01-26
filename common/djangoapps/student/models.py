@@ -227,6 +227,7 @@ class UserProfile(models.Model):
     allow_certificate = models.BooleanField(default=1)
     picurl = models.TextField(blank=True, null=True)
     shortbio = models.TextField(blank=True, null=True)
+    qqapi = models.CharField(max_length=225)
 
     def get_meta(self):
         js_str = self.meta

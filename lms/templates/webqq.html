@@ -1,0 +1,215 @@
+<%inherit file="main.html" />
+<%! from microsite_configuration import microsite %>
+<%namespace name='static' file='static_content.html'/>
+
+<%! from django.core.urlresolvers import reverse %>
+<%! from django.utils.translation import ugettext as _ %>
+
+<%block name="pagetitle">绑定你的账户</%block>
+
+<%block name="bodyclass">view-login</%block>
+<%block name="jsextra">
+<script type="text/javascript">
+  $('document').ready(function(){
+        $('.web_login').click(function(){
+            var email = $('#email').val();
+            var pass = $('#passd').val();
+            nickname = $('#nickname').val();
+            access_token = $('#access_token').val();
+            qqapi = $('#qqapi').val();
+            var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+            if(email == ''){
+                alert('邮箱不能为空');
+                return false;
+            }
+            if(pass == ''){
+                alert('密码不能为空');
+                return false;
+            }
+            if(!reg.test(email)){
+                alert('邮箱格式不正确');
+                return false;
+            }
+        });
+        $('.web_register').click(function(){
+            var email = $('#email_register').val();
+            var pass = $('#passd_register').val();
+            nickname = $('#nickname_register').val();
+            access_token = $('#access_token_register').val();
+            qqapi = $('#qqapi_register').val();
+            username = $('#username_register').val();
+            name = $('#name_register').val();
+            var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+            if(email == ''){
+                alert('邮箱不能为空');
+                return false;
+            }
+            if(pass == ''){
+                alert('密码不能为空');
+                return false;
+            }
+            if(username == ''){
+                alert('用户名不能为空');
+                return false;
+            }
+            if(name == ''){
+                alert('姓名不能为空');
+                return false;
+            }
+            if(!reg.test(email)){
+                alert('邮箱格式不正确');
+                return false;
+            }
+        });
+        $('#webqq_register').on('ajax:success', function(event, json, xhr) {
+            var url = json.redirect_url || "${reverse('dashboard')}";
+            location.href = url;
+        });
+        $('#webqq_register').on('ajax:error', function(event, jqXHR, textStatus) {
+            json = $.parseJSON(jqXHR.responseText);
+            showErrors(json.value);
+        });
+         /*$('#band_webqq').on('ajax:success', function(event, json, xhr) {
+            console.log('success')
+            var url = json.redirect_url || "${reverse('dashboard')}";
+            location.href = url;
+        });
+        $('#band_webqq').on('ajax:error', function(event, jqXHR, textStatus) {
+            console.log('dfjdkslkfj');
+            json = $.parseJSON(jqXHR.responseText);
+            showErrors(json.value);
+        });*/
+        $('#band_webqq').on('ajax:success', function(event, json, xhr) {
+        if(json.success) {
+          var u=decodeURI(window.location.search);
+          next=u.split("next=")[1];
+          if(json.iframe){
+        	  $("body").append(json.iframe);
+          }
+          if (next && !isExternal(next)) {
+            to_url=next;
+          }  else if(json.redirect_url){
+        	  to_url=json.redirect_url;
+          } else {
+        	  to_url="${reverse('dashboard')}";
+          }
+          setTimeout(function(){
+        	  location.href = to_url;
+          },1500);
+
+        } else if(json.hasOwnProperty('redirect')) {
+          var u=decodeURI(window.location.search);
+          if (!isExternal(json.redirect)) { // a paranoid check.  Our server is the one providing json.redirect
+              location.href=json.redirect+u;
+          } // else we just remain on this page, which is fine since this particular path implies a login failure
+            // that has been generated via packet tampering (json.redirect has been messed with).
+        } else {
+          console.log('error jsdhjsd');
+          $('.status.message.submission-error').css('display', 'block');
+            $('.status.message.submission-error .message-copy').html(json.value).stop().css("display", "block");
+          }
+      });
+        function showErrors(err_str){
+            $('.status.message.submission-error').css('display', 'block');
+            $('.status.message.submission-error .message-copy-register').html(err_str).stop().css("display", "block");
+            $(".field-error").removeClass('field-error');
+            $("[data-field='"+json.field+"']").addClass('field-error')
+        };
+        accessible_modal(".edit-name", "#band_webqq_account .close-modal", "#band_webqq_account", "#index-main");
+        accessible_modal(".edit-name", "#band_webqq_account_register .close-modal", "#band_webqq_account_register", "#index-main");
+});
+</script>
+</%block>
+<section class="introduction">
+  <header class="header_login">
+    <h1 class="title">
+      <!--
+      <span class="title-super">${_("Please log in")}</span>
+      -->
+      <span class="title-sub"><h3>正在使用腾讯QQ帐号登录点滴云慕课平台</h3></span>
+    </h1>
+  </header>
+</section>
+
+<section class="login container">
+<h3>${username}</h3><br/>
+<a href="#band_webqq_account" rel="leanModal" title="绑定已有帐号" class="edit-name"><h3>绑定慕课已有帐号</h3></a>
+    % if mess:
+        <h3>${mess}</h3>
+    %endif
+
+<a href="#band_webqq_account_register" rel="leanModal" title="注册并绑定慕课帐号" class="edit-name"><h3>注册并绑定慕课帐号</h3></a>
+</section>
+
+<section id="band_webqq_account" class="modal" aria-hidden="true">
+  <div class="inner-wrapper" role="dialog" aria-labelledby="change-name-title">
+    <button class="close-modal">&#10005;
+      <span class="sr">
+        ## Translators: this is a control to allow users to exit out of this modal interface (a menu or piece of UI that takes the full focus of the screen)
+        ${_('Close Modal')}
+      </span>
+    </button>
+
+    <header>
+      <div class="change-name-title">
+        <strong>
+        <h3>点滴云慕课欢迎您</h3>
+        </strong>
+        <h3>${username}</h3>
+      </div>
+      <div role="alert" class="status message submission-error" tabindex="-1" style="display: None">
+        <h3><ul class="message-copy"></ul></h3>
+      </div>
+    </header>
+    <div class="change_name_body">
+        <form method="post" id="band_webqq" data-remote="true" action="/webqq_login_post" novalidate>
+            <input type='hidden' name='csrfmiddlewaretoken' value='${csrf_token}' />
+            <input type="hidden" id="nickname" name="nickname" value="${username}">
+            <input type="hidden" id="access_token" name="access_token" value="${access_token}">
+            <input type="hidden" id="qqapi" name="qqapi" value="${qqapi}">
+            <h3>邮箱：</h3><input type="text" id="email" name="email">
+            <h3>密码：</h3><input type="password" id="passd" name="passd">
+            <input type="submit" class="web_login" value="登录并绑定">
+        </form>
+    </div>
+  </div>
+    </div>
+</section>
+
+<section id="band_webqq_account_register" class="modal" aria-hidden="true">
+  <div class="inner-wrapper" role="dialog" aria-labelledby="change-name-title">
+    <button class="close-modal">&#10005;
+      <span class="sr">
+        ## Translators: this is a control to allow users to exit out of this modal interface (a menu or piece of UI that takes the full focus of the screen)
+        ${_('Close Modal')}
+      </span>
+    </button>
+
+    <header>
+      <div class="change-name-title">
+        <strong>
+        <h3>点滴云慕课欢迎您</h3>
+        </strong>
+        <h3>${username}</h3>
+      </div>
+      <div role="alert" class="status message submission-error" tabindex="-1" style="display: None">
+        <h3><ul class="message-copy-register"></ul></h3>
+      </div>
+    </header>
+    <div class="change_name_body">
+        <form method="post" id="webqq_register" data-remote="true" action="/webqq_register_post" novalidate>
+            <input type='hidden' name='csrfmiddlewaretoken' value='${csrf_token}' />
+            <input type="hidden" id="nickname_reqister" name="nickname" value="${username}">
+            <input type="hidden" id="access_token_register" name="access_token" value="${access_token}">
+            <input type="hidden" id="qqapi_register" name="qqapi" value="${qqapi}">
+            <h3>邮箱：</h3><input type="text" id="email_register" name="email">
+            <h3>密码：</h3><input type="password" id="passd_register" name="passd">
+            <h3>用户名：</h3><input type="text" id="username_register" name="username">
+            <span>用户名应当包含英文字母A到Z，阿拉伯数字0到9，并且不能包含空格. (以后不能被改变)</span>
+            <h3>姓名：</h3><input type="text" id="name_register" name="name">
+            <input type="submit" class="web_register" value="注册并绑定">
+        </form>
+    </div>
+  </div>
+    </div>
+</section>

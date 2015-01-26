@@ -20,6 +20,11 @@ urlpatterns = ('',  # nopep8
     url(r'^login$', 'student.views.signin_user', name="signin_user"),
     url(r'^login_failure_count$', 'student.views.login_failure_count', name='login_failure_count'),
     url(r'^register$', 'student.views.register_user', name="register_user"),
+    #webqq_login
+    url(r'^webqq_login$', 'student.views.webqq_login', name="webqq_login"),
+    url(r'^get_openapi$', 'student.views.get_openapi', name="get_openapi"),
+    url(r'^webqq_login_post$', 'student.views.webqq_login_post', name="webqq_login_post"),
+    url(r'^webqq_register_post$', 'student.views.webqq_register_post', name="webqq_register_post"),
 
     url(r'^admin_dashboard$', 'dashboard.views.dashboard'),
 
