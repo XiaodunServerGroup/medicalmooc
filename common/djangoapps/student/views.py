@@ -112,7 +112,6 @@ from util.password_policy_validators import (
 from syscustom.models import CustomImage
 from util.common import *
 import simplejson
-from lms.envs.aws import APP_ID, APP_KEY, REDIRECT_URL
 
 log = logging.getLogger("edx.student")
 AUDIT_LOG = logging.getLogger("audit")
@@ -3106,8 +3105,8 @@ def do_institution_import_student_create_account(post_vars, institute_id):
 def get_code_url(request):
     auth_url = '%s?%s'%('https://graph.qq.com/oauth2.0/authorize', urllib.urlencode({
         'response_type': 'code',
-        'client_id': APP_ID,
-        'redirect_uri': REDIRECT_URL,
+        'client_id': settings.APP_ID,
+        'redirect_uri': settings.REDIRECT_URL,
         # 'scope': self.scope,
         # 'state': crsf_token,
     }))
@@ -3116,10 +3115,10 @@ def get_code_url(request):
 def get_token_url(request, code):
     token_url = '%s?%s'%('https://graph.qq.com/oauth2.0/token', urllib.urlencode({
         'grant_type': 'authorization_code',
-        'client_id': APP_ID,
-        'client_secret': APP_KEY,
+        'client_id': settings.APP_ID,
+        'client_secret': settings.APP_KEY,
         'code': code,
-        'redirect_uri': REDIRECT_URL,
+        'redirect_uri': settings.REDIRECT_URL,
     }))
     return token_url
 
@@ -3162,7 +3161,7 @@ def get_openapi(request):
     qqapi = get_openid(request, openid_url)
     url = '%s?%s'%('https://graph.qq.com/user/get_user_info', urllib.urlencode({
         'access_token': access_token,
-        'oauth_consumer_key': APP_ID,
+        'oauth_consumer_key': settings.APP_ID,
         'openid': qqapi,
     }))
     req = urllib2.Request(url)
