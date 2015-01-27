@@ -4,9 +4,6 @@ Student Views
 """
 import sys
 
-import simplejson
-from lms.envs.aws import APP_ID, APP_KEY, REDIRECT_URL
-
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -114,6 +111,8 @@ from util.password_policy_validators import (
 )
 from syscustom.models import CustomImage
 from util.common import *
+import simplejson
+from lms.envs.aws import APP_ID, APP_KEY, REDIRECT_URL
 
 log = logging.getLogger("edx.student")
 AUDIT_LOG = logging.getLogger("audit")
@@ -3280,6 +3279,7 @@ def webqq_login_post(request):
 def webqq_register_post(request):
     email = passd = nickname = access_token = qqapi = mess = username = name = ''
     if request.method == 'POST':
+        js = {'success': False}
         email = request.POST['email']
         passd = request.POST['passd']
         nickname = request.POST['nickname']
@@ -3287,6 +3287,7 @@ def webqq_register_post(request):
         qqapi = request.POST['qqapi']
         username = request.POST['username']
         name = request.POST['name']
+
         user = User(username=username,
                     email=email,
                     is_active=True)
@@ -3296,6 +3297,11 @@ def webqq_register_post(request):
         # Right now, we can have e.g. no registration e-mail sent out and a zombie account
         try:
             user.save()
+            data = {'email': email, 'username': username, 'password': passd}
+            guoshi_reg_result = _reg_guoshi(data)
+            if not guoshi_reg_result['success']:
+                js['value'] = guoshi_reg_result['errmsg']
+                return JsonResponse(js, status=400)
         except IntegrityError:
             js = {'success': False}
             # Figure out the cause of the integrity error
