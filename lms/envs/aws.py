@@ -442,3 +442,7 @@ SSO_BUY_URL = 'http://202.101.75.74:8100/a/account/buy.action?uuid='
 APP_ID = '101189620'
 APP_KEY = '54c3c4d2adbd0db106795fc00e3ef7cc'
 REDIRECT_URL = 'mooc.diandiyun.com/get_openapi'
+
+
+CC_KEY="YRbFWhO8A0gwB8U5QmZpUrOpcNOHIbTX"
+CC_USER_ID = '70AC5AA799D98650'

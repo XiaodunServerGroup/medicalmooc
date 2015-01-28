@@ -311,3 +311,6 @@ SSO_BUY_URL = 'http://202.101.75.74:8100/a/account/buy.action?uuid='
 
 VIDEO_SUBTITLE_DIR ='srt/'
 
+
+CC_KEY="YRbFWhO8A0gwB8U5QmZpUrOpcNOHIbTX"
+CC_USER_ID = '70AC5AA799D98650'

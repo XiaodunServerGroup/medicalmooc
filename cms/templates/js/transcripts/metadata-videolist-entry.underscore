@@ -20,6 +20,7 @@
 
                </div>
                <!-- <div id="video_caption_file" class="video_caption_file" ><span><%= model.get('video_captions')%></span></div>-->
+                <input id="old_srt_file" class="temp_file_div" type="hidden" value="<%= model.get('video_captions_path')%>"/>
           	    <input id="temp_file_div" class="temp_file_div" type="hidden" value="<%= model.get('video_captions_path')%>"/>
          </form>
     <!--end-->
@@ -98,7 +99,7 @@
         }
     });
     uploader.bind('BeforeUpload', function(up) {
-	    uploader.settings.multipart_params.old_srt_file = $("#temp_file_div").val();
+	    uploader.settings.multipart_params.old_srt_file = $("#old_srt_file").val();
 	});
     uploader.init();
 
