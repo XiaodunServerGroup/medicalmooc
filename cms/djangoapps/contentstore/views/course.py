@@ -5,9 +5,11 @@ import sys,os
 from envs.common import PROJECT_ROOT
 import xlrd
 from student.views import do_institution_import_teacher_create_account
-from student.models import PendingNameChange
+from student.models import PendingNameChange, CourseEnrollment
 from student.views import accept_picurl_change_by_id, accept_shortbio_change_by_id
 from student.views import do_institution_import_teacher_create_account,do_institution_import_student_create_account
+from student.roles import CourseInstructorRole, CourseStaffRole
+
 import random
 
 reload(sys)
@@ -25,6 +27,7 @@ import urllib2
 from Crypto.Cipher import DES
 import base64
 import hashlib
+from urlparse import urlparse
 
 import analytics.basic
 
@@ -41,6 +44,7 @@ from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.http import HttpResponseBadRequest, HttpResponseNotFound, HttpResponseRedirect, HttpResponse, Http404
 from util.json_request import JsonResponse
 from edxmako.shortcuts import render_to_response
@@ -97,7 +101,23 @@ __all__ = ['course_info_handler', 'course_handler', 'course_info_update_handler'
            'calendar_common_updateevent',
            'calendar_settings_getevents',
            'textbooks_list_handler',
-           'textbooks_detail_handler', 'course_audit_api', 'sync_class_appointment', 'institution_upload_teacher', 'remove_institute_teacher', 'teacher_intro_edit', 'change_picurl_request', 'change_shortbio_request', 'import_student']
+           'textbooks_detail_handler', 
+           'course_audit_api', 
+           'sync_class_appointment', 
+           'institution_upload_teacher', 
+           'remove_institute_teacher', 
+           'teacher_intro_edit', 
+           'change_picurl_request', 
+           'change_shortbio_request', 
+           'import_student',
+           'get_institute_info',
+           'get_institution_terchers',
+           'get_institution_courses',
+           'get_institution_tercher_courses',
+           'get_teachers_info',
+           'get_all_courses',
+           'get_teacher_courses'
+          ]
 
 WENJUAN_STATUS = {
     "0": "未发布",
@@ -468,6 +488,323 @@ def course_listing(request):
         'user_student_list': user_student_list
     })
 
+@login_required
+@ensure_csrf_cookie
+def get_institute_info(request):
+    """
+    List all institute
+    """
+    q = request.GET.get('query', '')
+    userprofile_list = UserProfile.objects.all()
+    user_institution_list = []
+    for ul in userprofile_list:
+        if ul.profile_role == 'in':
+            i = User.objects.get(id=ul.user_id)
+            (course_count, course_list)=  _get_count_couses(ul.name)
+            url_tercher = 'institution_terchers/' + str(ul.user_id)
+            url_course = 'institution_course/' + str(i.id)
+            institution_context = [
+                int(i.id),
+                ul.name.encode('utf8'),
+                i.username.encode('utf8'),
+                i.email.encode('utf8'),
+                int(UserProfile.objects.filter(institute=ul.user_id).count()),
+                course_count,
+                int(ul.user_id),
+                url_tercher,
+                url_course
+            ]
+            user_institution_list.append(institution_context)
+
+    or_by = request.GET.get('or_by', '')
+    user_institution_list = order_sort_by(user_institution_list, or_by)
+    user_institutions = []
+    if q != "":
+        for user_institution in user_institution_list:
+            if q in user_institution[1] or q in user_institution[2] or q in user_institution[3]:
+                user_institutions.append(user_institution)
+            else:
+                continue
+    else:
+        user_institutions = user_institution_list
+
+    user_institutions = fenye_paginator(request, user_institutions)
+
+    return render_to_response('institution/institute_info.html', {'user_institution_list': user_institutions })
+
+@login_required
+@ensure_csrf_cookie
+def get_institution_courses(request, id):
+    """
+    List all course in instituton
+    """
+    pro = UserProfile.objects.get(user_id=id)
+    (course_count, courses) = _get_count_couses(pro.name)
+    course_institution = _get_course_institution(courses)
+
+    or_by = request.GET.get('or_by', '')
+    course_institution = order_sort_by(course_institution, or_by)
+    institution_courses_url = '/institution_course/' + str(id)
+    q = request.GET.get('query', '')
+    course_institution = find_by_org(course_institution, q)
+    course_institution = fenye_paginator(request, course_institution)
+    return  render_to_response('institution/institution_courses.html', {'course_institution': course_institution, 'institution_courses_url': institution_courses_url})
+
+
+@login_required
+@ensure_csrf_cookie
+def get_institution_terchers(request,user_id):
+    """
+    List all tercher in instituton
+    """
+    url_tercher = '/institution_terchers/' + str(user_id)
+    user_terchers = _get_tercher_institution(user_id)
+    user_tercher = []
+    q = request.GET.get('query', '')
+    if q != "":
+        for user_ter in user_terchers:
+            if q in user_ter['org'] or q in user_ter['username'] or q in user_ter['name'] or q in user_ter['email']:
+                user_tercher.append(user_ter)
+            else:
+                continue
+    else:
+        user_tercher = user_terchers
+    user_tercher = fenye_paginator(request, user_tercher)
+    return  render_to_response('institution/institution_tercher.html', {'user_tercher': user_tercher, 'url_tercher': url_tercher })
+
+
+@login_required
+@ensure_csrf_cookie
+def get_institution_tercher_courses(request, user_id):
+    """
+    List one instituton tercher all courses
+    """
+    courses = modulestore('direct').get_courses()
+    course_th_list = []
+    if int(user_id) > 0:
+        u = User.objects.get(id=int(user_id))
+        for course in courses:
+            roles = CourseStaffRole(course.location).users_with_role()
+            if len(roles) >=1:
+                for i in range(0, len(roles)):
+                    u_roles = UserProfile.objects.get(user_id=User.objects.get(username=roles[i]).id)
+                    if u.id == u_roles.user_id:
+                        course_context = [
+                            course.display_name,
+                            u.username,
+                            u.email,
+                            course.display_org_with_default,
+                            CourseEnrollment.num_enrolled_in(course.id)-1
+                        ]
+                        course_th_list.append(course_context)
+
+    or_by = request.GET.get('or_by', '')
+    course_th_list = order_sort_by(course_th_list, or_by)
+    url_in_courses = '/institution_tercher_courses/' + str(user_id)
+    q = request.GET.get('query', '')
+
+    user_institution = find_by_org(course_th_list, q)
+    user_institution = fenye_paginator(request, user_institution)
+
+    return render_to_response('institution/institution_tercher_courses.html', {'course_institution': user_institution, 'url_in_courses': url_in_courses })
+
+@login_required
+@ensure_csrf_cookie
+def get_teachers_info(request):
+    """
+    List all teacher
+    """
+    user_list = UserProfile.objects.filter(profile_role='th')
+    courses = modulestore('direct').get_courses()
+    user_info_list = []
+    for course in courses:
+        roles = CourseStaffRole(course.location).users_with_role()
+        if len(roles) >=1:
+            for i in range(0, len(roles)):
+                u = User.objects.get(username=roles[i])
+                u_roles = UserProfile.objects.get(user_id=u.id)
+                roles_context = [
+                    u_roles.name,
+                    u.username,
+                    u.email,
+                    u_roles.name,
+                    u.id
+                ]
+                user_info_list.append(roles_context)
+
+    course_th_list = []
+    for uil in user_info_list:
+        count_course = sum([x.count(uil[2]) for x in user_info_list])
+        utl_th = '/teacher_courses/' + str(uil[4])
+        user_tt = [
+             uil[0],
+             uil[1],
+             uil[2],
+             uil[3],
+             count_course,
+             utl_th
+        ]
+        course_th_list.append(user_tt)
+
+    course_th_list = list(set(map(tuple, course_th_list)))
+    or_by = request.GET.get('or_by', '')
+    course_th_list = order_sort_by(course_th_list, or_by)
+    q = request.GET.get('query', '')
+    course_th_list = find_by_org(course_th_list, q)
+    course_th_list = fenye_paginator(request, course_th_list)
+
+    return  render_to_response('institution/teachers_info.html', {'user_tercher': course_th_list})
+
+@login_required
+@ensure_csrf_cookie
+def get_teacher_courses(request, id):
+    """
+    List one teacher all courses
+    """
+    courses = modulestore('direct').get_courses()
+    teacher_courses = []
+    for course in courses:
+        roles = CourseStaffRole(course.location).users_with_role()
+        if len(roles) >=1:
+            for i in range(0, len(roles)):
+                u = User.objects.get(username=roles[i])
+                u_roles = UserProfile.objects.get(user_id=u.id)
+                if u_roles.user_id == int(id):
+                    course_context = [
+                        course.display_name,
+                        u.username,
+                        u.email,
+                        course.display_org_with_default,
+                        CourseEnrollment.num_enrolled_in(course.id)-1
+                    ]
+                    teacher_courses.append(course_context)
+
+    or_by = request.GET.get('or_by', '')
+    teacher_courses = order_sort_by(teacher_courses, or_by)
+    teacher_courses_url = '/teacher_courses/' + str(id)
+    q = request.GET.get('query', '')
+    teacher_courses = find_by_org(teacher_courses, q)
+    teacher_courses = fenye_paginator(request, teacher_courses)
+
+    return render_to_response('institution/teacher_courses.html', {'course_institution': teacher_courses, 'teacher_courses_url': teacher_courses_url})
+
+@login_required
+@ensure_csrf_cookie
+def get_all_courses(request):
+    """
+    List teacher courses
+    """
+    course_institution = _get_course_institution(modulestore('direct').get_courses())
+
+    or_by = request.GET.get('or_by', '')
+    course_institution = order_sort_by(course_institution, or_by)
+    q = request.GET.get('query', '')
+    course_institution = find_by_org(course_institution, q)
+    posts = fenye_paginator(request, course_institution)
+
+    return render_to_response('institution/all_courses.html', {'posts': posts})
+
+def _get_count_couses(name):
+    """
+    List courses count num available to the logged in user instituton
+    """
+    courses = modulestore('direct').get_courses()
+    course_list = []
+    for course in courses:
+        if course.org == name:
+            course_list.append(course)
+
+    return (len(course_list), course_list)
+
+def _get_course_institution(courses):
+
+     course_institution = []
+     for course in courses:
+        user = CourseStaffRole(course.location).users_with_role()
+        if len(user) >= 1:
+            us = User.objects.get(username=user[0])
+            enrollment_number = CourseEnrollment.num_enrolled_in(course.id)
+            course_context = [
+                course.display_name,
+                us.username,
+                us.email,
+                course.org,
+                enrollment_number-1
+            ]
+            course_institution.append(course_context)
+
+     return course_institution
+
+def _get_tercher_institution(user_id):
+    user_list = UserProfile.objects.filter(institute=user_id)
+    courses = modulestore('direct').get_courses()
+    user_tercher = []
+    for user in user_list:
+        u = User.objects.get(id=user.user_id)
+        course_th_list = []
+        u_roles_user_id = 0
+        for course in courses:
+            roles = CourseStaffRole(course.location).users_with_role()
+            if len(roles) >=1:
+                for i in range(0, len(roles)):
+
+                    u_roles = UserProfile.objects.get(user_id=User.objects.get(username=roles[i]).id)
+                    if u.id == u_roles.user_id:
+                        u_roles_user_id = u_roles.user_id
+                        course_th_list.append(course)
+
+        course_th_url = '/institution_tercher_courses/' + str(u_roles_user_id)
+        tercher_context = {
+            'name': user.name.encode('utf8'),
+            'username': u.username.encode('utf8'),
+            'email': u.email,
+            'org': _get_institute(User.objects.get(id=u.id)),
+            'course_total': len(course_th_list),
+            'course_th_url': course_th_url
+        }
+        user_tercher.append(tercher_context)
+
+    return user_tercher
+
+
+def find_by_org(list, q):
+
+    find_list = []
+    if q != "":
+        for l in list:
+            if q in l[0] or q in l[1] or q in l[2] or q in l[3]:
+                find_list.append(l)
+            else:
+                continue
+    else:
+        find_list = list
+
+    return find_list
+
+def order_sort_by(lsit, query):
+    if query == 'low_to_high':
+        sort_list = sorted(lsit, reverse=False, key=lambda lsit : lsit[4])
+    else:
+        sort_list = sorted(lsit, reverse=True, key=lambda lsit : lsit[4])
+    return sort_list
+
+
+def fenye_paginator(request, list):
+
+    page_size = 10
+    paginator = Paginator(list, page_size)
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+        print page
+
+    try:
+        posts = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        posts = paginator.page(paginator.num_pages)
+
+    return posts
 
 @login_required
 @ensure_csrf_cookie
@@ -1381,7 +1718,7 @@ def remove_institute_teacher(request):
     profile_user.institute = None
     profile_user.save()
     return JsonResponse('/course')
-
+    
 @login_required
 @ensure_csrf_cookie
 def teacher_intro_edit(request, id):

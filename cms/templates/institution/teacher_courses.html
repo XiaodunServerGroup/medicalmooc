@@ -1,0 +1,65 @@
+<%inherit file="institution_base.html" />
+<%block name="title">教师课程信息列表</%block>
+<%block name="content">
+<script type="text/javascript">
+    function onchanged(){
+        var dd = document.getElementById("depaterment");
+        if (dd.value == 'high_to_low'){
+            self.location="${teacher_courses_url}" + "?or_by=high_to_low"
+        }else if(dd.value == 'low_to_high') {
+            self.location="${teacher_courses_url}" + "?or_by=low_to_high"
+        }
+    }
+</script>
+<div class="wrapper-mast wrapper">
+    <header class="mast has-actions has-subtitle">
+        <h1 class="page-header">
+            <a href="${teacher_courses_url}"><span class="sr">&gt; </span>教师课程信息列表</a>
+        </h1>
+    </header>
+    <section class="content">
+        <nav>
+          <table>
+              <tr>
+                  <form name="queryform" class="search-container search" id="search-form" action="${teacher_courses_url}" method="get" onsubmit="return chkform(this)">
+                     <td><div id="remind"></div></td>
+                     <td><input type="text" id="search-query" name="query"  class="search" placeholder="请输入关键字..." onfocus="placeholder =''" onblur="placeholder='请输入关键字...'" value=""></td>
+                     <td><input type="submit" class="search_button" value="搜索"></td>
+                  </form>
+                   <td>
+                     <select name="depaterment" id="depaterment" onchange="onchanged()">
+                       <option value="">按报名人数排序</option>
+                       <option value="high_to_low">从高到低排序</option>
+                       <option value="low_to_high">从低到高排序</option>
+                     </select>
+                   </td>
+              </tr>
+          </table>
+       </nav>
+    <hr />
+        <table width="1000" class="table1">
+        % if len(course_institution):
+                <tr>
+                    <td>课程名称</td>
+                    <td>创建人</td>
+                    <td>邮箱</td>
+                    <td>所属机构</td>
+                    <td>报名人数</td>
+                </tr>
+            %for n in range(0, len(course_institution)):
+                <tr>
+                    <td>${course_institution[n][0]}</td>
+                    <td>${course_institution[n][1]}</td>
+                    <td>${course_institution[n][2]}</td>
+                    <td>${course_institution[n][3]}</td>
+                    <td>${course_institution[n][4]}</td>
+                </tr>
+            %endfor
+        % else:
+            本教师暂无课程
+        %endif
+        </table>
+        <%include file="fenye.html" args="posts=course_institution" />
+    </section>
+
+</%block>

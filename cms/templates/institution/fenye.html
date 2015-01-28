@@ -1,0 +1,23 @@
+<hr />
+<%page args="posts" />
+<table class="table2">
+    %if posts.has_previous and posts.number !=1:
+        <a href="?page=${ posts.previous_page_number() }">上一页</a>
+    %else:
+        <span class='empty'></span>
+    %endif
+
+    <span class="current">
+    % if posts.paginator.num_pages > 0:
+        % for n in range(0, posts.paginator.num_pages):
+            <a href="?page=${n+1}">${n+1}</a>
+        % endfor
+    % endif
+    </span>
+
+    % if posts.has_next and posts.number != posts.paginator.num_pages:
+        <a href="?page=${ posts.next_page_number() }">下一页</a>
+    % else:
+        <span class='empty'></span>
+    % endif
+</table>
