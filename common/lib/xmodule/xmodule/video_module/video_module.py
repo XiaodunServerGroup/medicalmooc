@@ -293,8 +293,13 @@ class VideoModule(VideoFields, XModule):
             key= settings.CC_KEY
             user_id = settings.CC_USER_ID
             #video_id = '491D68CD178CC5F89C33DC5901307461'
-            
-            video_id = self.video_cc_id.strip()
+            try:
+                video_id = self.video_cc_id.strip()
+            except:
+                import traceback
+                print traceback.format_exc()
+                video_id = ''
+                
             if not video_id:
                 video_url = sources.get("mp4", '')
             else:
