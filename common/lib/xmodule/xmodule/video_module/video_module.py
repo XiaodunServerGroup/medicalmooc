@@ -294,7 +294,7 @@ class VideoModule(VideoFields, XModule):
             user_id = settings.CC_USER_ID
             #video_id = '491D68CD178CC5F89C33DC5901307461'
             try:
-                video_id = self.video_cc_id.strip()
+                video_id = self.video_cc_id
             except:
                 import traceback
                 print traceback.format_exc()
