@@ -1,0 +1,21 @@
+<%inherit file="../base.html" />
+<%namespace name='static' file='../static_content.html'/>
+<%!
+  from django.core.urlresolvers import reverse
+  from django.utils.translation import ugettext as _
+%>
+.table1{ line-height:24px; font-size:14px;}
+.table1 th{ font-weight:normal;}
+.table1 td{ text-align:center; width: 300px;}
+.table1 td a{ color:#85acce;}
+
+<script type="text/javascript">
+    function chkform(obj){
+        var search_value = $('#search-query').val()
+        if (search_value == "" || search_value == "请输入关键字..." ){
+             return false;
+        }
+
+    return true;
+    }
+</script>
