@@ -18,6 +18,7 @@ import time
 import hashlib
 import xmltodict
 import urllib2
+import base64
 from operator import itemgetter
 
 from lxml import etree
@@ -172,11 +173,19 @@ class VideoFields(object):
     )
     
     video_cc_id = String(
-        help="CC视频ID",
+        help="CC视频ID，默认会首先读取此视频，如果没有则取下面的视频URL",
         display_name="CC视频ID",
         scope=Scope.settings,
         default=""
     )
+    
+    video_captions = String(
+        help="视频字幕地址",
+        display_name="视频字幕",
+        scope=Scope.settings,
+        default=""
+    )
+
 
 
 class VideoModule(VideoFields, XModule):
@@ -279,40 +288,39 @@ class VideoModule(VideoFields, XModule):
         # OrderedDict for easy testing of rendered context in tests
         sorted_languages = OrderedDict(sorted(languages.items(), key=itemgetter(1)))
         
-        video_url = "http://bm1.43.play.bokecc.com/flvs/ca/Qxrei/ul75jtwR2Y-10.mp4?t=1422011717&key=7F1B70A2718CC88A869B17FC98B9808A"
         
         def get_video_url():
-            key="YRbFWhO8A0gwB8U5QmZpUrOpcNOHIbTX"
-            user_id = '70AC5AA799D98650'
+            key= settings.CC_KEY
+            user_id = settings.CC_USER_ID
             #video_id = '491D68CD178CC5F89C33DC5901307461'
             
             video_id = self.video_cc_id.strip()
             if not video_id:
-                return sources.get("mp4", '')
+                video_url = sources.get("mp4", '')
+            else:
+                query_str = 'userid=%s&videoid=%s' % (user_id, video_id)
+                
+                t = int(time.time())
+                hash = '%s&time=%s&salt=%s' % (query_str, t, key)
+                hash = hashlib.md5(hash).hexdigest().upper()
+                
+                #url = "http://spark.bokecc.com/api/user"+"?"+query_str+"&time="+t+"&hash="+hash;
+                url = "http://union.bokecc.com/api/mobile?%s&time=%s&hash=%s" % (query_str, t, hash)
+                
+                try:
+                    page = urllib2.urlopen(url).read()  
+                    result = xmltodict.parse(page.encode('utf-8'))
+                    if result.has_key("video") and len(result["video"])>0:
+                        video_url = result["video"]['copy'][-1]['#text']
+                    else:
+                        video_url = ''
+                except:
+                    import traceback
+                    print traceback.format_exc()
+                    return ''
             
-            query_str = 'userid=%s&videoid=%s' % (user_id, video_id)
-            
-            t = int(time.time())
-            hash = '%s&time=%s&salt=%s' % (query_str, t, key)
-            hash = hashlib.md5(hash).hexdigest().upper()
-            
-            #url = "http://spark.bokecc.com/api/user"+"?"+query_str+"&time="+t+"&hash="+hash;
-            url = "http://union.bokecc.com/api/mobile?%s&time=%s&hash=%s" % (query_str, t, hash)
-            
-            try:
-                page = urllib2.urlopen(url).read()  
-                print page 
-                result = xmltodict.parse(page.encode('utf-8'))
-                print result
-                if result.has_key("video") and len(result["video"])>0:
-                    video_url = result["video"]['copy'][-1]['#text']
-                else:
-                    video_url = ''
-                return video_url
-            except:
-                import traceback
-                print traceback.format_exc()
-                return ''
+            video_url = base64.b64encode(video_url)
+            return video_url
         
         return self.system.render_template('video.html', {
             'ajax_url': self.system.ajax_url + '/save_user_state',
@@ -340,7 +348,8 @@ class VideoModule(VideoFields, XModule):
             'transcript_languages': json.dumps(sorted_languages),
             'transcript_translation_url': self.runtime.handler_url(self, 'transcript').rstrip('/?') + '/translation',
             'transcript_available_translations_url': self.runtime.handler_url(self, 'transcript').rstrip('/?') + '/available_translations',
-            'video_url':get_video_url()
+            'video_url':get_video_url(),
+            'video_captions':self.video_captions
         })
 
     def get_transcript(self):
@@ -654,7 +663,7 @@ class VideoDescriptor(VideoFields, TabsEditingDescriptor, EmptyDataRawDescriptor
         display_name = metadata_fields['display_name']
         video_url = metadata_fields['html5_sources']
         youtube_id_1_0 = metadata_fields['youtube_id_1_0']
-
+        video_captions = metadata_fields['video_captions']
         def get_youtube_link(video_id):
             if video_id:
                 return 'http://youtu.be/{0}'.format(video_id)
@@ -667,7 +676,10 @@ class VideoDescriptor(VideoFields, TabsEditingDescriptor, EmptyDataRawDescriptor
             'display_name': '视频URL',
             'field_name': 'video_url',
             'type': 'VideoList',
-            'default_value': '' #[get_youtube_link(youtube_id_1_0['default_value'])]
+            'default_value': '',  #[get_youtube_link(youtube_id_1_0['default_value'])]
+            'video_captions_path':video_captions['value'],
+            'video_captions':video_captions['value'].split('/')[-1],
+
         })
 
         youtube_id_1_0_value = get_youtube_link(youtube_id_1_0['value'])
