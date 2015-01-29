@@ -627,24 +627,36 @@ def get_teachers_info(request):
                     u_roles.name,
                     u.username,
                     u.email,
-                    u_roles.name,
+                    course.display_org_with_default,
                     u.id
                 ]
                 user_info_list.append(roles_context)
 
     course_th_list = []
-    for uil in user_info_list:
-        count_course = sum([x.count(uil[2]) for x in user_info_list])
-        utl_th = '/teacher_courses/' + str(uil[4])
-        user_tt = [
-             uil[0],
-             uil[1],
-             uil[2],
-             uil[3],
-             count_course,
-             utl_th
-        ]
-        course_th_list.append(user_tt)
+    for us in user_list:
+        ur = User.objects.get(id=us.user_id)
+        for uil in user_info_list:
+            if us.id == uil[4]:
+                count_course = sum([x.count(uil[2]) for x in user_info_list])
+                utl_th = '/teacher_courses/' + str(uil[4])
+                user_tt = [
+                    uil[0],
+                    uil[1],
+                    uil[2],
+                    uil[3],
+                    count_course,
+                    utl_th
+                ]
+            else:
+                user_tt = [
+                    us.name,
+                    ur.username,
+                    ur.email,
+                    _get_in_name(us),
+                    0,
+                    '#'
+                ]
+            course_th_list.append(user_tt)
 
     course_th_list = list(set(map(tuple, course_th_list)))
     or_by = request.GET.get('or_by', '')
@@ -654,6 +666,7 @@ def get_teachers_info(request):
     course_th_list = fenye_paginator(request, course_th_list)
 
     return  render_to_response('institution/teachers_info.html', {'user_tercher': course_th_list})
+
 
 @login_required
 @ensure_csrf_cookie
@@ -805,6 +818,15 @@ def fenye_paginator(request, list):
         posts = paginator.page(paginator.num_pages)
 
     return posts
+
+def _get_in_name(user_profile):
+
+    if (user_profile.institute == None) or (user_profile.institute == '0') or (user_profile.institute == ''):
+        name = u'暂无'
+    else:
+        name = UserProfile.objects.get(user_id=user_profile.institute).name
+
+    return name
 
 @login_required
 @ensure_csrf_cookie
