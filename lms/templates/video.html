@@ -79,11 +79,11 @@
     <!--% endif-->
   <!--</ul>-->
 </div>
-
-     <script type="text/javascript" src="${static.url('/static/js/jwplayer/jwplayer6.6/jwplayer.flash.swf')}"></script>
-     <script type="text/javascript" src="${static.url('/static/js/jwplayer/jwplayer6.6/jwplayer.js')}"></script>
-     <script type="text/javascript" src="${static.url('/static/js/jwplayer/jwplayer6.6/jwplayer.html5.js')}"></script>
-
+	 
+     <script type="text/javascript" src="${static.url('static/js/jwplayer/jwplayer6.6/jwplayer.flash.swf')}"></script>
+     <script type="text/javascript" src="${static.url('static/js/jwplayer/jwplayer6.6/jwplayer.js')}"></script>
+     <script type="text/javascript" src="${static.url('static/js/jwplayer/jwplayer6.6/jwplayer.html5.js')}"></script>
+	 <script type="text/javascript" src="${static.url('static/js/lms.js')}"></script>
 <script type="text/javascript">
 var captions="${video_captions}";
 var captionsfile = {label: "on", 'default': true};
@@ -93,13 +93,13 @@ if(captions){
 	usecaptions = true;
 }
 setTimeout(function(){
-         jwplayer("myElement_${id}").setup({
-                        file: "${video_url}",
-                        width: '100%',
-                        height: '484',
-                        usecaptions:usecaptions,
-                       	tracks: [captionsfile]
-                    })
+   jwplayer("myElement_${id}").setup({
+            file: BaseToUrl.decode("${video_url}"),
+            width: '100%',
+            height: '484',
+            usecaptions:usecaptions,
+           	tracks: [captionsfile]
+        })
 }, 150);
 
 </script>

@@ -3,8 +3,6 @@
 
 <%inherit file="wechat_main.html" />
 
-<%namespace name='static' file='/static_content.html'/>
-
 <%! from django.core.urlresolvers import reverse %>
 <%! from django.utils import html %>
 <%! from django_countries.countries import COUNTRIES %>
@@ -152,13 +150,13 @@
 
 <div>
   <div class="ui-header ui-bar-a" role="banner" data-role="header" data-theme="a">
-    <div class="class_title">注册中国医学教育慕课联盟账户</div>
+    <div class="class_title">注册中国点滴慕课联盟账户</div>
   </div>
 </div>
 
 <section class="class_m20">
   <p class="center">
-    <img src="/static/images/xdlogo.png"/>
+    <img src="/store/images/logo.png"/>
   </p>
 
   <section role="main" class="content">
@@ -179,7 +177,7 @@
       </div>  
 
       <div>
-        <p>密码*（6-16个字符，请使用字母加数字或符号的组合，例如：xiaodun_2014）</p>
+        <p>密码*（6-16个字符，请使用字母加数字或符号的组合，例如：diandiyun_2014）</p>
         <p>
           <input type="password" class="input" name="password" placeholder="请输入您的密码" value="">
         </p>   

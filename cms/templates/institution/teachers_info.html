@@ -1,0 +1,50 @@
+<%inherit file="institution_base.html" />
+<%block name="title">教师信息</%block>
+
+<%block name="content">
+<div class="wrapper-mast wrapper">
+    <header class="mast has-actions has-subtitle">
+        <h1 class="page-header">
+            <a href="/teachers_info"><span class="sr">&gt; </span>教师信息</a>
+        </h1>
+    </header>
+    <section class="content">
+     <nav>
+    <form name="queryform" class="search-container search" id="search-form" action="/teachers_info" method="get" onsubmit="return chkform(this)">
+          <!--<input type="text" id="search-query" name="query"  onfocus="if (value =='请输入关键字...'){value =''}" onblur="if (value ==''){value='请输入关键字...'}" value="">-->
+          <table>
+              <tr>
+                  <td><div id="remind"></div></td>
+                  <td><input type="text" id="search-query" name="query"  class="search" placeholder="请输入关键字..." onfocus="placeholder =''" onblur="placeholder='请输入关键字...'" value=""></td>
+                  <td><input type="submit" class="search_button" value="搜索"></td>
+              </tr>
+          </table>
+    </form>
+    </nav>
+    <hr />
+        <table width="1000" class="table1">
+        % if len(user_tercher):
+                <tr>
+                    <td>教师名</td>
+                    <td>用户名</td>
+                    <td>邮箱</td>
+                    <td>所属机构</td>
+                    <td>课程数</td>
+                </tr>
+            %for n in range(0, len(user_tercher)):
+                <tr>
+                    <td>${user_tercher[n][0]}</td>
+                    <td>${user_tercher[n][1]}</td>
+                    <td>${user_tercher[n][2]}</td>
+                    <td>${user_tercher[n][3]}</td>
+                    <td><a href="${user_tercher[n][5]}">${user_tercher[n][4]}</a></td>
+                </tr>
+            %endfor
+        % else:
+            暂无教师
+        %endif
+        </table>
+        <%include file="fenye.html" args="posts=user_tercher" />
+    </section>
+
+</%block>

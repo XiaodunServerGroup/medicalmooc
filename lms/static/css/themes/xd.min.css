@@ -282,9 +282,9 @@ div.class_m20 div a.login {color: white; font-weight: normal;}
 .ott {background:#000000; filter:alpha(opacity=50); -moz-opacity:0.9; -khtml-opacity: 0.9; opacity: 0.9; -webkit-border-radius: .3125em /*{global-radii-buttons}*/;	border-radius: .3125em; width:80%; padding:30px; margin:auto;}
 .ott .title {color:#FFFFFF; font-size:24px; font-weight:bold; background:url(images/title_line.png) left bottom repeat-x; padding-bottom:10px;}
 .ott .title .close {background:url(images/close.png) left top no-repeat; color:#e4e4e4; font-size:20px; float:right; padding-left:25px; line-height:21px; font-weight:normal; cursor:pointer;}
-.ott p {font-size:18px; color:#FFFFFF; line-height:30px; font-weight:normal;}
+.ott p {font-size:15px; color:#FFFFFF; line-height:30px; font-weight:normal;}
 .ott p .input {background:#bcbcbc; font-size:15px; color:#000000;}
-.ott p.right {text-align:right; font-size:15px; font-weight:normal;}
+.ott p.right {text-align:right; font-size:14px; font-weight:normal;}
 .ott .but {width: 100%; height:60px; text-align:center; padding-left:60px;}
 .ott .cancel {border-radius: 10px; background-color: #CCC; width:30%; height:49px; color:#000000; text-align:center; font-size:20px; line-height:49px; cursor:pointer; float:left; margin-right:10px;}
 .ott .ok {border-radius: 10px; background-color: #FF8000; width:30%; height:49px; color:#FFFFFF; text-align:center; font-size:20px; line-height:49px; cursor:pointer; float:left;}

@@ -145,7 +145,6 @@ PLATFORM_NAME = ENV_TOKENS.get('PLATFORM_NAME', PLATFORM_NAME)
 CC_MERCHANT_NAME = ENV_TOKENS.get('CC_MERCHANT_NAME', PLATFORM_NAME)
 EMAIL_BACKEND = ENV_TOKENS.get('EMAIL_BACKEND', EMAIL_BACKEND)
 EMAIL_FILE_PATH = ENV_TOKENS.get('EMAIL_FILE_PATH', None)
-EMAIL_HOST = ENV_TOKENS.get('EMAIL_HOST', 'mail.pmph.com')  # django default is localhost
 EMAIL_PORT = ENV_TOKENS.get('EMAIL_PORT', 25)  # django default is 25
 EMAIL_USE_TLS = ENV_TOKENS.get('EMAIL_USE_TLS', False)  # django default is False
 SITE_NAME = ENV_TOKENS['SITE_NAME']
@@ -314,6 +313,7 @@ MONGODB_LOG = AUTH_TOKENS.get('MONGODB_LOG', {})
 OPEN_ENDED_GRADING_INTERFACE = AUTH_TOKENS.get('OPEN_ENDED_GRADING_INTERFACE',
                                                OPEN_ENDED_GRADING_INTERFACE)
 
+EMAIL_HOST = AUTH_TOKENS.get('EMAIL_HOST', '')  # django default is localhost
 EMAIL_HOST_USER = AUTH_TOKENS.get('EMAIL_HOST_USER', '')  # django default is ''
 EMAIL_HOST_PASSWORD = AUTH_TOKENS.get('EMAIL_HOST_PASSWORD', '')  # django default is ''
 
@@ -442,3 +442,7 @@ SSO_BUY_URL = 'http://202.101.75.74:8100/a/account/buy.action?uuid='
 APP_ID = '101189620'
 APP_KEY = '54c3c4d2adbd0db106795fc00e3ef7cc'
 REDIRECT_URL = 'mooc.diandiyun.com/get_openapi'
+
+
+CC_KEY="YRbFWhO8A0gwB8U5QmZpUrOpcNOHIbTX"
+CC_USER_ID = '70AC5AA799D98650'

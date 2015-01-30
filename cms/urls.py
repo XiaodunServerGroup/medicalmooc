@@ -77,6 +77,16 @@ urlpatterns += patterns(
     url(r'^sync/class/appointment$', 'sync_class_appointment'),
     url(r'^institution_upload_teacher$', 'institution_upload_teacher'),
     url(r'^remove_institute_teacher$', 'remove_institute_teacher'),
+
+    url(r'^institute_info/?$', 'get_institute_info'),
+    url(r'^institution_terchers/(?P<user_id>\d+)/?$', 'get_institution_terchers'),
+    url(r'^institution_course/(?P<id>\d+)/?$', 'get_institution_courses'),
+    url(r'^institution_tercher_courses/(?P<user_id>\d+)/?$', 'get_institution_tercher_courses'),
+    url(r'^teachers_info/?$', 'get_teachers_info'),
+    url(r'^teacher_courses/(?P<id>\d+)/?$', 'get_teacher_courses'),
+    url(r'^all_courses/?$', 'get_all_courses'),
+
+
     url(r'^teacher_intro_edit/(?P<id>\d+)/$', 'teacher_intro_edit'),
     url(r'^change_picurl$', 'change_picurl_request', name="change_picurl"),
     url(r'^change_shortbio$', 'change_shortbio_request', name="change_shortbio"),

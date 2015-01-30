@@ -85,7 +85,7 @@ def login_page(request):
         {
             'flag':flag,
             'csrf': csrf_token,
-            'forgot_password_link': "//{base}/login#forgot-password-modal".format(base=settings.LMS_BASE),
+            'forgot_password_link': "{base}/login#forgot-password-modal".format(base=settings.LMS_BASE),
             'platform_name': microsite.get_value('platform_name', settings.PLATFORM_NAME),
             'form': form
         }
