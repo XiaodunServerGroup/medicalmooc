@@ -99,6 +99,16 @@
           </a>
         </div>
       %endif
+    %elif user.is_authenticated() and not registered:
+      <form id="class_enroll_form" method="post" data-remote="true" action="${reverse('mobile_change_enrollment')}">
+          <fieldset class="enroll_fieldset">
+              <input name="course_id" type="hidden" value="${course.id}">
+              <input name="enrollment_action" type="hidden" value="enroll">
+          </fieldset>
+          <div class="submit">
+              <input name="submit" type="submit" value="注册课程">
+          </div>
+      </form>
     % elif is_course_full:
       <span class="register disabled">
         ${_("Course is full")}
@@ -118,17 +128,3 @@
 			<p>${get_course_about_section(course, "overview")}</p>
 		</div>
 </div>
-
-%if not registered:
-  <div style="display: none;">
-      <form id="class_enroll_form" method="post" data-remote="true" action="${reverse('mobile_change_enrollment')}">
-          <fieldset class="enroll_fieldset">
-              <input name="course_id" type="hidden" value="${course.id}">
-              <input name="enrollment_action" type="hidden" value="enroll">
-          </fieldset>
-          <div class="submit">
-              <input name="submit" type="submit" value="enroll">
-          </div>
-      </form>
-  </div>
-%endif
