@@ -237,7 +237,7 @@ html .ui-alt-icon .ui-radio-off:after {
 .fall-body ul h1 {color:#000000; font-size:20px;}
 .fall-body ul h2 {color:#333333; font-size:16px; font-weight:normal; line-height:20px;}
 .fall-body ul.click {background:#eeeeee;}
-.class_title {height:35px; font-size:15px; color:#FFFFFF; padding:0 10px; text-align:center; line-height:35px; background: left center no-repeat #2883bc;}
+.class_title {height:35px; font-size:15px; color:#FFFFFF; text-align:center; line-height:35px; background: left center no-repeat #2883bc;}
 .class_m20 {margin:5px;}
 .img-board {margin:15px 5px; padding:0;}
 .img-board img {width:100%; height:200px;}
@@ -248,7 +248,7 @@ html .ui-alt-icon .ui-radio-off:after {
 .class_m20 p.center {text-align: center; margin-top: 50px;}
 .class_m20 p.message.submission-error.is-shown {display: block;}
 .class_m20 p.message.submission-error {width: auto; padding: 0px; margin: 0 5px; color: white; background-color: #2883bc; border-radius: 5px; height: 30px; display: none}
-.class_m20 span.message-copy {line-height: 30px;}
+.class_m20 span.message-copy {line-height: 30px;text-shadow:none;}
 .class_m20 input.input {width: 100%; border: #dddddd solid 1px; height: 40px; color: #CCCCCC; line-height: 40px;}
 .class_m20 section h2{font-size: 15px;}
 .class_m20 section p{font-size: 14px;} 
