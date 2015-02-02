@@ -30,6 +30,30 @@ ${page_title_breadcrumbs(course_name())}
     <link rel="stylesheet" href="${static.url('candy_res/candy_full.css')}" />
   % endif
   ${fragment.head_html()}
+  
+  <style>
+  	.discussion-module .new-post-body .wmd-panel, .discussion-user-threads .new-post-body .wmd-panel {
+	width: 100%;
+	min-width:100px;
+	}
+	
+	.discussion-module .new-post-article .inner-wrapper, .discussion-user-threads .new-post-article .inner-wrapper {
+		max-width: 1180px;
+		min-width: 100px;
+		margin: auto;
+	}
+	.discussion-module, .discussion-user-threads {
+	position: relative;
+	margin: 20px 0;
+	padding:0;
+	background: #f6f6f6 !important;
+	border-radius: 3px;
+	}
+	.discussion-module .new-post-icon, .discussion-user-threads .new-post-icon {
+		display: none;
+	}
+  </style>
+  
 </%block>
 
 <%block name="js_extra">
