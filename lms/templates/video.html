@@ -79,11 +79,18 @@
     <!--% endif-->
   <!--</ul>-->
 </div>
+	 % if settings.DEBUG:
+	     <script type="text/javascript" src="${static.url('/static/js/jwplayer/jwplayer6.6/jwplayer.flash.swf')}"></script>
+	     <script type="text/javascript" src="${static.url('/static/js/jwplayer/jwplayer6.6/jwplayer.js')}"></script>
+	     <script type="text/javascript" src="${static.url('/static/js/jwplayer/jwplayer6.6/jwplayer.html5.js')}"></script>
+		 <script type="text/javascript" src="${static.url('/static/js/lms.js')}"></script>
+	 % else:
+	 	 <script type="text/javascript" src="${static.url('static/js/jwplayer/jwplayer6.6/jwplayer.flash.swf')}"></script>
+	     <script type="text/javascript" src="${static.url('static/js/jwplayer/jwplayer6.6/jwplayer.js')}"></script>
+	     <script type="text/javascript" src="${static.url('static/js/jwplayer/jwplayer6.6/jwplayer.html5.js')}"></script>
+		 <script type="text/javascript" src="${static.url('static/js/lms.js')}"></script>
+	 % endif 
 	 
-     <script type="text/javascript" src="${static.url('static/js/jwplayer/jwplayer6.6/jwplayer.flash.swf')}"></script>
-     <script type="text/javascript" src="${static.url('static/js/jwplayer/jwplayer6.6/jwplayer.js')}"></script>
-     <script type="text/javascript" src="${static.url('static/js/jwplayer/jwplayer6.6/jwplayer.html5.js')}"></script>
-	 <script type="text/javascript" src="${static.url('static/js/lms.js')}"></script>
 <script type="text/javascript">
 var captions="${video_captions}";
 var captionsfile = {label: "on", 'default': true};
@@ -92,10 +99,15 @@ if(captions){
 	captionsfile['file'] = '/store/'+captions;
 	usecaptions = true;
 }
+var aspectratio="";
+if(window.location.href.indexOf("/m/")>-1){
+	aspectratio = "16:10";
+}
 setTimeout(function(){
    jwplayer("myElement_${id}").setup({
             file: BaseToUrl.decode("${video_url}"),
             width: '100%',
+            aspectratio:aspectratio,
             height: '484',
             usecaptions:usecaptions,
            	tracks: [captionsfile]
