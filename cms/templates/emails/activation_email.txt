@@ -2,19 +2,25 @@
 
 ${_("hello user!")}${username}<br>
 ${_("Hello!")}<br>
-
+<%
+    if site.startswith('http://'):
+        site_new =site[7:]
+    else:
+        site_new=site
+    endif
+%>
 ${_("you can activate it now and enjoy the MOOC services!")}<br>
 % if is_secure:
-  <a href="https://${ site }/activate/${ key }" style="color:blue">${_("Click the Activate message")}</a>
+  <a href="https://${ site_new }/activate/${ key }" style="color:blue">${_("Click the Activate message")}</a>
 % else:
-  <a href="http://${ site }/activate/${ key }" style="color:blue">${_("Click the Activate message")}</a>
+  <a href="http://${ site_new }/activate/${ key }" style="color:blue">${_("Click the Activate message")}</a>
 % endif
 <br>
 ${_("If these words click do not work,copy and paste this address into your web browser's address bar!")}<br>
  % if is_secure:
-   https://${ site }/activate/${ key }
+   https://${ site_new }/activate/${ key }
  % else:
-   http://${ site }/activate/${ key }
+   http://${ site_new }/activate/${ key }
  % endif
  <br>
 ${_("this satellite was admires the automatically generated class, the system does not receive an answer, please do not reply!")}
