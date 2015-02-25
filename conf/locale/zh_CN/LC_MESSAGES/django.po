@@ -6418,7 +6418,7 @@ msgid "User {email} has registered but has not yet activated his/her account."
 msgstr "用户{email}已注册但尚未激活其账户。"
 
 msgid "User's Email Address"
-msgstr "用户邮箱地址"
+msgstr "用户地址"
 
 msgid "User:"
 msgstr "用户："
@@ -8276,6 +8276,27 @@ msgstr "请输入您个人简介，修改后您的个人简介将出现在您的
 
 msgid "Change my profile"
 msgstr "更改我的简介 "
+
+
+
+msgid "Start Time"
+msgstr "开始时间 "
+
+msgid "End Time"
+msgstr "结束时间"
+
+msgid "Course Teacher"
+msgstr "课程教师 "
+
+msgid "Award"
+msgstr "已颁发"
+
+msgid "Not Award"
+msgstr "未颁发"
+
+
+
+
 
 msgid "…"
 msgstr "…"

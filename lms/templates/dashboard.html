@@ -442,7 +442,7 @@
 
     <header>
       <h2 id="purchase-modal-title">
-        学分证书
+          ${_("Credit certificate")}
         <span class="sr">,
           ## Translators: this text gives status on if the modal interface (a menu or piece of UI that takes the full focus of the screen) is open or not
           ${_("modal open")}
@@ -454,12 +454,12 @@
     <section class="portfolio-content" style="padding: 0 40px 20px; max-height: 400px; overflow-y: auto;">
       <div class='portfolio-userinfo'>
         <div>
-          <label>用户名：</label>
+          <label>${_("Username")}：</label>
           <span>${_(user.username)}</span>
         </div>
 
         <div>
-          <label>邮箱：</label>
+          <label>${_("email")}：</label>
           <span>${_(user.email)}</span>
         </div>
       </div>
@@ -473,42 +473,42 @@
             
             <li>
               <div id='coursename'>
-                <label>课程名称：</label>
+                <label>${_("Course Name")}：</label>
                 <span>${course.display_name_with_default | h}</span>
               </div>
 
               <div id='coursecode'>
-                <label>课程代号：</label>
+                <label>${_("Course Number")}：</label>
                 <span>${course.number}</span>
               </div>
 
               <div id='coursestarttime'>
-                <label>开始时间：</label>
+                <label>${_("Start Time")}：</label>
                 <span>${course.start_date_text | h}</span>
               </div>
 
               <div id='courseendtime'>
-                <label>结束时间：</label>
+                <label>${_("End Time")}：</label>
                 <span>${course.end_date_text | h}</span>
               </div>
 
               <div id='courseteacher'>
-                <label>课程教师：</label>
+                <label>${_("Course Teacher")}：</label>
                 <span>${ get_one_instructor_name(course) | h }</span>
               </div>
 
               <div id='courseprogress'>
-                <label>课程进度：</label>
+                <label>${_("Course Progress")}：</label>
                 <span>${'{:.0%}'.format((grades.grade(user, request, course)['percent']))}</span>
               </div>
 
               <div id='coursecertificate'>
-              	<label>证书:</label>
+              	<label>${_("Certificates")}:</label>
               	<span>
                  % if grades.grade(user, request, course)['percent'] == 1:
-                   <p>已颁发</p>
+                   <p>${_("Award")}</p>
                  % else:
-                   <p>未颁发</p>
+                   <p>${_("Not Award")}</p>
                  % endif
               	</span>
               </div>
