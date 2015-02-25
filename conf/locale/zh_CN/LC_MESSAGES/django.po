@@ -8170,5 +8170,47 @@ msgstr "{span_start}激活{span_end}"
 msgid "{span_start}{platform_name}{span_end} Help"
 msgstr "{span_start}{platform_name}{span_end} 帮助"
 
+msgid "mooc"
+msgstr "慕课"
+
+msgid "hot courses"
+msgstr "热门课程"
+
+msgid "recent commencement"
+msgstr "最近开课"
+
+msgid "New Trailer"
+msgstr "最新预告"
+
+msgid "Alliance members"
+msgstr "联盟成员"
+
+
+msgid "Course overview"
+msgstr "课程概述"
+
+msgid "Course semester"
+msgstr "课程学期"
+
+msgid "Course Information"
+msgstr "课程信息"
+
+msgid "Course price"
+msgstr "课程价格"
+
+msgid "Course duration"
+msgstr "课程时长"
+
+msgid "Classes Starts"
+msgstr "开课时间"
+
+msgid "Course load"
+msgstr "课程负载"
+
+msgid "Course Instructor"
+msgstr "授课老师"
+
+
+
 msgid "…"
 msgstr "…"

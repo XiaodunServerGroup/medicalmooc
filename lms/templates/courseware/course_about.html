@@ -190,7 +190,7 @@
         <section class="container">
             <section class="section_left container_bg">
             	<div class="container_pad2" style="width:780px;">
-                    <h2 class="line">课程概述</h2>
+                    <h2 class="line">${_("Course overview")}</h2>
                         <div class="inner-wrapper">
                         ${get_course_about_section(course, "overview")}
                         </div>
@@ -198,7 +198,7 @@
             </section>
             <section class="section_right container_bg">
             	<div class="container_pad2">
-                    <h2>课程学期</h2>
+                    <h2>${_("Course semester")}</h2>
                     <div class="termSelect_c">
                         <select id="j-termSelect" class="termSelect">
                         %if course_end:
@@ -244,23 +244,23 @@
                         </div>
                     </div> 
                     <div class="m-btnList">
-                        <h2>课程信息</h2>
+                        <h2>${_("Course Information")}</h2>
                         %if course.course_price:
-                        	<p><span>课程价格：</span><span class="cor_red" style='font-size:18px;font-family:"Microsoft YaHei","Open Sans",Verdana"'>￥${course.course_price}</span></p>
+                        	<p><span>${_("Course price")}：</span><span class="cor_red" style='font-size:18px;font-family:"Microsoft YaHei","Open Sans",Verdana"'>￥${course.course_price}</span></p>
                         %endif
                         %if course_dur:
-                            <p><span>课程时长：</span><span class="cor_red">${course_dur[0] + "天"}</span></p>
+                            <p><span>${_("Course duration")}：</span><span class="cor_red">${course_dur[0] + "天"}</span></p>
                         %else:
-                            <p><span>课程时长：</span><span class="cor_red">${course_duration}</span></p>
+                            <p><span>${_("Course duration")}：</span><span class="cor_red">${course_duration}</span></p>
                         %endif
-                        <p><span>开课时间：</span><span class="cor_red">${course.start_date_text}</span></p>
-                        <p><span>课程负载：</span><span class="cor_red">${get_course_about_section(course, "effort")}小时每周</span></p>
+                        <p><span>${_("Classes Starts")}：</span><span class="cor_red">${course.start_date_text}</span></p>
+                        <p><span>${_("Course load")}：</span><span class="cor_red">${get_course_about_section(course, "effort")}小时每周</span></p>
                         <!--<p><span>内容类型：</span><span>视频 文档 随堂测验 富文本 讨论</span></p>-->
                         <!--<p><span>课程分类：</span><a href="#">哲学历史</a></p>-->
                     </div>
                   </div>
                     <div class="m-btnList">
-                        <h4>授课老师</h4>
+                        <h4>${_("Course Instructor")}</h4>
 
 
                         % for n in range(0, len(course_team)):
