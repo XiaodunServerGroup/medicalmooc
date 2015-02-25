@@ -4,7 +4,7 @@
   from courseware.access import has_access
   from django.conf import settings
   from edxmako.shortcuts import marketing_link
-
+  from django.utils.translation import ugettext as _
 %>
 <html>
 <head>
@@ -63,11 +63,11 @@
     <div class="wrapper">
     	<section>
     	<div class="title_mooc">
-            <h2>慕课</h2>
+            <h2>${_("mooc")}</h2>
             <ul class="nav" id="tabs">
-                <li><a id="current" name="#tab1" href="#">热门课程</a></li>/
-                <li><a name="#tab2" href="#">最近开课</a></li>/
-                <li><a name="#tab3" href="#">最新预告</a></li>
+                <li><a id="current" name="#tab1" href="#">${_("hot courses")}</a></li>/
+                <li><a name="#tab2" href="#">${_("recent commencement")}</a></li>/
+                <li><a name="#tab3" href="#">${_("New Trailer")}</a></li>
             </ul>
         </div>
 		<!--tab menu end-->
