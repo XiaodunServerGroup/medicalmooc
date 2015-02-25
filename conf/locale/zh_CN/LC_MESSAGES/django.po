@@ -8170,6 +8170,8 @@ msgstr "{span_start}激活{span_end}"
 msgid "{span_start}{platform_name}{span_end} Help"
 msgstr "{span_start}{platform_name}{span_end} 帮助"
 
+
+
 msgid "mooc"
 msgstr "慕课"
 
@@ -8211,6 +8213,39 @@ msgid "Course Instructor"
 msgstr "授课老师"
 
 
+msgid "Subject classification"
+msgstr "学科分类"
+
+msgid "All"
+msgstr "全部"
+
+msgid "No matching course"
+msgstr "无匹配课程"
+
+
+msgid "completed progress"
+msgstr "完成进度"
+
+msgid "head"
+msgstr "头像"
+
+msgid "Personal profile"
+msgstr "个人简介"
+
+msgid "Credit certificate"
+msgstr "学分证书"
+
+msgid "Synchronous classroom"
+msgstr "同步课堂预约"
+
+msgid "My order"
+msgstr "我的订单"
+
+msgid "My Account"
+msgstr "我的账户"
+
+msgid "Recharge history"
+msgstr "充值记录"
 
 msgid "…"
 msgstr "…"

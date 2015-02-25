@@ -244,7 +244,7 @@
 
         %if user.profile.profile_role in ['th', 'in']:
         <li class="info--pic">
-          <span class="title"><div class="icon picurl-icon"></div>头像 (<a href="#apply_picurl_change" rel="leanModal" class="edit-picurl">${_("edit")}</a>)</span>
+          <span class="title"><div class="icon picurl-icon"></div>${_("head")} (<a href="#apply_picurl_change" rel="leanModal" class="edit-picurl">${_("edit")}</a>)</span>
             <span class="data">
                 %if user.profile.picurl:
                 <img src="${ user.profile.picurl | h }" width="70" height="70" style="border-radius:50%;"/>
@@ -273,7 +273,7 @@
 
         %if user.profile.profile_role in ['th', 'in']:
         <li class="info--shortbio">
-          <span class="title"><div class="icon shortbio-icon"></div>个人简介 (<a href="#apply_shortbio_change" rel="leanModal" class="edit-shortbio">${_("edit")}</a>)</span>
+          <span class="title"><div class="icon shortbio-icon"></div>${_("Personal profile")} (<a href="#apply_shortbio_change" rel="leanModal" class="edit-shortbio">${_("edit")}</a>)</span>
             <span style="color: #646464;font-weight: 700;margin-left: 26px;margin-right: 16px; text-overflow: ellipsis;overflow: hidden; width:100;">
             %if user.profile.shortbio:
                 ${ user.profile.shortbio | h }
@@ -287,7 +287,7 @@
         <li class="info--portfolio">
           <span class="title">
               <div class='icon course-info-icon'></div>
-              <a href='#portfolio-modal' rel="leanModal" id="show_portfolio">学分证书</a>
+              <a href='#portfolio-modal' rel="leanModal" id="show_portfolio">${_("Credit certificate")}</a>
           </span>
         </li>
 
@@ -310,27 +310,27 @@
         <li class="control--appointment">
           <span class="title">
               <div class='icon'></div>
-              <a href='/sync/class/appointment' id="show_appointment">同步课堂预约</a>
+              <a href='/sync/class/appointment' id="show_appointment">${_("Synchronous classroom")}</a>
           </span>
         </li>
 
 		<li class="control--appointment">
           <span class="title">
               <div class='icon'></div>
-              <a href='javascript:void(0)' id="myOrder">我的订单</a>
+              <a href='javascript:void(0)' id="myOrder">${_("My order")}</a>
           </span>
         </li>
 		
 		<li class="control--appointment">
           <span class="title">  
               <div class='icon'></div>
-              <a href='javascript:void(0)' id="myAccount">我的账户</a>
+              <a href='javascript:void(0)' id="myAccount">${_("My Account")}</a>
           </span>
         </li>
         <li class="control--appointment">
           <span class="title">
               <div class='icon'></div>
-              <a href='javascript:void(0)' id="myRecord">充值记录</a>
+              <a href='javascript:void(0)' id="myRecord">${_("Recharge history")}</a>
           </span>
         </li>
 
