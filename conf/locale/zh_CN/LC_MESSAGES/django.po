@@ -8247,5 +8247,35 @@ msgstr "我的账户"
 msgid "Recharge history"
 msgstr "充值记录"
 
+
+msgid "Change your avatar link"
+msgstr "更改您的头像链接"
+
+msgid "In order to maintain your drip in cloud education Mu class coalition credibility, all changes are records."
+msgstr "为了维护您在点滴云教育慕课联盟的可信度，所有的更改都被做记录."
+
+msgid "Please input your avatar link, use the JPG or PNG format, the modified full name you appear in the drip cloud education Mu class alliance information in your:"
+msgstr "请输入您的头像链接,请使用jpg或png格式，修改后您的全名将出现在您的点滴云教育慕课联盟资料中："
+
+msgid "change my head"
+msgstr "更改我的头像"
+
+
+msgid "In order to maintain your drip in cloud education Mu class coalition credibility, all name changes are recorded."
+msgstr "为了维护您在点滴云教育慕课联盟的可信度，所有的名称更改都被做记录."
+
+msgid "Please enter your full name, full name you have modified the drip in cloud education Mu class alliance information in your:"
+msgstr "请输入您的全名，修改后您的全名将出现在您的点滴云教育慕课联盟资料中："
+
+
+msgid "Change your profile"
+msgstr "更改您的个人简介 "
+
+msgid "Please enter your personal profile, the modified your profile will appear in bit by bit cloud education Mu class alliance information in your:"
+msgstr "请输入您个人简介，修改后您的个人简介将出现在您的点滴云教育慕课联盟资料中："
+
+msgid "Change my profile"
+msgstr "更改我的简介 "
+
 msgid "…"
 msgstr "…"
