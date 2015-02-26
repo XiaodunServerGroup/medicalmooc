@@ -772,69 +772,13 @@ def mobi_directory(request, course_id):
     course = get_course_with_access(user, course_id, 'load', depth=2)
     staff_access = has_access(user, course, 'staff')
     registered = registered_for_course(course, user)
-    
-    show_list = list()
-    '''
+
     motoc = mobi_toc_for_course(user, request, course)
+    show_list = list()
     for toc in motoc:
         videolist = toc['show_url'][0]
         show_list.append(videolist)
-        '''
         
-    import pymongo
-    import random
-    import hashlib
-    import urllib2
-    import xmltodict
-    default_config = settings.MODULESTORE['default']['OPTIONS']['stores']['default']['DOC_STORE_CONFIG']
-    conn = pymongo.Connection(default_config['host'][0], default_config['port'])
-    db = conn[default_config['db']] #连接库
-    db.authenticate(default_config['user'], default_config['password'])   
-    edxapp = db[default_config['collection']]
-    
-    _org,_course,run =  course_id.split('/')
-    video_list = edxapp.find_one({"_id.org" :_org, "_id.course" :_course, "_id.category" :"video", "_id.revision" : {"$ne":"draft"},
-             "$or":[{"metadata.html5_sources":{"$exists": "true", "$not": {"$size": 0}}},
-                    {"metadata.video_cc_id":{"$exists": "true", "$not": {"$size": 0}}}]
-             })
-    def get_video_url(video_id):
-        key= settings.CC_KEY
-        user_id = settings.CC_USER_ID
-        #video_id = '491D68CD178CC5F89C33DC5901307461'
-            
-        query_str = 'userid=%s&videoid=%s' % (user_id, video_id)
-        
-        t = int(time.time())
-        hash = '%s&time=%s&salt=%s' % (query_str, t, key)
-        hash = hashlib.md5(hash).hexdigest().upper()
-        
-        #url = "http://spark.bokecc.com/api/user"+"?"+query_str+"&time="+t+"&hash="+hash;
-        url = "http://union.bokecc.com/api/mobile?%s&time=%s&hash=%s" % (query_str, t, hash)
-        
-        try:
-            page = urllib2.urlopen(url).read()  
-            result = xmltodict.parse(page.encode('utf-8'))
-            
-            if result.has_key("video") and len(result["video"])>0:
-                video_url = result["video"]['copy'][-1]['#text']
-            else:
-                video_url = ''
-        except:
-            import traceback
-            print traceback.format_exc()
-            return ''
-        return video_url
-    
-    
-    if video_list:
-        video_cc_id = video_list['metadata'].get('video_cc_id', '')
-        if video_cc_id:
-            video_url = get_video_url(video_cc_id)
-        else:
-            video_url = video_list['metadata'].get('html5_sources', [''])[0]
-        show_list.append(video_url)
-   # print show_list
-    
     if not registered:
         # TODO (vshnayder): do course instructors need to be registered to see course?
         log.debug(u'User %s tried to view course %s but is not enrolled', user, course.location.url())
