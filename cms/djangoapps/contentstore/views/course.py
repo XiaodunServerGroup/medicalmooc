@@ -508,7 +508,7 @@ def get_institute_info(request):
                 ul.name.encode('utf8'),
                 i.username.encode('utf8'),
                 i.email.encode('utf8'),
-                int(UserProfile.objects.filter(institute=ul.user_id).count()),
+                int(UserProfile.objects.filter(institute=ul.user_id, profile_role='th').count()),
                 course_count,
                 int(ul.user_id),
                 url_tercher,
@@ -749,7 +749,7 @@ def _get_course_institution(courses):
      return course_institution
 
 def _get_tercher_institution(user_id):
-    user_list = UserProfile.objects.filter(institute=user_id)
+    user_list = UserProfile.objects.filter(institute=user_id, profile_role='th')
     courses = modulestore('direct').get_courses()
     user_tercher = []
     for user in user_list:

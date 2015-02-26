@@ -244,7 +244,7 @@
 
         %if user.profile.profile_role in ['th', 'in']:
         <li class="info--pic">
-          <span class="title"><div class="icon picurl-icon"></div>头像 (<a href="#apply_picurl_change" rel="leanModal" class="edit-picurl">${_("edit")}</a>)</span>
+          <span class="title"><div class="icon picurl-icon"></div>${_("head")} (<a href="#apply_picurl_change" rel="leanModal" class="edit-picurl">${_("edit")}</a>)</span>
             <span class="data">
                 %if user.profile.picurl:
                 <img src="${ user.profile.picurl | h }" width="70" height="70" style="border-radius:50%;"/>
@@ -273,7 +273,7 @@
 
         %if user.profile.profile_role in ['th', 'in']:
         <li class="info--shortbio">
-          <span class="title"><div class="icon shortbio-icon"></div>个人简介 (<a href="#apply_shortbio_change" rel="leanModal" class="edit-shortbio">${_("edit")}</a>)</span>
+          <span class="title"><div class="icon shortbio-icon"></div>${_("Personal profile")} (<a href="#apply_shortbio_change" rel="leanModal" class="edit-shortbio">${_("edit")}</a>)</span>
             <span style="color: #646464;font-weight: 700;margin-left: 26px;margin-right: 16px; text-overflow: ellipsis;overflow: hidden; width:100;">
             %if user.profile.shortbio:
                 ${ user.profile.shortbio | h }
@@ -287,7 +287,7 @@
         <li class="info--portfolio">
           <span class="title">
               <div class='icon course-info-icon'></div>
-              <a href='#portfolio-modal' rel="leanModal" id="show_portfolio">学分证书</a>
+              <a href='#portfolio-modal' rel="leanModal" id="show_portfolio">${_("Credit certificate")}</a>
           </span>
         </li>
 
@@ -310,27 +310,27 @@
         <li class="control--appointment">
           <span class="title">
               <div class='icon'></div>
-              <a href='/sync/class/appointment' id="show_appointment">同步课堂预约</a>
+              <a href='/sync/class/appointment' id="show_appointment">${_("Synchronous classroom")}</a>
           </span>
         </li>
 
 		<li class="control--appointment">
           <span class="title">
               <div class='icon'></div>
-              <a href='javascript:void(0)' id="myOrder">我的订单</a>
+              <a href='javascript:void(0)' id="myOrder">${_("My order")}</a>
           </span>
         </li>
 		
 		<li class="control--appointment">
           <span class="title">  
               <div class='icon'></div>
-              <a href='javascript:void(0)' id="myAccount">我的账户</a>
+              <a href='javascript:void(0)' id="myAccount">${_("My Account")}</a>
           </span>
         </li>
         <li class="control--appointment">
           <span class="title">
               <div class='icon'></div>
-              <a href='javascript:void(0)' id="myRecord">充值记录</a>
+              <a href='javascript:void(0)' id="myRecord">${_("Recharge history")}</a>
           </span>
         </li>
 
@@ -442,7 +442,7 @@
 
     <header>
       <h2 id="purchase-modal-title">
-        学分证书
+          ${_("Credit certificate")}
         <span class="sr">,
           ## Translators: this text gives status on if the modal interface (a menu or piece of UI that takes the full focus of the screen) is open or not
           ${_("modal open")}
@@ -454,12 +454,12 @@
     <section class="portfolio-content" style="padding: 0 40px 20px; max-height: 400px; overflow-y: auto;">
       <div class='portfolio-userinfo'>
         <div>
-          <label>用户名：</label>
+          <label>${_("Username")}：</label>
           <span>${_(user.username)}</span>
         </div>
 
         <div>
-          <label>邮箱：</label>
+          <label>${_("email")}：</label>
           <span>${_(user.email)}</span>
         </div>
       </div>
@@ -473,42 +473,42 @@
             
             <li>
               <div id='coursename'>
-                <label>课程名称：</label>
+                <label>${_("Course Name")}：</label>
                 <span>${course.display_name_with_default | h}</span>
               </div>
 
               <div id='coursecode'>
-                <label>课程代号：</label>
+                <label>${_("Course Number")}：</label>
                 <span>${course.number}</span>
               </div>
 
               <div id='coursestarttime'>
-                <label>开始时间：</label>
+                <label>${_("Start Time")}：</label>
                 <span>${course.start_date_text | h}</span>
               </div>
 
               <div id='courseendtime'>
-                <label>结束时间：</label>
+                <label>${_("End Time")}：</label>
                 <span>${course.end_date_text | h}</span>
               </div>
 
               <div id='courseteacher'>
-                <label>课程教师：</label>
+                <label>${_("Course Teacher")}：</label>
                 <span>${ get_one_instructor_name(course) | h }</span>
               </div>
 
               <div id='courseprogress'>
-                <label>课程进度：</label>
+                <label>${_("Course Progress")}：</label>
                 <span>${'{:.0%}'.format((grades.grade(user, request, course)['percent']))}</span>
               </div>
 
               <div id='coursecertificate'>
-              	<label>证书:</label>
+              	<label>${_("Certificates")}:</label>
               	<span>
                  % if grades.grade(user, request, course)['percent'] == 1:
-                   <p>已颁发</p>
+                   <p>${_("Award")}</p>
                  % else:
-                   <p>未颁发</p>
+                   <p>${_("Not Award")}</p>
                  % endif
               	</span>
               </div>
@@ -615,12 +615,12 @@
       <form id="change_name_form">
         <div id="change_name_error" class="modal-form-error"> </div>
         ## Translators: note that {platform} {cert_name_short} will look something like: "edX certificate". Please do not change the order of these placeholders.
-        <p> <p>为了维护您在中国医学教育慕课联盟的可信度，所有的名称更改都被做记录.</p></p>
+        <p> <p>${_("In order to maintain your drip in cloud education Mu class coalition credibility, all name changes are recorded.")}</p></p>
         <br/>
         <fieldset>
           <div class="input-group">
             ## Translators: note that {platform} {cert_name_short} will look something like: "edX certificate". Please do not change the order of these placeholders.
-            <label>请输入您的全名，修改后您的全名将出现在您的中国医学教育慕课联盟资料中：</label>
+            <label>${_("Please enter your full name, full name you have modified the drip in cloud education Mu class alliance information in your:")}</label>
             <input id="new_name_field" value="" type="text" />
             <label>${_("Reason for name change:")}</label>
             <textarea id="name_rationale_field" value=""></textarea>
@@ -676,7 +676,7 @@
 
     <header>
       <h2 id="change-picurl-title">
-        更改您的头像链接
+          ${_("Change your avatar link")}
         <span class="sr">,
           ## Translators: this text gives status on if the modal interface (a menu or piece of UI that takes the full focus of the screen) is open or not
           ${_("modal open")}
@@ -688,16 +688,16 @@
       <form id="change_picurl_form">
         <div id="change_picurl_error" class="modal-form-error"> </div>
         ## Translators: note that {platform} {cert_name_short} will look something like: "edX certificate". Please do not change the order of these placeholders.
-        <p> <p>为了维护您在中国医学教育慕课联盟的可信度，所有的更改都被做记录.</p></p>
+        <p> <p> ${_("In order to maintain your drip in cloud education Mu class coalition credibility, all changes are records.")}</p></p>
         <br/>
         <fieldset>
           <div class="input-group">
             ## Translators: note that {platform} {cert_name_short} will look something like: "edX certificate". Please do not change the order of these placeholders.
-            <label>请输入您的头像链接,请使用jpg或png格式，修改后您的全名将出现在您的中国医学教育慕课联盟资料中：</label>
+            <label>${_("Please input your avatar link, use the JPG or PNG format, the modified full name you appear in the drip cloud education Mu class alliance information in your:")}</label>
             <input id="new_picurl_field" value="" type="text" />
           </div>
           <div class="submit">
-            <input type="submit" id="submit" value="更改我的头像">
+            <input type="submit" id="submit" value='${_("change my head")}'>
           </div>
         </fieldset>
       </form>
@@ -716,7 +716,7 @@
 
     <header>
       <h2 id="change-shortbio-title">
-        更改您的个人简介
+          ${_('Change your profile')}
         <span class="sr">,
           ## Translators: this text gives status on if the modal interface (a menu or piece of UI that takes the full focus of the screen) is open or not
           ${_("modal open")}
@@ -728,16 +728,16 @@
       <form id="change_shortbio_form">
         <div id="change_shortbio_error" class="modal-form-error"> </div>
         ## Translators: note that {platform} {cert_name_short} will look something like: "edX certificate". Please do not change the order of these placeholders.
-        <p> <p>为了维护您在中国医学教育慕课联盟的可信度，所有的更改都被做记录.</p></p>
+        <p> <p> ${_('In order to maintain your drip in cloud education Mu class coalition credibility, all changes are records.')}</p></p>
         <br/>
         <fieldset>
           <div class="input-group">
             ## Translators: note that {platform} {cert_name_short} will look something like: "edX certificate". Please do not change the order of these placeholders.
-            <label>请输入您个人简介，修改后您的个人简介将出现在您的中国医学教育慕课联盟资料中：</label>
+            <label> ${_('Please enter your personal profile, the modified your profile will appear in bit by bit cloud education Mu class alliance information in your:')}</label>
             <textarea id="new_shortbio_field" value=""></textarea>
           </div>
           <div class="submit">
-            <input type="submit" id="submit" value="更改我的简介">
+            <input type="submit" id="submit" value=' ${_("Change my profile")}'>
           </div>
         </fieldset>
       </form>

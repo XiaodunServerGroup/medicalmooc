@@ -587,7 +587,7 @@ function chkform(obj){
       <div class="content-body">
         <div class="selection-panel">
           <div class="filter fl">
-            <div class="filter-title fl"><span>学科分类</span></div>
+            <div class="filter-title fl"><span>${_("Subject classification")}</span></div>
             <div class="filter-ul fl">
               <ul id="searbar">
                       <li id="subjectsearbar" class="tab1" style="display: none;"><div><strong></strong><span></span></div></li>
@@ -600,7 +600,7 @@ function chkform(obj){
                 <div class="subject-left">科目：</div>
                 <div class="subject-right">
                   <ul id="subject">
-                      <li class="tab1" name="all"><span>全部</span></li>
+                      <li class="tab1" name="all"><span>${_("All")}</span></li>
                        % for item in course_class_list:
 						 <li class="tab1" name="${item.code}"><span>${item.name}</span></li>
 					 % endfor
@@ -639,7 +639,7 @@ function chkform(obj){
               <tr>
                   <td><div id="remind"></div></td>
                   <td><input type="text" id="search-query" name="query"  class="search" placeholder="请输入关键字..." onfocus="placeholder =''" onblur="placeholder='请输入关键字...'" value=""></td>
-                  <td><input type="submit" class="search_button" value="搜索"></td>
+                  <td><input type="submit" class="search_button" value='${_("Search")}'></td>
               </tr>
           </table>
         </form>
@@ -657,7 +657,7 @@ function chkform(obj){
       </ul>
     % else:
         <ul class="courses">
-        无匹配课程
+            ${_("No matching course")}
     % endif
     </section>
 

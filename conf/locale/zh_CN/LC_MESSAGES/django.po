@@ -6418,7 +6418,7 @@ msgid "User {email} has registered but has not yet activated his/her account."
 msgstr "用户{email}已注册但尚未激活其账户。"
 
 msgid "User's Email Address"
-msgstr "用户邮箱地址"
+msgstr "用户地址"
 
 msgid "User:"
 msgstr "用户："
@@ -8169,6 +8169,134 @@ msgstr "{span_start}激活{span_end}"
 
 msgid "{span_start}{platform_name}{span_end} Help"
 msgstr "{span_start}{platform_name}{span_end} 帮助"
+
+
+
+msgid "mooc"
+msgstr "慕课"
+
+msgid "hot courses"
+msgstr "热门课程"
+
+msgid "recent commencement"
+msgstr "最近开课"
+
+msgid "New Trailer"
+msgstr "最新预告"
+
+msgid "Alliance members"
+msgstr "联盟成员"
+
+
+msgid "Course overview"
+msgstr "课程概述"
+
+msgid "Course semester"
+msgstr "课程学期"
+
+msgid "Course Information"
+msgstr "课程信息"
+
+msgid "Course price"
+msgstr "课程价格"
+
+msgid "Course duration"
+msgstr "课程时长"
+
+msgid "Classes Starts"
+msgstr "开课时间"
+
+msgid "Course load"
+msgstr "课程负载"
+
+msgid "Course Instructor"
+msgstr "授课老师"
+
+
+msgid "Subject classification"
+msgstr "学科分类"
+
+msgid "All"
+msgstr "全部"
+
+msgid "No matching course"
+msgstr "无匹配课程"
+
+
+msgid "completed progress"
+msgstr "完成进度"
+
+msgid "head"
+msgstr "头像"
+
+msgid "Personal profile"
+msgstr "个人简介"
+
+msgid "Credit certificate"
+msgstr "学分证书"
+
+msgid "Synchronous classroom"
+msgstr "同步课堂预约"
+
+msgid "My order"
+msgstr "我的订单"
+
+msgid "My Account"
+msgstr "我的账户"
+
+msgid "Recharge history"
+msgstr "充值记录"
+
+
+msgid "Change your avatar link"
+msgstr "更改您的头像链接"
+
+msgid "In order to maintain your drip in cloud education Mu class coalition credibility, all changes are records."
+msgstr "为了维护您在点滴云教育慕课联盟的可信度，所有的更改都被做记录."
+
+msgid "Please input your avatar link, use the JPG or PNG format, the modified full name you appear in the drip cloud education Mu class alliance information in your:"
+msgstr "请输入您的头像链接,请使用jpg或png格式，修改后您的全名将出现在您的点滴云教育慕课联盟资料中："
+
+msgid "change my head"
+msgstr "更改我的头像"
+
+
+msgid "In order to maintain your drip in cloud education Mu class coalition credibility, all name changes are recorded."
+msgstr "为了维护您在点滴云教育慕课联盟的可信度，所有的名称更改都被做记录."
+
+msgid "Please enter your full name, full name you have modified the drip in cloud education Mu class alliance information in your:"
+msgstr "请输入您的全名，修改后您的全名将出现在您的点滴云教育慕课联盟资料中："
+
+
+msgid "Change your profile"
+msgstr "更改您的个人简介 "
+
+msgid "Please enter your personal profile, the modified your profile will appear in bit by bit cloud education Mu class alliance information in your:"
+msgstr "请输入您个人简介，修改后您的个人简介将出现在您的点滴云教育慕课联盟资料中："
+
+msgid "Change my profile"
+msgstr "更改我的简介 "
+
+
+
+msgid "Start Time"
+msgstr "开始时间 "
+
+msgid "End Time"
+msgstr "结束时间"
+
+msgid "Course Teacher"
+msgstr "课程教师 "
+
+msgid "Award"
+msgstr "已颁发"
+
+msgid "Not Award"
+msgstr "未颁发"
+
+
+
+
 
 msgid "…"
 msgstr "…"
