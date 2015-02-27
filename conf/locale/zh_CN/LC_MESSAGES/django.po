@@ -8406,6 +8406,77 @@ msgid "Zhejiang University (Zhejiang University), the predecessor is the Qiushi 
 msgstr "浙江大学（Zhejiang University），前身是1897年创建的求是书院，是中国人自己最早创办的现代高等学府之一。1928年更名为国立浙江大学。"
 
 
+msgid "Mooc platform registration"
+msgstr "慕课平台注册"
+
+msgid "Welcome to the Mu class platform, please create your account."
+msgstr "欢迎访问慕课平台，请创建属于您的账户."
+
+msgid "Please fill in the following content related to the completion of the registration."
+msgstr " 请填写以下相关内容完成注册。"
+
+msgid "Mark"
+msgstr "标记"
+
+msgid "Bold asterisk"
+msgstr "粗体和星号"
+
+msgid "As required"
+msgstr "为必填项"
+
+msgid "The e-mail address to verify the rear can complete the registration, please fill in the correct e-mail."
+msgstr "电子邮件地址需验证后方可完成注册，请务必填写正确的电子邮件。"
+
+msgid "Weak"
+msgstr "弱"
+
+msgid "Middle"
+msgstr "中"
+
+msgid "Strong"
+msgstr "强"
+
+msgid "6-16 characters, please use letters and numbers or symbols, such as: renweimooc_2014"
+msgstr "6-16个字符，请使用字母加数字或符号的组合，例如：renweimooc_2014"
+
+msgid "The username should contain English letters from A to Z, Arabia the numbers 0 to 9, and cannot contain spaces."
+msgstr "用户名应当包含英文字母A到Z，阿拉伯数字0到9，并且不能包含空格."
+
+msgid "Dr"
+msgstr "博士"
+
+msgid "Master"
+msgstr "硕士"
+
+msgid "Bachelor"
+msgstr "学士"
+
+msgid "Junior College"
+msgstr "大专"
+
+msgid "Secondary / high school"
+msgstr "中专/高中"
+
+msgid "Junior middle school"
+msgstr "初中"
+
+msgid "Primary school"
+msgstr "小学"
+
+msgid "Without"
+msgstr "没有"
+
+msgid "Other"
+msgstr "其他"
+
+msgid "Male"
+msgstr "男"
+
+msgid "Female"
+msgstr "女"
+
+msgid "Please share your registration Mu class platform"
+msgstr "请分享您注册慕课平台的原因"
 
 
 msgid "…"

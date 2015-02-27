@@ -14,7 +14,7 @@
 <%! from datetime import date %>
 <%! import calendar %>
 
-<%block name="pagetitle">慕课平台注册</%block>
+<%block name="pagetitle">${_("Mooc platform registration")}</%block>
 
 <%block name="bodyclass">view-register</%block>
 
@@ -97,7 +97,7 @@
         $submitButton.
           removeClass('is-disabled').
           removeProp('disabled').
-          html("创建我的账户");
+          html('${_("Create My Account")}');
       }
       else {
         $submitButton.
@@ -163,12 +163,12 @@
 <div class="introduction">
   <header>
     <h1 class="title">
-      <span class="title-super">欢迎访问慕课平台，请创建属于您的账户.</span>
+      <span class="title-super">${_("Welcome to the Mu class platform, please create your account.")}</span>
     </h1>
   </header>
   <p style="padding-top:20px;"><span style="color:#fff; margin-left:120px;">
-        请填写以下相关内容完成注册。</span><br>
-        <span style="color:#fff; margin-left:120px;">标记<strong>粗体和星号(*)</strong>的为必填项</span>
+        ${_("Please fill in the following content related to the completion of the registration.")}</span><br>
+        <span style="color:#fff; margin-left:120px;">${_("Mark")}<strong>${_("Bold asterisk")}(*)</strong>${_("As required")}</span>
   </p>
 </div>
 </section>
@@ -197,7 +197,7 @@
           <li class="field required text" id="field-email">
             <label for="email">${_('E-mail')}</label>
             <input class="" id="email" type="email" name="email" value="" placeholder="${_('example: username@domain.com')}" required aria-required="true" />
-            <span id="" class="tip tip-input">电子邮件地址需验证后方可完成注册，请务必填写正确的电子邮件。</span>
+            <span id="" class="tip tip-input">${_("The e-mail address to verify the rear can complete the registration, please fill in the correct e-mail.")}</span>
           </li>
           <li class="field required password" id="field-password">
             <label for="password">${_('Password')}</label>
@@ -205,18 +205,18 @@
             <div id="J_PwdStrength" class="pw-strength pw-weak">
               <div class="pw-bar"></div>
               <div class="pw-letter">
-                <span class="tsl" data-phase-id="r_1_8">弱</span>
-                <span class="tsl" data-phase-id="r_1_9">中</span>
-                <span class="tsl" data-phase-id="r_1_10">强</span>       
+                <span class="tsl" data-phase-id="r_1_8">${_("Weak")}</span>
+                <span class="tsl" data-phase-id="r_1_9">${_("Middle")}</span>
+                <span class="tsl" data-phase-id="r_1_10">${_("Strong")}</span>
               </div>
             </div>
-            <span id="username-tip" class="tip tip-input">6-16个字符，请使用字母加数字或符号的组合，例如：renweimooc_2014</span>
+            <span id="username-tip" class="tip tip-input">${_("6-16 characters, please use letters and numbers or symbols, such as: renweimooc_2014")}</span>
           </li>
           <li class="field required text" id="field-username">
             <!--<label for="username">${_('Public Username')}</label>-->
-            <label for="username">用户名</label>
+            <label for="username">${_('Public Username')}</label>
             <input id="username" type="text" name="username" value="" placeholder="${_('example: JaneDoe')}" required aria-required="true" maxlength="15" aria-describedby="username-tip"/>
-            <span class="tip tip-input" id="username-tip">用户名应当包含英文字母A到Z，阿拉伯数字0到9，并且不能包含空格. <strong>(${_('cannot be changed later')})</strong></span>
+            <span class="tip tip-input" id="username-tip">${_("The username should contain English letters from A to Z, Arabia the numbers 0 to 9, and cannot contain spaces.")} <strong>(${_('cannot be changed later')})</strong></span>
           </li>
           <li class="field required text" id="field-name">
             <label for="name">${_('Full Name')}</label>
@@ -296,23 +296,23 @@
                 %for code, ed_level in UserProfile.LEVEL_OF_EDUCATION_CHOICES:
                 <option value="${code}">
                     % if code == 'p':
-                        博士
+                        ${_("Dr")}
                     % elif code == 'm':
-                        硕士
+                        ${_("Master")}
                     % elif code == 'b':
-                        学士
+                        ${_("Bachelor")}
                     % elif code == 'a':
-                        大专
+                        ${_("Junior College")}
                     % elif code == 'hs':
-                        中专/高中
+                        ${_("Secondary / high school")}
                     % elif code == 'jhs':
-                        初中
+                        ${_("Junior middle school")}
                     % elif code == 'el':
-                        小学
+                        ${_("Primary school")}
                     % elif code == 'none':
-                        没有
+                        ${_("Without")}
                     % else:
-                        其他
+                        ${_("Other")}
                     % endif
                 </option>
                 %endfor
@@ -329,11 +329,11 @@
                 %for code, gender in UserProfile.GENDER_CHOICES:
                 <option value="${code}">
                     % if code == 'm':
-                        男
+                        ${_("Male")}
                     % elif code == 'f':
-                        女
+                        ${_("Female")}
                     % else:
-                        其他
+                        ${_("Other")}
                     % endif
                 </option>
                 %endfor
@@ -370,7 +370,7 @@
 
           % if settings.REGISTRATION_EXTRA_FIELDS['goals'] != 'hidden':
           <li class="field ${settings.REGISTRATION_EXTRA_FIELDS['goals']} text" id="field-goals">
-            <label for="goals">请分享您注册慕课平台的原因</label>
+            <label for="goals">${_("Please share your registration Mu class platform")}</label>
             <textarea id="goals" name="goals" value="" ${'required aria-required="true"' if settings.REGISTRATION_EXTRA_FIELDS['goals'] == 'required' else ''}></textarea>
           </li>
           % endif
