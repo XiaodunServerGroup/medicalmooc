@@ -8187,6 +8187,19 @@ msgstr "最新预告"
 msgid "Alliance members"
 msgstr "联盟成员"
 
+msgid "No Teacher profile"
+msgstr "教师暂无简介"
+
+msgid "No Course profile"
+msgstr "课程暂无简介"
+
+msgid "Not update"
+msgstr "暂时无更新"
+
+msgid "Listen"
+msgstr "听讲"
+
+
 
 msgid "Course overview"
 msgstr "课程概述"

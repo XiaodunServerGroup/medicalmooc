@@ -22,32 +22,32 @@
 
                 for(var i = 0; i < context.length; i++){
                     if(context[i]["course_update_date"] != null){
-                        $("#tab1_"+ i + " .left").html(context[i]["course_update_date"]+"更新");
+                        $("#tab1_"+ i + " .left").html(context[i]["course_update_date"]);
                     }else{
-                        $("#tab1_"+ i + " .left").html("暂时无更新")
+                        $("#tab1_"+ i + " .left").html('${_("Not update")}')
                     }
-                    $("#tab1_"+ i + " .number").html(context[i]["enrollment_number"]+"听讲");
-                    $("#tab1_"+ i + " .right").html(context[i]["count"]+"讨论");
+                    $("#tab1_"+ i + " .number").html(context[i]["enrollment_number"]+'${_("Listen")}');
+                    $("#tab1_"+ i + " .right").html(context[i]["count"]+'${_("Discussion")}');
                 }
 
                 for(var j = 0; j < context_later.length; j++){
                     if(context_later[j]["course_update_date"] != null){
-                        $("#tab2_"+ j + " .left").html(context_later[j]["course_update_date"]+"更新");
+                        $("#tab2_"+ j + " .left").html(context_later[j]["course_update_date"]);
                     }else{
-                        $("#tab2_"+ j + " .left").html("暂时无更新");
+                        $("#tab2_"+ j + " .left").html('${_("Not update")}');
                     }
-                    $("#tab2_"+ j + " .number").html(context_later[j]["enrollment_number"]+"听讲");
-                    $("#tab2_"+ j + " .right").html(context_later[j]["count"]+"讨论");
+                    $("#tab2_"+ j + " .number").html(context_later[j]["enrollment_number"]+'${_("Listen")}');
+                    $("#tab2_"+ j + " .right").html(context_later[j]["count"]+'${_("Discussion")}');
                 }
 
                 for(var k = 0; k < context_advance.length; k++){
                     if(context_advance[k]["course_update_date"] != null){
-                        $("#tab3_"+ k + " .left").html(context_advance[k]["course_update_date"]+"更新");
+                        $("#tab3_"+ k + " .left").html(context_advance[k]["course_update_date"]);
                     }else{
-                        $("#tab3_"+ k + " .left").html("暂时无更新");
+                        $("#tab3_"+ k + " .left").html('${_("Not update")}');
                     }
-                    $("#tab3_"+ k + " .number").html(context_advance[k]["enrollment_number"]+"听讲");
-                    $("#tab3_"+ k + " .right").html(context_advance[k]["count"]+"讨论");
+                    $("#tab3_"+ k + " .number").html(context_advance[k]["enrollment_number"]+'${_("Listen")}');
+                    $("#tab3_"+ k + " .right").html(context_advance[k]["count"]+'${_("Discussion")}');
                 }
             }
         )
@@ -85,8 +85,8 @@
                                 <h4>${courses[co]['title']}</h4>
                                 <p id="tab1_${co}">
                                   <span class="left"></span>
-                                  <span class="number">听讲</span>
-                                  <span class="right">评论</span>
+                                  <span class="number">${_("Listen")}</span>
+                                  <span class="right">${_("comments")}</span>
                                 </p>
                             </div>
                             <div class="text_con3">
@@ -100,7 +100,7 @@
 									<h2>${courses[co]['name']}</h2>
 
                                 %if courses[co]['shortbio'] == 'None':
-                                    <p>教师暂无简介</p>
+                                    <p>${_("No Teacher profile")}</p>
                                 %else:
                                     <p>${courses[co]['shortbio'].decode('utf-8')[:30]}</p>
                                 %endif
@@ -108,7 +108,7 @@
                                %if courses[co]['short_description']:
                                     <p>${courses[co]['short_description'][0:80]}</p>
                                %else:
-                                    <p>课程暂无简介</p>
+                                    <p>${_("No Course profile")}</p>
                                %endif
                             </div>
                     	</a>
@@ -129,9 +129,9 @@
                                 <img src="${course_later[col]['image_url']}" width="275" height="180"  alt=""/>
                                 <h4>${course_later[col]['title']}</h4>
                                 <p id="tab2_${col}">
-                                  <span class="left">暂时无更新</span>
-                                  <span class="number">听讲</span>
-                                  <span class="right">评论</span>
+                                  <span class="left">${_("Not update")}</span>
+                                  <span class="number">${_("Listen")}</span>
+                                  <span class="right">${_("comments")}</span>
                                 </p>
                             </div>
                             <div class="text_con3">
@@ -144,7 +144,7 @@
 									<h2>${course_later[col]['name']}</h2>
 
                                     %if course_later[col]['shortbio'] == 'None':
-                                        <p>教师暂无简介</p>
+                                        <p>${_("No Teacher profile")}</p>
                                     %else:
                                         <p>${course_later[col]['shortbio'].decode('utf-8')[:30]}</p>
                                     %endif
@@ -152,7 +152,7 @@
                                    %if course_later[col]['short_description']:
                                         <p>${course_later[col]['short_description'][0:80]}</p>
                                    %else:
-                                        <p>课程暂无简介</p>
+                                        <p>${_("No Course profile")}</p>
                                    %endif
                             </div>
                     	</a>
@@ -173,9 +173,9 @@
                                 <img src="${course_advance[coa]['image_url']}" width="275" height="180"  alt=""/>
                                 <h4>${course_advance[coa]['title']}</h4>
                                 <p id="tab3_${coa}">
-                                  <span class="left">暂时无更新</span>
-                                  <span class="number">听讲</span>
-                                  <span class="right">评论</span>
+                                  <span class="left">${_("Not update")}</span>
+                                  <span class="number">${_("Listen")}</span>
+                                  <span class="right">${_("comments")}</span>
                                 </p>
                             </div>
                             <div class="text_con3">
@@ -188,7 +188,7 @@
 									<h2>${course_advance[coa]['name']}</h2>
 
                                     %if course_advance[coa]['shortbio'] == 'None':
-                                        <p>教师暂无简介</p>
+                                        <p>${_("No Teacher profile")}</p>
                                     %else:
                                         <p>${course_advance[coa]['shortbio'].decode('utf-8')[:30]}</p>
                                     %endif
@@ -196,7 +196,7 @@
                                     %if course_advance[coa]['short_description']:
                                         <p>${course_advance[coa]['short_description'][0:80]}</p>
                                     %else:
-                                        <p>课程暂无简介</p>
+                                        <p>${_("No Course profile")}</p>
                                     %endif
                             </div>
                     	</a>
