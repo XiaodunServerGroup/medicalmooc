@@ -772,12 +772,94 @@ def mobi_directory(request, course_id):
     course = get_course_with_access(user, course_id, 'load', depth=2)
     staff_access = has_access(user, course, 'staff')
     registered = registered_for_course(course, user)
-
+    
+    '''
     motoc = mobi_toc_for_course(user, request, course)
     show_list = list()
     for toc in motoc:
         videolist = toc['show_url'][0]
         show_list.append(videolist)
+     '''   
+        
+    def get_first_video_url_course(user, request, course, active_chapter=None, active_section=None, field_data_cache=None):
+        first_video_url = ''
+        course_module = get_module_for_descriptor(user, request, course, field_data_cache, course.id)
+        if course_module is None:
+            return ''
+        show_url = list()
+        chapters = list()
+        for chapter in course_module.get_display_items():
+            chapter_descriptor = course.get_child_by(lambda m: m.url_name == chapter.url_name)
+            chapter_module = course_module.get_child_by(lambda m: m.url_name == chapter.url_name)
+            sections = list()
+            for section in chapter_module.get_display_items():
+                i = 0
+                section_descriptor = chapter_descriptor.get_child_by(lambda m: m.url_name == section.url_name)
+    
+                section_descriptor = modulestore().get_instance(course.id, section_descriptor.location, depth=None)
+    
+                section_field_data_cache = FieldDataCache.cache_for_descriptor_descendents(
+                    course.id, user, section_descriptor, depth=None)
+    
+                section_module = get_module_for_descriptor(request.user,
+                    request,
+                    section_descriptor,
+                    section_field_data_cache,
+                    course.id,
+                    i
+                )
+    
+                units = list()
+                for unit in section_module.get_display_items():
+                    for child in unit.get_display_items():
+                        if child.get_icon_class()=='video':
+                            if child.video_cc_id and len(str(child.video_cc_id).strip())>0:
+                                def get_video_url(child):
+                                    key= settings.CC_KEY
+                                    user_id = settings.CC_USER_ID
+                                    #video_id = '491D68CD178CC5F89C33DC5901307461'
+                                    try:
+                                        video_id = child.video_cc_id
+                                    except:
+                                        import traceback
+                                        print traceback.format_exc()
+                                        video_id = ''
+                                        
+                                    query_str = 'userid=%s&videoid=%s' % (user_id, video_id)
+                                    
+                                    t = int(time.time())
+                                    hash = '%s&time=%s&salt=%s' % (query_str, t, key)
+                                    hash = hashlib.md5(hash).hexdigest().upper()
+                                    
+                                    #url = "http://spark.bokecc.com/api/user"+"?"+query_str+"&time="+t+"&hash="+hash;
+                                    url = "http://union.bokecc.com/api/mobile?%s&time=%s&hash=%s" % (query_str, t, hash)
+                                    
+                                    try:
+                                        page = urllib2.urlopen(url).read()  
+                                        result = xmltodict.parse(page.encode('utf-8'))
+                                        if result.has_key("video") and len(result["video"])>0:
+                                            video_url = result["video"]['copy'][-1]['#text']
+                                        else:
+                                            video_url = ''
+                                    except:
+                                        import traceback
+                                        print traceback.format_exc()
+                                        return ''
+                                    
+                                    return video_url
+                            
+                                first_video_url = get_video_url(child)
+                            elif child.html5_sources:
+                                first_video_url = child.html5_sources[0]
+                            elif child.source:
+                                first_video_url = child.source
+                            
+                            if not first_video_url:
+                                return first_video_url
+                   
+        return first_video_url
+    show_url = get_first_video_url_course(user, request, course)
+        
         
     if not registered:
         # TODO (vshnayder): do course instructors need to be registered to see course?
@@ -806,7 +888,7 @@ def mobi_directory(request, course_id):
             'masquerade': masq,
             'xqa_server': settings.FEATURES.get('USE_XQA_SERVER', 'http://xqa:server@content-qa.mitx.mit.edu/xqa'),
             'reverifications': fetch_reverify_banner_info(request, course_id),
-            'show_url': show_list and show_list[0] or '',
+            'show_url': show_url,
             }
         result = render_to_response('wechat/mobi_directory.html', context)
     except Exception as e:
