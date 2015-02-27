@@ -8225,6 +8225,40 @@ msgstr "课程负载"
 msgid "Course Instructor"
 msgstr "授课老师"
 
+msgid "Registered course"
+msgstr "注册课程"
+
+msgid "Registration is closed"
+msgstr "注册已关闭"
+
+msgid "day"
+msgstr "天"
+
+msgid "Hours per week"
+msgstr "小时每周"
+
+msgid "Open"
+msgstr "展开"
+
+msgid "Shrinkage"
+msgstr "收缩"
+
+msgid "The purchase of course"
+msgstr "购买课程"
+
+msgid "Please buy course"
+msgstr "请先购买课程"
+
+msgid "Failure to obtain the course data refresh, please try again"
+msgstr "获取课程数据失败，请刷新再试"
+
+msgid "Payment in... If payment is completed, please click the button below to enter the course shrinkage"
+msgstr "支付进行中。。。如果支付完成，请点击下面按钮来进入课程收缩"
+
+msgid "Determine the paid & into the curriculum"
+msgstr "确定已支付&进入课程"
+
+
 
 msgid "Subject classification"
 msgstr "学科分类"
