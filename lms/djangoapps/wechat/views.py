@@ -854,7 +854,7 @@ def mobi_directory(request, course_id):
                             elif child.source:
                                 first_video_url = child.source
                             
-                            if not first_video_url:
+                            if  first_video_url:
                                 return first_video_url
                    
         return first_video_url
