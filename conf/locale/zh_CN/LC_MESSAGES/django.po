@@ -8295,6 +8295,84 @@ msgid "Not Award"
 msgstr "未颁发"
 
 
+msgid "One: The operating environment"
+msgstr "一、运行环境"
+
+msgid "Two: Course Content"
+msgstr "二、课程内容"
+
+msgid "Three: Course Policy"
+msgstr "三、课程政策"
+
+
+msgid "Operation Chinese medical education Mu class alliance learning platform needs the computer device or browser?"
+msgstr "运行中国医学教育慕课联盟学习平台需要的计算机设备或浏览器?"
+
+
+
+msgid "You need a stable Internet connection, computer recommend at least 1 GB of memory."
+msgstr "你需要一个稳定的互联网连接，计算机建议至少1 GB的内存。"
+
+msgid "We support the browser:"
+msgstr "我们支持以下浏览器:"
+
+msgid "And above"
+msgstr "及以上版本"
+
+msgid "Please update your browser, to avoid technical problems!"
+msgstr "请及时更新您的浏览器,以避免技术问题!"
+
+msgid "The abnormal situation of video connection, how to solve?"
+msgstr "视频连接时出现异常状况，该如何解决？"
+
+msgid "At the same time for the network to your circumstances, could have an impact on video playback, it is recommended to contact the Internet service provider (EMAIL:service@diandiyun.com) or contact us, we will help you solve the problem."
+msgstr "同时针对您的网络具体情况，可能对视频播放造成影响，建议联系网络服务商或与我们联系（EMAIL：service@diandiyun.com)，我们将帮您解决问题。"
+
+msgid "To use the browser such as Chrome, there appears to be only the image has no voice, please in the browser settings - advanced display settings, will use hardware acceleration mode (if available) a uncheck the box, and restart the browser, can be normal to watch;"
+msgstr "针对使用部分浏览器如Chrome时，有出现只有图像没有声音的情况，请在浏览器的 设置 - 显示高级设置 中，将使用硬件加速模式（如果可用）一项取消勾选，并重新启动浏览器，即可正常观看；"
+
+msgid "Bit by bit cloud education Mu class alliance includes what content?"
+msgstr "点滴云教育慕课联盟课程包括哪些内容？"
+
+msgid "Including security management, technology, technology, technology advanced primary intermediate for several kinds of."
+msgstr "包括安全管理，技术初级、技术中级、技术高级几类。"
+
+msgid "Can I download the video lessons?"
+msgstr "我可以下载课程视频吗?"
+
+msgid "Can. You can play the page to download video files and other video resources from video."
+msgstr "可以。您可以从视频播放页面下载视频文件和其他视频资源。"
+
+msgid "The course of how long an update?"
+msgstr "课程多久更新一次？"
+
+msgid "Updated regularly according to the courseware upload situation."
+msgstr "根据课件上传情况定期更新。"
+
+msgid "To learn a course, I have to finish all the homework?"
+msgstr "参加学习一个课程后，我必须完成所有的作业吗?"
+
+msgid "Not. You can join any courses, and meet the relevant policy in the speaker's requirements, and also hope to obtain a certificate."
+msgstr "不是。您可以参加任何课程，并在满足讲师提出的相关政策要求后，更有希望获得一个证书。"
+
+msgid "Many times I can take another course?"
+msgstr "我能修一门课程多次吗?"
+
+msgid "Courses can be restored, as long as your reference procedures, submit homework content material."
+msgstr "课程可以重修的，只要您参考相关程序，提交作业内容材料。"
+
+msgid "I can go to as many classes?"
+msgstr "我可以参加多少课程?"
+
+msgid "According to your wishes."
+msgstr "按您的意愿决定。"
+
+msgid "If I study in bit by bit cloud education Mu class alliance platform course, will obtain the certificate?"
+msgstr "如果我在点滴云教育慕课联盟学习平台修完一门课，会获得证书吗？"
+
+msgid "After dropping cloud education Mu class alliance learning platform completed the relevant course and pass the examination, you can get a certificate."
+msgstr "在点滴云教育慕课联盟学习平台修完相关课程并通过考核之后，可以得到证书。"
+
 
 
 
