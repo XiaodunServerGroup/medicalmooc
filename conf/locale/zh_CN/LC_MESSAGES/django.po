@@ -8374,6 +8374,24 @@ msgid "After dropping cloud education Mu class alliance learning platform comple
 msgstr "在点滴云教育慕课联盟学习平台修完相关课程并通过考核之后，可以得到证书。"
 
 
+msgid "Members Classify"
+msgstr "成员分类"
+
+msgid "Comprehensive"
+msgstr "综合院校"
+
+msgid "academy"
+msgstr "专科院校"
+
+msgid "Please input your inquiries to the curriculum"
+msgstr "请输入您要查询的课程"
+
+msgid "Bit by bit cloud education Mu class alliance platform"
+msgstr "点滴云教育慕课联盟平台"
+
+msgid "Zhejiang University (Zhejiang University), the predecessor is the Qiushi academy founded in 1897, is one of the Chinese founded the first modern institution of higher learning. In 1928 the name was changed to the national Zhejiang University."
+msgstr "浙江大学（Zhejiang University），前身是1897年创建的求是书院，是中国人自己最早创办的现代高等学府之一。1928年更名为国立浙江大学。"
+
 
 
 
