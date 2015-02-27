@@ -3,6 +3,12 @@ import logging
 import urllib
 import time
 
+import xmltodict
+import time
+import hashlib
+from urllib import urlencode
+from django.utils.http import urlquote
+
 from collections import defaultdict
 
 from lxml import html
@@ -780,7 +786,8 @@ def mobi_directory(request, course_id):
         videolist = toc['show_url'][0]
         show_list.append(videolist)
      '''   
-        
+    
+    
     def get_first_video_url_course(user, request, course, active_chapter=None, active_section=None, field_data_cache=None):
         first_video_url = ''
         course_module = get_module_for_descriptor(user, request, course, field_data_cache, course.id)
@@ -888,7 +895,7 @@ def mobi_directory(request, course_id):
             'masquerade': masq,
             'xqa_server': settings.FEATURES.get('USE_XQA_SERVER', 'http://xqa:server@content-qa.mitx.mit.edu/xqa'),
             'reverifications': fetch_reverify_banner_info(request, course_id),
-            'show_url': show_url,
+            'show_url': urlquote(show_url),
             }
         result = render_to_response('wechat/mobi_directory.html', context)
     except Exception as e:
