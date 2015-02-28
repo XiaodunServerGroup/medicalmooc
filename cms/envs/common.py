@@ -249,12 +249,13 @@ ROOT_URLCONF = 'cms.urls'
 IGNORABLE_404_ENDS = ('favicon.ico')
 
 # Email
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'mail.pmph.com'
-EMAIL_PORT = 25
+
+EMAIL_BACKEND = 'util.email_utils.SSLEmailBackend'
+EMAIL_HOST = 'smtp.exmail.qq.com'
+EMAIL_PORT = 465
 EMAIL_USE_TLS = False
-EMAIL_HOST_USER = 'servicemooc'
-EMAIL_HOST_PASSWORD = 'pmph59787000'
+EMAIL_HOST_USER = 'servicemooc@pmph.com'
+EMAIL_HOST_PASSWORD = 'pmph59787576'
 
 DEFAULT_FROM_EMAIL = 'servicemooc@pmph.com'
 DEFAULT_FEEDBACK_EMAIL = 'servicemooc@pmph.com'

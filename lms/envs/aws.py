@@ -144,7 +144,7 @@ PLATFORM_NAME = ENV_TOKENS.get('PLATFORM_NAME', PLATFORM_NAME)
 CC_MERCHANT_NAME = ENV_TOKENS.get('CC_MERCHANT_NAME', PLATFORM_NAME)
 EMAIL_BACKEND = ENV_TOKENS.get('EMAIL_BACKEND', EMAIL_BACKEND)
 EMAIL_FILE_PATH = ENV_TOKENS.get('EMAIL_FILE_PATH', None)
-EMAIL_HOST = ENV_TOKENS.get('EMAIL_HOST', 'mail.pmph.com')  # django default is localhost
+EMAIL_HOST = ENV_TOKENS.get('EMAIL_HOST', 'smtp.exmail.qq.com')  # django default is localhost
 EMAIL_PORT = ENV_TOKENS.get('EMAIL_PORT', 25)  # django default is 25
 EMAIL_USE_TLS = ENV_TOKENS.get('EMAIL_USE_TLS', False)  # django default is False
 SITE_NAME = ENV_TOKENS['SITE_NAME']
@@ -313,8 +313,8 @@ MONGODB_LOG = AUTH_TOKENS.get('MONGODB_LOG', {})
 OPEN_ENDED_GRADING_INTERFACE = AUTH_TOKENS.get('OPEN_ENDED_GRADING_INTERFACE',
                                                OPEN_ENDED_GRADING_INTERFACE)
 
-EMAIL_HOST_USER = AUTH_TOKENS.get('EMAIL_HOST_USER', 'servicemooc')  # django default is ''
-EMAIL_HOST_PASSWORD = AUTH_TOKENS.get('EMAIL_HOST_PASSWORD', 'pmph59787000')  # django default is ''
+EMAIL_HOST_USER = AUTH_TOKENS.get('EMAIL_HOST_USER', 'servicemooc@pmph.com')  # django default is ''
+EMAIL_HOST_PASSWORD = AUTH_TOKENS.get('EMAIL_HOST_PASSWORD', 'pmph59787576')  # django default is ''
 
 # Datadog for events!
 DATADOG = AUTH_TOKENS.get("DATADOG", {})
