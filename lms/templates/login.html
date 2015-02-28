@@ -5,7 +5,7 @@
 <%! from django.core.urlresolvers import reverse %>
 <%! from django.utils.translation import ugettext as _ %>
 
-<%block name="pagetitle">登录你的账户</%block>
+<%block name="pagetitle">${_("Login to your account")}</%block>
 
 <%block name="bodyclass">view-login</%block>
 
@@ -149,7 +149,7 @@
         $submitButton.
           removeClass('is-disabled').
           removeProp('disabled').
-          html("登录进入我的课程");
+          html('${_("Log in to my course")}');
       }
       else {
         $submitButton.
@@ -167,7 +167,7 @@
       <!--
       <span class="title-super">${_("Please log in")}</span>
       -->
-      <span class="title-sub">登录您的账户</span>
+      <span class="title-sub">${_("Login to your account")}</span>
     </h1>
   </header>
 </section>
@@ -227,7 +227,7 @@
           </li>
 
           <li class="field required" id="field-captcha">
-            <label for='captcha'>验证码</label>
+            <label for='captcha'>${_("Captcha")}</label>
             ${ form }
             <span class="tip tip-input" style="clear: both;"></span>
           </li>
@@ -254,8 +254,8 @@
         <button name="submit" type="submit" id="submit" class="action action-primary action-update" style="height: 40px; margin: 0px;"></button>
       </div>
       <div class="no_login">
-      	<h3>尚未注册？
-  		<a href="/register" style="color:#f8ff3d" class="now_login">现在注册</a>
+      	<h3>${_("Not Enrolled?")}
+  		<a href="/register" style="color:#f8ff3d" class="now_login">${_("Register Now")}</a>
         </h3>
         </div>
       <a href="/webqq_login" target="_blank"><img src=""><h3 style="color:fff;">qq帐号登录</h3></a>

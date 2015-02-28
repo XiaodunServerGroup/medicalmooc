@@ -8638,5 +8638,19 @@ msgid "Special tips: you in the register before, please ensure that you and I ha
 msgstr "特别提示：您在进行注册之前，请确保您本人已经完全理解并接受本条款所有条款（尤其是免责条款）。 一旦您正式注册，则表明您已经完全理解并接受本条款所有条款，尤其是免责和责任限制条款。"
 
 
+
+msgid "Log in to my course"
+msgstr "登录进入我的课程"
+
+msgid "Captcha"
+msgstr "验证码"
+
+msgid "Login to your account"
+msgstr "登录您的账户"
+
+msgid "This e-mail address is used to register in the drip cloud education Mu class Alliance"
+msgstr "这个e-mail地址被用于在点滴云教育慕课联盟注册"
+
+
 msgid "…"
 msgstr "…"
