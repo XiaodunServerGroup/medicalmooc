@@ -641,18 +641,23 @@ function goto( mode)
       });
     </script>
 %endif
-
+    <div style="display: block;" id="test"> </div>
     </form>
 ##-----------------------------------------------------------------------------
 
 %if msg:
     <p></p><p>${msg}</p>
+    <script>
+        $(document).ready(function(){
+            $("html,body").animate({scrollTop:$("#test").offset().top},600);
+        });
+    </script>
+
 %endif
 
 ##-----------------------------------------------------------------------------
 
 %if modeflag.get('Analytics'):
-
   %if not any(analytics_results.values()):
     <p>${_("No Analytics are available at this time.")}</p>
   %endif
@@ -857,13 +862,11 @@ function goto( mode)
 ##     </table>
 ##   </p>
 
-
 %endif
 
 ##-----------------------------------------------------------------------------
 
 %if datatable and modeflag.get('Psychometrics') is None:
-
     <br/>
     <br/>
     <p>
@@ -932,6 +935,9 @@ function goto( mode)
     <p>
       <hr width="100%">
       <h2>${course_stats['title'] | h}</h2>
+
+
+
       <table class="stat_table">
         <tr>
 	%for hname in course_stats['header']:
@@ -947,7 +953,18 @@ function goto( mode)
         %endfor
       </table>
     </p>
+
+
 %endif
+##-----------------------------------------------------------------------------
+%if datatable :
+    <script>
+        $(document).ready(function(){
+            $("html,body").animate({scrollTop:$("#test").offset().top},600);
+        });
+    </script>
+%endif
+
 
 ##-----------------------------------------------------------------------------
 %if modeflag.get('Psychometrics'):
@@ -988,6 +1005,12 @@ function goto( mode)
         <li>${summary | h}
         % if err:
           <ul><li><pre>${err | h}</pre></li></ul>
+            <script>
+                $(document).ready(function(){
+                    $("html,body").animate({scrollTop:$("#test").offset().top},600);
+                });
+            </script>
+
         % else:
           <p>&nbsp;</p>
         % endif
