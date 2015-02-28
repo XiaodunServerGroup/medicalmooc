@@ -1534,8 +1534,8 @@ def _do_enroll_students(course, course_id, students, overload=False, auto_enroll
              'registration_url': registration_url,
              'course': course,
              'auto_enroll': auto_enroll,
-             'course_url': 'https://' + stripped_site_name + '/courses/' + course_id,
-             'course_about_url': 'https://' + stripped_site_name + '/courses/' + course_id + '/about',
+             'course_url': 'http://' + stripped_site_name + '/courses/' + course_id,
+             'course_about_url': 'http://' + stripped_site_name + '/courses/' + course_id + '/about',
              'is_shib_course': is_shib_course
              }
 

@@ -6,8 +6,8 @@ ${"您被邀请参加{course_name}课程".format(
 course_name=course.display_name_with_default
 )}
 
-${"要开始学习课程, 请访问 {course_url}".format(
-course_url=course_url
+${"要开始学习课程, 请访问 {course_about_url}".format(
+course_about_url=course_about_url
 )}
 
 ${"这封邮件通过系统自动发送"}
