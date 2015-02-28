@@ -8651,6 +8651,34 @@ msgstr "登录您的账户"
 msgid "This e-mail address is used to register in the drip cloud education Mu class Alliance"
 msgstr "这个e-mail地址被用于在点滴云教育慕课联盟注册"
 
+msgid "Are you sure you want to exit"
+msgstr "你确定你想退出"
+
+
+
+msgid "Dear {full_name}:"
+msgstr "亲爱的 {full_name}："
+
+msgid "You have withdrawn from the {course_name} course. This course will not appear on your course catalogs."
+msgstr "您已退出课程 {course_name} 。这门课程将不会出现在您的课程列表中。"
+
+msgid "This email is sent automatically by the system, please do not reply."
+msgstr "这封邮件由系统自动发送，请勿回复。"
+
+msgid "Your course is not affected."
+msgstr "您的其它课程不受影响。"
+
+msgid "You left {course_name} course."
+msgstr "您已退出{course_name}课程。"
+
+msgid "You have been invited to join the {course_name} course"
+msgstr "您已被邀请加入{course_name}课程 "
+
+msgid "To start learning courses, please visit {course_url}"
+msgstr "要开始学习课程, 请访问 {course_url}"
+
+msgid "This message through the system automatically send"
+msgstr "这封邮件通过系统自动发送"
 
 msgid "…"
 msgstr "…"
