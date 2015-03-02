@@ -1,3 +1,4 @@
+#coding:utf-8
 """
 This module contains celery task functions for handling the sending of bulk email
 to a course.
@@ -147,7 +148,7 @@ def _get_course_email_context(course):
         'course_image_url': image_url,
         'account_settings_url': 'https://{}{}'.format(settings.SITE_NAME, reverse('dashboard')),
         'platform_name': settings.PLATFORM_NAME,
-        'temp_str':u'·ÃÎÊ¿Î³ÌÇëµã»÷'
+        'temp_str':u'è®¿é—®è¯¾ç¨‹è¯·ç‚¹å‡»'
     }
     return email_context
 
