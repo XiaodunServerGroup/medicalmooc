@@ -11,34 +11,34 @@ textarea.seo-textarea{margin-bottom:8px;width:800px;height:60px;}
 </style>
 	<table class="tb">
 		<tr>  
-			<th width="80px">首页</th>
+			<th width="80px">${_("Home Page")}</th>
 			<td>
-				关键字：<textarea id="index_page_keyword" class="clear-input seo-textarea">${index_page_keyword | h}</textarea><br/>
-				描　述：<textarea id="index_page_desc"  class="clear-input seo-textarea">${index_page_desc | h}</textarea>
+				${_("Keyword")}：<textarea id="index_page_keyword" class="clear-input seo-textarea">${index_page_keyword | h}</textarea><br/>
+				${_("Description")}：<textarea id="index_page_desc"  class="clear-input seo-textarea">${index_page_desc | h}</textarea>
 			</td>
 		</tr>	 
 		<tr>  
-			<th width="80px">列表页</th>
+			<th width="80px">${_("List Page")}</th>
 			<td>
-				关键字：<textarea id="list_page_keyword" class="clear-input seo-textarea">${list_page_keyword | h}</textarea><br/>
-				描　述：<textarea id="list_page_desc"  class="clear-input seo-textarea">${list_page_desc | h}</textarea>
+				${_("Keyword")}：<textarea id="list_page_keyword" class="clear-input seo-textarea">${list_page_keyword | h}</textarea><br/>
+				${_("Description")}：<textarea id="list_page_desc"  class="clear-input seo-textarea">${list_page_desc | h}</textarea>
 			</td>
 		</tr>	 
 		<tr> 
-			<th width="80px">课程介绍页</th>
+			<th width="80px">${_("Course Introduction Page")}</th>
 			<td>
-				关键字：<textarea id="intro_page_keyword" class="clear-input seo-textarea">${intro_page_keyword | h}</textarea><br/>
-				描　述：<textarea id="intro_page_desc"  class="clear-input seo-textarea">${intro_page_desc | h}</textarea>
+				${_("Keyword")}：<textarea id="intro_page_keyword" class="clear-input seo-textarea">${intro_page_keyword | h}</textarea><br/>
+				${_("Description")}：<textarea id="intro_page_desc"  class="clear-input seo-textarea">${intro_page_desc | h}</textarea>
 			</td>
 		</tr>
 		<tr> 
-			<th width="80px">页面标题后缀</th>
+			<th width="80px">${_("The Page Title Suffix")}</th>
 			<td>
 				<textarea id="title_suffix" class="clear-input seo-textarea">${title_suffix | h}</textarea><br/>
 			</td>
 		</tr>		
 		<tr> 
-			<th width="80px">底部Foot文字</th>
+			<th width="80px">${_("The Bottom Of Foot Text")}</th>
 			<td>
 				<textarea id="bottom_footer_text" class="clear-input seo-textarea">${bottom_footer_text | h}</textarea><br/>
 			</td>
@@ -46,7 +46,7 @@ textarea.seo-textarea{margin-bottom:8px;width:800px;height:60px;}
 		<tr>   
 			<th></th> 
 			<td>
-				<a href="javascript:void(0);" id="save-btn" class="btn">保存</a> <span id="msg" style="color:red"></span>
+				<a href="javascript:void(0);" id="save-btn" class="btn">${_("Save")}</a> <span id="msg" style="color:red"></span>
 			</td>
 		</tr>	
 	</table>  

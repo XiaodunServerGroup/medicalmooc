@@ -5,7 +5,7 @@
   from contentstore import utils
   from xmodule.modulestore.django import loc_mapper
 %>
-<%block name="title">日历</%block>
+<%block name="title">${_("Calendar")}</%block>
 <%block name="bodyclass">is-signedin course advanced view-settings</%block>
 
 <%block name="header_extras">
@@ -32,7 +32,7 @@
       <!--
       <small class="subtitle">${_("Settings")}</small>
       -->
-      <span class="sr">&gt; </span>日历
+      <span class="sr">&gt; </span>${_("Calendar")}
     </h1>
   </header>
 </div>

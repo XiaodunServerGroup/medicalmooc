@@ -8,20 +8,20 @@
 	
 	<table class="tb">
 		<tr> 
-			<th width="160px">当前Logo(png格式):<br/>尺寸：250*52</th>
+			<th width="160px">${_("The current Logo (PNG format):")}<br/>${_("Size")}：250*52</th>
 			<td>
 				% if current_logo_url:
 					<img src="${current_logo_url}" style="width: 250px; height: 52px;"/>
 				% else:
-					没有Logo文件
+					${_("No Logo file")}
 				% endif
 			</td>
 		</tr>	
 		<tr> 
 			<th></th>
 			<td>
-				<a href="#" id="modify-logo-btn" class="btn">修改</a>
-				<span style="margin-left:8px;font-size:12px;">注意：PNG格式，选择图片后会自动上传</span>
+				<a href="#" id="modify-logo-btn" class="btn">${_("Change")}</a>
+				<span style="margin-left:8px;font-size:12px;">${_("Note: the PNG format, select the image will automatically upload")}</span>
 			</td>
 		</tr>	
 	</table>  

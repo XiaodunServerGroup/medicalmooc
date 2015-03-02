@@ -19,7 +19,7 @@ from django.utils.translation import ugettext as _
 
 <table class="tb">
     <tr>
-        <th>课程代码</th><th>名称</th><th>排序号</th><th>操作</th>
+        <th>${_("Course Number")}</th><th>${_("Name")}</th><th>${_("Sort Number")}</th><th>${_("Operators")}</th>
     </tr>
     %for courseclass in courseclass_list:
         <tr >
@@ -27,15 +27,15 @@ from django.utils.translation import ugettext as _
             <td>${courseclass.name}</td>
             <td>${courseclass.order_num}</td>
             <td>
-            	<a href="/syscustom/courseclass/${courseclass.id}/edit/">修改</a>
-            	<a href="#" onclick="show_confirm(${courseclass.id})" >删除</a>
+            	<a href="/syscustom/courseclass/${courseclass.id}/edit/">${_("Change")}</a>
+            	<a href="#" onclick="show_confirm(${courseclass.id})" >${_("Delete")}</a>
             </td>
         </tr>
     %endfor
 
     <tr>
 	    <td colspan="4" style="text-align:center">
-	    	<a href="/syscustom/courseclass/add/" class="btn">添加分类</a>
+	    	<a href="/syscustom/courseclass/add/" class="btn">${_("Add Classification")}</a>
 	    </td>
     </tr>
 

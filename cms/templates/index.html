@@ -390,7 +390,7 @@ $('#submit_button1').click(function(){
                   <span class="tip tip-er ror is-hiding"></span>
                 </li>
                 <li class="field text required" id="field-course-category">
-                  <label for="new-course-category">课程分类</label>
+                  <label for="new-course-category">${_("Course Category")}</label>
                   <select class="new-course-category" id="new-course-category" name='new-course-category' aria-required='false'>
                   </select>
                   <span class="tip tip-error is-hiding"></span>
@@ -614,38 +614,38 @@ $('#submit_button1').click(function(){
       </div>
 
       <div class="bit">
-        <h3 class="title title-3">同步课堂</h3>
-        <p>同步课堂简介</p>
+        <h3 class="title title-3">${_("Synchronous Classroom")}</h3>
+        <p>${_("Synchronous Classroom Introduction")}</p>
 
         <ol class="list-actions">
           <li class="action-item">
-            <a href="/sync/class/appointment" title="同步课堂" target="_blank">同步课堂</a>
+            <a href="/sync/class/appointment" title="${_('Synchronous Classroom')}" target="_blank">${_("Synchronous Classroom")}</a>
           </li>
         </ol>
       </div>
 
       <div class="bit">
-        <h3 class="title title-3">课程问卷调查</h3>
-        <p>课程问卷调查介绍</p>
+        <h3 class="title title-3">${_("Courses Questionnaire")}</h3>
+        <p>${_("Courses Questionnaire Introduction")}</p>
 
         <ol class="list-actions">
           <li class="action-item">
-            <a href="${ wenjuan_link }" title="创建问卷" target="_blank">创建问卷</a>
+            <a href="${ wenjuan_link }" title="${_('Create Questionnaire')}" target="_blank">${_("Create Questionnaire")}</a>
             <br/>
-            <a href="#wenjuan-list-modal" title="已有问卷列表" id="show-wenjuan-list-modal">已有问卷列表</a>
+            <a href="#wenjuan-list-modal" title="${_('Existing Questionnaire List')}" id="show-wenjuan-list-modal">${_("Existing Questionnaire List")}</a>
           </li>
         </ol>
       </div>
 
       % if profile.profile_role=='in':
       <div class="bit">
-        <h3 class="title title-3">单位管理</h3>
-        <p>由帐户为单位帐户,在以下可进行本单位相关管理.</p>
+        <h3 class="title title-3">${_("Unit Management")}</h3>
+        <p>${_("Account for the unit of account, in the following can be related to the management of the unit.")}</p>
 
         <ol class="list-actions">
           <li class="action-item">
             <!--<a href="/institution_upload_teacher?id=${ profile.user_id }" title="批量导入教师" target="_blank">批量导入教师</a>-->
-            <a href="#apply_name_change_file" rel="leanModal" title="批量导入教师" class="edit-name">批量导入教师</a>
+            <a href="#apply_name_change_file" rel="leanModal" title="${_('Import Batch Of Teachers')}" class="edit-name">${_("Import Batch Of Teachers")}</a>
             <br/>
             <!--<a href="#add-teachers-modal"  rel="leanModal"  id="show-add-teachers-modal" title="添加审核教师">添加审核教师</a>-->
             <!--<br/>-->
@@ -656,17 +656,17 @@ $('#submit_button1').click(function(){
         % endif
 
       <div class="bit">
-        <h3 class="title title-3">导入学生管理</h3>
-        <p>以下操作可进行导入学生的相关管理.</p>
+        <h3 class="title title-3">${_("Import Student Management")}</h3>
+        <p>${_("The following operations related to the management of students can be imported.")}</p>
 
         <ol class="list-actions">
           <li class="action-item">
-            <a href="#apply_name_change_student" rel="leanModal" title="批量导入学生" class="edit-name">批量导入学生</a>
-            <p>导入的文件为excel文件,填写的顺序为邮箱,密码,用户名,姓名</p>
+            <a href="#apply_name_change_student" rel="leanModal" title="${_('Import Batch Of Students')}" class="edit-name">${_("Import Batch Of Students")}</a>
+            <p>${_("Import files to excel, fill in the order of the mailbox, password, user name, name")}</p>
             <br/>
             <!--<a href="#add-teachers-modal"  rel="leanModal"  id="show-add-teachers-modal" title="添加审核教师">添加审核教师</a>-->
             <!--<br/>-->
-            <a href="#list_student_change" rel="leanModal" title="导入" class="edit-name">管理导入的学生</a>
+            <a href="#list_student_change" rel="leanModal" title="${_('Management Of Import Students')}" class="edit-name">${_("Management Of Import Students")}</a>
           </li>
         </ol>
       </div>
@@ -902,7 +902,7 @@ $('#submit_button1').click(function(){
 
     <header>
       <h2>
-        <span id="wenjuan-modal-title">当前问卷列表</span>
+        <span id="wenjuan-modal-title">${_("Questionnaire List")}</span>
         <span class="sr">,
           ## Translators: this text gives status on if the modal interface (a menu or piece of UI that takes the full focus of the screen) is open or not
           ${_("modal open")}
@@ -915,11 +915,11 @@ $('#submit_button1').click(function(){
       % if len(qlist):
         <table class="table-hover">
           <thead>
-            <th>问卷名</th>
-            <th>问卷状态</th>
-            <th>答卷人数</th>
-            <th>创建时间</th>
-            <th>操作</th>
+            <th>${_("Questionnaire Name")}</th>
+            <th>${_("Questionnaire State")}</th>
+            <th>${_("Answer Number")}</th>
+            <th>${_("Create Time")}</th>
+            <th>${_("Operators")}</th>
           </thead>
 
           % for wj in qlist:
@@ -929,8 +929,8 @@ $('#submit_button1').click(function(){
               <td>${ wj[2] }</td>
               <td>${ wj[3] }</td>
               <td>
-                <a href="#" id="copy-content-id" data="${wj[4]}">查看URL</a>
-                <a href="${wj[5]}" target="_blank">结果地址</a>
+                <a href="#" id="copy-content-id" data="${wj[4]}">${_("View URL")}</a>
+                <a href="${wj[5]}" target="_blank">${_("Result Address")}</a>
               </td>
             </tr>
 
@@ -1004,24 +1004,24 @@ $('#submit_button1').click(function(){
     <header>
       <div class="change-name-title">
         <strong>
-        批量导入教师
+        ${_("Import Batch Of Teachers")}
         </strong>
       </div>
     </header>
     <div class="up_text">
-    <p>配置文件上传</p>
+    <p>${_("Configuration File Upload")}</p>
     <form action="" method="post" enctype="multipart/form-data" accept-charset="utf-8">
         <input type='hidden' name='csrfmiddlewaretoken' value='${csrf_token}' />
         <input type="hidden" class="teacher_id" value="${ profile.user_id }" />
 
-        <div class="upload_text"><p><label for="id_file">请上传文件:</label> <input type="file" name="file" id="teacher_file" /></p></div>
+        <div class="upload_text"><p><label for="id_file">${_("Please upload the file")}:</label> <input type="file" name="file" id="teacher_file" /></p></div>
         <div id="teacher_success_info" style="margin-top:10px;margin-left: 20px;"></div>
         <div class="btn01">
 
-        <button id="submit_button" type="button" class="submit1">提交</button>
+        <button id="submit_button" type="button" class="submit1">${_("Submit")}</button>
         </div>
     </form>
-        <button id="return_course" name="return_course" class="reset">返回</button>
+        <button id="return_course" name="return_course" class="reset">${_("Go Back")}</button>
     </div>
   </div>
 </section>
@@ -1037,23 +1037,23 @@ $('#submit_button1').click(function(){
     <header>
       <div class="change-name-title">
         <strong>
-        批量导入学生
+        ${_("Import Batch Of Students")}
         </strong>
       </div>
     </header>
     <div class="up_text">
-    <p>配置文件上传</p>
+    <p>${_("Configuration File Upload")}</p>
     <form action="" id="form" method="post" enctype="multipart/form-data" accept-charset="utf-8">
         <input type='hidden' name='csrfmiddlewaretoken' value='${csrf_token}' />
         <input type="hidden" class="student_id" value="${ profile.user_id }" />
-        <div class="upload_text"><p><label for="id_file">请上传文件:</label> <input type="file" name="file" id="student_file" /></p></div>
+        <div class="upload_text"><p><label for="id_file">${_("Please upload the file")}:</label> <input type="file" name="file" id="student_file" /></p></div>
 		<div id="temp_img_div" style="margin-top:10px;margin-left: 20px;"></div>
         <div class="btn01">
-        <button id="submit_button1" type="button" class="submit1">提交</button>
+        <button id="submit_button1" type="button" class="submit1">${_("Submit")}</button>
 
         </div>
     </form>
-       <button id="" name="return_course" class="reset">返回</button>
+       <button id="" name="return_course" class="reset">${_("Go Back")}</button>
     </div>
   </div>
 </section>
@@ -1070,7 +1070,7 @@ $('#submit_button1').click(function(){
     <header>
       <div class="change-name-title">
         <strong>
-        学生管理
+        ${_("The Management Of Students")}
         </strong>
       </div>
     </header>
@@ -1079,17 +1079,17 @@ $('#submit_button1').click(function(){
             <table width="800" class="table1">
         % if len(user_student_list):
                 <tr>
-                    <td>用户名</td>
-                    <td>姓名</td>
-                    <td>邮箱</td>
-                    <td>操作</td>
+                    <td>${_("Username")}</td>
+                    <td>${_("Name")}</td>
+                    <td>${_("Email")}</td>
+                    <td>${_("Operators")}</td>
                 </tr>
             %for st in range(0, len(user_student_list)):
                 <tr>
                     <td>${user_student_list[st]['username']}</td>
                     <td>${user_student_list[st]['name']}</td>
                     <td>${user_student_list[st]['email']}</td>
-                    <td><a href="" class="remove-button-student" value="${ user_student_list[st]['id'] }">移除</a></td>
+                    <td><a href="" class="remove-button-student" value="${ user_student_list[st]['id'] }">${_("Remove")}</a></td>
                 </tr>
             %endfor
         % else:

@@ -8682,3 +8682,265 @@ msgstr "这封邮件通过系统自动发送"
 
 msgid "…"
 msgstr "…"
+
+# cms
+msgid "Synchronous Classroom"
+msgstr "同步课堂"
+
+msgid "Synchronous Classroom Introduction"
+msgstr "同步课堂简介"
+
+msgid "Courses Questionnaire"
+msgstr "课程问卷调查"
+
+msgid "Courses Questionnaire Introduction"
+msgstr "课程问卷调查介绍"
+
+msgid "Create Questionnaire"
+msgstr "创建问卷"
+
+msgid "Existing Questionnaire List"
+msgstr "已有问卷列表"
+
+msgid "Import Student Management"
+msgstr "导入学生管理"
+
+msgid "The following operations related to the management of students can be imported."
+msgstr "以下操作可进行导入学生的相关管理."
+
+msgid "Import Batch Of Students"
+msgstr "批量导入学生"
+
+msgid "Import files to excel, fill in the order of the mailbox, password, user name, name"
+msgstr "导入的文件为excel文件,填写的顺序为邮箱,密码,用户名,姓名"
+
+msgid "Management Of Import Students"
+msgstr "管理导入的学生"
+
+msgid "The Management Of Students"
+msgstr "学生管理"
+
+msgid "Teacher Introduction"
+msgstr "教师简介"
+
+msgid "System Settings"
+msgstr "系统设置"
+
+msgid "Institution Management"
+msgstr "机构管理"
+
+msgid "Teacher Management"
+msgstr "教师管理"
+
+msgid "Course Management"
+msgstr "课程管理"
+
+msgid "Logout"
+msgstr "退出登录"
+
+msgid "The teacher information editor"
+msgstr "教师信息编辑"
+
+msgid "Avatar Address Link"
+msgstr "头像链接地址"
+
+msgid "The Information Of Institution"
+msgstr "单位机构信息"
+
+msgid "Please input a keyword..."
+msgstr "请输入关键字..."
+
+msgid "search"
+msgstr "搜索"
+
+msgid "Sort by the number of Teachers"
+msgstr "按教师人数排序"
+
+msgid "From high to low order"
+msgstr "从高到低排序"
+
+msgid "From low to high order"
+msgstr "从低到高排序"
+
+msgid "The name of the Institution"
+msgstr "机构名称。"
+
+msgid "The number of Teachers"
+msgstr "教师数"
+
+msgid "The number of courses"
+msgstr "课程数"
+
+msgid "The Information Of Teacher"
+msgstr "教师信息"
+
+msgid "The name of teacher"
+msgstr "教师名"
+
+msgid "Institutions"
+msgstr "所属机构"
+
+msgid "Information List Of Teachers' Course"
+msgstr "教师课程信息列表"
+
+msgid "Sort by the number of applicants"
+msgstr "按报名人数排序"
+
+msgid "Creater"
+msgstr "创建人"
+
+msgid "The number of applicants"
+msgstr "报名人数"
+
+msgid "Login Work Platform"
+msgstr "登录工作平台"
+
+msgid "Add"
+msgstr "添加"
+
+msgid "Handout Name"
+msgstr "讲义名称"
+
+msgid "Handout URL"
+msgstr "讲义URL"
+
+msgid "LOGO Settings"
+msgstr "LOGO设置"
+
+msgid "The Home Page Carousel Pictures"
+msgstr "首页轮播图片"
+
+msgid "Custom Statistic Code"
+msgstr "自定义统计代码"
+
+msgid "Client Startup LOGO"
+msgstr "客户端启动LOGO"
+
+msgid "The Client Carousel Pictures"
+msgstr "客户端轮播图片"
+
+msgid "Course Classification"
+msgstr "课程分类"
+
+msgid "SEO Settings"
+msgstr "SEO设置"
+
+msgid "The current Logo (PNG format):"
+msgstr "当前Logo(png格式):"
+
+msgid "No Logo file"
+msgstr "没有Logo文件"
+
+msgid "Note: the PNG format, select the image will automatically upload"
+msgstr "注意：PNG格式，选择图片后会自动上传"
+
+msgid "Pictures"
+msgstr "图片"
+
+msgid "Sort Number"
+msgstr "排序号"
+
+msgid "Statistical Code"
+msgstr "统计代码"
+
+msgid "Add Classification"
+msgstr "添加分类"
+
+msgid "Home Page"
+msgstr "首页"
+
+msgid "List Page"
+msgstr "列表页"
+
+msgid "Keyword"
+msgstr "关键字"
+
+msgid "Course Introduction Page"
+msgstr "课程介绍页"
+
+msgid "The Page Title Suffix"
+msgstr "页面标题后缀"
+
+msgid "The Bottom Of Foot Text"
+msgstr "底部Foot文字"
+
+msgid "Add Picture"
+msgstr "添加图片"
+
+msgid "Change Picture"
+msgstr "修改图片"
+
+msgid "Please select a client type"
+msgstr "请选择客户端类型"
+
+msgid "The course information link address,For example:http://127.0.0.1:8000/courses/TSINGHUA/TSINGHUA101/2014_T1/about"
+msgstr "课程信息的链接地址,例如:http://127.0.0.1:8000/courses/TSINGHUA/TSINGHUA101/2014_T1/about"
+
+msgid "Course Classification Code"
+msgstr "课程分类代码"
+
+msgid "Course Classification Name"
+msgstr "课程分类名称"
+
+msgid "Course overview editing tools"
+msgstr "课程概况编辑工具"
+
+msgid "This tool helps you make course overview. Please above editor production is completed, select <b>'tools' - 'source code'</b>, all the text copy popup window, paste into the course overview."
+msgstr "这个工具帮助你制作课程概况.请在上面编辑器制作完成后,选择<b>'工具'-'源代码'</b>,复制弹出的窗口里的所有文本,粘贴进课程概况."
+
+msgid "The price of the course"
+msgstr "该课程的价格"
+
+msgid "Calendar"
+msgstr "日历"
+
+msgid "Synchronous Classroom Appointment"
+msgstr "同步课堂预约"
+
+msgid "My House"
+msgstr "我的小屋"
+
+msgid "Search House"
+msgstr "查找小屋"
+
+msgid "Add House"
+msgstr "添加小屋"
+
+msgid "Information Notification"
+msgstr "信息通知"
+
+msgid "Questionnaire List"
+msgstr "当前问卷列表"
+
+msgid "Questionnaire Name"
+msgstr "问卷名"
+
+msgid "Questionnaire State"
+msgstr "问卷状态"
+
+msgid "Answer Number"
+msgstr "答卷人数"
+
+msgid "Create Time"
+msgstr "创建时间"
+
+msgid "View URL"
+msgstr "查看URL"
+
+msgid "Result Address"
+msgstr "结果地址"
+
+msgid "Configuration File Upload"
+msgstr "配置文件上传"
+
+msgid "Please upload the file"
+msgstr "请上传文件"
+
+msgid "Unit Management"
+msgstr "单位管理"
+
+msgid "Account for the unit of account, in the following can be related to the management of the unit."
+msgstr "帐户为单位帐户,在以下可进行本单位相关管理."
+
+msgid "Import Batch Of Teachers"
+msgstr "批量导入教师"
