@@ -131,11 +131,11 @@ def _get_course_email_context(course):
     """
     course_id = course.id
     course_title = course.display_name
-    course_url = 'https://{}{}'.format(
+    course_url = 'http://{}{}'.format(
         settings.SITE_NAME,
         reverse('course_root', kwargs={'course_id': course_id})
     )
-    image_url = 'https://{}{}'.format(settings.SITE_NAME, course_image_url(course))
+    image_url = 'http://{}{}'.format(settings.SITE_NAME, course_image_url(course))
     email_context = {
         'course_title': course_title,
         'course_url': course_url,
