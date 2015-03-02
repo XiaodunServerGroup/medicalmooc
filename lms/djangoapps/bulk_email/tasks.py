@@ -136,10 +136,12 @@ def _get_course_email_context(course):
         settings.SITE_NAME,
         reverse('course_root', kwargs={'course_id': course_id})
     )
-    course_about_url = 'http://' + settings.SITE_NAME + '/courses/' + course_id + '/about',
+    course_about_url = 'http://' + settings.SITE_NAME + '/courses/' + course_id + '/about'
     image_url = 'http://{}{}'.format(settings.SITE_NAME, course_image_url(course))
+    
     if settings.SITE_NAME.startswith('http://'):
         image_url = image_url[7:]
+        course_about_url = course_about_url[7:]
     
     email_context = {
         'course_title': course_title,
