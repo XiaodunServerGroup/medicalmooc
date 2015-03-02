@@ -649,7 +649,7 @@ $('#submit_button1').click(function(){
             <br/>
             <!--<a href="#add-teachers-modal"  rel="leanModal"  id="show-add-teachers-modal" title="添加审核教师">添加审核教师</a>-->
             <!--<br/>-->
-            <a href="#apply_name_change" rel="leanModal" title="导入" class="edit-name">管理本单位教师</a>
+            <a href="#apply_name_change" rel="leanModal" title="导入" class="edit-name">${_("The Management Of Teachers")}</a>
           </li>
         </ol>
       </div>
@@ -960,7 +960,7 @@ $('#submit_button1').click(function(){
     <header>
       <div class="change-name-title">
         <strong>
-        本单位教师管理
+        ${_("The Management Of Teachers")}
         </strong>
       </div>
     </header>
@@ -969,21 +969,21 @@ $('#submit_button1').click(function(){
             <table width="800" class="table1">
         % if len(user_institute_teacher_list):
                 <tr>
-                    <td>用户名</td>
-                    <td>姓名</td>
-                    <td>邮箱</td>
-                    <td>操作</td>
+                    <td>${_("Username")}</td>
+                    <td>${_("Name")}</td>
+                    <td>${_("Email")}</td>
+                    <td>${_("Operators")}</td>
                 </tr>
             %for s in range(0, len(user_institute_teacher_list)):
                 <tr>
                     <td>${user_institute_teacher_list[s]['username']}</td>
                     <td>${user_institute_teacher_list[s]['name']}</td>
                     <td>${user_institute_teacher_list[s]['email']}</td>
-                    <td><a href="" class="remove-button" value="${ user_institute_teacher_list[s]['id'] }">移除</a></td>
+                    <td><a href="" class="remove-button" value="${ user_institute_teacher_list[s]['id'] }">${_("Remove")}</a></td>
                 </tr>
             %endfor
         % else:
-            本单位暂无教师
+            ${_("The units no teachers")}
         %endif
         </table>
         </fieldset>
