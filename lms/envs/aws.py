@@ -313,6 +313,7 @@ MONGODB_LOG = AUTH_TOKENS.get('MONGODB_LOG', {})
 OPEN_ENDED_GRADING_INTERFACE = AUTH_TOKENS.get('OPEN_ENDED_GRADING_INTERFACE',
                                                OPEN_ENDED_GRADING_INTERFACE)
 
+EMAIL_PORT = AUTH_TOKENS.get('EMAIL_PORT', 25)  # django default is 25
 EMAIL_HOST = AUTH_TOKENS.get('EMAIL_HOST', '')  # django default is localhost
 EMAIL_HOST_USER = AUTH_TOKENS.get('EMAIL_HOST_USER', '')  # django default is ''
 EMAIL_HOST_PASSWORD = AUTH_TOKENS.get('EMAIL_HOST_PASSWORD', '')  # django default is ''
