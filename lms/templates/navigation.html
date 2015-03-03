@@ -62,19 +62,16 @@ site_status_msg = get_site_status_msg(course_id)
       <%block name="navigation_global_links_authenticated">
         % if settings.FEATURES.get('COURSES_ARE_BROWSABLE'):
           <li class="nav-global-01">
-            <a style="color:#2883bc;" href="${marketing_link('COURSES')}">慕课</a>
+            <a style="color:#2883bc;" href="${marketing_link('COURSES')}">${_("Courses")}</a>
           </li>
           <li class="nav-global-01">
-            <a href="/gkk/">公开课</a>
+            <a href="/lmcy/">${_("Members")}</a>
           </li>
           <li class="nav-global-01">
-            <a href="/lmcy/">联盟成员</a>
+            <a href="">${_("Announcement")}</a>
           </li>
           <li class="nav-global-01">
-            <a href="/gg/">公告</a>
-          </li>
-          <li class="nav-global-01">
-            <a href="/gy/">关于</a>
+            <a href="">${_("About")}</a>
           </li>
         % endif
       </%block>
@@ -96,7 +93,7 @@ site_status_msg = get_site_status_msg(course_id)
 
     % if user.is_authenticated():
     <ol class="right downloads">
-          <li style="font-size: 15px; z-index:100; margin-left:-10px; margin-top:10px;"><span>客户端下载</span>
+          <li style="font-size: 15px; z-index:100; margin-left:-10px; margin-top:10px;"><span>${_("Download")}</span>
             <div class="bg_pic001"></div>
             <ul style="z-index:10;" class="app_01">
             <li class="anzhuo01"><a href="#">Phone</a>
@@ -104,7 +101,7 @@ site_status_msg = get_site_status_msg(course_id)
                 <div style="" class="erweima show"><img width="225" height="225" style="display:inline-block; margin:7px 0 0 7px;" src="/static/images/erweima.jpg"></div>
               </div>
             </li>
-            <li class="weixin01"><a href="#">微信</a>
+            <li class="weixin01"><a href="#">${_("Wchat")}</a>
               <div style="margin-left:10px; width:23px; position:relative; left:122px; top:-43px; z-index:20;" class="bg_weixin2"><img width="23" height="23" class="x_show2" src="/static/images/bg_weixin.png">
               </div>
               </li>
@@ -130,7 +127,7 @@ site_status_msg = get_site_status_msg(course_id)
           <%block name="navigation_dropdown_menu_links" >
             <li><a href="${marketing_link('FAQ')}">${_("Help")}</a></li>
           </%block>
-          <li><a href="javascript:void(0)" url="${reverse('logout')}" id="logout" role="menuitem">退出登录</a></li>
+          <li><a href="javascript:void(0)" url="${reverse('logout')}" id="logout" role="menuitem">${_("Logout")}</a></li>
         </ul>
       </li>
     </ol>
@@ -160,7 +157,7 @@ site_status_msg = get_site_status_msg(course_id)
       </%block>
     </ol>
 	<ol class="right downloads">
-          <li style="font-size: 15px; z-index:100; margin-left:-10px; margin-top:10px;"><span>客户端下载</span>
+          <li style="font-size: 15px; z-index:100; margin-left:-10px; margin-top:10px;"><span>${_("Download")}</span>
             <div class="bg_pic001"></div>
             <ul style="z-index:10;" class="app_01">
             <li class="anzhuo01"><a href="#">Phone</a>
@@ -168,7 +165,7 @@ site_status_msg = get_site_status_msg(course_id)
                 <div style="" class="erweima show"><img width="225" height="225" style="display:inline-block; margin:7px 0 0 7px;" src="/static/images/erweima.jpg"></div>
               </div>
             </li>
-            <li class="weixin01"><a href="#">微信</a>
+            <li class="weixin01"><a href="#">${_("Wchat")}</a>
               <div style="margin-left:10px; width:23px; position:relative; left:122px; top:-43px; z-index:20;" class="bg_weixin2"><img width="23" height="23" class="x_show2" src="/static/images/bg_weixin.png">
               </div>
               </li>
@@ -186,7 +183,7 @@ site_status_msg = get_site_status_msg(course_id)
           % if course and settings.FEATURES.get('RESTRICT_ENROLL_BY_REG_METHOD') and course.enrollment_domain:
           <a class="cta cta-login" style="font-size: 15px;border-radius: 0px;" href="${reverse('course-specific-login', args=[course.id])}${login_query()}">${_("Log in")}</a>
           % else:
-          <a class="cta cta-login" style="font-size: 15px;border-radius: 0px;" href="/login${login_query()}">${_("Log in")}</a>
+          <a class="cta cta-login" style="font-size: 15px;border-radius: 0px;" href="/login${login_query()}">${_("Login")}</a>
           % endif
       % endif
      </li>
@@ -196,11 +193,11 @@ site_status_msg = get_site_status_msg(course_id)
       % if not settings.FEATURES['DISABLE_LOGIN_BUTTON']:
           % if course and settings.FEATURES.get('RESTRICT_ENROLL_BY_REG_METHOD') and course.enrollment_domain:
           <li>
-            <a class="cta cta-register click" style="border-radius: 0px;font-size: 15px;" href="${reverse('course-specific-register', args=[course.id])}">注册</a>
+            <a class="cta cta-register click" style="border-radius: 0px;font-size: 15px;" href="${reverse('course-specific-register', args=[course.id])}">${_("Register")}</a>
           </li>
           % else:
           <li>
-            <a class="cta cta-register click" style="border-radius: 0px;font-size: 15px;" href="/register">注册</a>
+            <a class="cta cta-register click" style="border-radius: 0px;font-size: 15px;" href="/register">${_("Register")}</a>
           </li>
           % endif
       % endif
