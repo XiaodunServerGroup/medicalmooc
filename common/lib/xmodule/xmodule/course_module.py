@@ -196,27 +196,27 @@ class CourseFields(object):
     grading_policy = Dict(help="Grading policy definition for this class",
                           default={"GRADER": [
                               {
-                                  "type": u"家庭作业",
+                                  "type": "Homework",
                                   "min_count": 12,
                                   "drop_count": 2,
                                   "short_label": "HW",
                                   "weight": 0.15
                               },
                               {
-                                  "type": u"实验",
+                                  "type": "Lab",
                                   "min_count": 12,
                                   "drop_count": 2,
                                   "weight": 0.15
                               },
                               {
-                                  "type": u"期中测验",
+                                  "type": "Midterm Exam",
                                   "short_label": "Midterm",
                                   "min_count": 1,
                                   "drop_count": 0,
                                   "weight": 0.3
                               },
                               {
-                                  "type": u"期末测验",
+                                  "type": "Final Exam",
                                   "short_label": "Final",
                                   "min_count": 1,
                                   "drop_count": 0,
@@ -287,30 +287,30 @@ class CourseFields(object):
     checklists = List(scope=Scope.settings,
                       default=[
                                 {
-                                  "short_description": "准备开始工作台",
+                                  "short_description": "Ready to start work station",
                                   "items": [
                                     {
-                                      "short_description": "添加课程队伍成员",
-                                      "long_description": "添加课程队伍成员，使之具有课程协同编辑的权限。",
+                                      "short_description": "Add the course team members",
+                                      "long_description": "Add the course team members, so that it has a curriculum collaborative editing permissions.",
                                       "is_checked": 0,
                                       "action_url": "ManageUsers",
-                                      "action_text": "编辑课程队伍",
+                                      "action_text": "Editing course team",
                                       "action_external": 0
                                     },
                                     {
-                                      "short_description": "为您的课程设置主要日期",
-                                      "long_description": "设置课程发布、结束等时间。",
+                                      "short_description": "Set date for your main course",
+                                      "long_description": "Set course release, end time.",
                                       "is_checked": 0,
                                       "action_url": "SettingsDetails",
-                                      "action_text": "设置课程详细信息和日程",
+                                      "action_text": "Set the course details and schedules",
                                       "action_external": 0
                                     },
                                     {
-                                      "short_description": "起草课程评分标准",
-                                      "long_description": "设置您的任务类型和评分标准。",
+                                      "short_description": "Drafting course grade standard",
+                                      "long_description": "Set task types and grading standards of your。",
                                       "is_checked": 0,
                                       "action_url": "SettingsGrading",
-                                      "action_text": "编辑评分设置",
+                                      "action_text": "Edit the score set",
                                       "action_external": 0
                                     },
                                     # {
@@ -324,62 +324,62 @@ class CourseFields(object):
                                   ]
                                 },
                                 {
-                                  "short_description": "起草一份简略的课程大纲",
+                                  "short_description": "Draw up a simple course outline",
                                   "items": [
                                     {
-                                      "short_description": "创建第一个章节及其小节",
-                                      "long_description": "使用大纲来创建第一个章节及其小节。",
+                                      "short_description": "Create the first chapters and sections",
+                                      "long_description": "To create the first chapters and sections use the outline。",
                                       "is_checked": 0,
                                       "action_url": "CourseOutline",
-                                      "action_text": "编辑课程大纲",
+                                      "action_text": "Edit course outline",
                                       "action_external": 0
                                     },
                                     {
-                                      "short_description": "设置章节发布日期",
-                                      "long_description": "为每个章节设定发布日期，章节内容在发布日期对学生可见。",
+                                      "short_description": "Chapter release date set",
+                                      "long_description": "Set the release date for each chapter, chapters in the release date for the students of visible。",
                                       "is_checked": 0,
                                       "action_url": "CourseOutline",
-                                      "action_text": "编辑课程大纲",
+                                      "action_text": "Edit course outline",
                                       "action_external": 0
                                     },
                                     {
-                                      "short_description": "指明一个小节的评分类别",
-                                      "long_description": "设置小节的评分类别，小节的成绩计入学生的最终成绩。",
+                                      "short_description": "Indicates a section of the score categories",
+                                      "long_description": "Set the bar score category, the final results of the students' score is included in section。",
                                       "is_checked": 0,
                                       "action_url": "CourseOutline",
-                                      "action_text": "编辑课程大纲",
+                                      "action_text": "Edit course outline",
                                       "action_external": 0
                                     },
                                     {
-                                      "short_description": "重新安排课程内容",
-                                      "long_description": "鼠标拖放排列章节顺序。",
+                                      "short_description": "To arrange the course content",
+                                      "long_description": "Drag and drop the chapter order arrangement。",
                                       "is_checked": 0,
                                       "action_url": "CourseOutline",
-                                      "action_text": "编辑课程大纲",
+                                      "action_text": "Edit course outline",
                                       "action_external": 0
                                     },
                                     {
-                                      "short_description": "课程章节重命名",
-                                      "long_description": "对课程大纲章节进行重命名。",
+                                      "short_description": "Course Chapter rename",
+                                      "long_description": "Renaming course outline section。",
                                       "is_checked": 0,
                                       "action_url": "CourseOutline",
-                                      "action_text": "编辑课程大纲",
+                                      "action_text": "Edit course outline",
                                       "action_external": 0
                                     },
                                     {
-                                      "short_description": "删除课程内容",
-                                      "long_description": "删除课程章节、小节、单元，删除后不能恢复，请谨慎操作！",
+                                      "short_description": "Delete the contents of the course",
+                                      "long_description": "Delete course chapters, sections, units, not restore deleted, please be careful！",
                                       "is_checked": 0,
                                       "action_url": "CourseOutline",
-                                      "action_text": "编辑课程大纲",
+                                      "action_text": "Edit course outline",
                                       "action_external": 0
                                     },
                                     {
-                                      "short_description": "为您的大纲增加一个专用章节",
-                                      "long_description": "创建一个辅助教师教学的章节。",
+                                      "short_description": "To add a special section for your outline",
+                                      "long_description": "Create a teaching section。",
                                       "is_checked": 0,
                                       "action_url": "CourseOutline",
-                                      "action_text": "编辑课程大纲",
+                                      "action_text": "Edit course outline",
                                       "action_external": 0
                                     }
                                   ]

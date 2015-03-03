@@ -11,9 +11,9 @@ from uuid import uuid4
 class DiscussionFields(object):
     discussion_id = String(scope=Scope.settings, default="$$GUID$$")
     display_name = String(
-        display_name="显示名称",
-        help="此模块的显示名称",
-        default="讨论",
+        display_name="Display Name",
+        help="Display name for this module",
+        default="Discussion",
         scope=Scope.settings
     )
     data = String(
@@ -22,15 +22,15 @@ class DiscussionFields(object):
         default="<discussion></discussion>"
     )
     discussion_category = String(
-        display_name="类别",
-        default="默认主题",
-        help="关于类别讨论的名称。此名称出现在论坛讨论的过程中的左侧窗格中。",
+        display_name="Category",
+        default="Week 1",
+        help="A category name for the discussion. This name appears in the left pane of the discussion forum for the course.",
         scope=Scope.settings
     )
     discussion_target = String(
-        display_name="子类别",
-        default="默认子类别",
-        help="关于讨论子类的名称。此名称出现在论坛讨论的过程中的左侧窗格中。",
+        display_name="Subcategory",
+        default="Topic-Level Student-Visible Label",
+        help="A subcategory name for the discussion. This name appears in the left pane of the discussion forum for the course.",
         scope=Scope.settings
     )
     sort_key = String(scope=Scope.settings)

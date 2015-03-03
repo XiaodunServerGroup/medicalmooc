@@ -134,8 +134,8 @@ class XModuleMixin(XBlockMixin):
     icon_class = 'other'
     
     display_name = String(
-        display_name="显示名称",
-        help="此名称出现在页面顶部的水平导航中",
+        display_name="Display name",
+        help="This name appears at the top of the page in Horizontal navigation",
         scope=Scope.settings,
         # it'd be nice to have a useful default but it screws up other things; so,
         # use display_name_with_default for those
@@ -143,8 +143,8 @@ class XModuleMixin(XBlockMixin):
     )
 
     course_category = String(
-        display_name="课程类别",
-        help="此名称出现在页面顶部的水平导航中.",
+        display_name="Course category",
+        help="This name appears at the top of the page in Horizontal navigation.",
         scope=Scope.settings,
         # it'd be nice to have a useful default but it screws up other things; so,
         # use display_name_with_default for those
@@ -152,8 +152,8 @@ class XModuleMixin(XBlockMixin):
     )
 
     course_level = String(
-        display_name="课程级别",
-        help="此名称出现在页面顶部的水平导航中",
+        display_name="Course level",
+        help="This name appears at the top of the page in Horizontal navigation",
         scope=Scope.settings,
         # it'd be nice to have a useful default but it screws up other things; so,
         # use display_name_with_default for those
@@ -161,8 +161,8 @@ class XModuleMixin(XBlockMixin):
     )
 
     course_price = String(
-        display_name="课程价格",
-        help="此名称出现在页面顶部的水平导航中",
+        display_name="Course price",
+        help="This name appears at the top of the page in Horizontal navigation",
         scope=Scope.settings,
         # it'd be nice to have a useful default but it screws up other things; so,
         # use display_name_with_default for those
@@ -170,8 +170,8 @@ class XModuleMixin(XBlockMixin):
     )
 
     course_audit = Integer(
-        display_name="审核与否",
-        help="与业务系统相关字段",
+        display_name="Audit or not",
+        help="Business system related field",
         scope=Scope.settings,
         default=0
     )
