@@ -1,5 +1,5 @@
 <%! from django.utils.translation import ugettext as _ %>
 
-${"您已被邀请加入{course_name}课程 ".format(
+${_("You have been invited to join the {course_name} course").format(
 		course_name=course.display_name_with_default
 	)}

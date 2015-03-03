@@ -78,13 +78,13 @@ require(["domReady!", "jquery", "js/models/module_info", "coffee/src/views/unit"
                       <span class="large-template-icon large-${type}-icon"></span>
                      <span class="name">
                        % if type == 'discussion':
-                             讨论
+                             ${_("Discussion")}
                        % elif type == 'html':
-                             页面
+                             ${_("Html")}
                        % elif type == 'problem':
-                             问题
+                             ${_("Problem")}
                        % elif type == 'video':
-                             视频
+                             ${_("Video")}
                        % else:
                              type
                        % endif

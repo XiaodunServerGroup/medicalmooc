@@ -8,10 +8,10 @@
 	
 	<table class="tb">
 		<tr>
-			<td>图片</td>
-			<td width="400px">链接</td>
-			<td width="50px">排序号</td>
-			<td width="100px">操作</td>
+			<td>${_("Pictures")}</td>
+			<td width="400px">${_("Links")}</td>
+			<td width="50px">${_("Sort Number")}</td>
+			<td width="100px">${_("Operators")}</td>
 		</tr>
 		% for item in image_list:
 		<tr> 
@@ -25,14 +25,14 @@
 			<td>${item.url}</th>
 			<td  style="text-align:center">${item.order_num}</th>
 			<td  style="text-align:center;vertical-align:middle;">
-				<a href="${item.get_edir_url()}">修改</a>
-				<a href="javascript:void(0)" class="del" data-id="${item.id}">删除</a>
+				<a href="${item.get_edir_url()}">${_("Change")}</a>
+				<a href="javascript:void(0)" class="del" data-id="${item.id}">${_("Delete")}</a>
 			</td>
 		</tr>	
 		% endfor
 		<tr> 
 			<td colspan="4" style="text-align:center">
-				<a href="/syscustom/indexluobo/add/" id="modify-logo-btn" class="btn">添加</a>
+				<a href="/syscustom/indexluobo/add/" id="modify-logo-btn" class="btn">${_("Add")}</a>
 			</td>
 		</tr>	
 	</table>

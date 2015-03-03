@@ -224,21 +224,21 @@
                         %elif course.course_price>0: 
                               % if can_enroll:  
 	                        	  % if is_buy>0:
-	                        	      <a class="register free ${'auth' if user.is_authenticated() else ''}"><span class="u-btn-orange">注册课程</span></a>
+	                        	      <a class="register free ${'auth' if user.is_authenticated() else ''}"><span class="u-btn-orange">${_("Registered course")}</span></a>
 	                        	  % else:
-		                        	  <a class="free" id="buycourse" has_course="${has_course}" target="_blank" href="javascript:;"  url="${settings.SSO_BUY_URL}${course.uuid}"><span class="u-btn-orange">购买课程</span></a>
+		                        	  <a class="free" id="buycourse" has_course="${has_course}" target="_blank" href="javascript:;"  url="${settings.SSO_BUY_URL}${course.uuid}"><span class="u-btn-orange">${_("The purchase of course")}</span></a>
 		                        	  <a class="free" id="alert_tips"  href="#purchase-modal"  rel='leanModal' style="display:none;"><span class="u-btn-orange"></span></a>
 		                              <div id="register_error" style='clear: both;'></div>
 	                              % endif
 	                          % else:
-	                          		<a class="register1 free disabled"><span class="u-btn-orange disabled">注册已关闭</span></a>
+	                          		<a class="register1 free disabled"><span class="u-btn-orange disabled">${_("Registration is closed")}</span></a>
                               % endif
                         %else:
                         	% if can_enroll:  
-                              <a class="register free ${'auth' if user.is_authenticated() else ''}"><span class="u-btn-orange">注册课程</span></a>
+                              <a class="register free ${'auth' if user.is_authenticated() else ''}"><span class="u-btn-orange">${_("Registered course")}</span></a>
                               <div id="register_error" style='clear: both;'></div>
                             % else:
-	                          		<a class="register1 free disabled"><span class="u-btn-orange disabled">注册已关闭</span></a>
+	                          		<a class="register1 free disabled"><span class="u-btn-orange disabled">${_("Registration is closed")}</span></a>
                             % endif
                         %endif
                         </div>
@@ -249,12 +249,12 @@
                         	<p><span>${_("Course price")}：</span><span class="cor_red" style='font-size:18px;font-family:"Microsoft YaHei","Open Sans",Verdana"'>￥${course.course_price}</span></p>
                         %endif
                         %if course_dur:
-                            <p><span>${_("Course duration")}：</span><span class="cor_red">${course_dur[0] + "天"}</span></p>
+                            <p><span>${_("Course duration")}：</span><span class="cor_red">${course_dur[0] }${_("day")}</span></p>
                         %else:
                             <p><span>${_("Course duration")}：</span><span class="cor_red">${course_duration}</span></p>
                         %endif
                         <p><span>${_("Classes Starts")}：</span><span class="cor_red">${course.start_date_text}</span></p>
-                        <p><span>${_("Course load")}：</span><span class="cor_red">${get_course_about_section(course, "effort")}小时每周</span></p>
+                        <p><span>${_("Course load")}：</span><span class="cor_red">${get_course_about_section(course, "effort")}${_("Hours per week")}</span></p>
                         <!--<p><span>内容类型：</span><span>视频 文档 随堂测验 富文本 讨论</span></p>-->
                         <!--<p><span>课程分类：</span><a href="#">哲学历史</a></p>-->
                     </div>
@@ -274,10 +274,10 @@
                         <li style="list-style-type:none">
                 				<h3>${course_team[n]['name']}</h3>
                             %if course_team[n]['shortbio']:
-                                <span class="shou">展开&nbsp;∨</span>
+                                <span class="shou">${_("Open")}&nbsp;∨</span>
                 				    <div class="p1" style="display:none;">${course_team[n]['shortbio']}</div>
                             %else:
-                                <span id="" style="display:none">展开&nbsp;∨</span>
+                                <span id="" style="display:none">${_("Open")}&nbsp;∨</span>
                             %endif
 
                         </li>
@@ -372,13 +372,13 @@
 		$(".shou").toggle(
 		    function(){
 				$(this).addClass("");
-				var sibling1 = $(this).html("收缩&nbsp;∧");
+				var sibling1 = $(this).html('${_("Shrinkage")}&nbsp;∧');
 
 				$(this).siblings(".p1").attr("style","display:block");
 					},
 				function (){
 				   $(this).siblings(".p1").attr("style","display:none")
-				    var sibling2=$(this).html("展开&nbsp;∨");
+				    var sibling2=$(this).html('${_("Open")}&nbsp;∨');
 					}
 			      )
 		  $.get($("#school_logo_img").attr("src"), function(result, textStatus){
@@ -394,7 +394,7 @@
 			}
 			
 			if($(this).attr('has_course')!='True'){
-				alert("获取课程数据失败，请刷新再试");
+				alert('${_("Failure to obtain the course data refresh, please try again")}');
 				return false;
 			}else{
 				window.open($(this).attr('url'), '_blank');
@@ -412,7 +412,7 @@
 				   if(response.status && response.status=='1'){
 					   window.location.href="${course_url}";
 				   }else{
-					   alert("请先购买课程");
+					   alert('${_("Please buy course")}');
 				   }
 				   
 			   }
@@ -481,11 +481,11 @@
 
     <section class="purchase-content" style="width: auto; padding: 0 40px 20px">
       <div id='purchase-prompt'>
-        <span>支付进行中。。。如果支付完成，请点击下面按钮来进入课程</span>
+        <span>${_("Payment in... If payment is completed, please click the button below to enter the course shrinkage")}</span>
       </div>
 
       <div id='purchase-oper'>
-        <a class="trade_class" id="finish_purchase" style="display: inline-block; padding: 8px 20px">确定已支付&进入课程</a>
+        <a class="trade_class" id="finish_purchase" style="display: inline-block; padding: 8px 20px">${_("Determine the paid & into the curriculum")}</a>
       </div>
     </section>
   </div>

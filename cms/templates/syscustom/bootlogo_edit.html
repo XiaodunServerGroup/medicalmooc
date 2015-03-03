@@ -10,34 +10,34 @@
 	<table class="tb">
 		<tr>
 			<tr> 
-				<td width="100px">类型</td>  
+				<td width="100px">${_("type")}</td>
 				<td colspan=3>
 					<select id="type" name="type">
-						<option value="">请选择客户端类型</option>
+						<option value="">${_("Please select a client type")}</option>
 						% for item in type_list:
 							 <option value="${item[0]}" ${'selected="selected"' if obj and obj.type==item[0] else ''}>${item[1]}</option>
 						% endfor
 					</select>
 				</td>
 			</tr>
-			<td>图片<div style="font-size:12px;">尺寸：1180*350</div></td>  
+			<td>${_("Pictures")}<div style="font-size:12px;">${_("Size")}：1180*350</div></td>
 			<td>  
 				% if obj:
 					<input type="hidden" id="image" name="image" value="${obj.img}"/>
-					<a href="#" id="add-pic-btn" class="btn">修改图片</a>
+					<a href="#" id="add-pic-btn" class="btn">${_("Change Picture")}</a>
 					<div id="temp_img_div" class="temp_img_div">
 						<img src="${obj.get_image_url()}"/>
 					</div>
 				% else:
 					<input type="hidden" id="image" name="image" value=""/>
-					<a href="#" id="add-pic-btn" class="btn">添加图片</a>
+					<a href="#" id="add-pic-btn" class="btn">${_("Add Picture")}</a>
 					<div id="temp_img_div" class="temp_img_div"></div>
 				%endif
 			</td>
 		</tr>
 		<tr> 
 			<td colspan=3>
-				<a href="#" id="save-btn" class="btn">保存</a>
+				<a href="#" id="save-btn" class="btn">${_("Save")}</a>
 			</td>
 		</tr>	
 	</table>

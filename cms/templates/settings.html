@@ -235,9 +235,9 @@ tinymce.init({
               <ol class="list-input">
                 % if short_description_editable:
                 <li class="field text" id="field-course-short-edittool">
-                  <label for="course-overview">课程概况编辑工具</label>
+                  <label for="course-overview">${_("Course overview editing tools")}</label>
                   <textarea class="text" id="introedittool"></textarea>
-                  <span >这个工具帮助你制作课程概况.请在上面编辑器制作完成后,选择<b>"工具"-"源代码"</b>,复制弹出的窗口里的所有文本,粘贴进课程概况.</span>
+                  <span >${_("This tool helps you make course overview. Please above editor production is completed, select <b>'tools' - 'source code'</b>, all the text copy popup window, paste into the course overview.")}</span>
                 </li>
                 % endif
                 % if short_description_editable:
@@ -338,14 +338,14 @@ tinymce.init({
 
                 <section class="group-settings requirements">
                   <header>
-                    <h2 class="title-2">价格</h2>
+                    <h2 class="title-2">${_("Price")}</h2>
                   </header>
 
                   <ol class="list-input">
                     <li class="field text" id="field-course-price">
-                      <label for="course-price">该课程的价格</label>
+                      <label for="course-price">${_("The price of the course")}</label>
                       <input type="text" class="short time" id="course-price" placeholder="" />
-                      <span class="tip tip-inline">该课程的价格</span>
+                      <span class="tip tip-inline">${_("The price of the course")}</span>
                     </li>
                   </ol>
                 </section>

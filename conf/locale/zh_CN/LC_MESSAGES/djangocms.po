@@ -1,0 +1,66 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: edx-platform\n"
+"Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
+"POT-Creation-Date: 2014-03-10 09:12-0400\n"
+"PO-Revision-Date: 2014-03-12 02:11+0000\n"
+"Last-Translator: zhou_Scott <zbzcool@163.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/edx-"
+"platform/language/zh_CN/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 1.3\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Synchronous Classroom"
+msgstr "同步课堂"
+
+msgid "Synchronous Classroom Introduction"
+msgstr "同步课堂简介"
+
+msgid "Courses Questionnaire"
+msgstr "课程问卷调查"
+
+msgid "Courses Questionnaire Introduction"
+msgstr "课程问卷调查介绍"
+
+msgid "Create Questionnaire"
+msgstr "创建问卷"
+
+msgid "Existing Questionnaire List"
+msgstr "已有问卷列表"
+
+msgid "Import Student Management"
+msgstr "导入学生管理"
+
+msgid "The following operations related to the management of students can be imported."
+msgstr "以下操作可进行导入学生的相关管理."
+
+msgid "Import Batch Of Students"
+msgstr "批量导入学生"
+
+msgid "Import files to excel, fill in the order of the mailbox, password, user name, name"
+msgstr "导入的文件为excel文件,填写的顺序为邮箱,密码,用户名,姓名"
+
+msgid "Management Of Import Students"
+msgstr "管理导入的学生"
+
+msgid "The Management Of Students"
+msgstr "学生管理"
+
+msgid "Username"
+msgstr "用户名"
+
+msgid "Name"
+msgstr "姓名"
+
+msgid "Email"
+msgstr "邮箱"
+
+msgid "Operation"
+msgstr "操作"
+
+msgid "Remove"
+msgstr "移除"

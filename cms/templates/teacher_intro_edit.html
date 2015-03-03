@@ -3,7 +3,7 @@
   from django.core.urlresolvers import reverse
   from django.utils.translation import ugettext as _
 %>
-<%block name="title">教师简介</%block>
+<%block name="title">${_("Teacher Introduction")}</%block>
 <%block name="bodyclass">is-signedin course uploads view-uploads</%block>
 
 <%namespace name='static' file='static_content.html'/>
@@ -28,7 +28,7 @@
             <!--
             <small class="subtitle">${_("Content")}</small>
             -->
-            <span class="sr">&gt; </span>教师信息编辑
+            <span class="sr">&gt; </span>${_("The teacher information editor")}
         </h1>
     </header>
     <section class="content">
@@ -40,7 +40,7 @@
     <input type='hidden' name='csrfmiddlewaretoken' value='${csrf_token}' />
         	<table class="tb">
         		<tr>
-        			<td width="100px">头像链接地址</td>
+        			<td width="100px">${_("Avatar Address Link")}</td>
         			<td>
         				<input type="text" name="picurl" value="" size="60" maxlength="160"/><br/>
         				
@@ -52,7 +52,7 @@
         			</td>
         		</tr>
         		<tr>
-        			<td >个人简介 </td>
+        			<td >${_("Personal profile")} </td>
         			<td>
         				<textarea name="shortbio" style="width:600px;height:200px;" >${profile.shortbio|h}</textarea>
         			</td>
@@ -60,7 +60,7 @@
         		<tr>
         			<td ></td>
         			<td>
-        				 <input type="submit" id="submit" value="保存" class="button upload-button new-button" style="font-size:14px;">
+        				 <input type="submit" id="submit" value="${_('Save')}" class="button upload-button new-button" style="font-size:14px;">
         			</td>
         		</tr>
         	</table> 

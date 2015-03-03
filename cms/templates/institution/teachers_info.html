@@ -1,11 +1,14 @@
 <%inherit file="institution_base.html" />
-<%block name="title">教师信息</%block>
+<%!
+  from django.utils.translation import ugettext as _
+%>
+<%block name="title">${_("The Information Of Teacher")}</%block>
 
 <%block name="content">
 <div class="wrapper-mast wrapper">
     <header class="mast has-actions has-subtitle">
         <h1 class="page-header">
-            <a href="/teachers_info"><span class="sr">&gt; </span>教师信息</a>
+            <a href="/teachers_info"><span class="sr">&gt; </span>${_("The Information Of Teacher")}</a>
         </h1>
     </header>
     <section class="content" style="min-height: 670px;">
@@ -15,8 +18,8 @@
           <table>
               <tr>
                   <td><div id="remind"></div></td>
-                  <td><input type="text" id="search-query" name="query"  class="search" placeholder="请输入关键字..." onfocus="placeholder =''" onblur="placeholder='请输入关键字...'" value=""></td>
-                  <td><input type="submit" class="search_button" value="搜索"></td>
+                  <td><input type="text" id="search-query" name="query"  class="search" placeholder="${_('Please input a keyword...')}" onfocus="placeholder =''" onblur="placeholder='请输入关键字...'" value=""></td>
+                  <td><input type="submit" class="search_button" value="${_('search')}"></td>
               </tr>
           </table>
     </form>
@@ -25,11 +28,11 @@
         <table width="1000" class="table1">
         % if len(user_tercher):
                 <tr>
-                    <td>教师名</td>
-                    <td>用户名</td>
-                    <td>邮箱</td>
-                    <td>所属机构</td>
-                    <td>课程数</td>
+                    <td>${_("The name of teacher")}</td>
+                    <td>${_("Username")}</td>
+                    <td>${_("Email")}</td>
+                    <td>${_("Institutions")}</td>
+                    <td>${_("The number of courses")}</td>
                 </tr>
             %for n in range(0, len(user_tercher)):
                 <tr>
