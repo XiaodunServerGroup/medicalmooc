@@ -8,10 +8,12 @@
     %endif
 
     <span class="current">
-    % if posts.paginator.num_pages > 0:
+    % if posts.paginator.num_pages > 0 and posts.number !=1:
         % for n in range(0, posts.paginator.num_pages):
             <a href="?page=${n+1}">${n+1}</a>
         % endfor
+    % else:
+        <span class='empty'></span>        
     % endif
     </span>
 
