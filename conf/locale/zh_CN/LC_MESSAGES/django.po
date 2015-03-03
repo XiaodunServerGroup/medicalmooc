@@ -8992,3 +8992,6 @@ msgstr "页面"
 
 msgid "Video"
 msgstr "视频"
+
+msgid "Video address"
+msgstr "视频地址"
