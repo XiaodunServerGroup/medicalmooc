@@ -129,7 +129,7 @@ function goto( mode)
   <section class="instructor-dashboard-content" id="instructor-dashboard-content">
     <h1>${_("Instructor Dashboard")}</h1>
 
-    <h2 class="navbar">[ <a href="#" onclick="goto('Grades');" class="${modeflag.get('Grades')}">等级</a> |
+    <h2 class="navbar">[ <a href="#" onclick="goto('Grades');" class="${modeflag.get('Grades')}">${_("Grade")}</a> |
           %if settings.FEATURES.get('ENABLE_PSYCHOMETRICS'):
             <a href="#" onclick="goto('Psychometrics');" class="${modeflag.get('Psychometrics')}">${_("Psychometrics")}</a> |
           %endif
@@ -142,7 +142,7 @@ function goto( mode)
              | <a href="#" onclick="goto('Email')" class="${modeflag.get('Email')}">${_("Email")}</a>
           %endif
           %if show_email_tab_free:
-             | <a href="#" onclick="goto('Email_free')" class="${modeflag.get('Email_free')}">自由发送电子邮件</a>
+             | <a href="#" onclick="goto('Email_free')" class="${modeflag.get('Email_free')}">${_("Free email")}</a>
           %endif
           %if settings.FEATURES.get('ENABLE_INSTRUCTOR_ANALYTICS'):
              | <a href="#" onclick="goto('Analytics');" class="${modeflag.get('Analytics')}">${_("Analytics")}</a>
@@ -194,22 +194,22 @@ function goto( mode)
     </p>
 
     <p>
-    <input type="submit" name="action" onclick="this.value='学生人数的转储列表'" value="学生人数的转储列表" class="${'is-disabled' if disable_buttons else ''}">
+    <input type="submit" name="action"  value='${_("The number of students dump list")}' class="${'is-disabled' if disable_buttons else ''}">
     </p>
 
     <p>
-    <input type="submit" name="action" onclick="this.value='所有注册这门课程的学生'" value="所有注册这门课程的学生" class="${'is-disabled' if disable_buttons else ''}">
-    <input type="submit" name="action" onclick="this.value='下载所有学生的成绩'" value="下载所有学生的成绩" class="${'is-disabled' if disable_buttons else ''}">
+    <input type="submit" name="action"  value='${_("All registered students on the course")}' class="${'is-disabled' if disable_buttons else ''}">
+    <input type="submit" name="action"  value='${_("Download all the achievements of the students")}' class="${'is-disabled' if disable_buttons else ''}">
     </p>
 
     <p>
-    <input type="submit" name="action" onclick="this.value='转储所有注册学习这门课的学生RAW等级'" value="转储所有注册学习这门课的学生RAW等级" class="${'is-disabled' if disable_buttons else ''}">
-    <input type="submit" name="action" onclick="this.value='下载所有的RAW等级'" value="下载所有的RAW等级" class="${'is-disabled' if disable_buttons else ''}">
+    <input type="submit" name="action"  value='${_("Dump all registered learning this course students grades RAW")}' class="${'is-disabled' if disable_buttons else ''}">
+    <input type="submit" name="action" value='${_("Download all RAW grade")}' class="${'is-disabled' if disable_buttons else ''}">
     </p>
 
     <p>
-    <input type="submit" name="action" onclick="this.value='下载答案'" value="下载答案" class="${'is-disabled' if disable_buttons else ''}">
-    <input type="submit" name="action" onclick="this.value='转存作业配置描述信息'" value="转存作业配置描述信息">
+    <input type="submit" name="action"  value='${_("Download the answer")}' class="${'is-disabled' if disable_buttons else ''}">
+    <input type="submit" name="action"  value='${_("To save job configuration description information")}'>
     </p>
     <hr width="40%" style="align:left">
 
@@ -262,14 +262,14 @@ function goto( mode)
     </p>
     <p>
       ${_("Then select an action:")}
-      <input type="submit" onclick="this.value='恢复所有学生的尝试次数'" name="action" value="恢复所有学生的尝试次数">
-      <input type="submit" onclick="this.value='重评所有学生提交的作业'" name="action" value="重评所有学生提交的作业">
+      <input type="submit"  name="action" value='${_("To restore all the student attempts")}'>
+      <input type="submit"  name="action" value='${_("Re evaluation of all students to submit homework")}'>
     </p>
     <p>
     <p>${_("These actions run in the background, and status for active tasks will appear in a table below. To see status for all tasks submitted for this problem, click on this button:")}
     </p>
     <p>
-      <input type="submit" onclick="this.value='显示后台操作历史记录'" name="action" value="显示后台操作历史记录">
+      <input type="submit"  name="action" value='${_("Display background operation history")}'>
     </p>
 
     <hr width="40%" style="align:left">
@@ -277,12 +277,12 @@ function goto( mode)
 
     <h2>${_("Student-specific grade inspection and adjustment")}</h2>
     <p>
-      在这里指定一个学生的邮件和用户名
+      ${_("Specify a student e-mail and user name here")}
       <input type="text" name="unique_student_identifier">
     </p>
     <p>
       ${_("Click this, and a link to student's progress page will appear below:")}
-      <input type="submit" onclick="this.value='获取转向进度页面的链接'" name="action" value="获取转向进度页面的链接">
+      <input type="submit"  name="action" value='${_("Gets the steering schedule page links")}'>
     </p>
     <p>
       ${_("Specify a particular problem in the course here by its url:")}
@@ -297,16 +297,16 @@ function goto( mode)
     </p>
     <p>
       ${_("Then select an action:")}
-      <input type="submit" onclick="this.value='恢复特定学生的尝试次数'" name="action" value="恢复特定学生的尝试次数">
+      <input type="submit"  name="action" value='${_("The restoration of a specific student attempts")}'>
       %if settings.FEATURES.get('ENABLE_INSTRUCTOR_BACKGROUND_TASKS'):
-      <input type="submit" onclick="this.value='重评特定学生提交的作业'" name="action" value="重评特定学生提交的作业">
+      <input type="submit"  name="action" value='${_("Re evaluation of specific students to submit homework")}'>
       %endif
     </p>
 
     %if instructor_access:
     <p>
       ${_("You may also delete the entire state of a student for the specified module:")}
-      <input type="submit" onclick="this.value='删除学生状态模块'" name="action" value="删除学生状态模块">
+      <input type="submit"  name="action" value='${_("Delete student status module")}'>
     </p>
     %endif
     %if settings.FEATURES.get('ENABLE_INSTRUCTOR_BACKGROUND_TASKS'):
@@ -314,7 +314,7 @@ function goto( mode)
            "To see status for all tasks submitted for this problem and student, click on this button:")}
     </p>
     <p>
-      <input type="submit" onclick="this.value='显示学生后台操作历史记录'" name="action" value="显示学生后台操作历史记录">
+      <input type="submit"  name="action" value='${_("Show the students the background operation history")}'>
     </p>
     %endif
 
@@ -347,21 +347,21 @@ function goto( mode)
   %if instructor_access:
     <hr width="40%" style="align:left">
     <p>
-    <input type="submit" onclick="this.value='List course staff members'" name="action" value="列出所有参与这门课程的工作人员">
+    <input type="submit"  name="action" value='${_("List course staff members")}'>
     <p>
     <input type="text" name="staffuser">
-    <input type="submit" onclick="this.value='Remove course staff'" name="action" value="删除课程管理者">
-    <input type="submit" onclick="this.value='Add course staff'" name="action" value="添加课程管理者">
+    <input type="submit"  name="action" value='${_("Remove course staff")}'>
+    <input type="submit"  name="action" value='${_("Add course staff")}'>
     <hr width="40%" style="align:left">
   %endif
 
   %if admin_access:
     <hr width="40%" style="align:left">
     <p>
-    <input type="submit" onclick="this.value='List course instructors'" name="action" value="列出所有这门课的导师">
+    <input type="submit"  name="action" value='${_("List course instructors")}'>
     <p>
-    <input type="text" name="instructor"> <input type="submit" onclick="this.value='Remove instructor'" name="action" value="删除导师">
-    <input type="submit" onclick="this.value='Add instructor'" name="action" value="添加导师">
+    <input type="text" name="instructor"> <input type="submit"  name="action" value='${_("Remove instructor")}'>
+    <input type="submit"  name="action" value='${_("Add instructor")}'>
     <hr width="40%" style="align:left">
   %endif
 
@@ -377,23 +377,23 @@ function goto( mode)
   %if instructor_access:
     <hr width="40%" style="align:left">
     <p>
-    <input type="submit" onclick="this.value='List course forum admins'" name="action" value="列出所有论坛管理者">
+    <input type="submit" name="action" value='${_("List course forum admins")}'>
     <p>
-    <input type="text" onclick="this.value='Remove forum admin'" name="forumadmin"> <input type="submit" name="action" value="删除论坛管理员">
-    <input type="submit" onclick="this.value='Add forum admin'" name="action" value="添加论坛管理员">
+    <input type="text" onclick="this.value='Remove forum admin'" name="forumadmin"> <input type="submit" name="action" value='${_("Delete the forum administrator")}'>
+    <input type="submit"  name="action" value='${_("Add forum admin")}'>
     <hr width="40%" style="align:left">
   %endif
 
   %if instructor_access or forum_admin_access:
     <p>
-    <input type="submit" onclick="this.value='List course forum moderators'" name="action" value="列出课程论坛版主">
-    <input type="submit" onclick="this.value='List course forum community TAs'" name="action" value="列出所有的论坛协会">
+    <input type="submit"  name="action" value='${_("List course forum moderators")}'>
+    <input type="submit"  name="action" value='${_("List course forum community TAs")}'>
     <p>
     <input type="text" name="forummoderator">
-    <input type="submit" onclick="this.value='Remove forum moderator'" name="action" value="删除论坛版主">
-    <input type="submit" onclick="this.value='Add forum moderator'" name="action" value="添加论坛版主">
-    <input type="submit" onclick="this.value='Remove forum community TA'" name="action" value="删除论坛协会">
-    <input type="submit" onclick="this.value='Add forum community TA'" name="action" value="添加论坛协会">
+    <input type="submit"  name="action" value='${_("Remove forum moderator")}'>
+    <input type="submit"  name="action" value='${_("Add forum moderator")}'>
+    <input type="submit"  name="action" value='${_("Remove forum community TA")}'>
+    <input type="submit"  name="action" value='${_("Add forum community TA")}'>
     <hr width="40%" style="align:left">
   %else:
   <p>${_("User requires forum administrator privileges to perform administration tasks.  See instructor.")}</p>
@@ -429,9 +429,8 @@ function goto( mode)
       </div>
     </div>
     % endif
-
-    <input type="submit" onclick="this.value='登记学生列表'" name="action" value="登记学生列表" class="${'is-disabled' if disable_buttons else ''}">
-    <input type="submit" onclick="this.value='已经登记但是尚未注册学生名单'" name="action" value="已经登记但是尚未注册学生名单" class="${'is-disabled' if disable_buttons else ''}">
+    <input type="submit"  name="action" value='${_("Student registration list")}' class="${'is-disabled' if disable_buttons else ''}">
+    <input type="submit" name="action" value='${_("Already registered but not yet registered students list")}' class="${'is-disabled' if disable_buttons else ''}">
     <hr width="40%" style="align:left">
 
   %if settings.FEATURES.get('REMOTE_GRADEBOOK_URL','') and instructor_access:
@@ -459,9 +458,9 @@ function goto( mode)
   <input type="checkbox" name="email_students"> ${_("Notify students by email")}
   <p>
   <input type="checkbox" name="auto_enroll"> ${_("Auto-enroll students when they activate")}
-  <input type="submit" onclick="this.value='正在招收'" name="action" value="招收多名学生">
+  <input type="submit" name="action" value='${_("Recruit students")}'>
   <p>
-  <input type="submit" onclick="this.value='正在取消'" name="action" value="取消注册多个学生">
+  <input type="submit"  name="action" value='${_("To cancel the registration of multiple students")}'>
 
 %endif
 
@@ -470,14 +469,14 @@ function goto( mode)
 %if modeflag.get('Data'):
     <hr width="40%" style="align:left">
     <p>
-    <input type="submit" onclick="this.value='Download CSV of all student profile data'" name="action" value="以CSV格式下载所有学生的档案数据">
+    <input type="submit"  name="action" value='${_("Download CSV of all student profile data")}'>
     </p>
     <p> ${_("Problem urlname:")}
         <input type="text" onclick="this.value='Download CSV of all responses to problem'" name="problem_to_dump" size="40">
-        <input type="submit" onclick="this.value='Add'" name="action" value="以CSV格式下载所有问题答案">
+        <input type="submit" onclick="this.value='Add'" name="action" value='${_("Download all the answers to the questions in CSV format")}'>
     </p>
     <p>
-    <input type="submit" onclick="this.value='Download CSV of all student anonymized IDs'" name="action" value="以CSV格式下载所有匿名学生ID">
+    <input type="submit"  name="action" value='${_("Download CSV of all student anonymized IDs")}'>
     </p>
     <hr width="40%" style="align:left">
 %endif
@@ -488,7 +487,7 @@ function goto( mode)
   %if instructor_access:
     <hr width="40%" style="align:left">
     <p>
-    <input type="submit" onclick="this.value='List beta testers'" name="action" value="测试用户列表">
+    <input type="submit"  name="action" value='${_("List beta testers")}'>
     <p>
     ## Translators: days_early_for_beta should not be translated
     ${_("Enter usernames or emails for students who should be beta-testers, one per line, or separated by commas.  They will get to "
@@ -496,8 +495,8 @@ function goto( mode)
     </p>
     <p>
     <textarea cols="50" row="30" name="betausers"></textarea>
-    <input type="submit" onclick="this.value='Remove beta testers'" name="action" value="删除测试用户">
-    <input type="submit" onclick="this.value='Add beta testers'" name="action" value="添加测试用户">
+    <input type="submit"  name="action" value='${_("Remove beta testers")}'>
+    <input type="submit"  name="action" value='${_("Add beta testers")}'>
     </p>
     <hr width="40%" style="align:left">
 
@@ -544,7 +543,7 @@ function goto( mode)
       </li>
 
       <li class="field">
-        <label>内容:</label>
+        <label>${_("Content:")}</label>
         <div class="email-editor">
           ${editor}
         </div>
@@ -564,7 +563,7 @@ function goto( mode)
 	<b>${_("A queued email CANNOT be cancelled.")}</b></p>
       </div>
       <br />
-      <input type="submit" onclick="this.value='发送邮件'" name="action" value="发送邮件">
+      <input type="submit"  name="action" value='${_("Send mail")}'>
     </div>
     <script type="text/javascript">
       $(document).ready(function(){
@@ -572,10 +571,10 @@ function goto( mode)
         document.idashform.onsubmit = function() {
           this.message.value = emailEditor.save()['data'];
           if (this.subject.value == ''){
-            alert("邮件主题不能为空")
+            alert('${_("Mail theme cannot be empty")}')
             return false;
           }else if (this.message.value == ''){
-            alert("邮件内容不能为空")
+            alert('${_("Mail theme cannot be empty")}')
             return false;
           }
           return true;
@@ -595,7 +594,7 @@ function goto( mode)
       <li class="field">
         <label for="id_to">${_("Send to:")}</label>
         <input type="text" name="student" id="send_email_student" value="" />
-        <span class="tip">(多个邮箱用;隔开, 例如:renwei@example.com;renweishe@example.com)</span>
+        <span class="tip">(${_("A plurality of spaced, such as mailbox:")}renwei@example.com;renweishe@example.com)</span>
       </li>
 
       <li class="field">
@@ -609,7 +608,7 @@ function goto( mode)
       </li>
 
       <li class="field">
-        <label>内容:</label>
+        <label>${_("Content:")}</label>
         <div class="email-editor">
           ${editor}
         </div>
@@ -619,7 +618,7 @@ function goto( mode)
 
     <div class="submit-email-action">
       <br />
-      <input type="submit" name="action" value="发送添加邮箱邮件">
+      <input type="submit" name="action" value='${_("Add mailbox mail sending")}'>
     </div>
     <script type="text/javascript">
       $(document).ready(function(){
@@ -627,13 +626,13 @@ function goto( mode)
         document.idashform.onsubmit = function() {
           this.message.value = emailEditor.save()['data'];
           if(this.student.value==''){
-            alert("收件人地址不能为空")
+            alert('${_("Recipient address can not be empty")}')
             return false;
           }else if (this.subject.value == ''){
-            alert("邮件主题不能为空")
+            alert('${_("Mail theme cannot be empty")}')
             return false;
           }else if (this.message.value == ''){
-            alert("邮件内容不能为空")
+            alert('${_("Mail theme cannot be empty")}')
             return false;
           }          
           return true;
@@ -978,10 +977,11 @@ function goto( mode)
 ##-----------------------------------------------------------------------------
 %if modeflag.get('Admin'):
  % if course_errors is not UNDEFINED:
+    <br/>
     <h2>${_("Course errors")}</h2>
     <div id="course-errors">
     %if not course_errors:
-          暂时没有
+          ${_("There is nothing for the time being")}
     %else:
       <ul>
         % for (summary, err) in course_errors:

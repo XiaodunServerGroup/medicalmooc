@@ -23,7 +23,7 @@ from courseware.access import has_access
 from xmodule.modulestore import Location
 from xmodule.modulestore.django import modulestore
 from courseware.model_data import FieldDataCache
-
+from django.utils.translation import ugettext as _u
 from open_ended_grading import open_ended_notifications
 
 import waffle
@@ -349,7 +349,7 @@ def get_course_tabs(user, course, active_page, request):
     # load, but not from inside xmodule, since that doesn't (and probably
     # shouldn't) know about the details of what tabs are supported, etc.
     validate_tabs(course)
-    course.tabs.append( {u'type': u'calendar', u'name': u'日历'});
+    course.tabs.append( {'type': 'calendar', 'name': _u("Calendar")});
     tabs = []
 
     if waffle.flag_is_active(request, 'merge_course_tabs'):
