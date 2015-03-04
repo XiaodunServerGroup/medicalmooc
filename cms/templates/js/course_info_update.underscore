@@ -2,7 +2,7 @@
 	<!-- FIXME what style should we use for initially hidden? --> <!-- TODO decide whether this should use codemirror -->
 	<form class="new-update-form">
 		<div class="row">
-			<label class="inline-label">日期:</label>
+			<label class="inline-label"><%=gettext("Date")%>:</label>
 			<!-- TODO replace w/ date widget and actual date (problem is that persisted version is "Month day" not an actual date obj -->
 			<input type="text" class="date" value="<%= updateModel.get('date') %>">
 		</div>
@@ -11,15 +11,15 @@
 		</div>
 		<div class="row">
 			<!-- cid rather than id b/c new ones have cid's not id's -->
-			<a href="#" class="save-button" name="<%= updateModel.cid %>">保存</a>
-			<a href="#" class="cancel-button" name="<%= updateModel.cid %>">取消</a>
-			&nbsp;&nbsp;<input type='checkbox' name='course_date' id='is_send_mail_<%= updateModel.cid %>' value=1><label for="is_send_mail_<%= updateModel.cid %>" style="display:inline-block;">发送邮件通知</label><br>
+			<a href="#" class="save-button" name="<%= updateModel.cid %>"><%=gettext("Save")%></a>
+			<a href="#" class="cancel-button" name="<%= updateModel.cid %>"><%=gettext("Cancle")%></a>
+			&nbsp;&nbsp;<input type='checkbox' name='course_date' id='is_send_mail_<%= updateModel.cid %>' value=1><label for="is_send_mail_<%= updateModel.cid %>" style="display:inline-block;"><%=gettext("Send email notification")%></label><br>
 		</div>
 	</form>
 	<div class="post-preview">
 		<div class="post-actions">
-			<a href="#" class="edit-button" name="<%- updateModel.cid %>"><span class="edit-icon"></span>编辑</a>
-			<a href="#" class="delete-button" name="<%- updateModel.cid %>"><span class="delete-icon"></span>删除</a>
+			<a href="#" class="edit-button" name="<%- updateModel.cid %>"><span class="edit-icon"></span><%=gettext("Edit")%></a>
+			<a href="#" class="delete-button" name="<%- updateModel.cid %>"><span class="delete-icon"></span><%=gettext("Delete")%></a>
 		</div>
 		<h2>
 			<span class="calendar-icon"></span><span class="date-display"><%=

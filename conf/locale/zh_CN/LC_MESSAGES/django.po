@@ -3297,6 +3297,9 @@ msgstr "通过OpenID登录"
 msgid "Login."
 msgstr "登录"
 
+msgid "Login"
+msgstr "登录"
+
 msgid "Looking for Help with Studio?"
 msgstr "希望得到关于Studio用法的帮助吗？"
 
@@ -8199,7 +8202,35 @@ msgstr "暂时无更新"
 msgid "Listen"
 msgstr "听讲"
 
+msgid "Courses"
+msgstr "公开课"
 
+msgid "Announcement"
+msgstr "公告"
+
+msgid "Members"
+msgstr "联盟成员"
+
+msgid "About"
+msgstr "关于"
+
+msgid "Download"
+msgstr "关于"
+
+msgid "Wchat"
+msgstr "微信"
+
+msgid "Login with QQ"
+msgstr "qq帐号登录"
+
+msgid "Subject"
+msgstr "科目"
+
+msgid "Category"
+msgstr "学科分类"
+
+msgid "No matching course"
+msgstr "无匹配课程"
 
 msgid "Course overview"
 msgstr "课程概述"
@@ -8992,3 +9023,6 @@ msgstr "页面"
 
 msgid "Video"
 msgstr "视频"
+
+msgid "Video address"
+msgstr "视频地址"

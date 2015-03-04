@@ -91,7 +91,7 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
     })
 
     $('.remove-button').click(function(){
-        if(confirm('确定要删除吗?')){
+        if(confirm('Are you sure you want to delete?')){
             $.ajax({
                 url: "/remove_institute_teacher?id=" + $(this).attr("value"),
                 type: "GET",
@@ -102,14 +102,14 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
 
                 }
             })
-            alert('移除成功!')
+            alert('Successfully removed!')
         }else{
             return false;
         }
     });
 
     $('.remove-button-student').click(function(){
-        if(confirm('确定要删除吗?')){
+        if(confirm('Are you sure you want to delete?')){
             $.ajax({
                 url: "/remove_institute_teacher?id=" + $(this).attr("value"),
                 type: "GET",
@@ -120,7 +120,7 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
 
                 }
             })
-            alert('移除成功!')
+            alert('Successfully removed!')
         }else{
             return false;
         }
@@ -941,7 +941,7 @@ $('#submit_button1').click(function(){
         </table>
       % else:
         <div style="padding: 0 30px">
-          <span>目前你还没有制作过问卷，<a href="${wenjuan_link}" target="_blank">点击此处</a>来制作</span>            
+          <span>Now you haven't made a questionnaire，<a href="${wenjuan_link}" target="_blank">Click here to</a> make</span>
         </div>
       % endif
     <div>
@@ -1093,7 +1093,7 @@ $('#submit_button1').click(function(){
                 </tr>
             %endfor
         % else:
-            本教师暂无导入学生
+            The teacher no import student
         %endif
         </table>
         </fieldset>
