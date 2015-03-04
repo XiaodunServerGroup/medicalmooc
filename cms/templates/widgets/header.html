@@ -91,7 +91,7 @@
                     <a href="${course_team_url}">${_("Course Team")}</a>
                   </li>
                   <li class="nav-item nav-course-settings-calendar">
-                    <a href="${calendar_settings_url}">日历</a>
+                    <a href="${calendar_settings_url}">${_("Calendar")}</a>
                   </li>
                   <!--
                   <li class="nav-item nav-course-settings-advanced">
@@ -168,24 +168,24 @@
                     <a href="/">${_("My Courses")}</a>
                   </li>
                   <li class="nav-item nav-account-dashboard">
-                    <a href="/teacher_intro_edit/${ user.id }/">教师简介</a>
+                    <a href="/teacher_intro_edit/${ user.id }/">${_("Teacher Introduction")}</a>
                   </li>
                   % if request.user.is_staff:
                   <li class="nav-item nav-account-dashboard">
-                    <a href="/syscustom/">系统设置</a>
+                    <a href="/syscustom/">${_("System Settings")}</a>
                   </li>
                   <li class="nav-item nav-account-dashboard">
-                    <a href="/institute_info">机构管理</a>
+                    <a href="/institute_info">${_("Institution Management")}</a>
                   </li>
                   <li class="nav-item nav-account-dashboard">
-                    <a href="/teachers_info">教师管理</a>
+                    <a href="/teachers_info">${_("Teacher Management")}</a>
                   </li>
                   <li class="nav-item nav-account-dashboard">
-                    <a href="/all_courses">课程管理</a>
+                    <a href="/all_courses">${_("Course Management")}</a>
                   </li>                                    
                   % endif
                   <li class="nav-item nav-account-signout">
-                    <a class="action action-signout" href="${reverse('logout')}">退出登录</a>
+                    <a class="action action-signout" href="${reverse('logout')}">${_("Logout")}</a>
                   </li>
                 </ul>
               </div>

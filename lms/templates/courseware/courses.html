@@ -251,7 +251,7 @@ li a:hover, li a:active{color:#ff7a31;}
 .course-content .content-body { margin:auto; width:1180px; font: 13px/1.6 Microsoft YaHei,SimSun,tahoma,arial,sans-serif;}
 .course-content .content-body ul li{ list-style: none;}
 /*hfy6 begin*/
-.course-content .selection-panel{width:100%; height: 120px; position: relative; left:0px; top:-49px; }
+.course-content .selection-panel{width:100%; position: relative; left:0px; top:0px; }
 /*hfy6 end*/
 .course-content .filter{ height:auto; width:100%; position:absolute; background:#f7f7f7; left:0;top:0; line-height:40px; border: 1px solid #dddddd; height:40px;}
 .course-content .filter-title{ height: 40px; width: 150px; position: absolute; background: #f7f7f7; left: 0; top: 0; }
@@ -267,7 +267,7 @@ li a:hover, li a:active{color:#ff7a31;}
 .course-content #searbar li div strong{ line-height:20px; text-align:center; float:left; }
 .course-content #searbar li{ display: none; }
 /*hfy6 begin*/
-.course-content .select-menu{ height:60px; width:100%; position:absolute; background:#ffffff; left:0;top: 40px; border-bottom: 1px solid #dddddd;border-right: 1px solid #dddddd; border-left: 1px solid #dddddd;}
+.course-content .select-menu{ width:100%;  background:#ffffff; border-bottom: 1px solid #dddddd;border-right: 1px solid #dddddd; border-left: 1px solid #dddddd;}
 /*hfy6 end*/
 .course-content .select-base{ height:40px; width:100%; position:absolute; left:0; top:0;}
 .course-content .base{ height:40px; width:960px;padding-left:40px; position:absolute; left:0; top:0;}
@@ -282,8 +282,8 @@ li a:hover, li a:active{color:#ff7a31;}
 .course-content .base-right .live span{background:#ff7a31; padding: 10px 10px 0; height:30px; color:#fff;width:auto;}
 .course-content .base-more{ width:70px; height:40px; line-height:40px;}
 /*hfy6 begin*/
-.course-content .select-subject{position:absolute; height:60px; width:100%; background:#fff;}
-.course-content .subject {height:40px; width:960px; padding-left:40px; position:absolute; left:0;top:0;}
+.course-content .select-subject{width:100%; background:#fff;}
+.course-content .subject { padding-left:40px; }
 .course-content .subject-left {float:left; height:40px; line-height:40px; font-weight:bold; color:#fff;}
 /*hfy6 end*/
 .course-content .subject-right ul {float:left;}
@@ -424,7 +424,7 @@ function checkClickedObj(ulClass){
         $($(barid + ">div").children('span')).html("");
         $(barid).hide()
     } else if ($('ul#'+ ulClass + ">li.live").length == childLen) {
-        $($(barid + ">div").children('span')[0]).html('全部');
+        $($(barid + ">div").children('span')[0]).html('All');
         $(barid).show();
     } else {
         var strArr = []
@@ -567,7 +567,7 @@ $("#search-form").submit(function(){
 })
 function chkform(obj){
     var search_value = $('#search-query').val()
-    if (search_value == "" || search_value == "请输入关键字..." ){
+    if (search_value == "" || search_value == "Please input a keyword..." ){
 //        $("#remind").html("<p><strong>搜索内容不能为空！</strong></p>"
 //        );
         return false;
@@ -576,6 +576,9 @@ function chkform(obj){
     return true;
 }
 </script>
+<style>
+
+</style>
 
   <!--<header class="search">-->
   <header class="">
@@ -586,39 +589,24 @@ function chkform(obj){
     <div class="course-content">
       <div class="content-body">
         <div class="selection-panel">
-          <div class="filter fl">
-            <div class="filter-title fl"><span>${_("Subject classification")}</span></div>
-            <div class="filter-ul fl">
+          <div class="filter fl" style="float: left;" >
+            <div class="filter-title fl" ><span>${_("Category")}</span></div>
+            <div class="filter-ul fl"> 
               <ul id="searbar">
                       <li id="subjectsearbar" class="tab1" style="display: none;"><div><strong></strong><span></span></div></li>
               </ul>
             </div>
           </div>
-          <div class="select-menu">
-            <div class="select-subject">
-              <div class="subject">
-                <div class="subject-left">科目：</div>
-                <div class="subject-right">
-                  <ul id="subject">
-                      <li class="tab1" name="all"><span>${_("All")}</span></li>
+          <div class="select-menu" style="float:left; margin-top:40px; margin-bottom:10px;" >
+            <div class="select-subject" style="float:left;">
+              <div class="subject" style="width:100%; padding:0px;">
+                <div class="subject-left" style="padding-left:10px; color:#000;">${_("Subject")}：</div>
+                <div class="subject-right" style="float:left; width:1100px;">
+                  <ul id="subject" style="margin-top:0;" >
+                      <li  name="all" class="death"><span>All</span></li>
                        % for item in course_class_list:
 						 <li class="tab1" name="${item.code}"><span>${item.name}</span></li>
 					 % endfor
-                     <!--
-                      <li class="tab1" name="LCHYX"><span>临床医学</span></li>
-                      <li class="tab1" name="JCHYX"><span>基础医学</span></li>
-                      <li class="tab1" name="ZHYZHY"><span>中医中药</span></li>
-                      <li class="tab1" name="KQYX"><span>口腔医学</span></li>
-                      <li class="tab1" name="YX"><span>药学</span></li>
-                      <li class="tab1" name="HL"><span>护理</span></li>
-                      <li class="tab1" name="GGWSHYFYX"><span>公共卫生与预防医学</span></li>
-                      <li class="tab1" name="YXYJ"><span>医学检验</span></li>
-                      <!--
-                      <li class="tab1" name="信息安全基础理论"><span>信息安全基础理论</span></li>
-                      <li class="tab1" name="通用安全技术"><span>通用安全技术</span></li>
-                      <li class="tab1" name="安全管理"><span>安全管理</span></li>
-                      <li class="tab1" name="专项安全技术"><span>专项安全技术</span></li>
-                      -->
                   </ul>
                 </div>
               </div>
@@ -631,15 +619,15 @@ function chkform(obj){
   <!--hfy6 end-->
   </header>
   <section class="container">
-    <section class="search_box" style="z-index:150;">
+    <section class="search_box" style="z-index:150;float:left;">
        <nav>
         <form name="queryform" class="search-container search" id="search-form" action="/courses" method="get" onsubmit="return chkform(this)">
           <!--<input type="text" id="search-query" name="query"  onfocus="if (value =='请输入关键字...'){value =''}" onblur="if (value ==''){value='请输入关键字...'}" value="">-->
           <table>
               <tr>
                   <td><div id="remind"></div></td>
-                  <td><input type="text" id="search-query" name="query"  class="search" placeholder="请输入关键字..." onfocus="placeholder =''" onblur="placeholder='请输入关键字...'" value=""></td>
-                  <td><input type="submit" class="search_button" value='${_("Search")}'></td>
+                  <td><input type="text" id="search-query" name="query"  class="search" placeholder="Please input a keyword..." onfocus="placeholder =''" onblur="placeholder='Please input a keyword...'" value=""></td>
+                  <td><input type="submit" class="search_button" value="Search"></td>
               </tr>
           </table>
         </form>
@@ -648,7 +636,7 @@ function chkform(obj){
 
     <section class="courses">
       % if len(courses):
-      <ul class="courses">
+      <ul class="courses" style="float:left; width:100%; margin-top:40px;" >
         %for course in courses:
         <li class="courses-listing-item">
           <%include file="../course.html" args="course=course" />
@@ -657,7 +645,7 @@ function chkform(obj){
       </ul>
     % else:
         <ul class="courses">
-            ${_("No matching course")}
+        ${_('No matching course')}
     % endif
     </section>
 
@@ -678,7 +666,7 @@ function chkform(obj){
 .course-content .content-body { margin:auto; width:100%; font: 13px/1.6 Microsoft YaHei,SimSun,tahoma,arial,sans-serif;}
 .course-content .content-body ul li{ list-style: none;}
 /*hfy6 begin*/
-.course-content .selection-panel{ width:100%; height: 120px; position: relative; left:0; top:0; }
+.course-content .selection-panel{ width:100%;  position: relative; left:0; top:0; }
 /*hfy6 end*/
 .course-content .filter{ height:auto; width:100%; position:absolute; background:#f7f7f7; left:0;top:0; line-height:40px; border: 1px solid #dddddd; height:40px;}
 .course-content .filter-title{ height: 40px; width: 150px; position: absolute; background: #f7f7f7; left: 0; top: 0; }
@@ -694,7 +682,7 @@ function chkform(obj){
 .course-content #searbar li div strong{ line-height:20px; text-align:center; float:left; }
 .course-content #searbar li{ display: none; }
 /*hfy6 begin*/
-.course-content .select-menu{ height:60px; width:100%; position:absolute; background:#ffffff; left:0;top: 40px; border-bottom: 1px solid #dddddd;border-right: 1px solid #dddddd; border-left: 1px solid #dddddd;}
+.course-content .select-menu{  width:100%;  background:#ffffff; border-bottom: 1px solid #dddddd;border-right: 1px solid #dddddd; border-left: 1px solid #dddddd;}
 /*hfy6 end*/
 .course-content .select-base{ height:40px; width:100%; position:absolute; left:0; top:0;}
 .course-content .base{ height:40px; width:960px;padding-left:40px; position:absolute; left:0; top:0;}
@@ -709,8 +697,8 @@ function chkform(obj){
 .course-content .base-right .live span{background:#ff7a31; padding: 10px 10px 0; height:30px; color:#fff;width:auto;}
 .course-content .base-more{ width:70px; height:40px; line-height:40px;}
 /*hfy6 begin*/
-.course-content .select-subject{position:absolute; height:60px; width:100%; background:#fff;}
-.course-content .subject {height:40px; width:960px; padding-left:40px; position:absolute; left:0;top:0;}
+.course-content .select-subject{width:100%; background:#fff;}
+.course-content .subject { padding-left:40px; }
 .course-content .subject-left {float:left; height:40px; line-height:40px; font-weight:bold; color:#fff;}
 /*hfy6 end*/
 .course-content .subject-right ul {float:left;padding: 0 0 0 0px;}
@@ -730,4 +718,47 @@ function chkform(obj){
 input[type="text"]{ border-radius:0!important; position:absolute; width:600px; color:#ddd; height:52px; left:60px; top:0; border:none; background:none; box-shadow:none;}
 input[type="text"]:focus{border-color:none;box-shadow:none;outline:none}textarea{height:60px}
 
+
+.selection-panel {
+    width: 100%;
+    /*height: 120px;*/
+    position: relative;
+    left: 0px;
+    top: 0px;
+}
+
+.course-content .select-menu {
+    /*height: 60px;*/
+    width: 100%;
+    /*position: absolute;*/
+    background: none repeat scroll 0% 0% #FFF;
+    /*left: 0px;*/
+    /*top: 40px;*/
+    border-bottom: 1px solid #DDD;
+    border-right: 1px solid #DDD;
+    border-left: 1px solid #DDD;
+}
+.course-content .select-subject {
+    /*position: absolute;*/
+    /*height: 60px;*/
+    width: 100%;
+    background: none repeat scroll 0% 0% #FFF;
+}
+.course-content .subject {
+    /*height: 40px;*/
+    /*width: 960px;*/
+    padding-left: 40px;
+    /*position: absolute;*/
+    /*left: 0px;*/
+    /*top: 0px;*/
+}
+.course-content .selection-panel {
+    width: 100%;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    /*height: 120px;*/
+}
+
 </style>
+

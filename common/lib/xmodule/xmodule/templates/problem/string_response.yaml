@@ -1,37 +1,42 @@
 ---
 metadata:
-    display_name: 文本填空题
+    display_name: Text Input
     markdown: |
-        文字输入问题接受学生的文字，根据预期的答案的评估输入的正确性。
-
-        如果它的预期的答案的每一个字符匹配，答案是正确的。
-        这可能是与国际拼写，日期，或地域，答案的格式是不明确的。
+        A text input problem accepts a line of text from the 
+        student, and evaluates the input for correctness based on an expected 
+        answer.
     
-        >>其中美国各州都有兰辛为首都？<<
+        The answer is correct if it matches every character of the expected answer. This can be a problem with  
+        international spelling, dates, or anything where the format of the answer is not clear.
+    
+        >>Which US state has Lansing as its capital?<<
 
         = Michigan
         
 
         [explanation]
-        Lansing是Michigan的首都，虽然它不是Michgan最大的城市，或在其所在县的城市。
+        Lansing is the capital of Michigan, although it is not Michgan's largest city, 
+        or even the seat of the county in which it resides.
         [explanation]
 data: |
     <problem>
     <p>
-    文字输入问题接受学生的文字，根据预期的答案的评估输入的正确性。
-    如果它的预期的答案的每一个字符匹配，答案是正确的。
-    这可能是与国际拼写，日期，或地域，答案的格式是不明确的。
 
+    A text input problem accepts a line of text from the
+    student, and evaluates the input for correctness based on an expected
+    answer.
+
+    The answer is correct if it matches every character of the expected answer. This can be a problem with international spelling, dates, or anything where the format of the answer is not clear. 
     </p>
 
-     <p>其中美国各州都有兰辛为首都？ </p>
+     <p>Which US state has Lansing as its capital? </p>
      <stringresponse answer="Michigan" type="ci">
       <textline size="20" label="Which US state has Lansing as its capital?"/>
      </stringresponse>
         <solution>
             <div class="detailed-solution">
                 <p>Explanation</p>
-                <p>Lansing是Michigan的首都，虽然它不是Michgan最大的城市，或在其所在县的城市。</p>
+                <p>Lansing is the capital of Michigan, although it is not Michgan's largest city, or even the seat of the county in which it resides.</p>
             </div>
         </solution>
     </problem>

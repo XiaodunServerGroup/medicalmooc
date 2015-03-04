@@ -315,3 +315,9 @@ VIDEO_SUBTITLE_DIR ='srt/'
 
 CC_KEY="YRbFWhO8A0gwB8U5QmZpUrOpcNOHIbTX"
 CC_USER_ID = '70AC5AA799D98650'
+
+
+EMAIL_PORT = AUTH_TOKENS.get('EMAIL_PORT', 25)  # django default is 25
+EMAIL_HOST = AUTH_TOKENS.get('EMAIL_HOST', '')  # django default is localhost
+EMAIL_HOST_USER = AUTH_TOKENS.get('EMAIL_HOST_USER', '')  # django default is ''
+EMAIL_HOST_PASSWORD = AUTH_TOKENS.get('EMAIL_HOST_PASSWORD', '')  # django default is ''

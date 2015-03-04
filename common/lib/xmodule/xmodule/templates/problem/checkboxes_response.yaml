@@ -1,9 +1,9 @@
 ---
 metadata:
-    display_name: 多项选择题
+    display_name: Checkboxes
     markdown: |
-      复选框问题供学生选择. 学生可选择一个或者多个.
-      >>选择正确的答案<<
+      A checkboxes problem presents checkbox buttons for student input. Students can select more
+      than one option presented.
 
       [x] correct
       [ ] incorrect
@@ -11,8 +11,7 @@ metadata:
 
 data: |
       <problem>
-        <p>复选框问题供学生选择. 学生可选择一个或者多个..</p>
-        <p>选择正确的答案</p>
+        <p>A checkboxes problem presents checkbox buttons for student input. Students can select more than one option presented.</p>
         <choiceresponse>
           <checkboxgroup direction="vertical" label="Select the answer that matches">
             <choice correct="true">correct</choice>

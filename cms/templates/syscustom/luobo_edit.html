@@ -9,36 +9,36 @@
 	<input type="hidden" name="csrfmiddlewaretoken" value="${csrf_token}" />
 	<table class="tb">
 		<tr>
-			<td width="100px">图片<div style="font-size:12px;">尺寸：1180*350</div></td>   
+			<td width="100px">${_("Pictures")}<div style="font-size:12px;">${_("Size")}：1180*350</div></td>
 			<td>  
 				% if obj:
 					<input type="hidden" id="image" name="image" value="${obj.img}"/>
-					<a href="#" id="add-pic-btn" class="btn">修改图片</a>
+					<a href="#" id="add-pic-btn" class="btn">${_("Change Picture")}</a>
 					<div id="temp_img_div" class="temp_img_div">
 						<img src="${obj.get_image_url()}"/>
 					</div>
 				% else:
 					<input type="hidden" id="image" name="image" value=""/>
-					<a href="#" id="add-pic-btn" class="btn">添加图片</a>
+					<a href="#" id="add-pic-btn" class="btn">${_("Add Picture")}</a>
 					<div id="temp_img_div"  class="temp_img_div"></div>
 				%endif
 			</td> 
 		</tr>
 		<tr> 
-			<th>链接</th>
+			<th>${_("Links")}</th>
 			<th>
 				<input type="text" class="clear-input" size="60" maxlength="190" name="url" value="${obj.url if obj else ''}"/> 
 			</th>
 		</tr>	
 		<tr> 
-			<th>排序号</th>
+			<th>${_("Sort Number")}</th>
 			<th> 
 				<input type="text" class="clear-input" name="order_num"  maxlength="5" value="${obj.order_num if obj else ''}"/>
 			</th> 
 		</tr> 
 		<tr> 
 			<td colspan=3>
-				<a href="#" id="save-btn" class="btn">保存</a>
+				<a href="#" id="save-btn" class="btn">${_("Save")}</a>
 			</td>
 		</tr>	
 	</table>

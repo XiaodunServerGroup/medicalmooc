@@ -3,7 +3,7 @@
 <%!
   from django.utils.translation import ugettext as _
 %>
-<%block name="title">系统设置</%block>
+<%block name="title">${_("System Settings")}</%block>
 <%block name="bodyclass">is-signedin course tools view-import</%block>
 
 <%block name="header_extras">
@@ -111,14 +111,14 @@ textarea.clear-input {
 <div class="wrapper-mast wrapper">
   <header class="mast has-subtitle">
     <div class="syscustom-nav">
-    	<a href="/syscustom/" class="btn ${'active' if request.path == '/syscustom/' else ''}">LOGO设置</a>
-      	<a href="/syscustom/indexluobo/" class="btn ${'active' if request.path.startswith('/syscustom/indexluobo') else ''}">首页轮播图片</a>
-      	<a href="/syscustom/statistics/" class="btn ${'active' if request.path.startswith('/syscustom/statistics') else ''}">自定义统计代码</a>
+    	<a href="/syscustom/" class="btn ${'active' if request.path == '/syscustom/' else ''}">${_("LOGO Settings")}</a>
+      	<a href="/syscustom/indexluobo/" class="btn ${'active' if request.path.startswith('/syscustom/indexluobo') else ''}">${_("The Home Page Carousel Pictures")}</a>
+      	<a href="/syscustom/statistics/" class="btn ${'active' if request.path.startswith('/syscustom/statistics') else ''}">${_("Custom Statistic Code")}</a>
       	
-      	<a href="/syscustom/bootlogo/" class="btn ${'active' if request.path.startswith('/syscustom/bootlogo') else ''}">客户端启动LOGO</a>
-      	<a href="/syscustom/clientluobo/" class="btn ${'active' if request.path.startswith('/syscustom/clientluobo') else ''}">客户端轮播图片</a>
-      	<a href="/syscustom/courseclass/" class="btn ${'active' if request.path.startswith('/syscustom/courseclass') else ''}">课程分类</a>
-      	<a href="/syscustom/seo/" class="btn ${'active' if request.path.startswith('/syscustom/seo') else ''}">SEO设置</a>
+      	<a href="/syscustom/bootlogo/" class="btn ${'active' if request.path.startswith('/syscustom/bootlogo') else ''}">${_("Client Startup LOGO")}</a>
+      	<a href="/syscustom/clientluobo/" class="btn ${'active' if request.path.startswith('/syscustom/clientluobo') else ''}">${_("The Client Carousel Pictures")}</a>
+      	<a href="/syscustom/courseclass/" class="btn ${'active' if request.path.startswith('/syscustom/courseclass') else ''}">${_("Course Classification")}</a>
+      	<a href="/syscustom/seo/" class="btn ${'active' if request.path.startswith('/syscustom/seo') else ''}">${_("SEO Settings")}</a>
     </div>
   </header>
 </div>

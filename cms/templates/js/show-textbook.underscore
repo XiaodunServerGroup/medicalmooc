@@ -36,7 +36,7 @@
 
 <ul  class="actions textbook-actions">
     <li class="action action-view">
-        <a href="//<%= CMS.URL.LMS_BASE %>/courses/<%= course.org %>/<%= course.num %>/<%= course.url_name %>/pdfbook/<%= bookindex %>/" class="view">查看</a>
+        <a href="<%= CMS.URL.LMS_BASE %>/courses/<%= course.org %>/<%= course.num %>/<%= course.url_name %>/pdfbook/<%= bookindex %>/" class="view">查看</a>
     </li>
     <li class="action action-edit">
         <button class="edit">编辑</button>
