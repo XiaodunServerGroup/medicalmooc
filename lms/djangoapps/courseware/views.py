@@ -414,7 +414,6 @@ def mobi_course_info(request, course, action=None):
     except:
         user = AnonymousUser()
 
-    Author = CourseStaffRole(course.location).users_with_role()
     cp = 0
     if not hasattr(course,"display_course_price_with_default"):
         cp = 0
@@ -434,7 +433,7 @@ def mobi_course_info(request, course, action=None):
         "registered": registered_for_course(course, user),
         "about": get_course_about_section(course, 'short_description'),
         "category": course.category,
-        "course_price": float('%0.2f'%int(course.display_course_price_with_default))
+        "course_price": float('%0.2f'%int(cp))
 
     }
 
