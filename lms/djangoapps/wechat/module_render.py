@@ -155,6 +155,7 @@ def mobi_toc_for_course(user, request, course, active_chapter=None, active_secti
             )
 
             units = list()
+            j = len(section_module.get_display_items())-1
             for unit in section_module.get_display_items():
                 for child in unit.get_display_items():
                     if child.get_icon_class()=='video':
@@ -163,8 +164,9 @@ def mobi_toc_for_course(user, request, course, active_chapter=None, active_secti
                         elif child.html5_sources:
                             show_url.append(child.html5_sources[0])
                 units.append({'display_name': unit.display_name_with_default,
-                              'location': i,
+                              'location': j,
                               'type': unit.get_icon_class()})
+                j = j-1
             sections.append({'display_name': section.display_name_with_default,
                              'url_name': section.url_name,
                              'format': section.format if section.format is not None else '',
