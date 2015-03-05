@@ -39,6 +39,8 @@ from django.db.models import Count
 from markupsafe import escape
 import django.utils
 
+from django.utils.translation import ugettext as _u
+
 from courseware import grades
 from courseware.access import has_access
 from courseware.courses import (get_courses, get_course_with_access, sort_by_announcement, sort_and_audited_items, get_course_info_section, filter_audited_items,
@@ -1126,7 +1128,7 @@ def course_about(request, course_id):
        course_dur = str(course_duration).split(" ")
        course_end = course.end + timedelta(days=+1)
     else:  
-       course_duration = "课程结束时间未定"
+       course_duration = _u("TBD")
 
     # course team
     course_team = [];

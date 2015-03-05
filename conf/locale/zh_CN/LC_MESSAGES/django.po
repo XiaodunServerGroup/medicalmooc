@@ -9196,3 +9196,12 @@ msgstr "视频"
 
 msgid "Video address"
 msgstr "视频地址"
+
+msgid "You can click on the download excel file to obtain import template"
+msgstr "您可以点击下载excel文件模板来获得导入模板"
+
+msgid "Download the excel file template"
+msgstr "下载excel文件模板"
+
+msgid "Import a file as a excel file,fill in the order of the mailbox, password, user name, the name you can click download excel file template to obtain import template"
+msgstr "导入的文件为excel文件,填写的顺序为邮箱,密码,用户名,姓名 您可以点击下载excel文件模板来获得导入模板"

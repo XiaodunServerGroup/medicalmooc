@@ -76,7 +76,9 @@ lms/static/sass/application-extend2.scss
 lms/static/sass/course.scss
 cms/static/css/
 cms/static/sass/*.css
-
+#####
+cms/static/upload
+lms/static/uploads/
 #####
 lms/envs/aws.py
 lms/envs/aws.py
