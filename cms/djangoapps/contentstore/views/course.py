@@ -474,6 +474,8 @@ def course_listing(request):
             }
             user_student_list.append(student_context)
 
+    excel_url ='/static/upload.xls'
+
     return render_to_response('index.html', {
         'courses': [format_course_for_view(c) for c in courses if not isinstance(c, ErrorDescriptor)],
         'user': request.user,
@@ -485,7 +487,8 @@ def course_listing(request):
         'profile': profile,
         'user_institute_teacher_list': user_institute_teacher_list,
         "course_class_list": CourseClass.objects.all().order_by('order_num','id'),
-        'user_student_list': user_student_list
+        'user_student_list': user_student_list,
+        'excel_url': excel_url
     })
 
 @login_required

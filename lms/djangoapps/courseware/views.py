@@ -39,6 +39,8 @@ from django.db.models import Count
 from markupsafe import escape
 import django.utils
 
+from django.utils.translation import ugettext as _u
+
 from courseware import grades
 from courseware.access import has_access
 from courseware.courses import (get_courses, get_course_with_access, sort_by_announcement, sort_and_audited_items, get_course_info_section, filter_audited_items,
@@ -412,12 +414,14 @@ def mobi_course_info(request, course, action=None):
     except:
         user = AnonymousUser()
 
-    Author = CourseStaffRole(course.location).users_with_role()
-    cp = 0
+    cp = 0.0
     if not hasattr(course,"display_course_price_with_default"):
-        cp = 0
+        cp = 0.0
     else:
-        cp = course.display_course_price_with_default
+        if not course.display_course_price_with_default:
+            cp = 0.0
+        else:
+            cp = course.display_course_price_with_default
 
     result = {
 
@@ -432,7 +436,7 @@ def mobi_course_info(request, course, action=None):
         "registered": registered_for_course(course, user),
         "about": get_course_about_section(course, 'short_description'),
         "category": course.category,
-        "course_price": float('%0.2f'%int(course.display_course_price_with_default))
+        "course_price": float('%0.2f' % int(cp))
 
     }
 
@@ -1124,7 +1128,7 @@ def course_about(request, course_id):
        course_dur = str(course_duration).split(" ")
        course_end = course.end + timedelta(days=+1)
     else:  
-       course_duration = "课程结束时间未定"
+       course_duration = _u("TBD")
 
     # course team
     course_team = [];

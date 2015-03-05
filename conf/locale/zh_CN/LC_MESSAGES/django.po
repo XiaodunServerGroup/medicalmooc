@@ -1661,8 +1661,7 @@ msgstr "特定课程分数调整"
 msgid "Course: "
 msgstr "课程："
 
-msgid "Courses"
-msgstr "课程"
+
 
 msgid "Courses loaded in the modulestore"
 msgstr "已加载课程至模块仓库"
@@ -8211,11 +8210,9 @@ msgstr "公告"
 msgid "Members"
 msgstr "联盟成员"
 
-msgid "About"
-msgstr "关于"
 
 msgid "Download"
-msgstr "关于"
+msgstr "客户端下载"
 
 msgid "Wchat"
 msgstr "微信"
@@ -8232,8 +8229,6 @@ msgstr "学科分类"
 msgid "No matching course"
 msgstr "无匹配课程"
 
-msgid "Course overview"
-msgstr "课程概述"
 
 msgid "Course semester"
 msgstr "课程学期"
@@ -8297,8 +8292,6 @@ msgstr "学科分类"
 msgid "All"
 msgstr "全部"
 
-msgid "No matching course"
-msgstr "无匹配课程"
 
 
 msgid "completed progress"
@@ -8711,8 +8704,187 @@ msgstr "要开始学习课程, 请访问 {course_url}"
 msgid "This message through the system automatically send"
 msgstr "这封邮件通过系统自动发送"
 
-msgid "…"
-msgstr "…"
+
+
+
+msgid "Free email"
+msgstr "自由发送电子邮件"
+
+msgid "Grade"
+msgstr "等级"
+
+msgid "List course staff members"
+msgstr "列出所有参与这门课程的工作人员"
+
+msgid "Remove course staff"
+msgstr "删除课程管理者"
+
+msgid "Add course staff"
+msgstr "添加课程管理者"
+
+msgid "List course instructors"
+msgstr "列出所有这门课的导师"
+
+msgid "Remove instructor"
+msgstr "删除导师"
+
+msgid "Add instructor"
+msgstr "添加导师"
+
+
+msgid "List beta testers"
+msgstr "测试用户列表"
+
+msgid "Remove beta testers"
+msgstr "删除测试用户"
+
+msgid "Add beta testers"
+msgstr "添加测试用户"
+
+
+msgid "Download CSV of all student profile data"
+msgstr "以CSV格式下载所有学生的档案数据"
+
+msgid "Download all the answers to the questions in CSV format"
+msgstr "以CSV格式下载所有问题答案"
+
+msgid "Download CSV of all student anonymized IDs"
+msgstr "以CSV格式下载所有匿名学生ID"
+
+
+
+msgid "List course forum admins"
+msgstr "列出所有论坛管理者"
+
+
+msgid "Delete the forum administrator"
+msgstr "删除论坛管理员"
+
+msgid "Add forum admin"
+msgstr "添加论坛管理员"
+
+msgid "List course forum moderators"
+msgstr "列出课程论坛版主"
+
+msgid "List course forum community TAs"
+msgstr "列出所有的论坛协会"
+
+msgid "Remove forum moderator"
+msgstr "删除论坛版主"
+
+msgid "Add forum moderator"
+msgstr "添加论坛版主"
+
+msgid "Remove forum community TA"
+msgstr "删除论坛协会"
+
+msgid "Add forum community TA"
+msgstr "添加论坛协会"
+
+
+msgid "Send mail"
+msgstr "发送邮件"
+
+msgid "Content:"
+msgstr "内容:"
+
+msgid "Mail theme cannot be empty"
+msgstr "邮件主题不能为空"
+
+
+msgid "A plurality of spaced, such as mailbox:"
+msgstr "多个邮箱用;隔开, 例如:"
+
+msgid "Recipient address can not be empty"
+msgstr "收件人地址不能为空"
+
+msgid "Add mailbox mail sending"
+msgstr "发送添加邮箱邮件"
+
+
+
+msgid "Student registration list"
+msgstr "登记学生列表"
+
+msgid "Already registered but not yet registered students list"
+msgstr "已经登记但是尚未注册学生名单"
+
+msgid "Recruit students"
+msgstr "招收多名学生"
+
+msgid "To cancel the registration of multiple students"
+msgstr "取消注册多个学生"
+
+
+msgid "The number of students dump list"
+msgstr "学生人数的转储列表"
+
+msgid "The number of students dump list {0}"
+msgstr "学生人数的转储列表 {0}"
+
+msgid "Download all the achievements of the students"
+msgstr "下载所有学生的成绩"
+
+msgid "Download all RAW grade"
+msgstr "下载所有的RAW等级"
+
+msgid "Download the answer"
+msgstr "下载答案"
+
+msgid "All registered students on the course"
+msgstr "所有注册这门课程的学生"
+
+msgid "All registered students on the course of {0}"
+msgstr "所有注册这门课程的学生 {0}"
+
+msgid "Dump all registered learning this course students grades RAW"
+msgstr "转储所有注册学习这门课的学生RAW等级"
+
+msgid "Dump all registered learning this course students of RAW class {0}"
+msgstr "转储所有注册学习这门课的学生RAW等级 {0}"
+
+msgid "To save job configuration description information"
+msgstr "转存作业配置描述信息"
+
+msgid "To restore all the student attempts"
+msgstr "恢复所有学生的尝试次数"
+
+msgid "Re evaluation of all students to submit homework"
+msgstr "重评所有学生提交的作业"
+
+msgid "Display background operation history"
+msgstr "显示后台操作历史记录"
+
+msgid "Specify a student e-mail and user name here"
+msgstr " 在这里指定一个学生的邮件和用户名"
+
+msgid "Gets the steering schedule page links"
+msgstr "获取转向进度页面的链接"
+
+msgid "The restoration of a specific student attempts"
+msgstr "恢复特定学生的尝试次数"
+
+msgid "Re evaluation of specific students to submit homework"
+msgstr "重评特定学生提交的作业"
+
+msgid "Delete student status module"
+msgstr "删除学生状态模块"
+
+msgid "Show the students the background operation history"
+msgstr "显示学生后台操作历史记录"
+
+msgid "Course statistics"
+msgstr "课程统计"
+
+msgid "Statistical values"
+msgstr "统计值"
+
+msgid "There is nothing for the time being"
+msgstr "暂时没有"
+
+msgid "Calendar"
+msgstr "日历"
+
 
 # cms
 msgid "Synchronous Classroom"
@@ -8922,8 +9094,6 @@ msgstr "这个工具帮助你制作课程概况.请在上面编辑器制作完�
 msgid "The price of the course"
 msgstr "该课程的价格"
 
-msgid "Calendar"
-msgstr "日历"
 
 msgid "Synchronous Classroom Appointment"
 msgstr "同步课堂预约"
@@ -9026,3 +9196,12 @@ msgstr "视频"
 
 msgid "Video address"
 msgstr "视频地址"
+
+msgid "You can click on the download excel file to obtain import template"
+msgstr "您可以点击下载excel文件模板来获得导入模板"
+
+msgid "Download the excel file template"
+msgstr "下载excel文件模板"
+
+msgid "Import a file as a excel file,fill in the order of the mailbox, password, user name, the name you can click download excel file template to obtain import template"
+msgstr "导入的文件为excel文件,填写的顺序为邮箱,密码,用户名,姓名 您可以点击下载excel文件模板来获得导入模板"
