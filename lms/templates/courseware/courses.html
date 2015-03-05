@@ -424,7 +424,7 @@ function checkClickedObj(ulClass){
         $($(barid + ">div").children('span')).html("");
         $(barid).hide()
     } else if ($('ul#'+ ulClass + ">li.live").length == childLen) {
-        $($(barid + ">div").children('span')[0]).html('All');
+        $($(barid + ">div").children('span')[0]).html('${_('All')}');
         $(barid).show();
     } else {
         var strArr = []
@@ -567,7 +567,7 @@ $("#search-form").submit(function(){
 })
 function chkform(obj){
     var search_value = $('#search-query').val()
-    if (search_value == "" || search_value == "Please input a keyword..." ){
+    if (search_value == "" || search_value == "${_('Please input a keyword...')}" ){
 //        $("#remind").html("<p><strong>搜索内容不能为空！</strong></p>"
 //        );
         return false;
@@ -603,7 +603,7 @@ function chkform(obj){
                 <div class="subject-left" style="padding-left:10px; color:#000;">${_("Subject")}：</div>
                 <div class="subject-right" style="float:left; width:1100px;">
                   <ul id="subject" style="margin-top:0;" >
-                      <li  name="all" class="death"><span>All</span></li>
+                      <li  name="all" class="death"><span>${_('All')}</span></li>
                        % for item in course_class_list:
 						 <li class="tab1" name="${item.code}"><span>${item.name}</span></li>
 					 % endfor
@@ -626,8 +626,8 @@ function chkform(obj){
           <table>
               <tr>
                   <td><div id="remind"></div></td>
-                  <td><input type="text" id="search-query" name="query"  class="search" placeholder="Please input a keyword..." onfocus="placeholder =''" onblur="placeholder='Please input a keyword...'" value=""></td>
-                  <td><input type="submit" class="search_button" value="Search"></td>
+                  <td><input type="text" id="search-query" name="query"  class="search" placeholder="${_('Please input a keyword...')}" onfocus="placeholder =''" onblur="placeholder='Please input a keyword...'" value=""></td>
+                  <td><input type="submit" class="search_button" value="${_('Search')}"></td>
               </tr>
           </table>
         </form>

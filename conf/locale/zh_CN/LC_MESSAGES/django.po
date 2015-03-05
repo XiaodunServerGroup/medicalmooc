@@ -8212,7 +8212,7 @@ msgstr "联盟成员"
 
 
 msgid "Download"
-msgstr "关于"
+msgstr "客户端下载"
 
 msgid "Wchat"
 msgstr "微信"
