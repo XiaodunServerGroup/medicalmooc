@@ -1013,11 +1013,11 @@ def _do_create_student(post_vars):
         js = {'success': False}
         # Figure out the cause of the integrity error
         if len(User.objects.filter(username=post_vars['username'])) > 0:
-            js['value'] = _("An account with the Public Username '{username}' already exists.").format(username=post_vars['username'])
+            js['value'] = _u("An account with the Public Username '{username}' already exists.").format(username=post_vars['username'])
             js['field'] = 'username'
 
         if len(User.objects.filter(email=post_vars['email'])) > 0:
-            js['value'] = _("An account with the Email '{email}' already exists.").format(email=post_vars['email'])
+            js['value'] = _u("An account with the Email '{email}' already exists.").format(email=post_vars['email'])
             js['field'] = 'email'
 
         raise
@@ -1082,13 +1082,13 @@ def students_filter(students):
                 validate_email(post_vars['email'])
             except ValidationError:
                 js = {'success':False}
-                js['no_register_email'] =_(" '{email}' email  format error").format(email=post_vars['email'])
+                js['no_register_email'] =_u(" '{email}' email  format error").format(email=post_vars['email'])
                 continue
             try:
                 validate_slug(post_vars['username'])
             except ValidationError:
                 js = {'success':False}
-                js['no_register_email'] =_(" '{username}' format error.").format(username=post_vars['username'])
+                js['no_register_email'] =_u(" '{username}' format error.").format(username=post_vars['username'])
                 continue
             ret=_do_create_student(post_vars)
 
@@ -1128,8 +1128,9 @@ def students_filter(students):
 #                        user.email_user(subject, message, from_address)
                         send_mails(subject, "", from_address, [user.email], fail_silently=False, html=message)
                 except Exception:  # pylint: disable=broad-except
+                    js = {'success':False}
                     log.warning('Unable to send activation email to user', exc_info=True)
-                    js['value'] = _('Could not send activation e-mail.')
+                    js['value'] = _u('Could not send activation e-mail.')
                     # What is the correct status code to use here? I think it's 500, because
                     # the problem is on the server's end -- but also, the account was created.
                     # Seems like the core part of the request was successful.
