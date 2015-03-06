@@ -474,7 +474,7 @@ def course_listing(request):
             }
             user_student_list.append(student_context)
 
-    excel_url =settings.LMS_BASE + ':18010' + '/static/upload.xls'
+    excel_url ='/static/upload.xls'
 
     return render_to_response('index.html', {
         'courses': [format_course_for_view(c) for c in courses if not isinstance(c, ErrorDescriptor)],
