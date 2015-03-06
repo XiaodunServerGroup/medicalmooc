@@ -9205,3 +9205,31 @@ msgstr "下载excel文件模板"
 
 msgid "Import a file as a excel file,fill in the order of the mailbox, password, user name, the name you can click download excel file template to obtain import template"
 msgstr "导入的文件为excel文件,填写的顺序为邮箱,密码,用户名,姓名 您可以点击下载excel文件模板来获得导入模板"
+
+
+
+
+msgid "The system will automatically help you access to bit by bit cloud Mu class learning platform to forget the password function, then you can modify your password."
+msgstr "系统将自动帮助您接入到点滴云慕课学习平台忘记密码功能，在此您可以修改您的密码。"
+
+msgid "If you already have a bit cloud education Mu class union work platform account, please log in directly"
+msgstr "如果您已经有了点滴云教育慕课联盟工作平台帐号,请直接登录"
+
+msgid "If you are ready to create online courses, please register below and create your first bit by bit cloud Mu class education curricula."
+msgstr "如果您已准备好创建在线课程，请在下面注册并创建您的第一个点滴云教育慕课联盟课程。"
+
+msgid "Bit by bit cloud education Mu class union work platform is to do what?"
+msgstr "点滴云教育慕课联盟工作平台是做什么的？"
+
+msgid "Bit by bit cloud education Mu class union work platform test for any hope that the use of globalization platform to create online courses of users, these users are typically faculty, teaching assistants, curriculum teaching staff or technical team."
+msgstr "点滴云教育慕课联盟工作平台试面向任何希望使用全球化平台创建在线课程的用户，这些用户通常是教员，助教，课程员工或教学技术小组。"
+
+msgid "Create a course in drip cloud education Mu class union work platform needs to know what technology?"
+msgstr "在点滴云教育慕课联盟工作平台创建课程需要掌握哪些技术？"
+
+
+msgid "For almost all familiar with online editing environment (WordPress, Moodle and the like) people, bit by bit cloud education Mu class alliance platform is very easy to use. It requires no programming knowledge, but having a technical background on the use of some advanced features help. We will as in the past to provide you with help, don't hesitate to join in."
+msgstr "对几乎所有熟悉网上编辑环境(WordPress，Moodle之类)的人而言，点滴云教育慕课联盟平台都是很容易使用的。它无需编程知识，不过拥有技术背景会对使用一些高级特性有所帮助。我们会一如既往地为您提供帮助，不要犹豫赶快加入吧。"
+
+msgid "Of course. We created a xiaodun101 online course, it describes some of the best practice methods: from the film, to create the practice foundation to carry out online course. In addition, we will provide help has been online, please give us a message when needed."
+msgstr "当然。我们创建了一个在线课程xiaodun101，它记述了一些最好的实践方法：从拍摄影片，创建练习到开展在线课程的基础。另外，我们会一直在线提供帮助，需要时请只管给我们留言。"
