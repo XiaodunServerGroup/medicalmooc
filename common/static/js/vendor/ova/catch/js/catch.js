@@ -23,11 +23,11 @@ annotationList:
                 '</div>'+
 
                 '<div class="annotatedBy field">'+
-                    '用户名'+
+                    gettext("Username")+
                 '</div>'+
 
                 '<div class="body field">'+
-                    '笔记'+
+                    gettext("Notes")+
                 '</div>'+  
                 
                 '{{#if videoFormat}}'+
@@ -41,7 +41,7 @@ annotationList:
                 '{{/if}}'+
                 
                 '<div class="annotatedAt field">'+
-                    '添加笔记时间'+
+                    gettext("Add notes time")+
                 '</div>'+
             '</div>'+
         '</div>'+
@@ -55,11 +55,11 @@ annotationList:
     
 //Main->PublicPrivate
 annotationPublicPrivate:
-    '<div class="selectors"><div class="PublicPrivate myNotes active">个人笔记<span class="action">myNotes</span></div>'+ 
-    '<div class="PublicPrivate public">公开笔记<span class="action">public</span></div></div>'+
-    '<div class="searchbox"><div class="searchinst">搜索</div><select class="dropdown-list">'+
-    '<option value="Users">用户名</option>'+
-    '<option value="text">笔记内容</option>'+
+    '<div class="selectors"><div class="PublicPrivate myNotes active">'+gettext("notes")+'<span class="action">myNotes</span></div>'+
+    '<div class="PublicPrivate public">'+gettext("Public notes")+'<span class="action">public</span></div></div>'+
+    '<div class="searchbox"><div class="searchinst">'+gettext("Search")+'</div><select class="dropdown-list">'+
+    '<option value="Users">'+gettext("Username")+'</option>'+
+    '<option value="text">'+gettext("Note Content")+'</option>'+
     '</select><input type="text" name="search"/><div class="search-icon" alt="Run search."></div></div>',
     
 //Main->MediaSelector
@@ -162,7 +162,7 @@ annotationDetail:
             '<span class="closeDetailIcon">'+
                 '<img src="'+root+'closeIcon.png" alt="Hide Details" />'+
             '</span>'+
-            '更新于  {{ updated }} <!--<a href="index.php?r=user/user/view&id={{{user.id}}}">-->{{{ user.name }}}<!--</a>-->{{#if geolocation}}, wrote from {{/if}}'+
+            gettext("Update")+'  {{ updated }} <!--<a href="index.php?r=user/user/view&id={{{user.id}}}">-->{{{ user.name }}}<!--</a>-->{{#if geolocation}}, wrote from {{/if}}'+
             '{{#if geolocation}}'+
             '<span class="geolocationIcon">'+
                 '<img src="'+root+'geolocation_icon.png"width="25" height="25" alt="Location Map" title="Show Location Map" data-dropdown="myLocationMap"/>'+
@@ -190,10 +190,10 @@ annotationDetail:
         '<div class="controlReplies">'+
             '<div class="hideReplies" style="text-decoration:underline;display:{{#if hasReplies}}block{{else}}none{{/if}}">Show Replies</div>&nbsp;'+
             '{{#if authToEditButton}}'+
-                '<div class="editAnnotation" style="text-decoration:underline">编辑</div>'+
+                '<div class="editAnnotation" style="text-decoration:underline">'+gettext("Edit")+'</div>'+
             '{{/if}}'+
             '{{#if authToDeleteButton}}'+
-                '<div class="deleteAnnotation" style="text-decoration:underline">删除</div>'+
+                '<div class="deleteAnnotation" style="text-decoration:underline">'+gettext("Delete")+'</div>'+
             '{{/if}}'+
             
         '</div>'+

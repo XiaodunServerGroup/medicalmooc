@@ -1501,3 +1501,32 @@ msgstr "上传您的课程图片"
 #: cms/static/js/views/settings/main.js
 msgid "Files must be in JPEG or PNG format."
 msgstr "文件必须是JPEG或者PNG格式"
+
+
+msgid "notes"
+msgstr "个人笔记"
+
+msgid "Public notes"
+msgstr "公开笔记"
+
+msgid "Note Content"
+msgstr "笔记内容"
+
+msgid "Add notes time"
+msgstr "添加笔记时间"
+
+msgid "Update"
+msgstr "更新于"
+
+msgid "Username"
+msgstr "用户名"
+
+msgid "Edit"
+msgstr "编辑"
+
+msgid "Search"
+msgstr "搜索"
+
+
+
+
