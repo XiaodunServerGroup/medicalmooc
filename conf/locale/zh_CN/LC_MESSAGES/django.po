@@ -9233,3 +9233,7 @@ msgstr "对几乎所有熟悉网上编辑环境(WordPress，Moodle之类)的人�
 
 msgid "Of course. We created a xiaodun101 online course, it describes some of the best practice methods: from the film, to create the practice foundation to carry out online course. In addition, we will provide help has been online, please give us a message when needed."
 msgstr "当然。我们创建了一个在线课程xiaodun101，它记述了一些最好的实践方法：从拍摄影片，创建练习到开展在线课程的基础。另外，我们会一直在线提供帮助，需要时请只管给我们留言。"
+
+
+msgid "Do not use. Dots and Chinese."
+msgstr "请勿使用.点号和中文."
