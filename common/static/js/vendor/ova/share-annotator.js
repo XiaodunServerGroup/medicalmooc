@@ -1,6 +1,6 @@
 /* 
 Share Annotation Plugin v1.0 (https://github.com/danielcebrian/share-annotator)
-Copyright (C) 2014 Daniel Cebri‡n Robles
+Copyright (C) 2014 Daniel Cebriï¿½n Robles
 License: https://github.com/danielcebrian/share-annotator/blob/master/License.rst
 
 This program is free software; you can redistribute it and/or
@@ -95,12 +95,13 @@ Annotator.Plugin.Share = (function(_super) {
 	
 	//Share button HTML
 	Share.prototype.buildHTMLShareButton = function(title,id) {
-		var title = title || '',
-			id = typeof id!='undefined'?'annotationId="'+id+'"':'',
-			titleText = title!=''?'<div class="share-text-annotator">'+title+'</div>':'',
-			shareButton = '<div class="share-button-annotator share-button" '+id+'></div>',
-			popup = '<div class="share-popup-overlay-bg" style="z-index:30000000000"><div class="share-popup"><div class="share-popup-items"></div><div class="close-btn">Close</div></div></div>';
-		return '<div class="share-container-annotator">'+titleText+shareButton+popup+'</div>';
+//		var title = title || '',
+//			id = typeof id!='undefined'?'annotationId="'+id+'"':'',
+//			titleText = title!=''?'<div class="share-text-annotator">'+title+'</div>':'',
+//			shareButton = '<div class="share-button-annotator share-button" '+id+'></div>',
+//			popup = '<div class="share-popup-overlay-bg" style="z-index:30000000000"><div class="share-popup"><div class="share-popup-items"></div><div class="close-btn">Close</div></div></div>';
+//		return '<div class="share-container-annotator">'+titleText+shareButton+popup+'</div>';
+        return '<div class="share-container-annotator"></div>';
 	}
 	
 	//template for the design of the Share Plugin

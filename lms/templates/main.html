@@ -53,8 +53,15 @@
   </script>
   </%block>
   <script type="text/javascript" src="/jsi18n/"></script>
-
-  <link rel="gettext" type="application/x-po" href="${static.url('js/vendor/ova/locale/zh_CN/annotator.po')}"/>
+<%
+if LANGUAGE_CODE.find('-')>-1:
+    t = LANGUAGE_CODE.split('-')
+    LANGUAGE_DIR = '%s_%s' % (t[0], t[1].upper())
+else:
+    LANGUAGE_DIR = LANGUAGE_CODE
+endif
+%>
+<link rel="gettext" type="application/x-po" href="${static.url('js/vendor/ova/locale/'+LANGUAGE_DIR+'/annotator.po')}"/>
 
   <link rel="icon" type="image/x-icon" href="${static.url(microsite.get_value('favicon_path', settings.FAVICON_PATH))}" />
 

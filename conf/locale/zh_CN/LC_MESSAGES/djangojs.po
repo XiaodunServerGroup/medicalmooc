@@ -1503,8 +1503,13 @@ msgid "Files must be in JPEG or PNG format."
 msgstr "文件必须是JPEG或者PNG格式"
 
 
+
+###############Notes#####################
 msgid "notes"
 msgstr "个人笔记"
+
+msgid "Notes"
+msgstr "笔记"
 
 msgid "Public notes"
 msgstr "公开笔记"
@@ -1526,6 +1531,9 @@ msgstr "编辑"
 
 msgid "Search"
 msgstr "搜索"
+
+
+
 
 
 

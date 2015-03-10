@@ -192,3 +192,10 @@ msgstr "允许其他人编辑这条批注"
 #: lib/plugin/permissions.js:92
 msgid "User"
 msgstr "用户"
+
+##############Notes####################
+msgid "Allows anyone to view"
+msgstr "允许任何人查看"
+
+msgid "Allow anyone to edit"
+msgstr "允许任何人编辑"

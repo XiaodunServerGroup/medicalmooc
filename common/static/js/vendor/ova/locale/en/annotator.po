@@ -1,0 +1,19 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+#   <tongyancn+transifex@gmail.com>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: Annotator\n"
+"Report-Msgid-Bugs-To: https://github.com/okfn/annotator/issues\n"
+"POT-Creation-Date: 2012-03-16 12:27+0000\n"
+"PO-Revision-Date: 2012-03-28 06:40+0000\n"
+"Last-Translator: ferryman <tongyancn+transifex@gmail.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.net/projects/p/annotator/language/zh_CN/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0\n"

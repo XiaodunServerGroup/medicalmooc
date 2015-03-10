@@ -124,7 +124,7 @@ getNodePosition = function(node) {
 var $, Util, gettext_annotator, _ref, _t;
 
 gettext_annotator = function(msgid) {
-  return msgid;
+  return gettext(msgid);
 };
 
 _t = function(msgid) {
