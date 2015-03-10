@@ -3,6 +3,9 @@
   import json
   import math
 %>
+<%!
+from django.utils.translation import ugettext as _u
+%>
 
 $(function () {
   function showTooltip(x, y, contents) {
@@ -88,7 +91,7 @@ $(function () {
             
             detail_tooltips[section['category'] + "-grade_breakdown"] = [ section['detail'] ]
   
-    ticks += [ [overviewBarX, "总的完成进度情况"] ]
+    ticks += [ [overviewBarX, _u("Total Completion Progress")] ]
     tickIndex += 1 + sectionSpacer
   
   totalScore = grade_summary['percent']

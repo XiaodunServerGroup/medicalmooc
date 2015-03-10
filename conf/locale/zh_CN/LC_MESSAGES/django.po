@@ -9237,3 +9237,8 @@ msgstr "当然。我们创建了一个在线课程xiaodun101，它记述了一�
 
 msgid "Do not use. Dots and Chinese."
 msgstr "请勿使用.点号和中文."
+
+
+########Progress#####
+msgid "Total Completion Progress"
+msgstr "总的完成进度情况"
