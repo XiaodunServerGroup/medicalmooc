@@ -38,14 +38,14 @@ ul,ol{padding:0; margin:0;}
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay'
                 },
-                lang: 'zh-cn',
+                lang: '${LANGUAGE_CODE}',
                 draggable: false,
                 buttonIcons: false, // show the prev/next text
                 weekNumbers: true,
                 selectable: true,
                 selectHelper: false,
                 select: function(start, end) {
-                    var title = prompt('添加事件:');
+                    var title = prompt('${_("Add event:")}');
                     var start = start.format();
                             var end = end.format();
                     var eventData;
@@ -107,7 +107,7 @@ ul,ol{padding:0; margin:0;}
 
 	                var del = document.getElementById('btn1');
 	                del.onclick = function del(){
-	                    if(confirm("确定要删除吗?")){
+	                    if(confirm('${_("Are you sure you want to delete?")}')){
 	                        $('#calendar').fullCalendar("removeEvents", calEvent._id);
 	                        var url = window.location+"/deleteEvent";
 				            $.ajax({
@@ -155,17 +155,17 @@ ul,ol{padding:0; margin:0;}
 <div id='loading'>loading...</div>
 
 <div id="replayModel" class="m_board_bg" style="display:none; ">
-<div class="m_board">
+<div class="m_board" >
 <div class="close" id="closes"></div>
-<div class="m_wrap">
-<h4>修改日程</h4>
+<div class="m_wrap" >
+<h4>${_("Modify the schedule")}</h4>
 <input id="event" type="hidden" />
 <div class="content" id= "tea">
 
 </div>
-<div class="btn1" id="btn1" >删除</div>
-<div class="btn" id="btn">确定</div>
-<div class="btn" id="btn2">取消</div>
+<div class="btn1" id="btn1"  style="float:left;padding:5px 10px;margin-right:5px;">${_("Delete")}</div>
+<div class="btn" id="btn" style="float:left;padding:5px 10px;margin-right:5px;">${_("Confirm")}</div>
+<div class="btn" id="btn2" style="float:left;padding:5px 10px;margin-right:5px;">${_("Cancel")}</div>
 </div>
 </div>
 </div>

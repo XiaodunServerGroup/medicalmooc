@@ -1534,6 +1534,17 @@ msgstr "搜索"
 
 
 
+###############Cms Courses#####################
+
+msgid "Delete is permanent, is not recoverable."
+msgstr "删除是永久的，是不可恢复的."
+
+msgid "Are you sure you want to delete this section?"
+msgstr "确定要删除这个章节？"
+
+msgid "Yes, I want to delete"
+msgstr "是的，我要删除 "
+
 
 
 

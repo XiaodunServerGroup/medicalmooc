@@ -9242,3 +9242,22 @@ msgstr "请勿使用.点号和中文."
 ########Progress#####
 msgid "Total Completion Progress"
 msgstr "总的完成进度情况"
+
+
+##########cms ###############
+
+msgid "Add event:"
+msgstr "添加事件:"
+
+msgid "Are you sure you want to delete?"
+msgstr "确定要删除吗?"
+
+msgid "Modify the schedule"
+msgstr "修改日程"
+
+
+
+
+
+
+
