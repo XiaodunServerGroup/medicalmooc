@@ -1546,6 +1546,23 @@ msgid "Yes, I want to delete"
 msgstr "是的，我要删除 "
 
 
+##########cms video captions###################
+
+msgid "The MP4 video link."
+msgstr "MP4视频链接地址"
+
+msgid "Caption"
+msgstr "[已有字幕]"
+
+msgid "Upload Caption"
+msgstr "上传字幕"
+
+
+msgid "Add more video resources"
+msgstr "添加更多的视频资源"
+
+msgid "Make sure that the students can watch the video, is proposed to provide the same video alternative versions: MP4, WebM and Youtube (if any)."
+msgstr "确保学生都能观看视频, 建议提供相同的视频替代版本: mp4, webm 和 youtube (如果有)."
 
 
 

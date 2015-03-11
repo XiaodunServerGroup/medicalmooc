@@ -2,20 +2,20 @@
   <label class="label setting-label" for="<%= uniqueId %>"><%= model.get('display_name')%></label>
   <div class="wrapper-videolist-settings">
     <div class="wrapper-videolist-url videolist-settings-item"><input type="text" id="<%= uniqueId %>"  class="input videolist-url" value="<%= model.get('value')[0] %>"></div>
-    <div class="tip videolist-url-tip setting-help">MP4视频链接地址</div>
+    <div class="tip videolist-url-tip setting-help"><%= gettext("The MP4 video link.") %></div>
     <!--upload file-->
     	<form id="form" name="form" method="post" action="">
     	    <input type="hidden"  id='add_csrf_id' name="csrfmiddlewaretoken" value="" />
 
           	    <div id="video_up_caption">
           	            <%if(model.get('video_captions')){%>
-          	                <span  id="video_caption" >[已有字幕]</span>
-          	                <a href="javascript:void(0)" id="add-caption-btn" class="upload-setting" >修改</a>
-          	                <a href="javascript:void(0)" id="video_caption_del" style="color:#2883bc">删除</a>
+          	                <span  id="video_caption" ><%= gettext("555555555") %></span>
+          	                <a href="javascript:void(0)" id="add-caption-btn" class="upload-setting" ><%= gettext("Edit") %></a>
+          	                <a href="javascript:void(0)" id="video_caption_del" style="color:#2883bc"><%= gettext("Delete") %></a>
                          <%}else{%>
-                            <span  id="video_caption" style="display:none">[已有字幕]</span>
-                             <a href="javascript:void(0)" id="add-caption-btn" class="upload-setting" >上传字幕</a>
-                             <a href="javascript:void(0)" id="video_caption_del" style="display:none;color:#2883bc">删除</a>
+                            <span  id="video_caption" style="display:none"><%= gettext("666666") %></span>
+                             <a href="javascript:void(0)" id="add-caption-btn" class="upload-setting" ><%= gettext("Upload Caption") %></a>
+                             <a href="javascript:void(0)" id="video_caption_del" style="display:none;color:#2883bc"><%= gettext("Delete") %></a>
                          <%}%>
 
                </div>
@@ -27,10 +27,10 @@
     
     <div class="wrapper-videolist-urls" style="display:none;">
       <a href="#" class="collapse-action collapse-setting">
-        <i class="icon-plus"></i><%= gettext("添加更多的视频资源") %> <span class="sr"><%= model.get('display_name')%></span>
+        <i class="icon-plus"></i><%= gettext("Add more video resources") %> <span class="sr"><%= model.get('display_name')%></span>
       </a>
       <div class="videolist-extra-videos">
-        <span class="tip videolist-extra-videos-tip setting-help"><%= gettext('确保学生都能观看视频, 建议提供相同的视频替代版本: mp4, webm 和 youtube (如果有).') %></span>
+        <span class="tip videolist-extra-videos-tip setting-help"><%= gettext('Make sure that the students can watch the video, is proposed to provide the same video alternative versions: MP4, WebM and Youtube (if any).') %></span>
         <ol class="videolist-settings">
             <li class="videolist-settings-item">
               <input type="text" class="input" value="<%= model.get('value')[1] %>">
@@ -49,7 +49,7 @@
     $("#video_caption_del").click(function(){
         $("#temp_file_div span").empty();
         $("#video_caption_file span").empty();
-        $("#add-caption-btn").text("上传字幕");
+        $("#add-caption-btn").text('<%= gettext("Upload Caption") %>');
          $("#video_caption").hide();
         $("#video_caption_del").hide();
     });
@@ -79,7 +79,7 @@
             uploader.start();
             },
         UploadFile: function(up, files) {
-            $("#video_caption").text("正在上传").addClass('disabled');
+            $("#video_caption").text('<%= gettext("Uploading") %>').addClass('disabled');
             },
         UploadComplete: function(up, files) {
             },
@@ -89,9 +89,9 @@
             var filename= arr[arr.length-1];
             $("#temp_file_div").val(response.caption);
             $("#video_caption_file span").text(filename);
-            $("#video_caption").text("[已有字幕]").show();
+            $("#video_caption").text('<%= gettext("Caption") %>').show();
             $("#video_caption_del").show();
-            $("#add-caption-btn").text("修改");
+            $("#add-caption-btn").text('<%= gettext("Edit") %>');
             },
         Error: function(up, err) {
             document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
