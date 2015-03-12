@@ -12,11 +12,11 @@
 <div class="wrapper-content wrapper">
   <section class="content">
     <header>
-      <h1 class="title title-1">注册</h1>
-      <a href="${reverse('login')}" class="action action-signin">如果您已经有了工作平台帐号,请直接登录</a>
+      <h1 class="title title-1">${_("Register")}</h1>
+      <a href="${reverse('login')}" class="action action-signin">${_("If you already have a bit cloud education Mu class union work platform account, please log in directly")}</a>
     </header>
 
-    <p class="introduction">如果您已准备好创建在线课程，请在下面注册并创建您的第一个课程。</p>
+    <p class="introduction">${_("If you are ready to create online courses, please register below and create your first bit by bit cloud Mu class education curricula.")}</p>
 
     <article class="content-primary" role="main">
       <form id="register_form" method="post">
@@ -44,7 +44,7 @@
             </li>
 
             <li class="field text required" id="field-name">
-              <label for="name">单位名称</label>
+              <label for="name">${_("Institution Name")}</label>
               <input id="name" type="text" name="name" placeholder="e.g. Jane Doe" />
             </li>
 
@@ -82,21 +82,21 @@
       <h2 class="sr">${_("Common Studio Questions")}</h2>
 
       <div class="bit">
-        <h3 class="title-3">中国医学教育慕课联盟工作平台是做什么的？</h3>
+        <h3 class="title-3">${_("Bit by bit cloud education Mu class union work platform is to do what?")}</h3>
         <p>
-           中国医学教育慕课联盟工作平台试面向任何希望使用全球化平台创建在线课程的用户，这些用户通常是教员，助教，课程员工或教学技术小组。
+            ${_("Bit by bit cloud education Mu class union work platform test for any hope that the use of globalization platform to create online courses of users, these users are typically faculty, teaching assistants, curriculum teaching staff or technical team.")}
         </p>
       </div>
 
       <div class="bit">
-        <h3 class="title-3">在中国医学教育慕课联盟工作平台创建课程需要掌握哪些技术？</h3>
-        <p>对几乎所有熟悉网上编辑环境(WordPress，Moodle之类)的人而言，中国医学教育慕课联盟平台都是很容易使用的。它无需编程知识，不过拥有技术背景会对使用一些高级特性有所帮助。我们会一如既往地为您提供帮助，不要犹豫赶快加入吧。</p>
+        <h3 class="title-3">${_("Create a course in drip cloud education Mu class union work platform needs to know what technology?")}</h3>
+        <p>${_("For almost all familiar with online editing environment (WordPress, Moodle and the like) people, bit by bit cloud education Mu class alliance platform is very easy to use. It requires no programming knowledge, but having a technical background on the use of some advanced features help. We will as in the past to provide you with help, don't hesitate to join in.")}</p>
       </div>
 
       <div class="bit">
         <h3 class="title-3">${_("I've never authored a course online before. Is there help?")}</h3>
         <p>
-            当然。我们创建了一个在线课程xiaodun101，它记述了一些最好的实践方法：从拍摄影片，创建练习到开展在线课程的基础。另外，我们会一直在线提供帮助，需要时请只管给我们留言。
+            ${_("Of course. We created a xiaodun101 online course, it describes some of the best practice methods: from the film, to create the practice foundation to carry out online course. In addition, we will provide help has been online, please give us a message when needed.")}
         </p>
       </div>
     </aside>

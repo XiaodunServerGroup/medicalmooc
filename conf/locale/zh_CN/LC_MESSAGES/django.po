@@ -9255,9 +9255,10 @@ msgstr "确定要删除吗?"
 msgid "Modify the schedule"
 msgstr "修改日程"
 
+#########cms signup_institution##################
 
-
-
+msgid "Institution Name"
+msgstr "单位名称"
 
 
 
