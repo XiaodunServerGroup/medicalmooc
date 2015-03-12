@@ -99,10 +99,10 @@ if STATIC_URL_BASE:
     # STATIC_URL += git.revision + "/"
 
 ###############################################################################
-# import json
+import json
 
-# with open(path(__file__).abspath().dirname() / "course_extend_fields.json") as course_extend_fields_file:
-#     COURSE_EXTENDS_FIELDS = json.load(course_extend_fields_file)
+with open(path(__file__).abspath().dirname() / "course_extend_fields.json") as course_extend_fields_file:
+     COURSE_EXTENDS_FIELDS = json.load(course_extend_fields_file)
     
 # GITHUB_REPO_ROOT is the base directory
 # for course data

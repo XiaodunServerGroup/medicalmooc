@@ -47,9 +47,13 @@ def checklists_handler(request, tag=None, package_id=None, branch=None, version_
     if request.method == 'GET':
         # If course was created before checklists were introduced, copy them over
         # from the template.
-        if not course_module.checklists:
+        if  request.LANGUAGE_CODE == "en":
             course_module.checklists = CourseDescriptor.checklists.default
             modulestore.update_item(course_module, request.user.id)
+        else:
+            course_module.checklists = settings.COURSE_EXTENDS_FIELDS['checklists']['default']
+            modulestore.update_item(course_module, request.user.id)
+
 
         expanded_checklists = expand_all_action_urls(course_module)
 
