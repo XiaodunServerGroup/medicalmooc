@@ -9260,5 +9260,55 @@ msgstr "修改日程"
 msgid "Institution Name"
 msgstr "单位名称"
 
+##############lms tabs##############################
+msgid "courseware"
+msgstr "课件"
+
+msgid "course_info"
+msgstr "更新"
+
+msgid "wiki"
+msgstr "资料"
+
+msgid "discussion"
+msgstr "讨论"
+
+msgid "notes"
+msgstr "我的笔记"
+
+msgid "progress"
+msgstr "进度"
+
+msgid "calendar"
+msgstr "日历"
+
+msgid "static_tab"
+msgstr "简介"
+
+msgid "pdf_textbooks"
+msgstr "课件"
+
+msgid "external_discussion"
+msgstr "external_discussion"
+
+msgid "external_link"
+msgstr "external_link"
+
+msgid "textbooks"
+msgstr "textbooks"
 
 
+msgid "html_textbooks"
+msgstr "html_textbooks"
+
+msgid "peer_grading"
+msgstr "peer_grading"
+
+msgid "staff_grading"
+msgstr "staff_grading"
+
+msgid "open_ended"
+msgstr "open_ended"
+
+msgid "syllabus"
+msgstr "syllabus"
