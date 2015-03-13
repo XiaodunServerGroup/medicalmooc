@@ -1564,5 +1564,59 @@ msgstr "添加更多的视频资源"
 msgid "Make sure that the students can watch the video, is proposed to provide the same video alternative versions: MP4, WebM and Youtube (if any)."
 msgstr "确保学生都能观看视频, 建议提供相同的视频替代版本: mp4, webm 和 youtube (如果有)."
 
+##########cms upload file########################
+
+msgid "You haven't added any assets to this course yet."
+msgstr "本课程你还没有添加任何资料"
+
+msgid "Upload your first asset"
+msgstr "上传你的第一份资料"
+
+msgid "Embed URL"
+msgstr "嵌入URL"
+
+msgid "External URL"
+msgstr "外部链接"
+
+#############cms add textbooks#####################################
+msgid "You haven't added any textbooks to this course yet."
+msgstr "本课程你还没有添加任何教材"
+
+msgid "Add your first textbook"
+msgstr "添加你的第一份教材"
+
+msgid "Add a Chapter"
+msgstr "添加一章"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Chapter Name"
+msgstr "章节名称"
+
+msgid "Textbook Name"
+msgstr "教材名称"
+
+msgid "Chapter Asset"
+msgstr "章节资料"
+
+msgid "Upload PDF"
+msgstr "上传PDF"
+
+msgid "Upload"
+msgstr "上传"
+
+msgid "Files must be in PDF format."
+msgstr "文件必须以PDF格式。"
+
+msgid "Chapter "
+msgstr "章节 "
+
+
+
+
+
+
+
 
 

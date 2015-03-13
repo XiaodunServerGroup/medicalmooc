@@ -1,7 +1,7 @@
 <div class="input-wrap field text required field-add-chapter-name chapter<%= order %>-name
     <% if (error && error.attributes && error.attributes.name) { print('error'); } %>">
   <label for="chapter<%= order %>-name"><%= gettext("Chapter Name") %></label>
-  <input id="chapter<%= order %>-name" name="chapter<%= order %>-name" class="chapter-name short" placeholder="<%= _.str.sprintf(gettext("Chapter %s"), order) %>" value="<%= name %>" type="text">
+  <input id="chapter<%= order %>-name" name="chapter<%= order %>-name" class="chapter-name short" placeholder="<%= gettext("Chapter ") %><%= order %>" value="<%= name %>" type="text">
   <!--<span class="tip tip-stacked"><%= gettext("provide the title/name of the chapter that will be used in navigating") %></span>-->
 </div>
 <div class="input-wrap field text required field-add-chapter-asset chapter<%= order %>-asset
