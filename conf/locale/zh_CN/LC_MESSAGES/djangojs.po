@@ -1618,8 +1618,14 @@ msgstr "章节 "
 msgid "Course Handouts"
 msgstr "课程讲义"
 
+msgid "Send email notification"
+msgstr "发送邮件通知"
+
 msgid "Add"
 msgstr "添加"
+
+msgid "Date"
+msgstr "日期"
 
 msgid "Handout Name"
 msgstr "讲义名称"
@@ -1659,6 +1665,13 @@ msgstr "一些可删除"
 msgid "total exercises that won't be graded"
 msgstr "总的练习，不会分级"
 
+
+##########cms Advanced settings############################
+msgid "Policy Key:"
+msgstr "变量键"
+
+msgid "Policy Value:"
+msgstr "变量值"
 
 
 

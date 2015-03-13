@@ -12,7 +12,7 @@
 		<div class="row">
 			<!-- cid rather than id b/c new ones have cid's not id's -->
 			<a href="#" class="save-button" name="<%= updateModel.cid %>"><%=gettext("Save")%></a>
-			<a href="#" class="cancel-button" name="<%= updateModel.cid %>"><%=gettext("Cancle")%></a>
+			<a href="#" class="cancel-button" name="<%= updateModel.cid %>"><%=gettext("Cancel")%></a>
 			&nbsp;&nbsp;<input type='checkbox' name='course_date' id='is_send_mail_<%= updateModel.cid %>' value=1><label for="is_send_mail_<%= updateModel.cid %>" style="display:inline-block;"><%=gettext("Send email notification")%></label><br>
 		</div>
 	</form>
