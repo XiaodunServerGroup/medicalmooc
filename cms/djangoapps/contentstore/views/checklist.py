@@ -16,6 +16,7 @@ from ..utils import get_modulestore
 from .access import has_course_access
 from xmodule.course_module import CourseDescriptor
 from xmodule.modulestore.locator import BlockUsageLocator
+from django.conf import settings
 
 __all__ = ['checklists_handler']
 
