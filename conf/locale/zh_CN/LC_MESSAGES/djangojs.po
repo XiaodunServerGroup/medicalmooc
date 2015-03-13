@@ -1616,16 +1616,49 @@ msgstr "章节 "
 #############cms course update################
 
 msgid "Course Handouts"
-msgstr "课程讲义 "
+msgstr "课程讲义"
 
 msgid "Add"
-msgstr "添加 "
+msgstr "添加"
 
 msgid "Handout Name"
-msgstr "讲义名称 "
+msgstr "讲义名称"
 
 msgid "Handout URL"
-msgstr "讲义URL "
+msgstr "讲义URL"
+
+
+##########cms grade##################
+msgid "Assignment Type Name"
+msgstr "分配类型名称"
+
+msgid "e.g. Homework, Midterm Exams"
+msgstr "例如，家庭作业，中期考试"
+
+msgid "Abbreviation"
+msgstr "缩写"
+
+msgid "e.g. HW, Midterm"
+msgstr "例如，作业，考试"
+
+msgid "Weight of Total Grade"
+msgstr "总成绩的比重"
+
+msgid "as a percent, e.g. 40"
+msgstr "例如，占总比重40%"
+
+msgid "Total Number"
+msgstr "总人数"
+
+msgid "total exercises assigned"
+msgstr "总的练习分配"
+
+msgid "Number of Droppable"
+msgstr "一些可删除"
+
+msgid "total exercises that won't be graded"
+msgstr "总的练习，不会分级"
+
 
 
 
