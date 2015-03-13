@@ -1613,6 +1613,22 @@ msgid "Chapter "
 msgstr "章节 "
 
 
+#############cms course update################
+
+msgid "Course Handouts"
+msgstr "课程讲义 "
+
+msgid "Add"
+msgstr "添加 "
+
+msgid "Handout Name"
+msgstr "讲义名称 "
+
+msgid "Handout URL"
+msgstr "讲义URL "
+
+
+
 
 
 

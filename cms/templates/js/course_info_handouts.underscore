@@ -39,14 +39,14 @@
   <div class="row">
     <span onclick='show_add_handout_item(this)'><img src='/static//img/ture_03.gif' style="height: 16px;"></span><br/>
     <span id='add_handout_item_input' style="display: none">
-        <input type="textfield" name='handout_title' style="display: inline-block;" placeholder="Handout Name"/>
-        <input type="textfield" name="handout_url" style="display: inline-block;" placeholder="Handout URL"/>
+        <input type="textfield" name='handout_title' style="display: inline-block;" placeholder='<%=gettext("Handout Name")%>'/>
+        <input type="textfield" name="handout_url" style="display: inline-block;" placeholder='<%=gettext("Handout URL")%>'/>
         <a href="#" onclick='add_handout_item(this)' class='save_handout_item' style="float: right;margin-right: 135px;"><%=gettext("Add")%></a>
     </span>
     <span style="clear: both;"></span>
   </div>
   <div class="row">
     <a href="#" class="save-button"><%=gettext("Edit")%></a>
-    <a href="#" class="cancel-button"><%=gettext("Cancle")%></a>
+    <a href="#" class="cancel-button"><%=gettext("Cancel")%></a>
   </div>
 </form>
