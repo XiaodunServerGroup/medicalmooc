@@ -362,7 +362,8 @@ def get_course_tabs(user, course, active_page, request):
         # expect handlers to return lists--handles things that are turned off
         # via feature flags, and things like 'textbook' which might generate
         # multiple tabs.
-        tab['name'] =_u(tab['type'])
+        if  tab['type'] != 'static_tab':
+            tab['name'] =_u(tab['type'])
         # Temporary Modified
         tab_keys = tab.keys()
         if "name" in tab_keys and (tab['name'] == "Wiki" or tab['name'] == "资料"):
