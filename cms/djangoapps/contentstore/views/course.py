@@ -380,6 +380,8 @@ def course_listing(request):
         course_loc = loc_mapper().translate_location(
             course.location.course_id, course.location, published=False, add_entry_if_missing=True
         )
+        if not hasattr(course,"display_org_with_default"):
+            course.display_org_with_default=''
         return (
             course.display_name,
             # note, couldn't get django reverse to work; so, wrote workaround
