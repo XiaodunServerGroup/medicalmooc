@@ -529,7 +529,7 @@ SITE_NAME = 'http://127.0.0.1:8001'
 
 # Sourced from http://www.localeplanet.com/icu/ and wikipedia
 LANGUAGES = (
-#    ('en', u'English'),
+    ('en', u'English'),
 #    ('eo', u'Dummy Language (Esperanto)'),  # Dummy languaged used for testing
 #    ('fake2', u'Fake translations'),        # Another dummy language for testing (not pushed to prod)
 #

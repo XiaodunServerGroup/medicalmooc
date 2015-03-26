@@ -65,6 +65,7 @@
 
   <script type="text/javascript">
     var $$course_id = "${course.id}";
+    var notes_exist ="${course.advanced_modules}"
 
     $(function(){
         $(".ui-accordion-header a, .ui-accordion-content .subtitle").each(function() {
@@ -85,12 +86,15 @@
           }
           $(this).html(finalTitle);
         });
+        if(notes_exist.indexOf("notes")>-1){
+            var h2Item = $('#course-content>h2')
+            if (h2Item.length == 0) {
+                $('#course-content>div').trigger("notes:init", [""]);
+                $('#course-content>div').trigger("notes:init", [""]);
+            }
 
-        var h2Item = $('#course-content>h2')
-        if (h2Item.length == 0) {
-          $('#course-content>div').trigger("notes:init", [""]);
-          $('#course-content>div').trigger("notes:init", [""]);
-        } 
+        }
+
       });
   </script>
 
