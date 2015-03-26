@@ -418,7 +418,7 @@ def course_listing(request):
     qlist = []
     try:
         list_url = "{}/openapi/proj_list?{}&md5={}".format(wenjuan_domain, *sorted_url(qparams))
-        timeout = 10
+        timeout = 3
         socket.setdefaulttimeout(timeout)
         req = urllib2.Request(list_url.replace(' ', '%20'))
         # {"status": 1, "respondent_count": 0, "proj_id": "AzaYja", "ctime": "2014-08-08 15:23", "title": "测试问卷", "type": "survey"}
