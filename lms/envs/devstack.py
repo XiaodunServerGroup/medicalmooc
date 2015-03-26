@@ -25,7 +25,7 @@ for pkg_name in ['track.contexts', 'track.middleware', 'dd.dogapi']:
 
 ################################ EMAIL ########################################
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 FEATURES['ENABLE_INSTRUCTOR_EMAIL'] = True     # Enable email for all Studio courses
 FEATURES['REQUIRE_COURSE_EMAIL_AUTH'] = False  # Give all courses email (don't require django-admin perms)
 
@@ -75,3 +75,6 @@ try:
     from .private import *      # pylint: disable=F0401
 except ImportError:
     pass
+
+
+print EMAIL_PORT, EMAIL_HOST,EMAIL_HOST_USER,EMAIL_HOST_PASSWORD ,COURSEWARE_ENABLED

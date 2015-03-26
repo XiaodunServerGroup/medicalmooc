@@ -26,7 +26,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 ################################# LMS INTEGRATION #############################
 
-LMS_BASE = "119.254.225.106"
+LMS_BASE = ENV_TOKENS.get('LMS_BASE')
 FEATURES['PREVIEW_LMS_BASE'] = LMS_BASE
 
 ################################# CELERY ######################################
