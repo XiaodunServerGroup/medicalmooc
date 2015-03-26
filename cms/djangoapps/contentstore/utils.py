@@ -240,7 +240,12 @@ def add_extra_panel_tab(tab_type, course):
     # Check to see if open ended panel is defined in the course
 
     tab_panel = EXTRA_TAB_PANELS.get(tab_type)
-    if tab_panel not in course_tabs:
+#    if tab_panel not in course_tabs:
+#        # Add panel to the tabs if it is not defined
+#        course_tabs.append(tab_panel)
+#        changed = True
+    keys = [item['type'] for item in course_tabs]
+    if tab_panel['type'] not in keys:
         # Add panel to the tabs if it is not defined
         course_tabs.append(tab_panel)
         changed = True
@@ -260,9 +265,11 @@ def remove_extra_panel_tab(tab_type, course):
     # Check to see if open ended panel is defined in the course
 
     tab_panel = EXTRA_TAB_PANELS.get(tab_type)
-    if tab_panel in course_tabs:
-        # Add panel to the tabs if it is not defined
-        course_tabs = [ct for ct in course_tabs if ct != tab_panel]
+
+    keys = [item['type'] for item in course_tabs]
+    if tab_panel['type'] in keys:
+        # Remove panel to the tabs if it is defined
+        course_tabs = [ct for ct in course_tabs if ct['type'] != tab_panel['type']]
         changed = True
     return changed, course_tabs
 
