@@ -1071,15 +1071,15 @@ def login_user(request, error=""):
     if LoginFailures.is_feature_enabled():
         LoginFailures.clear_lockout_counter(user)
 
-    if failure_auth_count > 3: 
-        form_captcha = CaptchaLoginForm(request.POST)
-        if form_captcha.is_valid():
-            human = True
-        else:
-            return JsonResponse({
-                "success": False,
-                "value": '验证码错误',
-            })
+    # if failure_auth_count > 3: 
+    #     form_captcha = CaptchaLoginForm(request.POST)
+    #     if form_captcha.is_valid():
+    #         human = True
+    #     else:
+    #         return JsonResponse({
+    #             "success": False,
+    #             "value": '验证码错误',
+    #         })
 
     if user is not None and user.is_active:
         try:
