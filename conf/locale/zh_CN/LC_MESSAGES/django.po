@@ -7682,7 +7682,7 @@ msgid "e.g. 2014_T1"
 msgstr "例如：2014_T1"
 
 msgid "e.g. CS101"
-msgstr "例如： 课程CS101"
+msgstr "例如： CS101"
 
 msgid "e.g. Introduction to Computer Science"
 msgstr "例如，对计算机科学的介绍"
