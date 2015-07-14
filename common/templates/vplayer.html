@@ -4,22 +4,34 @@
 <head>
 <title>common video player</title>
 
-<script src="${static.url('js/jwplayer/jwplayer6.6/jwplayer.js')}"></script>
-<script src="${static.url('js/jwplayer/jwplayer6.6/jwplayer.html5.js')}"></script>
-<script src="${static.url('js/jwplayer/jwplayer6.6/jwplayer.js')}"></script>
+
+<script type="text/javascript" src="${static.url('js/vendor/jquery.min.js')}"></script>
+% if settings.DEBUG:
+    <link rel="stylesheet" href="${static.url('js/videojs/video-js.css')}"  type="text/css">	
+	<script type="text/javascript" src="${static.url('js/videojs/video.dev.js')}"></script>
+	<script type="text/javascript" src="${static.url('js/videojs/lang/zh-CN.js')}"></script>
+ % else:
+ 	 <link rel="stylesheet" href="${static.url('static/js/videojs/video-js.css')}"  type="text/css">	
+	<script type="text/javascript" src="${static.url('static/js/videojs/video.dev.js')}"></script>
+	<script type="text/javascript" src="${static.url('static/js/videojs/lang/zh-CN.js')}"></script>
+ % endif 
 </head><body>
 
-<div id="myElement">Loading the player...</div>
+<div id="">
+<video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" width="540" height="295" data-setup="{}">
+
+   <source src="" id="myElement" type='video/mp4' />
+   <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+ </video>
+
+</div>
 
 <script type="text/javascript">
     l = window.location.href;
     vurl = l.substring(l.indexOf("url=")+4);
-
-    jwplayer("myElement").setup({
-        file: vurl,
-        height: 295,
-        width: 540
-    });
+	console.info(vurl)
+    $("#myElement").attr('src', vurl);
+    
 </script>
 </body>
 </html>
