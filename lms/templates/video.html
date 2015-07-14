@@ -92,8 +92,9 @@
 	<script type="text/javascript" src="${static.url('/static/js/videojs/video.dev.js')}"></script>
 	<script type="text/javascript" src="${static.url('/static/js/videojs/lang/zh-CN.js')}"></script>
  % else:
- 	 <link rel="stylesheet" href="/static/js/videojs/video-js.css?v=1"  type="text/css">	
-	<script type="text/javascript" src="/static/js/videojs/video.dev.js"></script>
-	<script type="text/javascript" src="/static/js/videojs/lang/zh-CN.js"></script>
+ 	 <link rel="stylesheet" href="${static.url('js/videojs/video-js.css')}"  type="text/css">	
+	<script type="text/javascript" src="${static.url('js/videojs/video.dev.js')}"></script>
+	<script type="text/javascript" src="${static.url('js/videojs/lang/zh-CN.js')}"></script>
  % endif 
+<script>
 <script>
