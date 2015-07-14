@@ -57,7 +57,12 @@
 
     <div class="tc-wrapper">
       <a href="#before-transcript_${id}" class="nav-skip sr">${_("Skip to a navigable version of this video's transcript.")}</a>
-        <div id="myElement_${id}" style="text-align:center;position:relative;z-index:1111;min-height:300px;">加载中...</div>
+       <article class="video-wrapper">
+           <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" width="100%" height="364" data-setup="{}">
+		    <source src="${sources.get('mp4')}" id="source_${id}" type='video/mp4' />
+		    <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+		  </video>
+      </article>
 
       <ol id="transcript-captions" class="subtitles" tabindex="0" title="${_('Captions')}" role="group" aria-label="${_('Activating an item in this group will spool the video to the corresponding time point. To skip transcript, go to previous item.')}">
         <li></li>
@@ -81,18 +86,14 @@
   <!--</ul>-->
 </div>
 
-     <script type="text/javascript" src="${static.url('static/js/jwplayer/jwplayer6.6/jwplayer.flash.swf')}"></script>
-     <script type="text/javascript" src="${static.url('static/js/jwplayer/jwplayer6.6/jwplayer.js')}"></script>
-     <script type="text/javascript" src="${static.url('static/js/jwplayer/jwplayer6.6/jwplayer.html5.js')}"></script>
 
-<script type="text/javascript">
-
-setTimeout(function(){
-         jwplayer("myElement_${id}").setup({
-                        file: "${sources.get('mp4')}",
-                        width: '100%',
-                        height: '484'
-                        //aspectratio: '16:9'
-                    })
-}, 150);
-</script>
+% if settings.DEBUG:
+    <link rel="stylesheet" href="${static.url('js/videojs/video-js.css')}"  type="text/css">	
+	<script type="text/javascript" src="${static.url('js/videojs/video.dev.js')}"></script>
+	<script type="text/javascript" src="${static.url('js/videojs/lang/zh-CN.js')}"></script>
+ % else:
+ 	 <link rel="stylesheet" href="${static.url('static/js/videojs/video-js.css')}"  type="text/css">	
+	<script type="text/javascript" src="${static.url('static/js/videojs/video.dev.js')}"></script>
+	<script type="text/javascript" src="${static.url('static/js/videojs/lang/zh-CN.js')}"></script>
+ % endif 
+<script>
