@@ -47,7 +47,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.http import cookie_date, base36_to_int
 from django.utils.translation import ugettext as _
 from django.views.decorators.http import require_POST, require_GET
-
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 # captcha
 from django import forms
 from captcha.fields import CaptchaField
@@ -101,6 +101,8 @@ from dogapi import dog_stats_api
 
 from util.json_request import JsonResponse
 from util.bad_request_rate_limiter import BadRequestRateLimiter
+
+from util.common import *
 
 from microsite_configuration import microsite
 
@@ -709,6 +711,146 @@ def dashboard(request):
     return render_to_response('dashboard.html', context)
 
 
+from courseware import grades
+def api_mycourse(request):
+    #user = request.user
+    #if not user.is_authenticated():
+    #    return JsonResponse({'error':'NoLogin'})
+    username = request.REQUEST.get('username', '')
+    user = User.objects.get(username=username)
+    print user.id, user.username
+
+    # for microsites, we want to filter and only show enrollments for courses within
+    # the microsites 'ORG'
+    course_org_filter = microsite.get_value('course_org_filter')
+
+    # Let's filter out any courses in an "org" that has been declared to be
+    # in a Microsite
+    org_filter_out_set = microsite.get_all_orgs()
+
+    # remove our current Microsite from the "filter out" list, if applicable
+    if course_org_filter:
+        org_filter_out_set.remove(course_org_filter)
+
+    # Build our (course, enrollment) list for the user, but ignore any courses that no
+    # longer exist (because the course IDs have changed). Still, we don't delete those
+    # enrollments, because it could have been a data push snafu.
+    course_enrollment_pairs = list(get_course_enrollment_pairs(user, course_org_filter, org_filter_out_set))
+
+    course_optouts = Optout.objects.filter(user=user).values_list('course_id', flat=True)
+
+    staff_access = False
+    errored_courses = {}
+    if has_access(user, 'global', 'staff'):
+        # Show any courses that errored on load
+        staff_access = True
+        errored_courses = modulestore().get_errored_courses()
+
+    show_courseware_links_for = frozenset(course.id for course, _enrollment in course_enrollment_pairs
+                                          if has_access(user, course, 'load'))
+
+    course_modes = {course.id: complete_course_mode_info(course.id, enrollment) for course, enrollment in course_enrollment_pairs}
+    cert_statuses = {course.id: cert_info(user, course) for course, _enrollment in course_enrollment_pairs}
+
+    # only show email settings for Mongo course and when bulk email is turned on
+    show_email_settings_for = frozenset(
+        course.id for course, _enrollment in course_enrollment_pairs if (
+            settings.FEATURES['ENABLE_INSTRUCTOR_EMAIL'] and
+            modulestore().get_modulestore_type(course.id) != XML_MODULESTORE_TYPE and
+            CourseAuthorization.instructor_email_enabled(course.id)
+        )
+    )
+
+    # Verification Attempts
+    # Used to generate the "you must reverify for course x" banner
+    verification_status, verification_msg = SoftwareSecurePhotoVerification.user_status(user)
+
+    # Gets data for midcourse reverifications, if any are necessary or have failed
+    statuses = ["approved", "denied", "pending", "must_reverify"]
+    reverifications = reverification_info(course_enrollment_pairs, user, statuses)
+
+    show_refund_option_for = frozenset(course.id for course, _enrollment in course_enrollment_pairs
+                                       if _enrollment.refundable())
+
+    # get info w.r.t ExternalAuthMap
+    external_auth_map = None
+    try:
+        external_auth_map = ExternalAuthMap.objects.get(user=user)
+    except ExternalAuthMap.DoesNotExist:
+        pass
+
+    # If there are *any* denied reverifications that have not been toggled off,
+    # we'll display the banner
+    denied_banner = any(item.display for item in reverifications["denied"])
+
+    language_options = DarkLangConfig.current().released_languages_list
+
+    # add in the default language if it's not in the list of released languages
+    if settings.LANGUAGE_CODE not in language_options:
+        language_options.append(settings.LANGUAGE_CODE)
+
+    # try to get the prefered language for the user
+    cur_lang_code = UserPreference.get_preference(user, LANGUAGE_KEY)
+    if cur_lang_code:
+        # if the user has a preference, get the name from the code
+        current_language = settings.LANGUAGE_DICT[cur_lang_code]
+    else:
+        # if the user doesn't have a preference, use the default language
+        current_language = settings.LANGUAGE_DICT[settings.LANGUAGE_CODE]
+    
+    print course_optouts
+    
+    _mycourse = []
+    for course, enrollment in course_enrollment_pairs:
+        show_courseware_link = (course.id in show_courseware_links_for)
+        cert_status = cert_statuses.get(course.id)
+        show_email_settings = (course.id in show_email_settings_for) 
+        course_mode_info = course_modes.get(course.id) 
+        show_refund_option = (course.id in show_refund_option_for) 
+
+        grade_summary_percent = int(grades.grade(user, request, course)['percent'] * 100) 
+
+        if course.course_audit == 0:
+           continue
+       
+        d = {'course_id':course.id}
+        d['name'] = course.display_name_with_default
+        d['url'] = '%s%s' % (settings.LMS_BASE, reverse('info', args=[course.id]))
+        d['image'] = '%s%s' % (settings.LMS_BASE, course_image_url(course))
+        d['percent'] = int(grades.grade(user, request, course)['percent'] * 100)
+        d['desc'] = get_course_about_section(course, 'short_description')
+        d['start_date'] = course.has_started() and course.start_date_text or _("Course has not yet started")
+        d['quit_url'] = '%s%s' % (settings.LMS_BASE, '/change_enrollment')
+        d['email_set_url'] = '%s%s' % (settings.LMS_BASE, '/change_email_settings')
+        d['is_receive_emails'] = course.id not in course_optouts
+        
+        _mycourse.append(d)
+    
+    page = request.GET.get('page', 1)
+    try:
+        page = int(page)
+    except:
+        page = 1
+    page_size=3
+    paginator = Paginator(_mycourse, page_size)
+    
+    try:
+        pager = paginator.page(page)
+        number= pager.number
+        next=number+1
+        previous =number-1
+        if previous <= 1:
+            previous=1
+        if next  >= paginator.num_pages:
+            next =paginator.num_pages
+    except (EmptyPage, InvalidPage):
+        pager = paginator.page(paginator.num_pages)
+
+    result = "callback({'count': %s, 'course_list':%s})"  
+    result = {'count':  len(_mycourse), 'course_list':pager.object_list, 'page_count':paginator.num_pages, 'cur_page':page}
+    
+    return HttpResponse("callback("+ json.dumps(result) +")")
+
 def try_change_enrollment(request):
     """
     This method calls change_enrollment if the necessary POST
@@ -819,7 +961,7 @@ def mobi_change_enrollment(request):
         return JsonResponse({"success": False, "errmsg": "error action"})
 
 
-@require_POST
+#@require_POST
 def change_enrollment(request):
     """
     Modify the enrollment status for the logged-in user.
@@ -841,6 +983,10 @@ def change_enrollment(request):
 
     action = request.POST.get("enrollment_action")
     course_id = request.POST.get("course_id")
+    
+    action = request.REQUEST.get("enrollment_action")
+    course_id = request.REQUEST.get("course_id")
+    
     if course_id is None:
         return HttpResponseBadRequest(_("Course id not specified"))
 
@@ -1141,6 +1287,77 @@ def login_user(request, error=""):
         "success": False,
         "value": not_activated_msg,
     })  # TODO: this should be status code 400  # pylint: disable=fixme
+
+
+
+
+def sso_login(request):
+    from urllib import unquote
+    response_json = {'success': False}
+    # parse params
+    passport = unquote(request.GET.get('passport', ""))
+    if not passport:
+        msg ='no passport given'
+        return JsonResponse({'msg':msg, 'status':'0'})
+    
+    passport = des_decrypt(passport)
+    print passport
+    try:
+        username = passport.split("#")[0]
+        print username
+    except:
+        pass
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        msg = u'用户不存在'
+        return JsonResponse({'msg':msg, 'status':'0'}) 
+    
+    try:
+        import importlib
+        #backend_path = settings.AUTHENTICATION_BACKENDS[0]
+        backend_path = 'django.contrib.auth.backends'
+        backend = importlib.import_module(backend_path)
+        backend = getattr(backend, "ModelBackend")
+        
+        user.backend = "%s.%s" % (backend.__module__, backend.__class__.__name__)
+        login(request, user)
+        if request.POST.get('remember') == 'true':
+            request.session.set_expiry(604800)
+        else:
+            request.session.set_expiry(0)
+    except Exception as e:
+        AUDIT_LOG.critical("Login failed - Could not create session. Is memcached running?")
+        log.critical("Login failed - Could not create session. Is memcached running?")
+        log.exception(e)
+        raise
+    
+    response = JsonResponse({
+        "status": '1',
+    })
+
+
+    if request.session.get_expire_at_browser_close():
+        max_age = None
+        expires = None
+    else:
+        max_age = request.session.get_expiry_age()
+        expires_time = time.time() + max_age
+        expires = cookie_date(expires_time)
+
+    response.set_cookie(
+        settings.EDXMKTG_COOKIE_NAME, 'true', max_age=max_age,
+        expires=expires, domain=settings.SESSION_COOKIE_DOMAIN,
+        path='/', secure=None, httponly=None,
+    )
+
+    response.set_cookie(
+        "logged_username", user.username, max_age=max_age,
+        expires=expires, domain=settings.SESSION_COOKIE_DOMAIN,
+        path='/', secure=None, httponly=None,
+    )
+    return response
+
 
 
 @ensure_csrf_cookie
@@ -2327,7 +2544,7 @@ def accept_name_change(request):
     return accept_name_change_by_id(int(request.POST['id']))
 
 
-@require_POST
+#@require_POST
 @login_required
 @ensure_csrf_cookie
 def change_email_settings(request):
@@ -2336,6 +2553,10 @@ def change_email_settings(request):
 
     course_id = request.POST.get("course_id")
     receive_emails = request.POST.get("receive_emails")
+    
+    course_id = request.REQUEST.get("course_id")
+    receive_emails = request.REQUEST.get("receive_emails")
+    
     if receive_emails:
         optout_object = Optout.objects.filter(user=user, course_id=course_id)
         if optout_object:

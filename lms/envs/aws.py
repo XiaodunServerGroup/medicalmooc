@@ -392,3 +392,9 @@ if not os.path.exists(load_thesaurus_path):
     open(str(load_thesaurus_path), 'a').close()
 
 THESAURUS_PATH = load_thesaurus_path
+
+LMS_BASE = ENV_TOKENS.get('LMS_BASE')
+
+SSO_KEY = "SSOFOUNDER"
+
+

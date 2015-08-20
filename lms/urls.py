@@ -49,6 +49,7 @@ urlpatterns = ('',  # nopep8
     url(r'^password_reset/$', 'student.views.password_reset', name='password_reset'),
     ## Obsolete Django views for password resets
     ## TODO: Replace with Mako-ized views
+    url(r'^ssologin', 'student.views.sso_login', name="ssologin"),
     url(r'^password_change/$', django.contrib.auth.views.password_change,
         name='auth_password_change'),
     url(r'^password_change_done/$', django.contrib.auth.views.password_change_done,
@@ -587,6 +588,13 @@ if settings.FEATURES.get('ENABLE_HINTER_INSTRUCTOR_VIEW'):
         url(r'^courses/(?P<course_id>[^/]+/[^/]+/[^/]+)/hint_manager$',
             'instructor.hint_manager.hint_manager', name="hint_manager"),
     )
+
+#api
+urlpatterns += (
+    
+    url(r'^api/mycourse/', 'student.views.api_mycourse', name='api_mycourse'),
+)
+
 
 # enable automatic login
 if settings.FEATURES.get('AUTOMATIC_AUTH_FOR_TESTING'):
