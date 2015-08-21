@@ -23,27 +23,7 @@ CMS.URL.UPLOAD_ASSET = '${upload_asset_url}';
 
 require(["domReady!", "jquery", "js/models/settings/course_details", "js/views/settings/main"],
   function(doc, $, CourseDetailsModel, MainView) {
-    // highlighting labels when fields are focused in
-    $("form :input").focus(function() {
-      $("label[for='" + this.id + "']").addClass("is-focused");
-    }).blur(function() {
-      $("label").removeClass("is-focused");
-      });
-    var model = new CourseDetailsModel();
-    model.urlRoot = '${details_url}';
-    model.fetch({
-      success: function(model) {
-        var editor = new MainView({
-            el: $('.settings-details'),
-            model: model
-        });
-        editor.render();
-      },
-      reset: true
-    });
-    
-    
-    classList = new Array();
+	classList = new Array();
 	childClassList = new Array();    
     function callback(json){
     	for(var i in json){
@@ -81,6 +61,28 @@ require(["domReady!", "jquery", "js/models/settings/course_details", "js/views/s
         success: function(json){
         },
     });
+	
+	
+	
+    // highlighting labels when fields are focused in
+    $("form :input").focus(function() {
+      $("label[for='" + this.id + "']").addClass("is-focused");
+    }).blur(function() {
+      $("label").removeClass("is-focused");
+      });
+    var model = new CourseDetailsModel();
+    model.urlRoot = '${details_url}';
+    model.fetch({
+      success: function(model) {
+        var editor = new MainView({
+            el: $('.settings-details'),
+            model: model
+        });
+        editor.render();
+      },
+      reset: true
+    });
+    
     
     
 });
@@ -110,13 +112,6 @@ tinymce.init({
 "Terminal=terminal,monaco;",
     image_advtab: true
 });
-
-
-
-
-
-
-
   </script>
 </%block>
 
@@ -381,16 +376,14 @@ tinymce.init({
               </ol>
             </section>
           % endif
-          
            <hr class="divide" />
-
-            <section class="group-settings requirements">
+          <section class="group-settings requirements">
               <header>
                 <h3 class="title-2">课程分类</h3>
               </header>
 
               <ol class="list-input">
-                <li class="field text" id="field-course-effort">
+                <li class="field text" id="field-course_category">
                   <select class="course_category" id="course_category" placeholder="" ></select>
                 </li>
               </ol>
@@ -399,9 +392,8 @@ tinymce.init({
                 <h3 class="title-2">子分类</h3>
               </header>
               <ol class="list-input">
-                <li class="field text" id="field-course-effort">
-                   <select class="new-course-childcategory" id="course_childcategory" name="course_childcategory" aria-required="false" placeholder="课程分类">
-
+                <li class="field text" id="field-course_childcategory">
+                   <select class="course_childcategory" id="course_childcategory" name="course_childcategory" aria-required="false" placeholder="课程分类"></select>
                 </li>
               </ol>
             </section>

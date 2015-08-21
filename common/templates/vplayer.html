@@ -30,8 +30,10 @@
     l = window.location.href;
     vurl = l.substring(l.indexOf("url=")+4);
 	console.info(vurl)
-    $("#myElement").attr('src', vurl);
-    
+	if(vurl){
+		vurl = 'http://a.mp4'
+		$("#myElement").attr('src', vurl);
+	}
 </script>
 </body>
 </html>

@@ -9,13 +9,21 @@ var DetailsView = ValidatingView.extend({
         // Leaving change in as fallback for older browsers
         "change input" : "updateModel",
         "change textarea" : "updateModel",
+        
+        "change #course_category" : "updateModel",
+        "change #course_childcategory" : "updateModel",
+        
+        
         'click .remove-course-introduction-video' : "removeVideo",
         'focus #course-overview' : "codeMirrorize",
         'mouseover #timezone' : "updateTime",
         // would love to move to a general superclass, but event hashes don't inherit in backbone :-(
         'focus :input' : "inputFocus",
         'blur :input' : "inputUnfocus",
-        'click .action-upload-image': "uploadImage"
+        'click .action-upload-image': "uploadImage",
+        
+        
+        
     },
 
     initialize : function() {
@@ -51,6 +59,8 @@ var DetailsView = ValidatingView.extend({
         this.codeMirrorize(null, $('#course-overview')[0]);
 
         this.$el.find('#' + this.fieldToSelectorMap['short_description']).val(this.model.get('short_description'));
+        this.$el.find('#' + this.fieldToSelectorMap['course_category']).val(this.model.get('course_category'));
+        this.$el.find('#' + this.fieldToSelectorMap['course_childcategory']).val(this.model.get('course_childcategory'));
 
         this.$el.find('.current-course-introduction-video iframe').attr('src', '/common/vplayer.html?url='+this.model.videosourceSample());
         this.$el.find('#' + this.fieldToSelectorMap['intro_video']).val(this.model.get('intro_video') || '');
@@ -78,7 +88,9 @@ var DetailsView = ValidatingView.extend({
         'intro_video' : 'course-introduction-video',
         'effort' : "course-effort",
         'course_image_asset_path': 'course-image-url',
-        'course_price': "course-price"
+        'course_price': "course-price",
+        'course_category': "course_category",
+        'course_childcategory': "course_childcategory",	
     },
 
     updateTime : function(e) {
@@ -156,6 +168,12 @@ var DetailsView = ValidatingView.extend({
         case 'course-price':
             this.setField(event);
             break;
+        case 'course_category':
+            this.setField(event);
+            break;    
+        case 'course_childcategory':
+            this.setField(event);
+            break;      
         case 'course-short-description':
             this.setField(event);
             break;

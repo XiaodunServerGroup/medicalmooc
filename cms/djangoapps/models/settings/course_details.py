@@ -169,6 +169,15 @@ class CourseDetails(object):
         if 'course_price' in jsondict and jsondict['course_price'] != descriptor.course_price:
             descriptor.course_price = jsondict['course_price']
             dirty = True
+            
+        
+        if 'course_category' in jsondict and jsondict['course_category'] != descriptor.course_price:
+            descriptor.course_category = jsondict['course_category']
+            dirty = True
+        
+        if 'course_childcategory' in jsondict and jsondict['course_childcategory'] != descriptor.course_price:
+            descriptor.course_childcategory = jsondict['course_childcategory']
+            dirty = True
 
         if dirty:
             get_modulestore(course_old_location).update_item(descriptor, user.id)
