@@ -455,6 +455,7 @@ def create_new_course(request):
     number = request.json.get('number')
     display_name = request.json.get('display_name')
     course_category = request.json.get('course_category')
+    course_childcategory = request.json.get('course_childcategory','')
     course_level = request.json.get('course_level')
     course_price = request.json.get('course_price')
     run = request.json.get('run')
@@ -521,7 +522,7 @@ def create_new_course(request):
     if display_name is None and course_category is None and course_level is None:
         metadata = {}
     else:
-        metadata = {'display_name': display_name, 'course_category': course_category, 'course_level': course_level, 'course_price': course_price}
+        metadata = {'display_name': display_name, 'course_category': course_category, 'course_childcategory':course_childcategory, 'course_level': course_level, 'course_price': course_price}
 
     modulestore('direct').create_and_save_xmodule(
         dest_location,

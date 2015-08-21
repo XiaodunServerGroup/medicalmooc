@@ -150,6 +150,15 @@ class XModuleMixin(XBlockMixin):
         # use display_name_with_default for those
         default=None
     )
+    
+    course_childcategory = String(
+        display_name="Course child category",
+        help="This name appears at the top of the page in Horizontal navigation.",
+        scope=Scope.settings,
+        # it'd be nice to have a useful default but it screws up other things; so,
+        # use display_name_with_default for those
+        default=None
+    )
 
     course_level = String(
         display_name="课程级别",

@@ -264,8 +264,9 @@ sys.path.append(REPO_ROOT)
 sys.path.append(PROJECT_ROOT / 'djangoapps')
 sys.path.append(COMMON_ROOT / 'djangoapps')
 sys.path.append(COMMON_ROOT / 'lib')
-sys.path.append(REPO_ROOT / 'cms')
+
 sys.path.append(REPO_ROOT / 'cms/djangoapps')
+sys.path.append(REPO_ROOT / 'cms')
 
 # For Node.js
 

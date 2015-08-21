@@ -30,6 +30,8 @@ class CourseDetails(object):
         self.course_image_name = ""
         self.course_image_asset_path = ""  # URL of the course image
         self.course_price = ""  # update_price of course
+        self.course_category = ""
+        self.course_childcategory = ""
 
     @classmethod
     def fetch(cls, course_locator):
@@ -47,6 +49,9 @@ class CourseDetails(object):
         course.course_image_name = descriptor.course_image
         course.course_image_asset_path = course_image_url(descriptor)
         course.course_price = descriptor.course_price
+        
+        course.course_category = descriptor.course_category
+        course.course_childcategory = descriptor.course_childcategory
 
         temploc = course_old_location.replace(category='about', name='syllabus')
         try:

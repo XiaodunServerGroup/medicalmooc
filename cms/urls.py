@@ -7,6 +7,9 @@ from xmodule.modulestore import parsers
 from ratelimitbackend import admin
 admin.autodiscover()
 
+from contentstore.views import *
+
+
 urlpatterns = patterns('',  # nopep8
 
     url(r'^transcripts/upload$', 'contentstore.views.upload_transcripts', name='upload_transcripts'),

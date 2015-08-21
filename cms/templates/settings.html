@@ -41,6 +41,48 @@ require(["domReady!", "jquery", "js/models/settings/course_details", "js/views/s
       },
       reset: true
     });
+    
+    
+    classList = new Array();
+	childClassList = new Array();    
+    function callback(json){
+    	for(var i in json){
+    		classList[i] = json[i];
+    		if(json[i].child){
+    			childClassList[i] = json[i].child;
+    		}else{
+    			childClassList[i] = new Array();
+    		}
+    	}
+    	objClass = $("#course_category")
+    	objClass.find("option").remove();
+    	
+		for (var i = 0; i < classList.length; i++){
+			objClass.append("<option value='"+classList[i].code+"'>"+classList[i].pcfname+"</option>");
+		}
+		
+		objChildClass = $("#course_childcategory")
+		objClass.change(function(){
+			objChildClass.find("option").remove();
+			var index = objClass.get(0).selectedIndex;
+			for (var i = 0; i < childClassList[index].length; i++){
+				objChildClass.append("<option value='"+childClassList[index][i].code+"'>"+childClassList[index][i].pcfname+"</option>");
+			}
+		})
+		
+		objClass.trigger('change');
+		
+    }
+    window.callback = callback
+    $.ajax({
+        url: "http://192.168.1.28:8080/classification/getAllChild?parentId=0",
+        type: "GET",
+        dataType: "jsonp",
+        success: function(json){
+        },
+    });
+    
+    
 });
 
 tinymce.init({
@@ -68,6 +110,13 @@ tinymce.init({
 "Terminal=terminal,monaco;",
     image_advtab: true
 });
+
+
+
+
+
+
+
   </script>
 </%block>
 
@@ -332,6 +381,30 @@ tinymce.init({
               </ol>
             </section>
           % endif
+          
+           <hr class="divide" />
+
+            <section class="group-settings requirements">
+              <header>
+                <h3 class="title-2">课程分类</h3>
+              </header>
+
+              <ol class="list-input">
+                <li class="field text" id="field-course-effort">
+                  <select class="course_category" id="course_category" placeholder="" ></select>
+                </li>
+              </ol>
+              <br/>
+              <header>
+                <h3 class="title-2">子分类</h3>
+              </header>
+              <ol class="list-input">
+                <li class="field text" id="field-course-effort">
+                   <select class="new-course-childcategory" id="course_childcategory" name="course_childcategory" aria-required="false" placeholder="课程分类">
+
+                </li>
+              </ol>
+            </section>
 
           <!--% if about_page_editable:-->
                 <!--<hr class="divide" />-->
